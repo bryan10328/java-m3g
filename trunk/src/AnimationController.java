@@ -1,6 +1,24 @@
 package org.karlsland.m3g;
 
+
 public class AnimationController extends Object3D {
+
+    static {
+        System.loadLibrary ("m3g");
+    }
+    native private void  jni_initialize ();
+    native private void  jni_finalize ();
+    native private int   jni_getActiveIntervalEnd ();
+    native private float jni_getActiveIntervalStart ();
+    native private float jni_getPosition ();
+    native private int   jni_getRefWorldTime ();
+    native private float jni_getSpeed ();
+    native private float jni_getWeight ();
+    native private void  jni_setActiveInterval (int start, int end);
+    native private void  jni_setPosition (float sequenceTime, int worldTime);
+    native private void  jni_setSpeed (float speed, int worldTime);
+    native private void  jni_setWeight (float weight);
+
 
      public AnimationController () {
      }

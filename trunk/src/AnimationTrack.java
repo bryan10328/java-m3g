@@ -24,6 +24,17 @@ public class AnimationTrack extends Object3D {
     public final static int TRANSLATION    = 275;
     public final static int VISIBILITY     = 267;
 
+    static {
+        System.loadLibrary ("m3g");
+    }
+    native private void jni_initialize ();
+    native private void jni_finalize ();
+    native private AnimationController jni_getController ();
+    native private KeyframeSequence jni_getKeyframeSequence ();
+    native private int jni_getTargetProperty ();
+    native private void jni_setController (AnimationController controller);
+
+
     public AnimationTrack () {
     }
 

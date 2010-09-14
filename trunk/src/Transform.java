@@ -2,6 +2,26 @@ package org.karlsland.m3g;
 
 public class Transform extends java.lang.Object {
 
+    static {
+        System.loadLibrary ("m3g");
+    }
+    native private void jni_initilize  ();
+    native private void jni_initilize  (Transform transform);
+    native private void jni_finalize   ();
+    native private void jni_get            (float[] matrix);
+    native private void jni_invert         ();
+    native private void jni_postMultiply   (Transform transform);
+    native private void jni_postRotate     (float angle, float ax, float ay, float az);
+    native private void jni_postRotateQuat (float qx, float qy, float qz, float qw);
+    native private void jni_postScale      (float sx, float sy, float sz);
+    native private void jni_postTranslate  (float tx, float ty, float tz);
+    native private void jni_set            (float[] matrix);
+    native private void jni_set            (Transform transform);
+    native private void jni_setIdentity    ();
+    native private void jni_transform      (float[] vectors);
+    native private void jni_transform      (VertexArray in, float[] out, boolean W);
+    native private void jni_transpose      ();
+
     public Transform () {
     }
 
@@ -14,7 +34,7 @@ public class Transform extends java.lang.Object {
     public void get (float[] matrix) {
     }
 
-    public void inbert () {
+    public void invert () {
     }
 
     public void postMultiply (Transform transform) {

@@ -7,6 +7,40 @@ public class Graphics3D extends Object {
     public final static int OVERWRITE  = 16;
     public final static int TRUE_COLOR = 8;
 
+    static {
+        System.loadLibrary ("m3g");
+    }
+    native private void    jni_initialize           ();
+    native private void    jni_finalize             ();
+    native private int     jni_addLight             (Light light, Transform transform);
+    native private void    jni_bindTarget           (java.lang.Object target);
+    native private void    jni_bindTarget           (java.lang.Object target, boolean depthBuffer, int hints);
+    native private void    jni_clear                (Background background);
+    native private Camera  jni_getCamera            (Transform transform);
+    native private float   jni_getDepthRangeFar     ();
+    native private float   jni_getDepthRangeNear    ();
+    native private int     jni_getHints             ();
+    native private static Graphics3D jni_getInstance();
+    native private Light   jni_getLight             (int index, Transform transform);
+    native private int     jni_getLightCount        ();
+    native private java.util.Hashtable jni_getProperties ();
+    native private java.lang.Object jni_getTarget        ();
+    native private int     jni_getViewportHeight    ();
+    native private int     jni_getViewportWidth     ();
+    native private int     jni_getViewportX         ();
+    native private int     jni_getViewportY         ();
+    native private boolean jni_isDepthBufferEnabled ();
+    native private void    jni_releaseTarget        ();
+    native private void    jni_render               (Node node, Transform transform);
+    native private void    jni_render               (VertexBuffer vertices, IndexBuffer triangles, Appearance appearance, Transform transform);
+    native private void    jni_render               (VertexBuffer vertices, IndexBuffer triangles, Appearance appearacne, Transform transform, int scope);
+    native private void    jni_render               (World world);
+    native private void    jni_resetLights          ();
+    native private void    jni_setCamera            (Camera camera, Transform transform);
+    native private void    jni_setDepthRange        (float near, float far);
+    native private void    jni_setLight             (int index, Light light, Transform transform);
+    native private void    jni_setViewport          (int x, int y, int width, int height);
+
     public Graphics3D () {
     }
 
@@ -91,13 +125,13 @@ public class Graphics3D extends Object {
     public void render (VertexBuffer vertices, IndexBuffer triangles, Appearance appearance, Transform transform) {
     }
 
-    public void render (VertexBuffer vertices, IndexBuffer triangles, Appearance appearance, Transform transform, int sceope) {
+    public void render (VertexBuffer vertices, IndexBuffer triangles, Appearance appearance, Transform transform, int scope) {
     }
 
     public void render (World world) {
     }
 
-    public void resetLIghts () {
+    public void resetLights () {
     }
 
     public void setCamera (Camera camera, Transform transform) {
@@ -106,7 +140,7 @@ public class Graphics3D extends Object {
     public void setDepthRange (float near, float far) {
     }
 
-    public void setLight (int index, Light light, Transform transfrom) {
+    public void setLight (int index, Light light, Transform transform) {
     }
 
     public void setViewport (int x, int y, int width, int height) {

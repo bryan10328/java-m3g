@@ -7,6 +7,27 @@ public class Light extends Object3D {
     public final static int OMNI        = 130;
     public final static int SPOT        = 131;
 
+    static {
+        System.loadLibrary ("m3g");
+    }
+    native private void  jni_initilize               ();
+    native private void  jni_finalize                ();
+    native private int   jni_getColor                ();
+    native private float jni_getConstantAttenuation  ();
+    native private float jni_getIntensity            ();
+    native private float jni_getLinearAttenuation    ();
+    native private int   jni_getMode                 ();
+    native private float jni_getQuadraticAttenuation ();
+    native private float jni_getSpotAngle            ();
+    native private float jni_getSpotExponent         ();
+    native private void  jni_setAttenuation          (float constant, float linear, float quadratic);
+    native private int   jni_setColor                (int   RGB);
+    native private void  jni_setIntensity            (float intensity);
+    native private void  jni_setMode                 (int   mode);
+    native private void  jni_setSpotAngle            (float angle);
+    native private void  jni_setSpotExpoent          (float exponent);
+
+
     public Light () {
     }
 

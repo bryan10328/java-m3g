@@ -8,6 +8,27 @@ public class CompositingMode extends Object3D {
     public final static int MODULATE_X2 = 67;
     public final static int REPLACE     = 68;
 
+    static {
+        System.loadLibrary ("m3g");
+    }
+    native private void    jni_initialzie           ();
+    native private void    jni_finalize             ();
+    native private float   jni_getAlphaThreshold    ();
+    native private int     jni_getBlending          ();
+    native private float   jni_getDepthOffsetFactor ();
+    native private float   jni_getDepthOffsetUnits  ();
+    native private boolean jni_isAlphaWriteEnable   ();
+    native private boolean jni_isColorWriteEnable   ();
+    native private boolean jni_isDepthTestEnabled   ();
+    native private boolean jni_isDepthWriteEnabled  ();
+    native private void    jni_setAlphaThreashold   (float threashold);
+    native private void    jni_setAlphaWriteEnable  (boolean enable);
+    native private void    jni_setBlending          (int mode);
+    native private void    jni_setColorWriteEnable  (boolean enable);
+    native private void    jni_setDepthOffset       (float factor, float units);
+    native private void    jni_setDepthTestEnable   (boolean enable);
+    native private void    jni_setDepthWriteEnable  (boolean enable);
+
     public CompositingMode () {
     }
 
@@ -46,10 +67,6 @@ public class CompositingMode extends Object3D {
         return false;
     }
 
-    public boolean isDepthWrtiteEnalbed () {
-        return false;
-    }
-
     public void setAlphaThreashold (float threashold) {
     }
 
@@ -68,7 +85,7 @@ public class CompositingMode extends Object3D {
     public void setDepthTestEnable (boolean enable) {
     }
 
-    public void setDepthWrieEnable (boolean enable) {
+    public void setDepthWriteEnable (boolean enable) {
     }
 
 

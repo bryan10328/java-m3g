@@ -8,6 +8,18 @@ public class Image2D extends Object3D {
     public final static int RGB             = 99;
     public final static int RGBA            = 100;
 
+    static {
+        System.loadLibrary ("m3g");
+    }
+    native private void    jni_initilize ();
+    native private void    jni_finalize  ();
+    native private int     jni_getFormat ();
+    native private int     jni_getHeight ();
+    native private int     jni_getWidth  ();
+    native private boolean jni_isMutable ();
+    native private void    jni_set       (int x, int y, int width, int height, byte[] image);
+
+
     public Image2D () {
     }
 

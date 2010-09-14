@@ -3,6 +3,17 @@ package org.karlsland.m3g;
 
 public class Sprite3D extends Node {
 
+    static {
+        System.loadLibrary ("m3g");
+    }
+    native private void  jni_initilize        ();
+    native private void  jni_finalize         ();
+    native private void  jni_addTransform     (Node bone, int weight, int firstVertex, int numVertices);
+    native private void  jni_getBoneTransform (Node bone, Transform transform);
+    native private int   jni_getBoneVertices  (Node bone, int[] indices, float[] weights);
+    native private Group jni_getSkeleton      ();
+
+
     public Sprite3D (boolean scaled, Image2D image, Appearance appearance) {
     }
 

@@ -3,6 +3,19 @@ package org.karlsland.m3g;
 
 public class Mesh extends Node {
 
+    static {
+        System.loadLibrary ("m3g");
+    }
+    native private void         jni_initialize      (VertexBuffer vertices, IndexBuffer[] submeshes, Appearance[] appearances);
+    native private void         jni_initialize      (VertexBuffer vertices, IndexBuffer submeshes, Appearance appearances);
+    native private void         jni_finalize        ();
+    native private Appearance   jni_getAppearance   ();
+    native private IndexBuffer  jni_getIndexBuffer  ();
+    native private int          jni_getSubmeshCount ();
+    native private VertexBuffer jni_getVertexBuffer ();
+    native private void         jni_setAppearance   ();
+
+
     public Mesh (VertexBuffer vertices, IndexBuffer[] submeshes, Appearance[] appearances) {
     }
 
@@ -28,7 +41,7 @@ public class Mesh extends Node {
         return null;
     }
 
-    public void setAppearane (int index, Appearance apperance) {
+    public void setAppearane (int index, Appearance appearance) {
     }
 
 }

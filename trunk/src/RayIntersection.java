@@ -2,6 +2,22 @@ package org.karlsland.m3g;
 
 public class RayIntersection extends Object {
 
+    static {
+        System.loadLibrary ("m3g");
+    }
+    native private void  jni_initialize      ();
+    native private void  jni_finalize        ();
+    native private float jni_getDistance     ();
+    native private Node  jni_getIntersected  ();
+    native private float jni_getNormalX      ();
+    native private float jni_getNormalY      ();
+    native private float jni_getNormalZ      ();
+    native private void  jni_getRay          (float[] ray);
+    native private int   jni_getSubmeshIndex ();
+    native private float jni_getTestureS     (int index);
+    native private float jni_getTextureT     (int index);
+
+
     public RayIntersection () {
     }
 
@@ -36,7 +52,7 @@ public class RayIntersection extends Object {
         return 0;
     }
 
-    public float getTextruesS (int index) {
+    public float getTextureS (int index) {
         return 0;
     }
 

@@ -6,6 +6,31 @@ public class Background extends Object3D {
     public final static int BORDER = 32;
     public final static int REPEAT = 33;
 
+    static {
+        System.loadLibrary ("m3g");
+    }
+    native private void    jni_initizlie           ();
+    native private void    jni_finalize            ();
+    native private int     jni_getColor            ();
+    native private int     jni_getCropHeight       ();
+    native private int     jni_getCropWidth        ();
+    native private int     jni_getCropX            ();
+    native private int     jni_getCropY            ();
+    native private Image2D jni_getImage            ();
+    native private int     jni_getImageModeX       ();
+    native private int     jni_getImageModeY       ();
+    native private boolean jni_isColorClearEnabled ();
+    native private boolean jni_isDepthClearEnabled ();
+    native private void    jni_setColor            (int ARGB);
+    native private void    jni_setColorClearEnable (boolean enable);
+    native private void    jni_setCrop             (int cropX, int cropY, int width, int height);
+    native private void    jni_setDepthClearEnable (boolean enable);
+    native private void    jni_setImage            (Image2D image);
+    native private void    jni_setImageMode        (int modeX, int modeY);
+
+
+
+
     public Background () {
     }
 
@@ -44,7 +69,7 @@ public class Background extends Object3D {
         return 0;
     }
 
-    public boolean isColorClearEnalbed () {
+    public boolean isColorClearEnabled () {
         return false;
     }
 

@@ -4,6 +4,25 @@ package org.karlsland.m3g;
 abstract 
 public class Object3D extends java.lang.Object {
     
+    static {
+        System.loadLibrary ("m3g");
+    }
+    native private void             jni_initilize              ();
+    native private void             jni_finalize               ();
+    native private void             jni_addAnimationTrack      (AnimationTrack animationTrack);
+    native private int              jni_animate                (int time);
+    native private Object3D         jni_duplicate              ();
+    native private Object3D         jni_find                   (int userID);
+    native private AnimationTrack   jni_getAnimationTrack      (int index);
+    native private int              jni_getAnimationTrackCount ();
+    native private int              jni_getReferences          (Object3D[] references);
+    native private int              jni_getUserID              ();
+    native private java.lang.Object jni_getUserObject          ();
+    native private void             jni_removeAnimationTrack   (AnimationTrack animationTrack);
+    native private void             jni_setUserID              (int userID);
+    native private void             jni_setUserObject          (java.lang.Object userObject);
+
+
     public void addAnimationTrack (AnimationTrack animationTrack) {
     }
 

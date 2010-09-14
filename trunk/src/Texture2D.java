@@ -13,6 +13,24 @@ public class Texture2D extends Transformable {
     public final static int WRAP_CLAMP        = 240;
     public final static int WRAP_REPEAT       = 241;
 
+    static {
+        System.loadLibrary ("m3g");
+    }
+    native private void    jni_initilize      (Image2D image);
+    native private void    jni_finalize       ();
+    native private int     jni_getBlendColor  ();
+    native private int     jni_getBlending    ();
+    native private Image2D jni_getImage       ();
+    native private int     jni_getImageFilter ();
+    native private int     jni_getLevelFilter ();
+    native private int     jni_getWrappingS   ();
+    native private int     jni_getWrappingT   ();
+    native private void    jni_setBlendColor  (int RGB);
+    native private void    jni_setBlending    (int func);
+    native private void    jni_setFiltering   (int levelFilter, int imageFilter);
+    native private void    jni_setImage       (Image2D image);
+    native private void    jni_setWrapping    (int wrapS, int wrapT);
+
     public Texture2D (Image2D image) {
     }
 
