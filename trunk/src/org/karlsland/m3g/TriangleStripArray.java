@@ -3,7 +3,7 @@ package org.karlsland.m3g;
 public class TriangleStripArray extends IndexBuffer {
 
     static {
-        System.loadLibrary ("m3g");
+        System.loadLibrary ("javam3g");
     }
     native private void jni_initilize (int[] indices, int[] stripLengths);
     native private void jni_initilize (int   firstIndex, int[] stripLengths);

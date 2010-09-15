@@ -4,44 +4,52 @@ package org.karlsland.m3g;
 public class Mesh extends Node {
 
     static {
-        System.loadLibrary ("m3g");
+        System.loadLibrary ("javam3g");
     }
     native private void         jni_initialize      (VertexBuffer vertices, IndexBuffer[] submeshes, Appearance[] appearances);
-    native private void         jni_initialize      (VertexBuffer vertices, IndexBuffer submeshes, Appearance appearances);
+    native private void         jni_initialize      (VertexBuffer vertices, IndexBuffer submesh, Appearance appearance);
     native private void         jni_finalize        ();
-    native private Appearance   jni_getAppearance   ();
-    native private IndexBuffer  jni_getIndexBuffer  ();
+    native private Appearance   jni_getAppearance   (int index);
+    native private IndexBuffer  jni_getIndexBuffer  (int index);
     native private int          jni_getSubmeshCount ();
     native private VertexBuffer jni_getVertexBuffer ();
-    native private void         jni_setAppearance   ();
+    native private void         jni_setAppearance   (int index, Appearance appearance);
 
 
     public Mesh (VertexBuffer vertices, IndexBuffer[] submeshes, Appearance[] appearances) {
+        jni_initialize (vertices, submeshes, appearances);
     }
 
-    public Mesh (VertexBuffer vertices, IndexBuffer submesh, Appearance apperance) {
+    public Mesh (VertexBuffer vertices, IndexBuffer submesh, Appearance appearance) {
+        jni_initialize (vertices, submesh, appearance);
     }
 
     public void finalize () {
+        jni_finalize ();
     }
 
     public Appearance getAppearance (int index) {
-        return null;
+        Appearance app = jni_getAppearance (index);
+        return app;
     }
 
     public IndexBuffer getIndexBuffer (int index) {
-        return null;
+        IndexBuffer ibuf = jni_getIndexBuffer (index);
+        return ibuf;
     }
 
     public int getSubmeshCount () {
-        return 0;
+        int count = jni_getSubmeshCount ();
+        return count;
     }
 
     public VertexBuffer getVertexBuffer () {
-        return null;
+        VertexBuffer vbuf = jni_getVertexBuffer ();
+        return vbuf;
     }
 
-    public void setAppearane (int index, Appearance appearance) {
+    public void setAppearance (int index, Appearance appearance) {
+        jni_setAppearance (index, appearance);
     }
 
 }

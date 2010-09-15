@@ -10,7 +10,7 @@ public class Node extends Transformable {
     public final static int Z_AXIS = 148;
 
     static {
-        System.loadLibrary ("m3g");
+        System.loadLibrary ("javam3g");
     }
     native private void    jni_initilize             ();
     native private void    jni_finalize              ();

@@ -34,18 +34,18 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_AnimationController_jni_1getActive
 /*
  * Class:     org_karlsland_m3g_AnimationController
  * Method:    jni_getActiveIntervalStart
- * Signature: ()F
+ * Signature: ()I
  */
-JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_AnimationController_jni_1getActiveIntervalStart
+JNIEXPORT jint JNICALL Java_org_karlsland_m3g_AnimationController_jni_1getActiveIntervalStart
   (JNIEnv *, jobject);
 
 /*
  * Class:     org_karlsland_m3g_AnimationController
  * Method:    jni_getPosition
- * Signature: ()F
+ * Signature: (F)F
  */
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_AnimationController_jni_1getPosition
-  (JNIEnv *, jobject);
+  (JNIEnv *, jobject, jfloat);
 
 /*
  * Class:     org_karlsland_m3g_AnimationController
@@ -151,18 +151,18 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Mesh_jni_1finalize
 /*
  * Class:     org_karlsland_m3g_Mesh
  * Method:    jni_getAppearance
- * Signature: ()Lorg/karlsland/m3g/Appearance;
+ * Signature: (I)Lorg/karlsland/m3g/Appearance;
  */
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Mesh_jni_1getAppearance
-  (JNIEnv *, jobject);
+  (JNIEnv *, jobject, jint);
 
 /*
  * Class:     org_karlsland_m3g_Mesh
  * Method:    jni_getIndexBuffer
- * Signature: ()Lorg/karlsland/m3g/IndexBuffer;
+ * Signature: (I)Lorg/karlsland/m3g/IndexBuffer;
  */
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Mesh_jni_1getIndexBuffer
-  (JNIEnv *, jobject);
+  (JNIEnv *, jobject, jint);
 
 /*
  * Class:     org_karlsland_m3g_Mesh
@@ -183,10 +183,10 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Mesh_jni_1getVertexBuffer
 /*
  * Class:     org_karlsland_m3g_Mesh
  * Method:    jni_setAppearance
- * Signature: ()V
+ * Signature: (ILorg/karlsland/m3g/Appearance;)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Mesh_jni_1setAppearance
-  (JNIEnv *, jobject);
+  (JNIEnv *, jobject, jint, jobject);
 
 #ifdef __cplusplus
 }
@@ -435,10 +435,10 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Appearance_jni_1getPolygonMode
 
 /*
  * Class:     org_karlsland_m3g_Appearance
- * Method:    jni_getTeture
+ * Method:    jni_getTexture
  * Signature: (I)Lorg/karlsland/m3g/Texture2D;
  */
-JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Appearance_jni_1getTeture
+JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Appearance_jni_1getTexture
   (JNIEnv *, jobject, jint);
 
 /*
@@ -483,10 +483,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Appearance_jni_1setPolygonMode
 
 /*
  * Class:     org_karlsland_m3g_Appearance
- * Method:    jni_setTexure
+ * Method:    jni_setTexture
  * Signature: (ILorg/karlsland/m3g/Texture2D;)V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Appearance_jni_1setTexure
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Appearance_jni_1setTexture
   (JNIEnv *, jobject, jint, jobject);
 
 #ifdef __cplusplus
@@ -949,10 +949,10 @@ extern "C" {
 #define org_karlsland_m3g_Camera_PERSPECTIVE 50L
 /*
  * Class:     org_karlsland_m3g_Camera
- * Method:    jni_initialzie
+ * Method:    jni_initialize
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Camera_jni_1initialzie
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Camera_jni_1initialize
   (JNIEnv *, jobject);
 
 /*
@@ -1470,10 +1470,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Fog_jni_1getNearDistance
 /*
  * Class:     org_karlsland_m3g_Fog
  * Method:    jni_setColor
- * Signature: ()V
+ * Signature: (I)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Fog_jni_1setColor
-  (JNIEnv *, jobject);
+  (JNIEnv *, jobject, jint);
 
 /*
  * Class:     org_karlsland_m3g_Fog
@@ -1705,7 +1705,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getLightCount
  * Signature: ()Ljava/util/Hashtable;
  */
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getProperties
-  (JNIEnv *, jobject);
+  (JNIEnv *, jclass);
 
 /*
  * Class:     org_karlsland_m3g_Graphics3D
@@ -2155,10 +2155,10 @@ extern "C" {
 #define org_karlsland_m3g_Image2D_RGBA 100L
 /*
  * Class:     org_karlsland_m3g_Image2D
- * Method:    jni_initilize
+ * Method:    jni_initialize
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initilize
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize
   (JNIEnv *, jobject);
 
 /*
@@ -2361,10 +2361,10 @@ extern "C" {
 #endif
 /*
  * Class:     org_karlsland_m3g_IndexBuffer
- * Method:    jni_intialize
+ * Method:    jni_initialize
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1intialize
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1initialize
   (JNIEnv *, jobject);
 
 /*
@@ -2630,17 +2630,17 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getValidRang
 /*
  * Class:     org_karlsland_m3g_KeyframeSequence
  * Method:    jni_setDuration
- * Signature: (I)I
+ * Signature: (I)V
  */
-JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1setDuration
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1setDuration
   (JNIEnv *, jobject, jint);
 
 /*
  * Class:     org_karlsland_m3g_KeyframeSequence
  * Method:    jni_setKeyframe
- * Signature: (II[F)I
+ * Signature: (II[F)V
  */
-JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1setKeyframe
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1setKeyframe
   (JNIEnv *, jobject, jint, jint, jfloatArray);
 
 /*
@@ -2653,10 +2653,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1setRepeateMo
 
 /*
  * Class:     org_karlsland_m3g_KeyframeSequence
- * Method:    jni_setvalidRange
+ * Method:    jni_setValidRange
  * Signature: (II)V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1setvalidRange
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1setValidRange
   (JNIEnv *, jobject, jint, jint);
 
 #ifdef __cplusplus
@@ -2835,10 +2835,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1setSpotAngle
 
 /*
  * Class:     org_karlsland_m3g_Light
- * Method:    jni_setSpotExpoent
+ * Method:    jni_setSpotExponent
  * Signature: (F)V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1setSpotExpoent
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1setSpotExponent
   (JNIEnv *, jobject, jfloat);
 
 #ifdef __cplusplus
@@ -2953,27 +2953,11 @@ extern "C" {
 #endif
 /*
  * Class:     org_karlsland_m3g_Loader
- * Method:    jni_initilize
- * Signature: ()V
- */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Loader_jni_1initilize
-  (JNIEnv *, jobject);
-
-/*
- * Class:     org_karlsland_m3g_Loader
- * Method:    jni_finalize
- * Signature: ()V
- */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Loader_jni_1finalize
-  (JNIEnv *, jobject);
-
-/*
- * Class:     org_karlsland_m3g_Loader
  * Method:    jni_load
  * Signature: ([BI)[Lorg/karlsland/m3g/Object3D;
  */
 JNIEXPORT jobjectArray JNICALL Java_org_karlsland_m3g_Loader_jni_1load___3BI
-  (JNIEnv *, jobject, jbyteArray, jint);
+  (JNIEnv *, jclass, jbyteArray, jint);
 
 /*
  * Class:     org_karlsland_m3g_Loader
@@ -2981,7 +2965,7 @@ JNIEXPORT jobjectArray JNICALL Java_org_karlsland_m3g_Loader_jni_1load___3BI
  * Signature: (Ljava/lang/String;)[Lorg/karlsland/m3g/Object3D;
  */
 JNIEXPORT jobjectArray JNICALL Java_org_karlsland_m3g_Loader_jni_1load__Ljava_lang_String_2
-  (JNIEnv *, jobject, jstring);
+  (JNIEnv *, jclass, jstring);
 
 #ifdef __cplusplus
 }

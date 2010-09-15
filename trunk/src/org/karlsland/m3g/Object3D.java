@@ -7,7 +7,7 @@ public class Object3D extends java.lang.Object {
     protected long entity;
 
     static {
-        System.loadLibrary ("m3g");
+        System.loadLibrary ("javam3g");
     }
     native private void             jni_initilize              ();
     native private void             jni_finalize               ();

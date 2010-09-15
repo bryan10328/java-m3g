@@ -1,6 +1,6 @@
 SRCS = $(wildcard *.cpp)
 OBJS = $(SRCS:.cpp=.o)
-TARGET = libm3g.so
+TARGET = libjavam3g.so
 CXX = g++
 CXXFLAGS = -Wall -g -shared -fPIC -fno-strict-aliasing \
            -I/usr/lib/jvm/java-6-openjdk/include/ \

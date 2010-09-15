@@ -3,7 +3,7 @@ package org.karlsland.m3g;
 public class MorphingMesh extends Mesh {
 
     static {
-        System.loadLibrary ("m3g");
+        System.loadLibrary ("javam3g");
     }
     native private void         jni_initilize           (VertexBuffer base, VertexBuffer[] targets, IndexBuffer submeshes[], Appearance[] appearances);
     native private void         jni_initilize           (VertexBuffer base, VertexBuffer[] targets, IndexBuffer submesh, Appearance appearance);

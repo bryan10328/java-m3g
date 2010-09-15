@@ -9,9 +9,9 @@ public class Image2D extends Object3D {
     public final static int RGBA            = 100;
 
     static {
-        System.loadLibrary ("m3g");
+        System.loadLibrary ("javam3g");
     }
-    native private void    jni_initilize ();
+    native private void    jni_initialize ();
     native private void    jni_finalize  ();
     native private int     jni_getFormat ();
     native private int     jni_getHeight ();
@@ -19,30 +19,36 @@ public class Image2D extends Object3D {
     native private boolean jni_isMutable ();
     native private void    jni_set       (int x, int y, int width, int height, byte[] image);
 
-
     public Image2D () {
+        jni_initialize ();
     }
 
     public void finalize () {
+        jni_finalize ();
     }
 
     public int getFormat () {
-        return 0;
+        int format = jni_getFormat ();
+        return format;
     }
 
     public int getHeight () {
-        return 0;
+        int height = jni_getHeight ();
+        return height;
     }
 
     public int getWidth () {
-        return 0;
+        int width = jni_getWidth ();
+        return width;
     }
 
     public boolean isMutable () {
-        return false;
+        boolean mutable = jni_isMutable ();
+        return mutable;
     }
 
     public void set (int x, int y, int width, int height, byte[] image) {
+        jni_set (x, y, width, height, image);
     }
 
 

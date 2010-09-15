@@ -3,7 +3,7 @@ package org.karlsland.m3g;
 public class SkinnedMesh extends Mesh {
 
     static {
-        System.loadLibrary ("m3g");
+        System.loadLibrary ("javam3g");
     }
     native private void  jni_initilize        (VertexBuffer vertices, IndexBuffer[] submeshes, Appearance[] appearances, Group skeleton);
     native private void  jni_initilize        (VertexBuffer vertices, IndexBuffer submesh, Appearance appearance, Group skeleton);

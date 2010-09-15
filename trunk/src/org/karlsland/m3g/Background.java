@@ -7,7 +7,7 @@ public class Background extends Object3D {
     public final static int REPEAT = 33;
 
     static {
-        System.loadLibrary ("m3g");
+        System.loadLibrary ("javam3g");
     }
     native private void    jni_initizlie           ();
     native private void    jni_finalize            ();
@@ -32,67 +32,85 @@ public class Background extends Object3D {
 
 
     public Background () {
+        jni_initizlie ();
     }
 
     public void finalize () {
+        jni_finalize ();
     }
 
     public int getColor () {
-        return 0;
+        int color = jni_getColor ();
+        return color;
     }
 
     public int getCropHeight () {
-        return 0;
+        int height = jni_getCropHeight ();
+        return height;
     }
 
     public int getCropWidth () {
-        return 0;
+        int width = jni_getCropWidth ();
+        return width;
     }
 
     public int getCropX () {
-        return 0;
+        int x = jni_getCropX ();
+        return x;
     }
 
     public int getCropY () {
-        return 0;
+        int y = jni_getCropY ();
+        return y;
     }
 
     public Image2D getImage () {
-        return null;
+        Image2D img = jni_getImage ();
+        return img;
     }
 
     public int getImageModeX () {
-        return 0;
+        int mode = jni_getImageModeX ();
+        return mode;
     }
 
     public int getImageModeY () {
-        return 0;
+        int mode = jni_getImageModeY ();
+        return mode;
     }
 
     public boolean isColorClearEnabled () {
-        return false;
+        boolean enabled = jni_isColorClearEnabled ();
+        return enabled;
     }
 
     public boolean isDepthClearEnabled () {
-        return false;
+        boolean enabled = jni_isDepthClearEnabled ();
+        return enabled;
     }
 
     public void setColor (int ARGB) {
+        jni_setColor (ARGB);
     }
 
     public void setColorClearEnable (boolean enable) {
+        jni_setColorClearEnable (enable);
     }
 
     public void setCrop (int cropX, int cropY, int width, int height) {
+        jni_setCrop (cropX, cropY, width, height);
     }
 
     public void setDepthClearEnable (boolean enable) {
+        jni_setDepthClearEnable (enable);
     }
 
     public void setImage (Image2D image) {
+        jni_setImage (image);
     }
 
     public void setImageMode (int modeX, int modeY) {
+        jni_setImageMode (modeX, modeY);
     }
 
 }

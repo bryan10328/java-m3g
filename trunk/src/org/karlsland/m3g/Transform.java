@@ -3,7 +3,7 @@ package org.karlsland.m3g;
 public class Transform extends java.lang.Object {
 
     static {
-        System.loadLibrary ("m3g");
+        System.loadLibrary ("javam3g");
     }
     native private void jni_initilize  ();
     native private void jni_initilize  (Transform transform);

@@ -3,7 +3,7 @@ package org.karlsland.m3g;
 public class World extends Group {
     
     static {
-        System.loadLibrary ("m3g");
+        System.loadLibrary ("javam3g");
     }
     native private void       jni_intialize       ();
     native private void       jni_finalize        ();

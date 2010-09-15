@@ -14,5 +14,14 @@ public class TestAnimationController {
         AnimationController controller = new AnimationController ();
     }
 
+    @Test
+    public void testActiveInterval () {
+        AnimationController controller = new AnimationController ();
+        controller.setActiveInterval (10, 20);
+        int start = controller.getActiveIntervalStart();
+        System.out.println ("start = " + start);
+        assertEquals (10, controller.getActiveIntervalStart());
+        assertEquals (20, controller.getActiveIntervalEnd());
+    }
 
 }

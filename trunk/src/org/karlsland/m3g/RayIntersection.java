@@ -3,7 +3,7 @@ package org.karlsland.m3g;
 public class RayIntersection extends Object {
 
     static {
-        System.loadLibrary ("m3g");
+        System.loadLibrary ("javam3g");
     }
     native private void  jni_initialize      ();
     native private void  jni_finalize        ();

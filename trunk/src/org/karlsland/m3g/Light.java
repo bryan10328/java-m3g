@@ -8,7 +8,7 @@ public class Light extends Object3D {
     public final static int SPOT        = 131;
 
     static {
-        System.loadLibrary ("m3g");
+        System.loadLibrary ("javam3g");
     }
     native private void  jni_initilize               ();
     native private void  jni_finalize                ();
@@ -25,63 +25,79 @@ public class Light extends Object3D {
     native private void  jni_setIntensity            (float intensity);
     native private void  jni_setMode                 (int   mode);
     native private void  jni_setSpotAngle            (float angle);
-    native private void  jni_setSpotExpoent          (float exponent);
+    native private void  jni_setSpotExponent          (float exponent);
 
 
     public Light () {
+        jni_initilize ();
     }
 
     public void finalize () {
+        jni_finalize ();
     }
 
     public int getColor () {
-        return 0;
+        int color = jni_getColor ();
+        return color;
     }
 
     public float getConstantAttenuation () {
-        return 0;
+        float cons = jni_getConstantAttenuation ();
+        return cons;
     }
 
     public float getIntensity () {
-        return 0;
+        float intensity = jni_getIntensity ();
+        return intensity;
     }
 
     public float getLinearAttenuation () {
-        return 0;
+        float linear = jni_getLinearAttenuation ();
+        return linear;
     }
 
     public int getMode () {
-        return 0;
+        int mode = jni_getMode ();
+        return mode;
     }
 
     public float getQuadraticAttenuation () {
-        return 0;
+        float quad = jni_getQuadraticAttenuation ();
+        return quad;
     }
 
     public float getSpotAngle () {
-        return 0;
+        float angle = jni_getSpotAngle ();
+        return angle;
     }
 
     public float getSpotExponent () {
-        return 0;
+        float expo = jni_getSpotExponent ();
+        return expo;
     }
 
     public void setAttenuation (float constant, float linear, float quadratic) {
+        jni_setAttenuation (constant, linear, quadratic);
     }
 
     public void setColor (int RGB) {
+        jni_setColor (RGB);
     }
 
     public void setIntensity (float intensity) {
+        jni_setIntensity (intensity);
     }
 
     public void setMode (int mode) {
+        jni_setMode (mode);
     }
 
     public void setSpotAngle (float angle) {
+        jni_setSpotAngle (angle);
     }
 
     public void setSpotExponent (float exponent) {
+        jni_setSpotExponent (exponent);
     }
 
 

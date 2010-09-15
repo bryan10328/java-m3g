@@ -25,35 +25,41 @@ public class AnimationTrack extends Object3D {
     public final static int VISIBILITY     = 267;
 
     static {
-        System.loadLibrary ("m3g");
+        System.loadLibrary ("javam3g");
     }
-    native private void jni_initialize ();
-    native private void jni_finalize ();
-    native private AnimationController jni_getController ();
-    native private KeyframeSequence jni_getKeyframeSequence ();
-    native private int jni_getTargetProperty ();
-    native private void jni_setController (AnimationController controller);
+    native private void                jni_initialize          ();
+    native private void                jni_finalize            ();
+    native private AnimationController jni_getController       ();
+    native private KeyframeSequence    jni_getKeyframeSequence ();
+    native private int                 jni_getTargetProperty   ();
+    native private void                jni_setController       (AnimationController controller);
 
 
     public AnimationTrack () {
+        jni_initialize ();
     }
 
     public void finalzie () {
+        jni_finalize ();
     }
 
     public AnimationController getController () {
-        return null;
+        AnimationController controller = jni_getController ();
+        return controller;
     }
     
     public KeyframeSequence getKeyframeSequence () {
-        return null;
+        KeyframeSequence keyframe_sequence = jni_getKeyframeSequence ();
+        return keyframe_sequence;
     }
 
     public int getTargetProperty () {
-        return 0;
+        int target = jni_getTargetProperty ();
+        return target;
     }
 
     public void setController (AnimationController controller) {
+        jni_setController (controller);
     }
 
 }

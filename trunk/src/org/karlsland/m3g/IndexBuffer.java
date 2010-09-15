@@ -4,27 +4,30 @@ abstract
 public class IndexBuffer extends Object3D {
     
     static {
-        System.loadLibrary ("m3g");
+        System.loadLibrary ("javam3g");
     }
-    native private void jni_intialize     ();
+    native private void jni_initialize     ();
     native private void jni_finalize      ();
     native private int  jni_getIndexCount ();
     native private void jni_getIndices    (int[] indices);
 
 
     public IndexBuffer () {
+        jni_initialize ();
     }
 
     public void finalize () {
+        jni_finalize ();
     }
 
     public int getIndexCount () {
-        return 0;
+        int count = jni_getIndexCount ();
+        return count;
     }
 
     public void getIndices (int[] indices) {
+        jni_getIndices (indices);
     }
-
 
 
 }

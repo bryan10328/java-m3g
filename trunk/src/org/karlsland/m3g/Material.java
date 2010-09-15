@@ -8,7 +8,7 @@ public class Material extends Object3D {
     public final static int SPECULAR = 8192;
 
     static {
-        System.loadLibrary ("m3g");
+        System.loadLibrary ("javam3g");
     }
     native private void    jni_initialize                   ();
     native private void    jni_finalize                     ();
@@ -21,30 +21,38 @@ public class Material extends Object3D {
 
 
     public Material () {
+        jni_initialize ();
     }
 
     public void finalize () {
+        jni_finalize ();
     }
 
     public int getColor (int target) {
-        return 0;
+        int color = jni_getColor (target);
+        return color;
     }
 
     public float getShininess () {
-        return 0;
+        float shininess = jni_getShininess ();
+        return shininess;
     }
 
     public boolean isVertexColorTrackingEnabled () {
-        return false;
+        boolean enalbed = jni_isVertexColorTrackingEnabled ();
+        return enalbed;
     }
 
     public void setColor (int target, int ARGB) {
+        jni_setColor (target, ARGB);
     }
 
     public void setShininess (float shininess) {
+        jni_setShininess (shininess);
     }
 
     public void setVetexColorTrackingEnable (boolean enable) {
+        jni_setVertexColorTrackingEnable (enable);
     }
 
 

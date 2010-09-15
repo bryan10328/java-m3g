@@ -11,7 +11,7 @@ public class KeyframeSequence {
     public final static int STEP     = 180;
 
     static {
-        System.loadLibrary ("m3g");
+        System.loadLibrary ("javam3g");
     }
     native private void jni_initialize           ();
     native private void jni_finalize             ();
@@ -23,61 +23,73 @@ public class KeyframeSequence {
     native private int  jni_getRepeatMode        ();
     native private int  jni_getValidRangeFirst   ();
     native private int  jni_getValidRangeLast    ();
-    native private int  jni_setDuration          (int duration);
-    native private int  jni_setKeyframe          (int index, int time, float[] value);
+    native private void jni_setDuration          (int duration);
+    native private void jni_setKeyframe          (int index, int time, float[] value);
     native private void jni_setRepeateMode       (int mode);
-    native private void jni_setvalidRange        (int first, int last);
+    native private void jni_setValidRange        (int first, int last);
 
     public KeyframeSequence () {
+        jni_initialize ();
     }
 
     public void finalize () {
+        jni_finalize ();
     }
 
     public int getComponentCount () {
-        return 0;
+        int count = jni_getComponentCount ();
+        return count;
     }
 
     public int getDuration () {
-        return 0;
+        int duration = jni_getDuration ();
+        return duration;
     }
 
     public int getInterpolationType () {
-        return 0;
+        int type = jni_getInterpolationType ();
+        return type;
     }
 
     public int getKeyframe (int index, float[] value) {
-        return 0;
+        int time = jni_getKeyframe (index, value);
+        return time;
     }
 
     public int getKeyframeCount () {
-        return 0;
+        int count = jni_getKeyframeCount ();
+        return count;
     }
 
     public int getRepeatMode () {
-        return 0;
+        int mode = jni_getRepeatMode ();
+        return mode;
     }
 
     public int getValidRangeFirst () {
-        return 0;
+        int first = jni_getValidRangeFirst ();
+        return first;
     }
 
     public int getValidRangeLast () {
-        return 0;
+        int last = jni_getValidRangeLast ();
+        return last;
     }
 
-    public int setDuration (int duration) {
-        return 0;
+    public void setDuration (int duration) {
+        jni_setDuration (duration);
     }
 
-    public int setKeyframe (int index, int time, float[] value) {
-        return 0;
+    public void setKeyframe (int index, int time, float[] value) {
+        jni_setKeyframe (index, time, value);
     }
 
-    public void setRepeatMode (int mdoe) {
+    public void setRepeatMode (int mode) {
+        jni_setRepeateMode (mode);
     }
 
     public void setValidRange (int first, int last) {
+        jni_setValidRange (first, last);
     }
     
 
