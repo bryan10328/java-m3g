@@ -5,38 +5,42 @@ public class MorphingMesh extends Mesh {
     static {
         System.loadLibrary ("javam3g");
     }
-    native private void         jni_initilize           (VertexBuffer base, VertexBuffer[] targets, IndexBuffer submeshes[], Appearance[] appearances);
-    native private void         jni_initilize           (VertexBuffer base, VertexBuffer[] targets, IndexBuffer submesh, Appearance appearance);
+    native private void         jni_initialize           (VertexBuffer base, VertexBuffer[] targets, IndexBuffer submeshes[], Appearance[] appearances);
+    native private void         jni_initialize           (VertexBuffer base, VertexBuffer[] targets, IndexBuffer submesh, Appearance appearance);
     native private void         jni_finalize            ();
     native private IndexBuffer  jni_getMorphTarget      (int index);
     native private int          jni_getMorphTargetCount ();
     native private void         jni_getWeights          (float[] weights);
     native private void         jni_setWeights          (float[] weights);
 
-
     public MorphingMesh (VertexBuffer base, VertexBuffer[] targets, IndexBuffer submeshes[], Appearance[] appearances) {
-        super (base, submeshes, appearances);
+        jni_initialize (base, targets, submeshes, appearances);
     }
 
     public MorphingMesh (VertexBuffer base, VertexBuffer[] targets, IndexBuffer submesh, Appearance appearance) {
-        super (base, submesh, appearance);
+        jni_initialize (base, targets, submesh, appearance);
     }
 
     public void finalize () {
+        jni_finalize ();
     }
 
     public IndexBuffer getMorphTarget (int index) {
-        return null;
+        IndexBuffer ibuf = jni_getMorphTarget (index);
+        return ibuf;
     }
 
     public int getMorphTargetCount () {
-        return 0;
+        int count = jni_getMorphTargetCount ();
+        return count;
     }
 
     public void getWeights (float[] weights) {
+        jni_getWeights (weights);
     }
 
     public void setWeights (float[] weigths) {
+        jni_setWeights (weigths);
     }
 
 }

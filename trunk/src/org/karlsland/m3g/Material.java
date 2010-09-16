@@ -16,7 +16,7 @@ public class Material extends Object3D {
     native private float   jni_getShininess                 ();
     native private boolean jni_isVertexColorTrackingEnabled ();
     native private void    jni_setColor                     (int target, int ARGB);
-    native private void    jni_setShininess                 (float hininess);
+    native private void    jni_setShininess                 (float shininess);
     native private void    jni_setVertexColorTrackingEnable (boolean enable);
 
 

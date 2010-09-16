@@ -12,7 +12,7 @@ public class Node extends Transformable {
     static {
         System.loadLibrary ("javam3g");
     }
-    native private void    jni_initilize             ();
+    native private void    jni_initialize             ();
     native private void    jni_finalize              ();
     native private void    jni_align                 (Node reference);
     native private Node    jni_getAlignmentReference (int axis);
@@ -30,61 +30,76 @@ public class Node extends Transformable {
     native private void    jni_setScope              (int scope);
 
     public Node () {
+        jni_initialize ();
     }
 
     public void finalize () {
+        jni_finalize ();
     }
 
     public void align (Node reference) {
+        jni_align (reference);
     }
 
     public Node getAlignmentReference (int axis) {
-        return null;
+        Node node = jni_getAlignmentReference (axis);
+        return node;
     }
 
     public int getAlignmentTarget (int axis) {
-        return 0;
+        int target = jni_getAlignmentTarget (axis);
+        return target;
     }
 
 
     public float getAlphaFactor () {
-        return 0;
+        float alpha = jni_getAlphaFactor ();
+        return alpha;
     }
 
     public Node getParent() {
-        return null;
+        Node node = jni_getParent ();
+        return node;
     }
 
-    public int getSceope () {
-        return 0;
+    public int getScope () {
+        int scope = jni_getScope ();
+        return scope;
     }
 
     public boolean getTransformTo (Node target, Transform transform) {
-        return false;
+        boolean enable = jni_getTransformTo (target, transform);
+        return enable;
     }
 
     public boolean isPickingEnabled () {
-        return false;
+        boolean enable = jni_isPickingEnabled ();
+        return enable;
     }
 
     public boolean isRenderingEnabled () {
-        return false;
+        boolean enable = jni_isRenderingEnabled ();
+        return enable;
     }
 
     public void setAlignment (Node zRef, int zTarget, Node yRef, int yTarget) {
+        jni_setAlignment (zRef, zTarget, yRef, yTarget);
     }
 
     public void setAlphaFactor (float alphaFactor) {
+        jni_setAlphaFactor (alphaFactor);
     }
-
 
     public void setPickingEnable (boolean enable) {
+        jni_setPickingEnable (enable);
     }
 
-    public void setRenderingEnable (boolean enalbe) {
+    public void setRenderingEnable (boolean enable) {
+        jni_setRenderingEnable (enable);
     }
 
     public void setScope (int scope) {
+        jni_setScope (scope);
     }
 
 }

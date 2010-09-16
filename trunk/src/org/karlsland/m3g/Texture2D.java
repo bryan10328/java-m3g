@@ -16,7 +16,7 @@ public class Texture2D extends Transformable {
     static {
         System.loadLibrary ("javam3g");
     }
-    native private void    jni_initilize      (Image2D image);
+    native private void    jni_initialize     (Image2D image);
     native private void    jni_finalize       ();
     native private int     jni_getBlendColor  ();
     native private int     jni_getBlending    ();
@@ -32,53 +32,67 @@ public class Texture2D extends Transformable {
     native private void    jni_setWrapping    (int wrapS, int wrapT);
 
     public Texture2D (Image2D image) {
+        jni_initialize (image);
     }
 
     public void finalize () {
+        jni_finalize ();
     }
 
     public int getBlendColor () {
-        return 0;
+        int color = jni_getBlendColor ();
+        return color;
     }
 
     public int getBlending () {
-        return 0;
+        int mode = jni_getBlending ();
+        return mode;
     }
 
 
     public Image2D getImage () {
-        return null;
+        Image2D img = jni_getImage ();
+        return img;
     }
 
     public int getImageFilter () {
-        return 0;
+        int filter = jni_getImageFilter ();
+        return filter;
     }
 
     public int getLevelFilter () {
-        return 0;
+        int filter = jni_getLevelFilter ();
+        return filter;
     }
 
     public int getWrappingS () {
-        return 0;
+        int wrapping = jni_getWrappingS ();
+        return wrapping;
     }
 
     public int getWrappingT () {
-        return 0;
+        int wrapping = jni_getWrappingT ();
+        return wrapping;
     }
 
     public void setBlendColor (int RGB) {
+        jni_setBlendColor (RGB);
     }
 
     public void setBlending (int func) {
+        jni_setBlending (func);
     }
 
     public void setFiltering (int levelFilter, int imageFilter) {
+        jni_setFiltering (levelFilter, imageFilter);
     }
 
     public void setImage (Image2D image) {
+        jni_setImage (image);
     }
 
     public void setWrapping (int wrapS, int wrapT) {
+        jni_setWrapping (wrapS, wrapT);
     }
 
     

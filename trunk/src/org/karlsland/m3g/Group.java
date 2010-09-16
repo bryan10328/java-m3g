@@ -5,7 +5,7 @@ public class Group extends Node {
     static {
         System.loadLibrary ("javam3g");
     }
-    native private void    jni_initilize     ();
+    native private void    jni_initialize    ();
     native private void    jni_finalize      ();
     native private void    jni_addChild      (Node child);
     native private Node    jni_getChild      (int  index);
@@ -15,7 +15,7 @@ public class Group extends Node {
     native private void    jni_removeChild   (Node child);
 
     public Group () {
-        jni_initilize ();
+        jni_initialize ();
     }
 
     public void finalize () {

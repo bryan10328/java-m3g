@@ -30,51 +30,65 @@ public class PolygonMode extends Object3D {
 
 
     public PolygonMode () {
+        jni_initialize ();
     }
 
     public void finalize () {
+        jni_finalize ();
     }
 
     public int getCulling () {
-        return 0;
+        int culling = jni_getCulling ();
+        return culling;
     }
 
     public int getShading () {
-        return 0;
+        int shading = jni_getShading ();
+        return shading;
     }
 
     public int getWinding () {
-        return 0;
+        int winding = jni_getWinding ();
+        return winding;
     }
 
     public boolean isLocalCameraLightingEnaled () {
-        return false;
+        boolean enabled = jni_isLocalCameraLightingEnabled ();
+        return enabled;
     }
 
     public boolean isPerspectiveCorrectionEnabled () {
-        return false;
+        boolean enabled = jni_isPerspectiveCorrectionEnabled ();
+        return enabled;
     }
 
     public boolean isTwoSidedLightingEnabled () {
-        return false;
+        boolean enabled = jni_isTwoSidedLightingEnabled ();
+        return enabled;
     }
 
     public void setCulling (int mode) {
+        jni_setCulling (mode);
     }
 
     public void setLocalCameraLightingEnable (boolean enable) {
+        jni_setLocalCameraLighting (enable);
     }
 
     public void setPerspectiveCorrectionEnable (boolean enable) {
+        jni_setPerspectiveCorrectionEnable (enable);
     }
 
     public void setShading (int mode) {
+        jni_setShading (mode);
     }
 
     public void setTwoSidedLightingEnable (boolean enable) {
+        jni_setTwoSidedLightingEnable (enable);
     }
 
     public void setWinding (int mode) {
+        jni_setWinding (mode);
     }
 
 

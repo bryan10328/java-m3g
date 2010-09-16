@@ -6,55 +6,72 @@ public class Sprite3D extends Node {
     static {
         System.loadLibrary ("javam3g");
     }
-    native private void  jni_initilize        ();
-    native private void  jni_finalize         ();
-    native private void  jni_addTransform     (Node bone, int weight, int firstVertex, int numVertices);
-    native private void  jni_getBoneTransform (Node bone, Transform transform);
-    native private int   jni_getBoneVertices  (Node bone, int[] indices, float[] weights);
-    native private Group jni_getSkeleton      ();
-
+    native private void       jni_initialize    (boolean scaled, Image2D image, Appearance appearance);
+    native private void       jni_finalize      ();
+    native private Appearance jni_getAppearance ();
+    native private int        jni_getCropHeight ();
+    native private int        jni_getCropWidth  ();
+    native private int        jni_getCropX      ();
+    native private int        jni_getCropY      ();
+    native private Image2D    jni_getImage      ();
+    native private boolean    jni_isScaled      ();
+    native private void       jni_setAppearance (Appearance appearance);
+    native private void       jni_setCrop       (int cropX, int cropY, int width, int height);
+    native private void       jni_setImage      (Image2D image);
 
     public Sprite3D (boolean scaled, Image2D image, Appearance appearance) {
+        jni_initialize (scaled, image, appearance);
     }
 
-    public void finlize () {
+    public void finalize () {
+        jni_finalize ();
     }
 
     public Appearance getAppearance () {
-        return null;
+        Appearance app = jni_getAppearance ();
+        return app;
     }
 
     public int getCropHeight () {
+        int height = jni_getCropHeight ();
         return 0;
     }
 
     public int getCropWidth () {
-        return 0;
+        int width = jni_getCropWidth ();
+        return width;
     }
 
     public int getCropX () {
-        return 0;
+        int x = jni_getCropX ();
+        return x;
     }
 
     public int getCropY () {
-        return 0;
+        int y = jni_getCropY ();
+        return y;
     }
     
     public Image2D getImage () {
-        return null;
+        Image2D img = jni_getImage ();
+        return img;
     }
 
     public boolean isScaled () {
-        return false;
+        boolean scaled = jni_isScaled ();
+        return scaled;
     }
 
     public void setAppearance (Appearance appearance) {
+        jni_setAppearance (appearance);
     }
 
     public void setCrop (int cropX, int cropY, int width, int height) {
+        jni_setCrop (cropX, cropY, width, height);
     }
 
-    public void setImage (Image2D mage) {
+    public void setImage (Image2D image) {
+        jni_setImage (image);
     }
 
 

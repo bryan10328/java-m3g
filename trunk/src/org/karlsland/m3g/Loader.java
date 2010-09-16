@@ -1,13 +1,14 @@
 package org.karlsland.m3g;
 
 
-
-public class Loader extends Object {
+public class Loader extends java.lang.Object {
     
+    protected long entity;
+
     static {
         System.loadLibrary ("javam3g");
     }
-    //native private void       jni_initilize ();
+    //native private void       jni_initialize ();
     //native private void       jni_finalize ();
     native private static Object3D[] jni_load (byte[] data, int offset);
     native private static Object3D[] jni_load (java.lang.String name);

@@ -15,6 +15,9 @@ public class Mesh extends Node {
     native private VertexBuffer jni_getVertexBuffer ();
     native private void         jni_setAppearance   (int index, Appearance appearance);
 
+    protected Mesh () {
+        // nothing to do 
+    }
 
     public Mesh (VertexBuffer vertices, IndexBuffer[] submeshes, Appearance[] appearances) {
         jni_initialize (vertices, submeshes, appearances);

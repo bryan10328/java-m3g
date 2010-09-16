@@ -312,18 +312,18 @@ extern "C" {
 #define org_karlsland_m3g_MorphingMesh_Z_AXIS 148L
 /*
  * Class:     org_karlsland_m3g_MorphingMesh
- * Method:    jni_initilize
+ * Method:    jni_initialize
  * Signature: (Lorg/karlsland/m3g/VertexBuffer;[Lorg/karlsland/m3g/VertexBuffer;[Lorg/karlsland/m3g/IndexBuffer;[Lorg/karlsland/m3g/Appearance;)V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1initilize__Lorg_karlsland_m3g_VertexBuffer_2_3Lorg_karlsland_m3g_VertexBuffer_2_3Lorg_karlsland_m3g_IndexBuffer_2_3Lorg_karlsland_m3g_Appearance_2
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1initialize__Lorg_karlsland_m3g_VertexBuffer_2_3Lorg_karlsland_m3g_VertexBuffer_2_3Lorg_karlsland_m3g_IndexBuffer_2_3Lorg_karlsland_m3g_Appearance_2
   (JNIEnv *, jobject, jobject, jobjectArray, jobjectArray, jobjectArray);
 
 /*
  * Class:     org_karlsland_m3g_MorphingMesh
- * Method:    jni_initilize
+ * Method:    jni_initialize
  * Signature: (Lorg/karlsland/m3g/VertexBuffer;[Lorg/karlsland/m3g/VertexBuffer;Lorg/karlsland/m3g/IndexBuffer;Lorg/karlsland/m3g/Appearance;)V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1initilize__Lorg_karlsland_m3g_VertexBuffer_2_3Lorg_karlsland_m3g_VertexBuffer_2Lorg_karlsland_m3g_IndexBuffer_2Lorg_karlsland_m3g_Appearance_2
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1initialize__Lorg_karlsland_m3g_VertexBuffer_2_3Lorg_karlsland_m3g_VertexBuffer_2Lorg_karlsland_m3g_IndexBuffer_2Lorg_karlsland_m3g_Appearance_2
   (JNIEnv *, jobject, jobject, jobjectArray, jobject, jobject);
 
 /*
@@ -512,10 +512,10 @@ extern "C" {
 #define org_karlsland_m3g_Node_Z_AXIS 148L
 /*
  * Class:     org_karlsland_m3g_Node
- * Method:    jni_initilize
+ * Method:    jni_initialize
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Node_jni_1initilize
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Node_jni_1initialize
   (JNIEnv *, jobject);
 
 /*
@@ -810,10 +810,10 @@ extern "C" {
 #endif
 /*
  * Class:     org_karlsland_m3g_Object3D
- * Method:    jni_initilize
+ * Method:    jni_initialize
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Object3D_jni_1initilize
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Object3D_jni_1initialize
   (JNIEnv *, jobject);
 
 /*
@@ -1382,10 +1382,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getSubmeshInd
 
 /*
  * Class:     org_karlsland_m3g_RayIntersection
- * Method:    jni_getTestureS
+ * Method:    jni_getTextureS
  * Signature: (I)F
  */
-JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getTestureS
+JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getTextureS
   (JNIEnv *, jobject, jint);
 
 /*
@@ -1522,18 +1522,18 @@ extern "C" {
 #define org_karlsland_m3g_SkinnedMesh_Z_AXIS 148L
 /*
  * Class:     org_karlsland_m3g_SkinnedMesh
- * Method:    jni_initilize
+ * Method:    jni_initialize
  * Signature: (Lorg/karlsland/m3g/VertexBuffer;[Lorg/karlsland/m3g/IndexBuffer;[Lorg/karlsland/m3g/Appearance;Lorg/karlsland/m3g/Group;)V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1initilize__Lorg_karlsland_m3g_VertexBuffer_2_3Lorg_karlsland_m3g_IndexBuffer_2_3Lorg_karlsland_m3g_Appearance_2Lorg_karlsland_m3g_Group_2
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1initialize__Lorg_karlsland_m3g_VertexBuffer_2_3Lorg_karlsland_m3g_IndexBuffer_2_3Lorg_karlsland_m3g_Appearance_2Lorg_karlsland_m3g_Group_2
   (JNIEnv *, jobject, jobject, jobjectArray, jobjectArray, jobject);
 
 /*
  * Class:     org_karlsland_m3g_SkinnedMesh
- * Method:    jni_initilize
+ * Method:    jni_initialize
  * Signature: (Lorg/karlsland/m3g/VertexBuffer;Lorg/karlsland/m3g/IndexBuffer;Lorg/karlsland/m3g/Appearance;Lorg/karlsland/m3g/Group;)V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1initilize__Lorg_karlsland_m3g_VertexBuffer_2Lorg_karlsland_m3g_IndexBuffer_2Lorg_karlsland_m3g_Appearance_2Lorg_karlsland_m3g_Group_2
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1initialize__Lorg_karlsland_m3g_VertexBuffer_2Lorg_karlsland_m3g_IndexBuffer_2Lorg_karlsland_m3g_Appearance_2Lorg_karlsland_m3g_Group_2
   (JNIEnv *, jobject, jobject, jobject, jobject, jobject);
 
 /*
@@ -1858,11 +1858,11 @@ extern "C" {
 #define org_karlsland_m3g_Sprite3D_Z_AXIS 148L
 /*
  * Class:     org_karlsland_m3g_Sprite3D
- * Method:    jni_initilize
- * Signature: ()V
+ * Method:    jni_initialize
+ * Signature: (ZLorg/karlsland/m3g/Image2D;Lorg/karlsland/m3g/Appearance;)V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1initilize
-  (JNIEnv *, jobject);
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1initialize
+  (JNIEnv *, jobject, jboolean, jobject, jobject);
 
 /*
  * Class:     org_karlsland_m3g_Sprite3D
@@ -1874,35 +1874,83 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1finalize
 
 /*
  * Class:     org_karlsland_m3g_Sprite3D
- * Method:    jni_addTransform
- * Signature: (Lorg/karlsland/m3g/Node;III)V
+ * Method:    jni_getAppearance
+ * Signature: ()Lorg/karlsland/m3g/Appearance;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1addTransform
-  (JNIEnv *, jobject, jobject, jint, jint, jint);
-
-/*
- * Class:     org_karlsland_m3g_Sprite3D
- * Method:    jni_getBoneTransform
- * Signature: (Lorg/karlsland/m3g/Node;Lorg/karlsland/m3g/Transform;)V
- */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getBoneTransform
-  (JNIEnv *, jobject, jobject, jobject);
-
-/*
- * Class:     org_karlsland_m3g_Sprite3D
- * Method:    jni_getBoneVertices
- * Signature: (Lorg/karlsland/m3g/Node;[I[F)I
- */
-JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getBoneVertices
-  (JNIEnv *, jobject, jobject, jintArray, jfloatArray);
-
-/*
- * Class:     org_karlsland_m3g_Sprite3D
- * Method:    jni_getSkeleton
- * Signature: ()Lorg/karlsland/m3g/Group;
- */
-JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getSkeleton
+JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getAppearance
   (JNIEnv *, jobject);
+
+/*
+ * Class:     org_karlsland_m3g_Sprite3D
+ * Method:    jni_getCropHeight
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getCropHeight
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     org_karlsland_m3g_Sprite3D
+ * Method:    jni_getCropWidth
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getCropWidth
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     org_karlsland_m3g_Sprite3D
+ * Method:    jni_getCropX
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getCropX
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     org_karlsland_m3g_Sprite3D
+ * Method:    jni_getCropY
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getCropY
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     org_karlsland_m3g_Sprite3D
+ * Method:    jni_getImage
+ * Signature: ()Lorg/karlsland/m3g/Image2D;
+ */
+JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getImage
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     org_karlsland_m3g_Sprite3D
+ * Method:    jni_isScaled
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1isScaled
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     org_karlsland_m3g_Sprite3D
+ * Method:    jni_setAppearance
+ * Signature: (Lorg/karlsland/m3g/Appearance;)V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1setAppearance
+  (JNIEnv *, jobject, jobject);
+
+/*
+ * Class:     org_karlsland_m3g_Sprite3D
+ * Method:    jni_setCrop
+ * Signature: (IIII)V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1setCrop
+  (JNIEnv *, jobject, jint, jint, jint, jint);
+
+/*
+ * Class:     org_karlsland_m3g_Sprite3D
+ * Method:    jni_setImage
+ * Signature: (Lorg/karlsland/m3g/Image2D;)V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1setImage
+  (JNIEnv *, jobject, jobject);
 
 #ifdef __cplusplus
 }
@@ -1927,10 +1975,10 @@ extern "C" {
 #define org_karlsland_m3g_Group_Z_AXIS 148L
 /*
  * Class:     org_karlsland_m3g_Group
- * Method:    jni_initilize
+ * Method:    jni_initialize
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1initilize
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1initialize
   (JNIEnv *, jobject);
 
 /*
@@ -2022,10 +2070,10 @@ extern "C" {
 #define org_karlsland_m3g_Texture2D_WRAP_REPEAT 241L
 /*
  * Class:     org_karlsland_m3g_Texture2D
- * Method:    jni_initilize
+ * Method:    jni_initialize
  * Signature: (Lorg/karlsland/m3g/Image2D;)V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Texture2D_jni_1initilize
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Texture2D_jni_1initialize
   (JNIEnv *, jobject, jobject);
 
 /*
@@ -2222,18 +2270,18 @@ extern "C" {
 #endif
 /*
  * Class:     org_karlsland_m3g_Transform
- * Method:    jni_initilize
+ * Method:    jni_initialize
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1initilize__
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1initialize__
   (JNIEnv *, jobject);
 
 /*
  * Class:     org_karlsland_m3g_Transform
- * Method:    jni_initilize
+ * Method:    jni_initialize
  * Signature: (Lorg/karlsland/m3g/Transform;)V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1initilize__Lorg_karlsland_m3g_Transform_2
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1initialize__Lorg_karlsland_m3g_Transform_2
   (JNIEnv *, jobject, jobject);
 
 /*
@@ -2404,10 +2452,10 @@ extern "C" {
 #endif
 /*
  * Class:     org_karlsland_m3g_Transformable
- * Method:    jni_initilize
+ * Method:    jni_initialize
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1initilize
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1initialize
   (JNIEnv *, jobject);
 
 /*
@@ -2672,18 +2720,18 @@ extern "C" {
 #endif
 /*
  * Class:     org_karlsland_m3g_TriangleStripArray
- * Method:    jni_initilize
+ * Method:    jni_initialize
  * Signature: ([I[I)V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1initilize___3I_3I
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1initialize___3I_3I
   (JNIEnv *, jobject, jintArray, jintArray);
 
 /*
  * Class:     org_karlsland_m3g_TriangleStripArray
- * Method:    jni_initilize
+ * Method:    jni_initialize
  * Signature: (I[I)V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1initilize__I_3I
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1initialize__I_3I
   (JNIEnv *, jobject, jint, jintArray);
 
 /*
@@ -2715,10 +2763,10 @@ extern "C" {
 #define org_karlsland_m3g_Light_SPOT 131L
 /*
  * Class:     org_karlsland_m3g_Light
- * Method:    jni_initilize
+ * Method:    jni_initialize
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1initilize
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1initialize
   (JNIEnv *, jobject);
 
 /*
@@ -2854,10 +2902,10 @@ extern "C" {
 #endif
 /*
  * Class:     org_karlsland_m3g_VertexArray
- * Method:    jni_intialize
+ * Method:    jni_initialize
  * Signature: (III)V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1intialize
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1initialize
   (JNIEnv *, jobject, jint, jint, jint);
 
 /*
@@ -2980,10 +3028,10 @@ extern "C" {
 #endif
 /*
  * Class:     org_karlsland_m3g_VertexBuffer
- * Method:    jni_intialize
+ * Method:    jni_initialize
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1intialize
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1initialize
   (JNIEnv *, jobject);
 
 /*
@@ -3020,10 +3068,10 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1getNormals
 
 /*
  * Class:     org_karlsland_m3g_VertexBuffer
- * Method:    jni_getpositions
+ * Method:    jni_getPositions
  * Signature: ([F)Lorg/karlsland/m3g/VertexArray;
  */
-JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1getpositions
+JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1getPositions
   (JNIEnv *, jobject, jfloatArray);
 
 /*
@@ -3052,10 +3100,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1setColors
 
 /*
  * Class:     org_karlsland_m3g_VertexBuffer
- * Method:    jni_seDefaultColor
+ * Method:    jni_setDefaultColor
  * Signature: (I)V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1seDefaultColor
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1setDefaultColor
   (JNIEnv *, jobject, jint);
 
 /*
@@ -3188,10 +3236,10 @@ extern "C" {
 #define org_karlsland_m3g_World_Z_AXIS 148L
 /*
  * Class:     org_karlsland_m3g_World
- * Method:    jni_intialize
+ * Method:    jni_initialize
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_World_jni_1intialize
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_World_jni_1initialize
   (JNIEnv *, jobject);
 
 /*

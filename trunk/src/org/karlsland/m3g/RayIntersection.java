@@ -1,6 +1,8 @@
 package org.karlsland.m3g;
 
-public class RayIntersection extends Object {
+public class RayIntersection extends java.lang.Object {
+
+    protected long entity;
 
     static {
         System.loadLibrary ("javam3g");
@@ -14,50 +16,60 @@ public class RayIntersection extends Object {
     native private float jni_getNormalZ      ();
     native private void  jni_getRay          (float[] ray);
     native private int   jni_getSubmeshIndex ();
-    native private float jni_getTestureS     (int index);
+    native private float jni_getTextureS     (int index);
     native private float jni_getTextureT     (int index);
 
 
     public RayIntersection () {
+        jni_initialize ();
     }
 
     public void finalize () {
+        jni_finalize ();
     }
 
     public float getDistance () {
-        return 0;
+        float dist = jni_getDistance ();
+        return dist;
     }
 
     public Node getIntersected () {
-        return null;
+        Node intersected = jni_getIntersected ();
+        return intersected;
     }
 
     public float getNormalX () {
-        return 0;
+        float x = jni_getNormalX ();
+        return x;
     }
 
     public float getNormalY () {
-        return 0;
+        float y = jni_getNormalY ();
+        return y;
     }
 
     public float getNormalZ () {
-        return 0;
+        float z = jni_getNormalZ ();
+        return z;
     }
 
     public void getRay (float[] ray) {
-
+        jni_getRay (ray);
     }
 
     public int getSubmeshIndex () {
-        return 0;
+        int index = jni_getSubmeshIndex ();
+        return index;
     }
 
     public float getTextureS (int index) {
-        return 0;
+        float s = jni_getTextureS (index);
+        return s;
     }
 
     public float getTextureT (int index) {
-        return 0;
+        float t = jni_getTextureT (index);
+        return t;
     }
 
 

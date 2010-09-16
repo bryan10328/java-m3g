@@ -14,7 +14,7 @@ public class Graphics3D extends Object {
     native private void    jni_finalize             ();
     native private int     jni_addLight             (Light light, Transform transform);
     native private void    jni_bindTarget           (java.lang.Object target);
-    native private void    jni_bindTarget           (java.lang.Object target, boolean depthBuffer, int hints);
+    native private void    jni_bindTarget           (java.lang.Object target, boolean depthBufferEnable, int hints);
     native private void    jni_clear                (Background background);
     native private Camera  jni_getCamera            (Transform  transform);
     native private float   jni_getDepthRangeFar     ();

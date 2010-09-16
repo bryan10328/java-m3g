@@ -6,16 +6,16 @@ public class VertexBuffer extends Object3D {
     static {
         System.loadLibrary ("javam3g");
     }
-    native private void        jni_intialize   ();
-    native private void        jni_finalize    ();
+    native private void        jni_initialize      ();
+    native private void        jni_finalize        ();
     native private VertexArray jni_getColors       ();
     native private int         jni_getDefaultColor ();
     native private VertexArray jni_getNormals      ();
-    native private VertexArray jni_getpositions    (float[] scaleBias);
+    native private VertexArray jni_getPositions    (float[] scaleBias);
     native private VertexArray jni_getTexCoords    (int index, float[] scaleBias);
     native private int         jni_getVertexCount  ();
     native private void        jni_setColors       (VertexArray colors);
-    native private void        jni_seDefaultColor  (int ARGB);
+    native private void        jni_setDefaultColor (int ARGB);
     native private void        jni_setNormals      (VertexArray normals);
     native private void        jni_setPositions    (VertexArray positions, float scale, float[] bias);
     native private void        jni_setTexCoords    (int index, VertexArray texCoords, float scale, float[] bias);
@@ -23,48 +23,61 @@ public class VertexBuffer extends Object3D {
 //
 
     public VertexBuffer () {
+        jni_initialize ();
     }
 
     public void finalize () {
+        jni_finalize ();
     }
 
     public VertexArray getColors () {
-        return null;
+        VertexArray varry = jni_getColors ();
+        return varry;
     }
 
     public int getDefaultColor () {
-        return 0;
+        int color = jni_getDefaultColor ();
+        return color;
     }
 
     public VertexArray getNormals () {
-        return null;
+        VertexArray normals = jni_getNormals ();
+        return normals;
     }
 
-    public VertexArray getpositions (float[] scaleBias) {
-        return null;
+    public VertexArray getPositions (float[] scaleBias) {
+        VertexArray positions = jni_getPositions (scaleBias);
+        return positions;
     }
 
     public VertexArray getTexCoords (int index, float[] scaleBias) {
-        return null;
+        VertexArray texCoords = jni_getTexCoords (index, scaleBias);
+        return texCoords;
     }
 
     public int getVertexCount () {
-        return 0;
+        int count = jni_getVertexCount ();
+        return count;
     }
 
     public void setColors (VertexArray colors) {
+        jni_setColors (colors);
     }
 
-    public void seDefaultColor (int ARGB) {
+    public void setDefaultColor (int ARGB) {
+        jni_setDefaultColor (ARGB);
     }
 
     public void setNormals (VertexArray normals) {
+        jni_setNormals (normals);
     }
 
     public void setPositions (VertexArray positions, float scale, float[] bias) {
+        jni_setPositions (positions, scale, bias);
     }
 
     public void setTexCoords (int index, VertexArray texCoords, float scale, float[] bias) {
+        jni_setTexCoords (index, texCoords, scale, bias);
     }
 
 }

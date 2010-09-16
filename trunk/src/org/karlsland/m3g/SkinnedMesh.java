@@ -5,38 +5,42 @@ public class SkinnedMesh extends Mesh {
     static {
         System.loadLibrary ("javam3g");
     }
-    native private void  jni_initilize        (VertexBuffer vertices, IndexBuffer[] submeshes, Appearance[] appearances, Group skeleton);
-    native private void  jni_initilize        (VertexBuffer vertices, IndexBuffer submesh, Appearance appearance, Group skeleton);
+    native private void  jni_initialize        (VertexBuffer vertices, IndexBuffer[] submeshes, Appearance[] appearances, Group skeleton);
+    native private void  jni_initialize        (VertexBuffer vertices, IndexBuffer submesh, Appearance appearance, Group skeleton);
     native private void  jni_finalize         ();
     native private void  jni_addTransform     (Node bone, int weight, int firstVertex, int numVertices);
     native private void  jni_getBoneTransform (Node bone, Transform transform);
     native private int   jni_getBoneVertices  (Node bone, int[] indices, float[] weights);
     native private Group jni_getSkeleton      ();
 
-
     public SkinnedMesh (VertexBuffer vertices, IndexBuffer[] submeshes, Appearance[] appearances, Group skeleton) {
-        super(vertices, submeshes, appearances);
+        jni_initialize (vertices, submeshes, appearances, skeleton);
     }
 
     public SkinnedMesh (VertexBuffer vertices, IndexBuffer submesh, Appearance appearance, Group skeleton) {
-        super(vertices, submesh, appearance);
+        jni_initialize (vertices, submesh, appearance, skeleton);
     }
 
     public void finalize () {
+        jni_finalize ();
     }
 
     public void addTransform (Node bone, int weight, int firstVertex, int numVertices) {
+        jni_addTransform (bone, weight, firstVertex, numVertices);
     }
 
     public void getBoneTransform (Node bone, Transform transform) {
+        jni_getBoneTransform (bone, transform);
     }
 
     public int getBoneVertices (Node bone, int[] indices, float[] weights) {
-        return 0;
+        int num = jni_getBoneVertices (bone, indices, weights);
+        return num;
     }
 
     public Group getSkeleton () {
-        return null;
+        Group skeleton = jni_getSkeleton ();
+        return skeleton;
     }
 
 
