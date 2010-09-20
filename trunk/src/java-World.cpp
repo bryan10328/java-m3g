@@ -37,7 +37,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_World_jni_1finalize
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_World_jni_1getActiveCamera
   (JNIEnv* env, jobject obj)
 {
-
+    return (jobject)NULL;
 }
 
 /*
@@ -48,7 +48,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_World_jni_1getActiveCamera
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_World_jni_1getBackground
   (JNIEnv* env, jobject obj)
 {
-
+    return (jobject)NULL;
 }
 
 /*

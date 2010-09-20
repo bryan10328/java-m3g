@@ -50,7 +50,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Mesh_jni_1finalize
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Mesh_jni_1getAppearance
   (JNIEnv* env, jobject obj, jint index)
 {
-
+    return (jobject)0;
 }
 
 /*
@@ -61,7 +61,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Mesh_jni_1getAppearance
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Mesh_jni_1getIndexBuffer
   (JNIEnv* env, jobject obj, jint index)
 {
-
+    return (jobject)0;
 }
 
 /*
@@ -72,7 +72,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Mesh_jni_1getIndexBuffer
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Mesh_jni_1getSubmeshCount
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -83,7 +83,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Mesh_jni_1getSubmeshCount
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Mesh_jni_1getVertexBuffer
   (JNIEnv* env, jobject obj)
 {
-
+    return (jobject)0;
 }
 
 /*

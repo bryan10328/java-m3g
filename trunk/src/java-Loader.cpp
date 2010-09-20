@@ -14,7 +14,7 @@ using namespace m3g;
 JNIEXPORT jobjectArray JNICALL Java_org_karlsland_m3g_Loader_jni_1load___3BI
   (JNIEnv* env, jclass clazz, jbyteArray data, jint offset)
 {
-
+    return (jobjectArray)NULL;
 }
 
 /*
@@ -25,6 +25,6 @@ JNIEXPORT jobjectArray JNICALL Java_org_karlsland_m3g_Loader_jni_1load___3BI
 JNIEXPORT jobjectArray JNICALL Java_org_karlsland_m3g_Loader_jni_1load__Ljava_lang_String_2
   (JNIEnv* env, jclass clazz, jstring name)
 {
-
+    return (jobjectArray)NULL;
 }
 

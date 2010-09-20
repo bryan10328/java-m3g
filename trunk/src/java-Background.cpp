@@ -36,7 +36,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1finalize
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getColor
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -47,7 +47,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getColor
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getCropHeight
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -58,7 +58,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getCropHeight
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getCropWidth
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -69,7 +69,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getCropWidth
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getCropX
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -80,7 +80,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getCropX
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getCropY
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -91,7 +91,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getCropY
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Background_jni_1getImage
   (JNIEnv* env, jobject obj)
 {
-
+    return (jobject)NULL;
 }
 
 /*
@@ -102,7 +102,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Background_jni_1getImage
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getImageModeX
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -113,7 +113,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getImageModeX
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getImageModeY
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -124,7 +124,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getImageModeY
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Background_jni_1isColorClearEnabled
   (JNIEnv* env, jobject obj)
 {
-
+    return false;
 }
 
 /*
@@ -135,7 +135,7 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Background_jni_1isColorClearEn
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Background_jni_1isDepthClearEnabled
   (JNIEnv* env, jobject obj)
 {
-
+    return false;
 }
 
 /*

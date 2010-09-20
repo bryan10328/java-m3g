@@ -36,7 +36,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1finalize
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Light_jni_1getColor
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -47,7 +47,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Light_jni_1getColor
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Light_jni_1getConstantAttenuation
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -58,7 +58,7 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Light_jni_1getConstantAttenuatio
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Light_jni_1getIntensity
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -69,7 +69,7 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Light_jni_1getIntensity
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Light_jni_1getLinearAttenuation
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -80,7 +80,7 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Light_jni_1getLinearAttenuation
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Light_jni_1getMode
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -91,7 +91,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Light_jni_1getMode
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Light_jni_1getQuadraticAttenuation
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -102,7 +102,7 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Light_jni_1getQuadraticAttenuati
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Light_jni_1getSpotAngle
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -113,7 +113,7 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Light_jni_1getSpotAngle
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Light_jni_1getSpotExponent
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -135,7 +135,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1setAttenuation
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Light_jni_1setColor
   (JNIEnv* env, jobject obj, jint RGB)
 {
-
+    return 0;
 }
 
 /*

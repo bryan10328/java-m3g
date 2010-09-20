@@ -38,7 +38,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Appearance_jni_1getCompositingM
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Appearance_jni_1getFog
   (JNIEnv* env, jobject obj)
 {
-
+    return (jobject)NULL;
 }
 
 /*
@@ -49,7 +49,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Appearance_jni_1getFog
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Appearance_jni_1getLayer
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -60,7 +60,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Appearance_jni_1getLayer
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Appearance_jni_1getMaterial
   (JNIEnv* env, jobject obj)
 {
-
+    return (jobject)NULL;
 }
 
 /*
@@ -71,7 +71,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Appearance_jni_1getMaterial
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Appearance_jni_1getPolygonMode
   (JNIEnv* env, jobject obj)
 {
-
+    return (jobject)NULL;
 }
 
 /*
@@ -82,7 +82,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Appearance_jni_1getPolygonMode
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Appearance_jni_1getTexture
   (JNIEnv* env, jobject obj, jint)
 {
-
+    return (jobject)NULL;
 }
 
 
@@ -103,7 +103,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Appearance_jni_1setCompositingMode
  * Signature: (Lorg/karlsland/m3g/Fog;)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Appearance_jni_1setFog
-  (JNIEnv* env, jobject obj, jobject fog);
+  (JNIEnv* env, jobject obj, jobject fog)
 {
 
 }

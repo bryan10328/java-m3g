@@ -37,7 +37,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1finalize
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getAppearance
   (JNIEnv* env, jobject obj)
 {
-
+    return (jobject)NULL;
 }
 
 /*
@@ -48,7 +48,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getAppearance
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getCropHeight
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -59,7 +59,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getCropHeight
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getCropWidth
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -70,7 +70,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getCropWidth
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getCropX
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -81,7 +81,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getCropX
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getCropY
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -92,7 +92,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getCropY
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getImage
   (JNIEnv* env, jobject obj)
 {
-
+    return (jobject)NULL;
 }
 
 /*
@@ -103,7 +103,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getImage
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1isScaled
   (JNIEnv* env, jobject obj)
 {
-
+    return false;
 }
 
 /*

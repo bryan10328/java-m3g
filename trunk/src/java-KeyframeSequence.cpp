@@ -37,7 +37,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1finalize
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getComponentCount
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -48,7 +48,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getComponent
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getDuration
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -59,7 +59,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getDuration
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getInterpolationType
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -70,7 +70,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getInterpola
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getKeyframe
   (JNIEnv* env, jobject obj, jint index, jfloatArray value)
 {
-
+    return 0;
 }
 
 /*
@@ -81,7 +81,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getKeyframe
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getKeyframeCount
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -92,7 +92,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getKeyframeC
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getRepeatMode
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -103,7 +103,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getRepeatMod
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getValidRangeFirst
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -114,7 +114,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getValidRang
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getValidRangeLast
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*

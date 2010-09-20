@@ -69,7 +69,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1getBoneTransform
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1getBoneVertices
   (JNIEnv* env, jobject obj, jobject bone, jintArray indices, jfloatArray weights)
 {
-
+    return 0;
 }
 
 /*
@@ -80,6 +80,6 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1getBoneVertices
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1getSkeleton
   (JNIEnv* env, jobject obj)
 {
-
+    return (jobject)NULL;
 }
 

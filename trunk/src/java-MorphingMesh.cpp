@@ -47,7 +47,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1finalize
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1getMorphTarget
   (JNIEnv* env, jobject obj, jint index)
 {
-
+    return (jobject)NULL;
 }
 
 /*
@@ -58,7 +58,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1getMorphTarge
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1getMorphTargetCount
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*

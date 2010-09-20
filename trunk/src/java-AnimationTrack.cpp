@@ -37,7 +37,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1finalize
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1getController
   (JNIEnv* env, jobject obj)
 {
-
+    return (jobject)NULL;
 }
 
 /*
@@ -48,7 +48,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1getControll
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1getKeyframeSequence
   (JNIEnv* env, jobject obj)
 {
-
+    return (jobject)NULL;
 }
 
 
@@ -60,7 +60,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1getKeyframe
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1getTargetProperty
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*

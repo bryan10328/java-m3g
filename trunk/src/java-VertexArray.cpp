@@ -70,7 +70,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1get__II_3F
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_VertexArray_jni_1getComponentCount
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -81,7 +81,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_VertexArray_jni_1getComponentCount
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_VertexArray_jni_1getCompoenntType
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -92,7 +92,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_VertexArray_jni_1getCompoenntType
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_VertexArray_jni_1getVertexCount
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*

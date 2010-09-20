@@ -36,7 +36,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1finalize
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1getCulling
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -47,7 +47,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1getCulling
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1getShading
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -58,7 +58,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1getShading
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1getWinding
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -69,7 +69,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1getWinding
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1isLocalCameraLightingEnabled
   (JNIEnv* env, jobject obj)
 {
-
+    return false;
 }
 
 /*
@@ -80,7 +80,7 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1isLocalCamera
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1isPerspectiveCorrectionEnabled
   (JNIEnv* env, jobject obj)
 {
-
+    return false;
 }
 
 /*
@@ -91,7 +91,7 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1isPerspective
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1isTwoSidedLightingEnabled
   (JNIEnv* env, jobject obj)
 {
-
+    return false;
 }
 
 /*

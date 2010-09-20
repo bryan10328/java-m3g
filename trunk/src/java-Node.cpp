@@ -48,7 +48,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Node_jni_1align
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Node_jni_1getAlignmentReference
   (JNIEnv* env, jobject obj, jint)
 {
-
+    return (jobject)NULL;
 }
 
 /*
@@ -59,7 +59,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Node_jni_1getAlignmentReference
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Node_jni_1getAlignmentTarget
   (JNIEnv* env, jobject obj, jint)
 {
-
+    return 0;
 }
 
 /*
@@ -70,7 +70,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Node_jni_1getAlignmentTarget
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Node_jni_1getAlphaFactor
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -81,7 +81,7 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Node_jni_1getAlphaFactor
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Node_jni_1getParent
   (JNIEnv* env, jobject obj)
 {
-
+    return (jobject)NULL;
 }
 
 /*
@@ -92,7 +92,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Node_jni_1getParent
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Node_jni_1getScope
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -103,7 +103,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Node_jni_1getScope
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Node_jni_1getTransformTo
   (JNIEnv* env, jobject obj, jobject target, jobject transform)
 {
-
+    return false;
 }
 
 /*
@@ -114,7 +114,7 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Node_jni_1getTransformTo
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Node_jni_1isPickingEnabled
   (JNIEnv* env, jobject obj)
 {
-
+    return false;
 }
 
 /*
@@ -125,7 +125,7 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Node_jni_1isPickingEnabled
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Node_jni_1isRenderingEnabled
   (JNIEnv* env, jobject obj)
 {
-
+    return false;
 }
 
 /*

@@ -36,7 +36,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1finalize
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Image2D_jni_1getFormat
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -47,7 +47,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Image2D_jni_1getFormat
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Image2D_jni_1getHeight
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -58,7 +58,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Image2D_jni_1getHeight
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Image2D_jni_1getWidth
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -69,7 +69,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Image2D_jni_1getWidth
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Image2D_jni_1isMutable
   (JNIEnv* env, jobject obj)
 {
-
+    return false;
 }
 
 /*

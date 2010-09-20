@@ -36,7 +36,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1finalize
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1getAlphaThreshold
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -47,7 +47,7 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1getAlphaThr
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1getBlending
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -58,7 +58,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1getBlending
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1getDepthOffsetFactor
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -69,7 +69,7 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1getDepthOff
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1getDepthOffsetUnits
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -80,7 +80,7 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1getDepthOff
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1isAlphaWriteEnable
   (JNIEnv* env, jobject obj)
 {
-
+    return false;
 }
 
 /*
@@ -91,6 +91,7 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1isAlphaWr
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1isColorWriteEnable
   (JNIEnv* env, jobject obj)
 {
+    return false;
 }
 
 
@@ -102,7 +103,7 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1isColorWr
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1isDepthTestEnabled
   (JNIEnv* env, jobject obj)
 {
-
+    return false;
 }
 
 /*
@@ -113,7 +114,7 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1isDepthTe
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1isDepthWriteEnabled
   (JNIEnv* env, jobject obj)
 {
-
+    return false;
 }
 
 /*

@@ -47,7 +47,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1addChild
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Group_jni_1getChild
   (JNIEnv* env, jobject obj, jint index)
 {
-
+    return false;
 }
 
 /*
@@ -58,7 +58,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Group_jni_1getChild
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Group_jni_1getChildCount
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -69,7 +69,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Group_jni_1getChildCount
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Group_jni_1pick__IFFLorg_karlsland_m3g_Camera_2Lorg_karlsland_m3g_RayIntersection_2
   (JNIEnv* env, jobject obj, jint scope, jfloat x, jfloat y, jobject camera, jobject ri)
 {
-
+    return false;
 }
 
 /*
@@ -80,7 +80,7 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Group_jni_1pick__IFFLorg_karls
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Group_jni_1pick__IFFFFFLorg_karlsland_m3g_RayIntersection_2
   (JNIEnv* env, jobject obj, jint scope, jfloat ox, jfloat oy, jfloat dx, jfloat dy, jfloat dz, jobject ri)
 {
-
+    return false;
 }
 
 /*

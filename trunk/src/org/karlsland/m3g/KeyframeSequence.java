@@ -13,7 +13,7 @@ public class KeyframeSequence {
     static {
         System.loadLibrary ("javam3g");
     }
-    native private void jni_initialize           ();
+    native private void jni_initialize           (int numKeyframes, int numComponents, int interpolation);
     native private void jni_finalize             ();
     native private int  jni_getComponentCount    ();
     native private int  jni_getDuration          ();
@@ -28,8 +28,8 @@ public class KeyframeSequence {
     native private void jni_setRepeateMode       (int mode);
     native private void jni_setValidRange        (int first, int last);
 
-    public KeyframeSequence () {
-        jni_initialize ();
+    public KeyframeSequence (int numKeyframes, int numComponents, int interpolation) {
+        jni_initialize (numKeyframes, numComponents, interpolation);
     }
 
     public void finalize () {

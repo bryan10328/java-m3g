@@ -36,7 +36,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1finalize
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getDistance
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -47,7 +47,7 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getDistance
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getIntersected
   (JNIEnv* env, jobject obj)
 {
-
+    return (jobject)NULL;
 }
 
 /*
@@ -58,7 +58,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getInterse
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getNormalX
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -69,7 +69,7 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getNormalX
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getNormalY
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -80,7 +80,7 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getNormalY
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getNormalZ
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -102,7 +102,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getRay
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getSubmeshIndex
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -113,7 +113,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getSubmeshInd
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getTextureS
   (JNIEnv* env, jobject obj, jint index)
 {
-
+    return 0;
 }
 
 /*
@@ -124,6 +124,6 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getTextureS
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getTextureT
   (JNIEnv* env, jobject obj, jint index)
 {
-
+    return 0;
 }
 

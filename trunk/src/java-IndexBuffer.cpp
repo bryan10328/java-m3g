@@ -36,7 +36,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1finalize
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1getIndexCount
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*

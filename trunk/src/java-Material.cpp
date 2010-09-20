@@ -36,7 +36,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Material_jni_1finalize
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Material_jni_1getColor
   (JNIEnv* env, jobject obj, jint target)
 {
-
+    return 0;
 }
 
 /*
@@ -47,7 +47,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Material_jni_1getColor
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Material_jni_1getShininess
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -58,7 +58,7 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Material_jni_1getShininess
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Material_jni_1isVertexColorTrackingEnabled
   (JNIEnv* env, jobject obj)
 {
-
+    return false;
 }
 
 /*

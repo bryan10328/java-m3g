@@ -44,7 +44,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Object3D_jni_1addAnimationTrack
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Object3D_jni_1animate
   (JNIEnv* env, jobject obj, jint worldTime)
 {
-
+    return 0;
 }
 
 /*
@@ -55,7 +55,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Object3D_jni_1animate
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Object3D_jni_1duplicate
   (JNIEnv* env, jobject obj)
 {
-
+    return (jobject)NULL;
 }
 
 /*
@@ -66,7 +66,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Object3D_jni_1duplicate
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Object3D_jni_1find
   (JNIEnv* env, jobject obj, jint userID)
 {
-
+    return (jobject)NULL;
 }
 
 /*
@@ -77,7 +77,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Object3D_jni_1find
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Object3D_jni_1getAnimationTrack
   (JNIEnv* env, jobject obj, jint index)
 {
-
+    return (jobject)NULL;
 }
 
 /*
@@ -88,7 +88,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Object3D_jni_1getAnimationTrack
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Object3D_jni_1getAnimationTrackCount
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -99,7 +99,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Object3D_jni_1getAnimationTrackCou
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Object3D_jni_1getReferences
   (JNIEnv* env, jobject obj, jobjectArray references)
 {
-
+    return 0;
 }
 
 /*
@@ -110,7 +110,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Object3D_jni_1getReferences
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Object3D_jni_1getUserID
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -121,7 +121,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Object3D_jni_1getUserID
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Object3D_jni_1getUserObject
   (JNIEnv* env, jobject obj)
 {
-
+    return (jobject)NULL;
 }
 
 /*

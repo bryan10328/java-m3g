@@ -36,7 +36,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1finalize
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1addLight
   (JNIEnv* env, jobject obj, jobject light, jobject transform)
 {
-
+    return 0;
 }
 
 /*
@@ -80,7 +80,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1clear
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getCamera
   (JNIEnv* env, jobject obj, jobject transform)
 {
-
+    return (jobject)NULL;
 }
 
 /*
@@ -91,7 +91,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getCamera
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getDepthRangeFar
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -102,7 +102,7 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getDepthRangeFar
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getDepthRangeNear
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -113,7 +113,7 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getDepthRangeNea
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getHints
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -124,7 +124,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getHints
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getInstance
   (JNIEnv* env, jclass clazz)
 {
-
+    return (jobject)NULL;
 }
 
 /*
@@ -135,7 +135,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getInstance
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getLight
   (JNIEnv* env, jobject obj, jint index, jobject transform)
 {
-
+    return (jobject)NULL;
 }
 
 /*
@@ -146,7 +146,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getLight
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getLightCount
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -157,7 +157,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getLightCount
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getProperties
   (JNIEnv* env, jclass clazz)
 {
-
+    return (jobject)NULL;
 }
 
 /*
@@ -168,7 +168,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getProperties
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getTarget
   (JNIEnv* env, jobject obj)
 {
-
+    return (jobject)NULL;
 }
 
 /*
@@ -179,7 +179,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getTarget
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getViewportHeight
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -190,7 +190,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getViewportHeight
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getViewportWidth
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -201,7 +201,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getViewportWidth
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getViewportX
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -212,7 +212,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getViewportX
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getViewportY
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -223,7 +223,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getViewportY
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1isDepthBufferEnabled
   (JNIEnv* env, jobject obj)
 {
-
+    return false;
 }
 
 /*

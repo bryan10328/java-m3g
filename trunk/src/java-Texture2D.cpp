@@ -36,7 +36,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Texture2D_jni_1finalize
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Texture2D_jni_1getBlendColor
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -47,7 +47,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Texture2D_jni_1getBlendColor
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Texture2D_jni_1getBlending
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -58,7 +58,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Texture2D_jni_1getBlending
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Texture2D_jni_1getImage
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -69,7 +69,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Texture2D_jni_1getImage
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Texture2D_jni_1getImageFilter
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -80,7 +80,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Texture2D_jni_1getImageFilter
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Texture2D_jni_1getLevelFilter
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -91,7 +91,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Texture2D_jni_1getLevelFilter
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Texture2D_jni_1getWrappingS
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -102,7 +102,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Texture2D_jni_1getWrappingS
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Texture2D_jni_1getWrappingT
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*

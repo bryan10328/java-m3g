@@ -37,7 +37,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Fog_jni_1finalize
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Fog_jni_1getColor
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -48,7 +48,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Fog_jni_1getColor
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Fog_jni_1getDensity
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -59,7 +59,7 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Fog_jni_1getDensity
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Fog_jni_1getFarDistance
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -70,7 +70,7 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Fog_jni_1getFarDistance
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Fog_jni_1getMode
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
@@ -81,7 +81,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Fog_jni_1getMode
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Fog_jni_1getNearDistance
   (JNIEnv* env, jobject obj)
 {
-
+    return 0;
 }
 
 /*
