@@ -14,6 +14,11 @@ using namespace m3g;
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1initialize
   (JNIEnv* env, jobject obj)
 {
+    cout << "Java-Transformable: initiazlize is called.\n";
+    Transformable* obj3d = new Transformable ();
+    setEntity (env, obj, obj3d);
+    jobject entity = env->NewGlobalRef (obj);
+    obj3d->setExportedEntity (entity);
 
 }
 
@@ -25,7 +30,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1initialize
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1finalize
   (JNIEnv* env, jobject obj)
 {
-
+    cout << "Java-Transformable: finalize is called.\n";
+    Transformable* trans = (Transformable*)getEntity (env, obj);
+    delete trans;
 }
 
 /*
@@ -36,7 +43,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1finalize
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1getCompositeTransform
   (JNIEnv* env, jobject obj, jobject transform)
 {
-
+    cout << "Java-Transformable: getCompositingTransform is called.\n";
+    Transformable* trans = (Transformable*)getEntity (env, obj);
+    Transform*     t     = (Transform*)getEntity (env, transform);
+    trans->getCompositeTransform (t);
 }
 
 /*
@@ -47,7 +57,11 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1getCompositeTra
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1getOrientation
   (JNIEnv* env, jobject obj, jfloatArray angleAxis)
 {
-
+    cout << "Java-Transformable: getOrientation is called.\n";
+    Transformable* trans = (Transformable*)getEntity (env, obj);
+    float* angle_axis = env->GetFloatArrayElements (angleAxis, 0);
+    trans->getOrientation (angle_axis);
+    env->ReleaseFloatArrayElements (angleAxis, angle_axis, 0);
 }
 
 /*
@@ -58,7 +72,11 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1getOrientation
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1getScale
   (JNIEnv* env, jobject obj, jfloatArray xyz)
 {
-
+    cout << "Java-Transformable: getScale is called.\n";
+    Transformable* trans = (Transformable*)getEntity (env, obj);
+    float* scale = env->GetFloatArrayElements (xyz, 0);
+    trans->getScale (scale);
+    env->ReleaseFloatArrayElements (xyz, scale, 0);
 }
 
 /*
@@ -69,7 +87,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1getScale
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1getTransform
   (JNIEnv* env, jobject obj, jobject transform)
 {
-
+    cout << "Java-Transformable: getTransform is called.\n";
+    Transformable* trans = (Transformable*)getEntity (env, obj);
+    Transform*     t     = (Transform*)getEntity (env, transform);
+    trans->getTransform (t);
 }
 
 /*
@@ -78,9 +99,13 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1getTransform
  * Signature: ([F)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1getTranslation
-  (JNIEnv* env, jobject obj, jfloatArray transform)
+  (JNIEnv* env, jobject obj, jfloatArray xyz)
 {
-
+    cout << "Java-Transformable: getTranslation is called.\n";
+    Transformable* trans = (Transformable*)getEntity (env, obj);
+    float* translation = env->GetFloatArrayElements (xyz, 0);
+    trans->getTranslation (translation);
+    env->ReleaseFloatArrayElements (xyz, translation, 0);
 }
 
 /*
@@ -91,7 +116,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1getTranslation
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1postRotate
   (JNIEnv* env, jobject obj, jfloat angle, jfloat ax, jfloat ay, jfloat az)
 {
-
+    cout << "Java-Transformable: postRotate is called.\n";
+    Transformable* trans = (Transformable*)getEntity (env, obj);
+    trans->postRotate (angle, ax, ay, az);
 }
 
 /*
@@ -102,7 +129,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1postRotate
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1preRotate
   (JNIEnv* env, jobject obj, jfloat angle, jfloat ax, jfloat ay, jfloat az)
 {
-
+    cout << "Java-Transformable: preRotate is called.\n";
+    Transformable* trans = (Transformable*)getEntity (env, obj);
+    trans->postRotate (angle, ax, ay, az);
 }
 
 /*
@@ -113,7 +142,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1preRotate
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1scale
   (JNIEnv* env, jobject obj, jfloat sx, jfloat sy, jfloat sz)
 {
-
+    cout << "Java-Transformable: scale is called.\n";
+    Transformable* trans = (Transformable*)getEntity (env, obj);
+    trans->scale (sx, sy, sz);
 }
 
 /*
@@ -124,7 +155,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1scale
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1setOrientation
   (JNIEnv* env, jobject obj, jfloat angle, jfloat ax, jfloat ay, jfloat az)
 {
-
+    cout << "Java-Transformable: setOrientation is called.\n";
+    Transformable* trans = (Transformable*)getEntity (env, obj);
+    trans->setOrientation (angle, ax, ay, az);
 }
 
 /*
@@ -135,7 +168,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1setOrientation
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1setScale
   (JNIEnv* env, jobject obj, jfloat sx, jfloat sy, jfloat sz)
 {
-
+    cout << "Java-Transformable: setScale is called.\n";
+    Transformable* trans = (Transformable*)getEntity (env, obj);
+    trans->setScale (sx, sy, sz);
 }
 
 /*
@@ -146,7 +181,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1setScale
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1setTransform
   (JNIEnv* env, jobject obj, jobject transform)
 {
-
+    cout << "Java-Transformable: setTransform is called.\n";
+    Transformable* trans = (Transformable*)getEntity (env, obj);
+    Transform*     t     = (Transform*)getEntity (env, transform);
+    trans->setTransform (*t);
 }
 
 /*
@@ -157,16 +195,31 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1setTransform
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1setTranslation
   (JNIEnv* env, jobject obj, jfloat tx, jfloat ty, jfloat tz)
 {
-
+    cout << "Java-Transformable: setTranslation is called.\n";
+    Transformable* trans = (Transformable*)getEntity (env, obj);
+    trans->setTranslation (tx, ty, tz);
 }
 
 /*
  * Class:     org_karlsland_m3g_Transformable
- * Method:    jni_translation
+ * Method:    jni_translate
  * Signature: (FFF)V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1translation
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1translate
   (JNIEnv* env, jobject obj, jfloat tx, jfloat ty, jfloat tz)
+{
+    cout << "Java-Transformable: translation is called.\n";
+    Transformable* trans = (Transformable*)getEntity (env, obj);
+    trans->translate (tx, ty, tz);
+}
+
+/*
+ * Class:     org_karlsland_m3g_Transformable
+ * Method:    jni_print
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1print
+  (JNIEnv *, jobject)
 {
 
 }

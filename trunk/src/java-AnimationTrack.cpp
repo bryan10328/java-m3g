@@ -75,3 +75,14 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1setController
 
 }
 
+/*
+ * Class:     org_karlsland_m3g_AnimationTrack
+ * Method:    jni_print
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1print
+  (JNIEnv *, jobject)
+{
+
+}
+

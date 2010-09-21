@@ -99,3 +99,14 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Mesh_jni_1setAppearance
 
 }
 
+/*
+ * Class:     org_karlsland_m3g_Mesh
+ * Method:    jni_print
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Mesh_jni_1print
+  (JNIEnv *, jobject)
+{
+
+}
+

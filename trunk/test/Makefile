@@ -3,6 +3,7 @@
 #
 
 SRCS = $(wildcard *.java)
+#SRCS = $(wildcard TestObject3D.java)
 CLASSS = $(SRCS:.java=.class)
 TARGETS = $(SRCS:.java=)
 CXX = g++

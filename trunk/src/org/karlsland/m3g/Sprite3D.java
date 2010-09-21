@@ -18,6 +18,8 @@ public class Sprite3D extends Node {
     native private void       jni_setAppearance (Appearance appearance);
     native private void       jni_setCrop       (int cropX, int cropY, int width, int height);
     native private void       jni_setImage      (Image2D image);
+    native private void       jni_print         ();
+
 
     public Sprite3D (boolean scaled, Image2D image, Appearance appearance) {
         jni_initialize (scaled, image, appearance);
@@ -74,5 +76,8 @@ public class Sprite3D extends Node {
         jni_setImage (image);
     }
 
+    public void print () {
+        jni_print ();
+    }
 
 }

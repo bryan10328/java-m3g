@@ -83,3 +83,13 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1getSkeleton
     return (jobject)NULL;
 }
 
+/*
+ * Class:     org_karlsland_m3g_SkinnedMesh
+ * Method:    jni_print
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1print
+  (JNIEnv *, jobject)
+{
+
+}

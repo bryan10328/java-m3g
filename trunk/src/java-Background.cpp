@@ -204,3 +204,13 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1setImageMode
 
 }
 
+/*
+ * Class:     org_karlsland_m3g_Background
+ * Method:    jni_print
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1print
+  (JNIEnv *, jobject)
+{
+
+}

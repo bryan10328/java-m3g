@@ -26,6 +26,6 @@ depend:
 	makedepend -- $(CXXFLAGS) -- $(SRCS)
 
 clean:
-	rm -rf *.o *.so *~ 
+	rm -rf *.o *.so *~ *.class
 	@echo done.
 

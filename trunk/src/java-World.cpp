@@ -73,3 +73,13 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_World_jni_1setBackground
 
 }
 
+/*
+ * Class:     org_karlsland_m3g_World
+ * Method:    jni_print
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_World_jni_1print
+  (JNIEnv *, jobject)
+{
+
+}

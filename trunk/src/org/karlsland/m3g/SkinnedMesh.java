@@ -5,13 +5,14 @@ public class SkinnedMesh extends Mesh {
     static {
         System.loadLibrary ("javam3g");
     }
-    native private void  jni_initialize        (VertexBuffer vertices, IndexBuffer[] submeshes, Appearance[] appearances, Group skeleton);
-    native private void  jni_initialize        (VertexBuffer vertices, IndexBuffer submesh, Appearance appearance, Group skeleton);
+    native private void  jni_initialize       (VertexBuffer vertices, IndexBuffer[] submeshes, Appearance[] appearances, Group skeleton);
+    native private void  jni_initialize       (VertexBuffer vertices, IndexBuffer submesh, Appearance appearance, Group skeleton);
     native private void  jni_finalize         ();
     native private void  jni_addTransform     (Node bone, int weight, int firstVertex, int numVertices);
     native private void  jni_getBoneTransform (Node bone, Transform transform);
     native private int   jni_getBoneVertices  (Node bone, int[] indices, float[] weights);
     native private Group jni_getSkeleton      ();
+    native private void  jni_print            ();
 
     public SkinnedMesh (VertexBuffer vertices, IndexBuffer[] submeshes, Appearance[] appearances, Group skeleton) {
         jni_initialize (vertices, submeshes, appearances, skeleton);
@@ -43,5 +44,8 @@ public class SkinnedMesh extends Mesh {
         return skeleton;
     }
 
+    public void print () {
+        jni_print ();
+    }
 
 }

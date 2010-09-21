@@ -50,3 +50,13 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1getIndices
 
 }
 
+/*
+ * Class:     org_karlsland_m3g_IndexBuffer
+ * Method:    jni_print
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1print
+  (JNIEnv *, jobject)
+{
+
+}

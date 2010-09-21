@@ -27,7 +27,7 @@ public class Background extends Object3D {
     native private void    jni_setDepthClearEnable (boolean enable);
     native private void    jni_setImage            (Image2D image);
     native private void    jni_setImageMode        (int modeX, int modeY);
-
+    native private void    jni_print               ();
 
 
 
@@ -111,6 +111,10 @@ public class Background extends Object3D {
 
     public void setImageMode (int modeX, int modeY) {
         jni_setImageMode (modeX, modeY);
+    }
+
+    public void print () {
+        jni_print ();
     }
 
 }

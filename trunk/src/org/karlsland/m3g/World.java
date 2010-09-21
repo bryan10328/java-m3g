@@ -11,7 +11,7 @@ public class World extends Group {
     native private Background jni_getBackground   ();
     native private void       jni_setActiveCamera (Camera camera);
     native private void       jni_setBackground   (Background background);
-
+    native private void       jni_print           ();
 
     public World () {
         jni_initialize ();
@@ -39,6 +39,9 @@ public class World extends Group {
         jni_setBackground (background);
     }
 
+    public void print () {
+        jni_print ();
+    }
 
 
 }

@@ -194,3 +194,13 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1setDepthWrite
 
 }
 
+/*
+ * Class:     org_karlsland_m3g_CompositingMode
+ * Method:    jni_print
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1print
+  (JNIEnv *, jobject)
+{
+
+}

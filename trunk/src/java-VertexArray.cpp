@@ -128,3 +128,25 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1set__II_3F
 
 }
 
+/*
+ * Class:     org_karlsland_m3g_VertexArray
+ * Method:    jni_print
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1print
+  (JNIEnv *, jobject)
+{
+
+}
+
+/*
+ * Class:     org_karlsland_m3g_VertexArray
+ * Method:    jni_print_raw_data
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1print_1raw_1data
+  (JNIEnv *, jobject)
+{
+
+}
+

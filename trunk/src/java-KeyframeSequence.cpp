@@ -161,3 +161,13 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1setValidRang
 
 }
 
+/*
+ * Class:     org_karlsland_m3g_KeyframeSequence
+ * Method:    jni_print
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1print
+  (JNIEnv *, jobject)
+{
+
+}

@@ -12,7 +12,7 @@ public class Node extends Transformable {
     static {
         System.loadLibrary ("javam3g");
     }
-    native private void    jni_initialize             ();
+    native private void    jni_initialize            ();
     native private void    jni_finalize              ();
     native private void    jni_align                 (Node reference);
     native private Node    jni_getAlignmentReference (int axis);
@@ -28,6 +28,7 @@ public class Node extends Transformable {
     native private void    jni_setPickingEnable      (boolean enable);
     native private void    jni_setRenderingEnable    (boolean enable);
     native private void    jni_setScope              (int scope);
+    native private void    jni_print                 ();
 
     public Node () {
         jni_initialize ();
@@ -102,6 +103,9 @@ public class Node extends Transformable {
         jni_setScope (scope);
     }
 
+    public void print () {
+        jni_print ();
+    }
 }
 
 

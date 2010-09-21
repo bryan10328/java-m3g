@@ -9,7 +9,7 @@ public class Object3D extends java.lang.Object {
     static {
         System.loadLibrary ("javam3g");
     }
-    native private void             jni_initialize              ();
+    native private void             jni_initialize             ();
     native private void             jni_finalize               ();
     native private void             jni_addAnimationTrack      (AnimationTrack animationTrack);
     native private int              jni_animate                (int worldTime);
@@ -23,6 +23,7 @@ public class Object3D extends java.lang.Object {
     native private void             jni_removeAnimationTrack   (AnimationTrack animationTrack);
     native private void             jni_setUserID              (int userID);
     native private void             jni_setUserObject          (java.lang.Object userObject);
+    native private void             jni_print                  ();
 
     public Object3D () {
         entity = 0;
@@ -90,6 +91,9 @@ public class Object3D extends java.lang.Object {
         jni_setUserObject (userObject);
     }
 
+    public void print () {
+        jni_print ();
+    }
     
 }
 

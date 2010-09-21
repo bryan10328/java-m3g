@@ -27,7 +27,7 @@ public class PolygonMode extends Object3D {
     native private void    jni_setShading                     (int     mode);
     native private void    jni_setTwoSidedLightingEnable      (boolean enable);
     native private void    jni_setWinding                     (int     mdoe);
-
+    native private void    jni_print                          ();
 
     public PolygonMode () {
         jni_initialize ();
@@ -91,5 +91,8 @@ public class PolygonMode extends Object3D {
         jni_setWinding (mode);
     }
 
+    public void print () {
+        jni_print ();
+    }
 
 }

@@ -19,7 +19,8 @@ public class Appearance extends Object3D {
     native private void            jni_setLayer           (int layer);
     native private void            jni_setMaterial        (Material material);
     native private void            jni_setPolygonMode     (PolygonMode polygonMode);
-    native private void            jni_setTexture          (int index, Texture2D texture);
+    native private void            jni_setTexture         (int index, Texture2D texture);
+    native private void            jni_print              ();
 
     public Appearance () {
         jni_initialize ();
@@ -82,6 +83,11 @@ public class Appearance extends Object3D {
     public void setTexture (int index, Texture2D texture) {
         jni_setTexture (index, texture);
     }
+
+    public void print () {
+        jni_print ();
+    }
+
 
 
 }

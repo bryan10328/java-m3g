@@ -27,6 +27,7 @@ public class KeyframeSequence {
     native private void jni_setKeyframe          (int index, int time, float[] value);
     native private void jni_setRepeateMode       (int mode);
     native private void jni_setValidRange        (int first, int last);
+    native private void jni_print                ();
 
     public KeyframeSequence (int numKeyframes, int numComponents, int interpolation) {
         jni_initialize (numKeyframes, numComponents, interpolation);
@@ -92,5 +93,8 @@ public class KeyframeSequence {
         jni_setValidRange (first, last);
     }
     
+    public void print () {
+        jni_print ();
+    }
 
 }

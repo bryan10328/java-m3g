@@ -160,3 +160,13 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1setWinding
 
 }
 
+/*
+ * Class:     org_karlsland_m3g_PolygonMode
+ * Method:    jni_print
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1print
+  (JNIEnv *, jobject)
+{
+
+}

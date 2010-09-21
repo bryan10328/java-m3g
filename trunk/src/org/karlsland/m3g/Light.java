@@ -26,7 +26,7 @@ public class Light extends Object3D {
     native private void  jni_setMode                 (int   mode);
     native private void  jni_setSpotAngle            (float angle);
     native private void  jni_setSpotExponent         (float exponent);
-
+    native private void  jni_print                   ();
 
     public Light () {
         jni_initialize ();
@@ -100,6 +100,9 @@ public class Light extends Object3D {
         jni_setSpotExponent (exponent);
     }
 
+    public void print () {
+        jni_print ();
+    }
 
 
 }

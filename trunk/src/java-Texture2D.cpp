@@ -160,3 +160,12 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Texture2D_jni_1setWrapping
 
 }
 
+/*
+ * Class:     org_karlsland_m3g_Texture2D
+ * Method:    jni_print
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Texture2D_jni_1print
+  (JNIEnv *, jobject)
+{
+}

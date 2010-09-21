@@ -12,12 +12,14 @@ public class Image2D extends Object3D {
         System.loadLibrary ("javam3g");
     }
     native private void    jni_initialize ();
-    native private void    jni_finalize  ();
-    native private int     jni_getFormat ();
-    native private int     jni_getHeight ();
-    native private int     jni_getWidth  ();
-    native private boolean jni_isMutable ();
-    native private void    jni_set       (int x, int y, int width, int height, byte[] image);
+    native private void    jni_finalize   ();
+    native private int     jni_getFormat  ();
+    native private int     jni_getHeight  ();
+    native private int     jni_getWidth   ();
+    native private boolean jni_isMutable  ();
+    native private void    jni_set        (int x, int y, int width, int height, byte[] image);
+    native private void    jni_print      ();
+    native private void    jni_writePng   (java.lang.String name);
 
     public Image2D () {
         jni_initialize ();
@@ -51,5 +53,12 @@ public class Image2D extends Object3D {
         jni_set (x, y, width, height, image);
     }
 
+    public void print () {
+        jni_print ();
+    }
+
+    public void witePng (java.lang.String name) {
+        jni_writePng (name);
+    }
 
 }

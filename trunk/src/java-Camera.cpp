@@ -83,3 +83,13 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Camera_jni_1setPerspective
 
 }
 
+/*
+ * Class:     org_karlsland_m3g_Camera
+ * Method:    jni_print
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Camera_jni_1print
+  (JNIEnv *, jobject)
+{
+
+}

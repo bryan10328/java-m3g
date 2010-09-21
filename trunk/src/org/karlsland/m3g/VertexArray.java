@@ -17,6 +17,8 @@ public class VertexArray extends Object3D {
     native private void jni_set               (int firstVertex, int numVertices, byte[]  values);
     native private void jni_set               (int fristVertex, int numVertices, short[] values);
     native private void jni_set               (int fristVertex, int numVertices, float[] values);
+    native private void jni_print             ();
+    native private void jni_print_raw_data    ();
 
     public VertexArray (int numVertice, int numComponents, int componentSize) {
         jni_initialize (numVertice, numComponents, componentSize);
@@ -63,6 +65,14 @@ public class VertexArray extends Object3D {
 
     public void set (int firstVertex, int numVertices, float[] values) {
         jni_set (firstVertex, numVertices, values);
+    }
+
+    public void print () {
+        jni_print ();
+    }
+
+    public void print_raw_data () {
+        jni_print_raw_data ();
     }
 
 }

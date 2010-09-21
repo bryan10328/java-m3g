@@ -19,8 +19,9 @@ public class VertexBuffer extends Object3D {
     native private void        jni_setNormals      (VertexArray normals);
     native private void        jni_setPositions    (VertexArray positions, float scale, float[] bias);
     native private void        jni_setTexCoords    (int index, VertexArray texCoords, float scale, float[] bias);
+    native private void        jni_print           ();
 
-//
+
 
     public VertexBuffer () {
         jni_initialize ();
@@ -78,6 +79,10 @@ public class VertexBuffer extends Object3D {
 
     public void setTexCoords (int index, VertexArray texCoords, float scale, float[] bias) {
         jni_setTexCoords (index, texCoords, scale, bias);
+    }
+
+    public void print () {
+        jni_print ();
     }
 
 }

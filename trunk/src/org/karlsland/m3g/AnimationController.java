@@ -18,6 +18,7 @@ public class AnimationController extends Object3D {
     native private void  jni_setPosition               (float sequenceTime, int worldTime);
     native private void  jni_setSpeed                  (float speed, int worldTime);
     native private void  jni_setWeight                 (float weight);
+    native private void  jni_print                     ();
 
 
      public AnimationController () {
@@ -74,5 +75,8 @@ public class AnimationController extends Object3D {
         jni_setWeight (weight);
     }
      
-    
+    public void print () {
+        jni_print ();
+    }
+   
 }

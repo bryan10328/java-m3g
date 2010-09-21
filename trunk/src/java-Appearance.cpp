@@ -152,4 +152,14 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Appearance_jni_1setTexture
 
 }
 
+/*
+ * Class:     org_karlsland_m3g_Appearance
+ * Method:    jni_print
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Appearance_jni_1print
+  (JNIEnv *, jobject)
+{
+
+}
 

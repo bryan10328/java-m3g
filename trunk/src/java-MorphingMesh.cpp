@@ -83,3 +83,13 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1setWeights
 
 }
 
+/*
+ * Class:     org_karlsland_m3g_MorphingMesh
+ * Method:    jni_print
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1print
+  (JNIEnv *, jobject)
+{
+
+}

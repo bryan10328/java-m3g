@@ -19,7 +19,7 @@ public class Fog extends Object3D {
     native private void  jni_setDensity      (float density);
     native private void  jni_setLinear       (float near, float far);
     native private void  jni_setMode         (int   mode);
-
+    native private void  jni_print           ();
 
     public Fog () {
         jni_initialize ();
@@ -70,6 +70,9 @@ public class Fog extends Object3D {
         jni_setMode (mode);
     }
 
+    public void print () {
+        jni_print ();
+    }
 
 
 }

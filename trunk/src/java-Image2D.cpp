@@ -83,3 +83,23 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1set
 
 }
 
+/*
+ * Class:     org_karlsland_m3g_Image2D
+ * Method:    jni_print
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1print
+  (JNIEnv *, jobject)
+{
+}
+
+/*
+ * Class:     org_karlsland_m3g_Image2D
+ * Method:    jni_writePng
+ * Signature: (Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1writePng
+  (JNIEnv *, jobject, jstring)
+{
+
+}

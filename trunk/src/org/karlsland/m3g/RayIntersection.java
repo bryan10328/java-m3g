@@ -18,7 +18,7 @@ public class RayIntersection extends java.lang.Object {
     native private int   jni_getSubmeshIndex ();
     native private float jni_getTextureS     (int index);
     native private float jni_getTextureT     (int index);
-
+    native private void  jni_print           ();
 
     public RayIntersection () {
         jni_initialize ();
@@ -72,6 +72,9 @@ public class RayIntersection extends java.lang.Object {
         return t;
     }
 
+    public void print () {
+        jni_print ();
+    }
 
 
 

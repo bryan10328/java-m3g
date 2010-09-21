@@ -20,7 +20,8 @@ public class Transformable extends Object3D {
     native private void jni_setScale              (float sx, float sy, float sz);
     native private void jni_setTransform          (Transform transform);
     native private void jni_setTranslation        (float tx, float ty, float tz);
-    native private void jni_translation           (float tx, float ty, float tz);
+    native private void jni_translate             (float tx, float ty, float tz);
+    native private void jni_print                 ();
 
 
     public Transformable () {
@@ -79,9 +80,12 @@ public class Transformable extends Object3D {
         jni_setTranslation (tx, ty, tz);
     }
 
-    public void translation (float tx, float ty, float tz) {
-        jni_setTranslation (tx, ty, tz);
+    public void translate (float tx, float ty, float tz) {
+        jni_translate (tx, ty, tz);
     }
 
+    public void print () {
+        jni_print ();
+    }
 
 }

@@ -30,6 +30,8 @@ public class Texture2D extends Transformable {
     native private void    jni_setFiltering   (int levelFilter, int imageFilter);
     native private void    jni_setImage       (Image2D image);
     native private void    jni_setWrapping    (int wrapS, int wrapT);
+    native private void    jni_print          ();
+
 
     public Texture2D (Image2D image) {
         jni_initialize (image);
@@ -95,5 +97,8 @@ public class Texture2D extends Transformable {
         jni_setWrapping (wrapS, wrapT);
     }
 
+    public void print () {
+        jni_print ();
+    }
     
 }

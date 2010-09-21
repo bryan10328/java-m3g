@@ -14,9 +14,13 @@ public class Mesh extends Node {
     native private int          jni_getSubmeshCount ();
     native private VertexBuffer jni_getVertexBuffer ();
     native private void         jni_setAppearance   (int index, Appearance appearance);
+    native private void         jni_print           ();
 
     protected Mesh () {
-        // nothing to do 
+        // nothing to do,
+        // do not delete this.
+        // M3G非標準のコンストラクタ.
+        // SkinnedMeshをインスタンス化するときに使われる
     }
 
     public Mesh (VertexBuffer vertices, IndexBuffer[] submeshes, Appearance[] appearances) {
@@ -53,6 +57,10 @@ public class Mesh extends Node {
 
     public void setAppearance (int index, Appearance appearance) {
         jni_setAppearance (index, appearance);
+    }
+
+    public void print () {
+        jni_print ();
     }
 
 }

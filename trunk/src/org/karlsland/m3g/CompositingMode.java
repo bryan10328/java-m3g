@@ -28,6 +28,7 @@ public class CompositingMode extends Object3D {
     native private void    jni_setDepthOffset       (float   factor, float units);
     native private void    jni_setDepthTestEnable   (boolean enable);
     native private void    jni_setDepthWriteEnable  (boolean enable);
+    native private void    jni_print                ();
 
     public CompositingMode () {
         jni_initialzie ();
@@ -105,6 +106,9 @@ public class CompositingMode extends Object3D {
         jni_setDepthWriteEnable (enable);
     }
 
+    public void print () {
+        jni_print ();
+    }
 
 
 }

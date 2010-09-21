@@ -40,6 +40,8 @@ public class Graphics3D extends Object {
     native private void    jni_setDepthRange        (float   near  , float far);
     native private void    jni_setLight             (int     index , Light light, Transform transform);
     native private void    jni_setViewport          (int     x     , int   y    , int       width    , int height);
+    native private void    jni_print                ();
+
 
     public Graphics3D () {
         jni_initialize ();
@@ -176,5 +178,8 @@ public class Graphics3D extends Object {
         jni_setViewport (x, y, width, height);
     }
 
+    public void print () {
+        jni_print ();
+    }
 
 }

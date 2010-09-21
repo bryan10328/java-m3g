@@ -16,7 +16,7 @@ public class Camera extends Node {
     native private void jni_setGeneric     (Transform transform);
     native private void jni_setParallel    (float fovy, float aspectRatio, float near, float far);
     native private void jni_setPerspective (float fovy, float aspectRatio, float near, float far);
-
+    native private void jni_print          ();
 
     public Camera () {
         jni_initialize ();
@@ -46,6 +46,10 @@ public class Camera extends Node {
 
     public void setPerspective (float fovy, float aspectRatio, float near, float far) {
         jni_setPerspective (fovy, aspectRatio, near, far);
+    }
+
+    public void print () {
+        jni_print ();
     }
 
 }

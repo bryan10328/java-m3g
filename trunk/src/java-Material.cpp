@@ -94,3 +94,13 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Material_jni_1setVertexColorTracki
 
 }
 
+/*
+ * Class:     org_karlsland_m3g_Material
+ * Method:    jni_print
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Material_jni_1print
+  (JNIEnv *, jobject)
+{
+
+}

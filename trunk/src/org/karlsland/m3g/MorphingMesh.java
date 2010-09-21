@@ -5,13 +5,14 @@ public class MorphingMesh extends Mesh {
     static {
         System.loadLibrary ("javam3g");
     }
-    native private void         jni_initialize           (VertexBuffer base, VertexBuffer[] targets, IndexBuffer submeshes[], Appearance[] appearances);
-    native private void         jni_initialize           (VertexBuffer base, VertexBuffer[] targets, IndexBuffer submesh, Appearance appearance);
+    native private void         jni_initialize          (VertexBuffer base, VertexBuffer[] targets, IndexBuffer submeshes[], Appearance[] appearances);
+    native private void         jni_initialize          (VertexBuffer base, VertexBuffer[] targets, IndexBuffer submesh, Appearance appearance);
     native private void         jni_finalize            ();
     native private IndexBuffer  jni_getMorphTarget      (int index);
     native private int          jni_getMorphTargetCount ();
     native private void         jni_getWeights          (float[] weights);
     native private void         jni_setWeights          (float[] weights);
+    native private void         jni_print               ();
 
     public MorphingMesh (VertexBuffer base, VertexBuffer[] targets, IndexBuffer submeshes[], Appearance[] appearances) {
         jni_initialize (base, targets, submeshes, appearances);
@@ -41,6 +42,10 @@ public class MorphingMesh extends Mesh {
 
     public void setWeights (float[] weigths) {
         jni_setWeights (weigths);
+    }
+
+    public void print () {
+        jni_print ();
     }
 
 }

@@ -336,3 +336,13 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1setViewport
 
 }
 
+/*
+ * Class:     org_karlsland_m3g_Graphics3D
+ * Method:    jni_print
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1print
+  (JNIEnv *, jobject)
+{
+
+}

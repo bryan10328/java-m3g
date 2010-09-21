@@ -18,6 +18,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationController_jni_1initializ
     cout << "Jni: AnimationController initiazlize is called.\n";
     AnimationController* controller = new AnimationController();
     setEntity (env, obj, controller);
+    jobject entity = env->NewGlobalRef (obj);
+    controller->setExportedEntity (entity);
 }
 
 /*
@@ -146,5 +148,15 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationController_jni_1setWeight
 {
 }
 
+/*
+ * Class:     org_karlsland_m3g_AnimationController
+ * Method:    jni_print
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationController_jni_1print
+  (JNIEnv *, jobject)
+{
+
+}
 
 

@@ -182,3 +182,12 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1setSpotExponent
 
 }
 
+/*
+ * Class:     org_karlsland_m3g_Light
+ * Method:    jni_print
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1print
+  (JNIEnv *, jobject)
+{
+}

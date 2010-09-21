@@ -7,7 +7,8 @@ public class TriangleStripArray extends IndexBuffer {
     }
     native private void jni_initialize (int[] indices, int[] stripLengths);
     native private void jni_initialize (int   firstIndex, int[] stripLengths);
-    native private void jni_finalize  ();
+    native private void jni_finalize   ();
+    native private void jni_print      ();
 
 
     public TriangleStripArray (int[] indices, int[] stripLengths) {
@@ -16,6 +17,10 @@ public class TriangleStripArray extends IndexBuffer {
 
     public TriangleStripArray (int firstIndex, int[] stripLengths) {
         jni_initialize (firstIndex, stripLengths);
+    }
+
+    public void print () {
+        jni_print ();
     }
 
 }
