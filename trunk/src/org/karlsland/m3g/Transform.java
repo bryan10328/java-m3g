@@ -7,8 +7,8 @@ public class Transform extends java.lang.Object {
     static {
         System.loadLibrary ("javam3g");
     }
-    native private void jni_initialize      ();
-    native private void jni_initialize      (Transform transform);
+    native private void jni_initialize     ();
+    native private void jni_initialize     (Transform transform);
     native private void jni_finalize       ();
     native private void jni_get            (float[] matrix);
     native private void jni_invert         ();
@@ -23,6 +23,7 @@ public class Transform extends java.lang.Object {
     native private void jni_transform      (float[] vectors);
     native private void jni_transform      (VertexArray in, float[] out, boolean W);
     native private void jni_transpose      ();
+    native private void jni_print          ();
 
     public Transform () {
         jni_initialize ();
@@ -88,4 +89,7 @@ public class Transform extends java.lang.Object {
         jni_transpose ();
     }
 
+    public void print () {
+        jni_print ();
+    }
 }
