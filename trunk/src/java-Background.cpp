@@ -11,10 +11,14 @@ using namespace m3g;
  * Method:    jni_initizlie
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1initizlie
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1initialize
   (JNIEnv* env, jobject obj)
 {
-
+    cout << "Java-Background: initilize is called.\n";
+    Background* bg = new Background ();
+    setEntity (env, obj, bg);
+    jobject entity = env->NewGlobalRef (obj);
+    bg->setExportedEntity (entity);
 }
 
 /*
@@ -25,7 +29,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1initizlie
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1finalize
   (JNIEnv* env, jobject obj)
 {
-
+    cout << "Java-Background: finalize is called.\n";
+    Background* bg = (Background*)getEntity (env, obj);
+    delete bg;
 }
 
 /*
@@ -36,7 +42,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1finalize
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getColor
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Background: getColor is called.\n";
+    Background* bg = (Background*)getEntity (env, obj);
+    int color = bg->getColor ();
+    return color;
 }
 
 /*
@@ -47,7 +56,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getColor
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getCropHeight
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Background: getCropHeight is called.\n";
+    Background* bg = (Background*)getEntity (env, obj);
+    int height = bg->getCropHeight ();
+    return height;
 }
 
 /*
@@ -58,7 +70,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getCropHeight
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getCropWidth
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Background: getCropWidth is called.\n";
+    Background* bg = (Background*)getEntity (env, obj);
+    int width = bg->getCropWidth ();
+    return width;
 }
 
 /*
@@ -69,7 +84,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getCropWidth
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getCropX
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Background: getCropX is called.\n";
+    Background* bg = (Background*)getEntity (env, obj);
+    int x = bg->getCropX ();
+    return x;
 }
 
 /*
@@ -80,7 +98,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getCropX
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getCropY
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Background: getCropY is called.\n";
+    Background* bg = (Background*)getEntity (env, obj);
+    int y = bg->getCropY ();
+    return y;
 }
 
 /*
@@ -91,7 +112,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getCropY
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Background_jni_1getImage
   (JNIEnv* env, jobject obj)
 {
-    return (jobject)NULL;
+    cout << "Java-Background: getImage is called.\n";
+    Background* bg = (Background*)getEntity (env, obj);
+    Image2D* img = bg->getImage ();
+    return (img != NULL) ? (jobject)img->getExportedEntity() : (jobject)NULL;
 }
 
 /*
@@ -102,7 +126,10 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Background_jni_1getImage
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getImageModeX
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Background: getImageModeX is called.\n";
+    Background* bg = (Background*)getEntity (env, obj);
+    int mode = bg->getImageModeX ();
+    return mode;
 }
 
 /*
@@ -113,6 +140,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getImageModeX
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getImageModeY
   (JNIEnv* env, jobject obj)
 {
+    cout << "Java-Background: getImageModeY is called.\n";
+    Background* bg = (Background*)getEntity (env, obj);
+    int mode = bg->getImageModeY ();
+    return mode;
     return 0;
 }
 
@@ -124,7 +155,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getImageModeY
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Background_jni_1isColorClearEnabled
   (JNIEnv* env, jobject obj)
 {
-    return false;
+    cout << "Java-Background: isColorClearEnabled is called.\n";
+    Background* bg = (Background*)getEntity (env, obj);
+    bool enabled = bg->isColorClearEnabled ();
+    return enabled;
 }
 
 /*
@@ -135,7 +169,10 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Background_jni_1isColorClearEn
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Background_jni_1isDepthClearEnabled
   (JNIEnv* env, jobject obj)
 {
-    return false;
+    cout << "Java-Background: isDethClearEnabled is called.\n";
+    Background* bg = (Background*)getEntity (env, obj);
+    bool enabled = bg->isDepthClearEnabled ();
+    return enabled;
 }
 
 /*
@@ -146,7 +183,9 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Background_jni_1isDepthClearEn
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1setColor
   (JNIEnv* env, jobject obj, jint color)
 {
-
+    cout << "Java-Background: setColor is called.\n";
+    Background* bg = (Background*)getEntity (env, obj);
+    bg->setColor (color);
 }
 
 /*
@@ -157,7 +196,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1setColor
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1setColorClearEnable
   (JNIEnv* env, jobject obj, jboolean enable)
 {
-
+    cout << "Java-Background: setColorClearEnable is called.\n";
+    Background* bg = (Background*)getEntity (env, obj);
+    bg->setColorClearEnable (enable);
 }
 
 /*
@@ -168,7 +209,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1setColorClearEnabl
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1setCrop
   (JNIEnv* env, jobject obj, jint cropX, jint cropY, jint width, jint height)
 {
-
+    cout << "Java-Background: setCrop is called.\n";
+    Background* bg = (Background*)getEntity (env, obj);
+    bg->setCrop (cropX, cropY, width, height);
 }
 
 /*
@@ -179,7 +222,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1setCrop
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1setDepthClearEnable
   (JNIEnv* env, jobject obj, jboolean enable)
 {
-
+    cout << "Java-Background: setDepthClearEnable is called.\n";
+    Background* bg = (Background*)getEntity (env, obj);
+    bg->setDepthClearEnable (enable);
 }
 
 /*
@@ -190,7 +235,13 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1setDepthClearEnabl
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1setImage
   (JNIEnv* env, jobject obj, jobject image)
 {
-
+    cout << "Java-Background: setImage is called.\n";
+    Background* bg = (Background*)getEntity (env, obj);
+    Image2D*   img = (Image2D*)getEntity (env, image);
+    img->print (cout) << "\n";
+    cout << "1--------\n";
+    bg->setImage (img);
+    cout << "2--------\n";
 }
 
 /*
@@ -201,7 +252,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1setImage
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1setImageMode
   (JNIEnv* env, jobject obj, jint modeX, jint modeY)
 {
-
+    cout << "Java-Background: setImageMode is called.\n";
+    Background* bg = (Background*)getEntity (env, obj);
+    bg->setImageMode (modeX, modeY);
 }
 
 /*
@@ -210,7 +263,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1setImageMode
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1print
-  (JNIEnv *, jobject)
+  (JNIEnv* env, jobject obj)
 {
-
+    cout << "Java-Background: print is called.\n";
+    Background* bg = (Background*)getEntity (env, obj);
+    bg->print (cout) << "\n";
 }

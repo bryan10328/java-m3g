@@ -703,10 +703,10 @@ extern "C" {
 #define org_karlsland_m3g_Background_REPEAT 33L
 /*
  * Class:     org_karlsland_m3g_Background
- * Method:    jni_initizlie
+ * Method:    jni_initialize
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1initizlie
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1initialize
   (JNIEnv *, jobject);
 
 /*
@@ -1174,10 +1174,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1setCulling
 
 /*
  * Class:     org_karlsland_m3g_PolygonMode
- * Method:    jni_setLocalCameraLighting
+ * Method:    jni_setLocalCameraLightingEnable
  * Signature: (Z)V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1setLocalCameraLighting
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1setLocalCameraLightingEnable
   (JNIEnv *, jobject, jboolean);
 
 /*
@@ -1323,10 +1323,10 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1isDepthWr
 
 /*
  * Class:     org_karlsland_m3g_CompositingMode
- * Method:    jni_setAlphaThreashold
+ * Method:    jni_setAlphaThreshold
  * Signature: (F)V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1setAlphaThreashold
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1setAlphaThreshold
   (JNIEnv *, jobject, jfloat);
 
 /*

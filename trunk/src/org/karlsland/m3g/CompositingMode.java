@@ -21,7 +21,7 @@ public class CompositingMode extends Object3D {
     native private boolean jni_isColorWriteEnable   ();
     native private boolean jni_isDepthTestEnabled   ();
     native private boolean jni_isDepthWriteEnabled  ();
-    native private void    jni_setAlphaThreashold   (float   threashold);
+    native private void    jni_setAlphaThreshold    (float   threshold);
     native private void    jni_setAlphaWriteEnable  (boolean enable);
     native private void    jni_setBlending          (int     mode  );
     native private void    jni_setColorWriteEnable  (boolean enable);
@@ -63,7 +63,7 @@ public class CompositingMode extends Object3D {
         return enabled;
     }
 
-    public boolean isColorWriteEnalbed () {
+    public boolean isColorWriteEnabled () {
         boolean enabled = jni_isColorWriteEnable ();
         return enabled;
     }
@@ -78,8 +78,8 @@ public class CompositingMode extends Object3D {
         return enabled;
     }
 
-    public void setAlphaThreashold (float threashold) {
-        jni_setAlphaThreashold (threashold);
+    public void setAlphaThreshold (float threshold) {
+        jni_setAlphaThreshold (threshold);
     }
 
     public void setAlphaWriteEnable (boolean enable) {

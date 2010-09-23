@@ -25,5 +25,6 @@ JNIEXPORT void JNICALL Java_JniGlut_jni_1glut_1init
     glutInit            (&argc, argv);
     glutInitDisplayMode (GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE);
     glutCreateWindow    (argv[0]);
-
 }
+
+

@@ -14,7 +14,11 @@ using namespace m3g;
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1initialize
   (JNIEnv* env, jobject obj)
 {
-
+    cout << "Java-PolygonMode: initialize is called.";
+    PolygonMode* pmode = new PolygonMode ();
+     setEntity (env, obj, pmode);
+    jobject entity = env->NewGlobalRef (obj);
+    pmode->setExportedEntity (entity);
 }
 
 /*
@@ -25,7 +29,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1initialize
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1finalize
   (JNIEnv* env, jobject obj)
 {
-
+    cout << "Java-PolygonMode: finalize is called.";
+    PolygonMode* pmode = (PolygonMode*)getEntity (env, obj);
+    delete pmode;
 }
 
 /*
@@ -36,7 +42,11 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1finalize
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1getCulling
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-PolygonMode: getCulling is called.";
+    PolygonMode* pmode = (PolygonMode*)getEntity (env, obj);
+    int culling = pmode->getCulling ();
+    cout << "culling = " << culling << "\n";
+    return culling;
 }
 
 /*
@@ -47,7 +57,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1getCulling
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1getShading
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-PolygonMode: getShading is called.";
+    PolygonMode* pmode = (PolygonMode*)getEntity (env, obj);
+    int shading = pmode->getShading ();
+    return shading;
 }
 
 /*
@@ -58,7 +71,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1getShading
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1getWinding
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-PolygonMode: getWinding is called.";
+    PolygonMode* pmode = (PolygonMode*)getEntity (env, obj);
+    int winding = pmode->getWinding ();
+    return winding;
 }
 
 /*
@@ -69,7 +85,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1getWinding
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1isLocalCameraLightingEnabled
   (JNIEnv* env, jobject obj)
 {
-    return false;
+    cout << "Java-PolygonMode: isLocalCameraLightingEnabled is called.";
+    PolygonMode* pmode = (PolygonMode*)getEntity (env, obj);
+    bool enabled = pmode->isLocalCameraLightingEnabled ();
+    return enabled;
 }
 
 /*
@@ -80,7 +99,10 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1isLocalCamera
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1isPerspectiveCorrectionEnabled
   (JNIEnv* env, jobject obj)
 {
-    return false;
+    cout << "Java-PolygonMode: isPerspectiveCorrectionEnabled is called.";
+    PolygonMode* pmode = (PolygonMode*)getEntity (env, obj);
+    bool enabled = pmode->isPerspectiveCorrectionEnabled ();
+    return enabled;
 }
 
 /*
@@ -91,7 +113,10 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1isPerspective
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1isTwoSidedLightingEnabled
   (JNIEnv* env, jobject obj)
 {
-    return false;
+    cout << "Java-PolygonMode: isTwoSidedLightingEnabled is called.";
+    PolygonMode* pmode = (PolygonMode*)getEntity (env, obj);
+    bool enabled = pmode->isTwoSidedLightingEnabled ();
+    return enabled;
 }
 
 /*
@@ -102,18 +127,22 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1isTwoSidedLig
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1setCulling
   (JNIEnv* env, jobject obj, jint culling)
 {
-
+    cout << "Java-PolygonMode: setCulling is called.";
+    PolygonMode* pmode = (PolygonMode*)getEntity (env, obj);
+    pmode->setCulling (culling);
 }
 
 /*
  * Class:     org_karlsland_m3g_PolygonMode
- * Method:    jni_setLocalCameraLighting
+ * Method:    jni_setLocalCameraLightingEnable
  * Signature: (Z)V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1setLocalCameraLighting
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1setLocalCameraLightingEnable
   (JNIEnv* env, jobject obj, jboolean enable)
 {
-
+    cout << "Java-PolygonMode: setLocalCameraLighting is called.";
+    PolygonMode* pmode = (PolygonMode*)getEntity (env, obj);
+    pmode->setLocalCameraLightingEnable (enable);
 }
 
 /*
@@ -124,7 +153,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1setLocalCameraLig
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1setPerspectiveCorrectionEnable
   (JNIEnv* env, jobject obj, jboolean enable)
 {
-
+    cout << "Java-PolygonMode: setPerspectiveCorrectionEnable is called.";
+    PolygonMode* pmode = (PolygonMode*)getEntity (env, obj);
+    pmode->setPerspectiveCorrectionEnable (enable);
 }
 
 /*
@@ -135,7 +166,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1setPerspectiveCor
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1setShading
   (JNIEnv* env, jobject obj, jint shading)
 {
-
+    cout << "Java-PolygonMode: setShading is called.";
+    PolygonMode* pmode = (PolygonMode*)getEntity (env, obj);
+    pmode->setShading (shading);
 }
 
 /*
@@ -146,7 +179,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1setShading
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1setTwoSidedLightingEnable
   (JNIEnv* env, jobject obj, jboolean enable)
 {
-
+    cout << "Java-PolygonMode: setTwoSidedLightingEnable is called.";
+    PolygonMode* pmode = (PolygonMode*)getEntity (env, obj);
+    pmode->setTwoSidedLightingEnable (enable);
 }
 
 /*
@@ -157,7 +192,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1setTwoSidedLighti
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1setWinding
   (JNIEnv* env, jobject obj, jint winding)
 {
-
+    cout << "Java-PolygonMode: setWinding is called.";
+    PolygonMode* pmode = (PolygonMode*)getEntity (env, obj);
+    pmode->setWinding (winding);
 }
 
 /*
@@ -166,7 +203,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1setWinding
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1print
-  (JNIEnv *, jobject)
+  (JNIEnv* env, jobject obj)
 {
-
+    cout << "Java-PolygonMode: print is called.";
+    PolygonMode* pmode = (PolygonMode*)getEntity (env, obj);
+    pmode->print (cout) << "\n";
 }

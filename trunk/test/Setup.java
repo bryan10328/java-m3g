@@ -5,12 +5,12 @@ import org.junit.BeforeClass;
 import org.junit.AfterClass;
 
 
-public class TestSetup {
+public class Setup {
 
     private static JniGlut glut;
 
     public static junit.framework.Test suite() {
-        return new JUnit4TestAdapter(TestSetup.class);
+        return new JUnit4TestAdapter(Setup.class);
     } 
 
     @Test
@@ -20,13 +20,14 @@ public class TestSetup {
 
     @BeforeClass
     public static void testSetup () {
+        System.out.println ("Global Setup is called.");
         glut = new JniGlut ();
         glut.init ();
     }
 
     @AfterClass
     public static void testTearDown () {
-
+        System.out.println ("Global TearDown is called.");
     }
 
 

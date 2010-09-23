@@ -9,7 +9,7 @@ public class Background extends Object3D {
     static {
         System.loadLibrary ("javam3g");
     }
-    native private void    jni_initizlie           ();
+    native private void    jni_initialize          ();
     native private void    jni_finalize            ();
     native private int     jni_getColor            ();
     native private int     jni_getCropHeight       ();
@@ -32,7 +32,7 @@ public class Background extends Object3D {
 
 
     public Background () {
-        jni_initizlie ();
+        jni_initialize ();
     }
 
     public void finalize () {

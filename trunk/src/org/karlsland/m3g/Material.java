@@ -51,7 +51,7 @@ public class Material extends Object3D {
         jni_setShininess (shininess);
     }
 
-    public void setVetexColorTrackingEnable (boolean enable) {
+    public void setVertexColorTrackingEnable (boolean enable) {
         jni_setVertexColorTrackingEnable (enable);
     }
 

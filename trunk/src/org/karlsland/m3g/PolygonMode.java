@@ -22,7 +22,7 @@ public class PolygonMode extends Object3D {
     native private boolean jni_isPerspectiveCorrectionEnabled ();
     native private boolean jni_isTwoSidedLightingEnabled      ();
     native private void    jni_setCulling                     (int     mode);
-    native private void    jni_setLocalCameraLighting         (boolean enable);
+    native private void    jni_setLocalCameraLightingEnable   (boolean enable);
     native private void    jni_setPerspectiveCorrectionEnable (boolean enable);
     native private void    jni_setShading                     (int     mode);
     native private void    jni_setTwoSidedLightingEnable      (boolean enable);
@@ -52,7 +52,7 @@ public class PolygonMode extends Object3D {
         return winding;
     }
 
-    public boolean isLocalCameraLightingEnaled () {
+    public boolean isLocalCameraLightingEnabled () {
         boolean enabled = jni_isLocalCameraLightingEnabled ();
         return enabled;
     }
@@ -72,7 +72,7 @@ public class PolygonMode extends Object3D {
     }
 
     public void setLocalCameraLightingEnable (boolean enable) {
-        jni_setLocalCameraLighting (enable);
+        jni_setLocalCameraLightingEnable (enable);
     }
 
     public void setPerspectiveCorrectionEnable (boolean enable) {
