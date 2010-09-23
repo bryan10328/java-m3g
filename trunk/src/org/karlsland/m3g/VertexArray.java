@@ -12,7 +12,7 @@ public class VertexArray extends Object3D {
     native private void jni_get               (int firstVeretx, int numVertices, short[] values);
     native private void jni_get               (int firstVeretx, int numVertices, float[] values);
     native private int  jni_getComponentCount ();
-    native private int  jni_getCompoenntType  ();
+    native private int  jni_getComponentType   ();
     native private int  jni_getVertexCount    ();
     native private void jni_set               (int firstVertex, int numVertices, byte[]  values);
     native private void jni_set               (int fristVertex, int numVertices, short[] values);
@@ -41,12 +41,12 @@ public class VertexArray extends Object3D {
     }
 
     public int getComponentCount () {
-        int count = jni_getCompoenntType ();
+        int count = jni_getComponentCount ();
         return count;
     }
 
-    public int getCompoenntType () {
-        int type = jni_getCompoenntType ();
+    public int getComponentType () {
+        int type = jni_getComponentType ();
         return type;
     }
 

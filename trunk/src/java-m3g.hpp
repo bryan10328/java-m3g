@@ -2348,10 +2348,34 @@ extern "C" {
 /*
  * Class:     org_karlsland_m3g_Image2D
  * Method:    jni_initialize
- * Signature: ()V
+ * Signature: (III)V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize
-  (JNIEnv *, jobject);
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__III
+  (JNIEnv *, jobject, jint, jint, jint);
+
+/*
+ * Class:     org_karlsland_m3g_Image2D
+ * Method:    jni_initialize
+ * Signature: (III[B)V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__III_3B
+  (JNIEnv *, jobject, jint, jint, jint, jbyteArray);
+
+/*
+ * Class:     org_karlsland_m3g_Image2D
+ * Method:    jni_initialize
+ * Signature: (III[B[B)V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__III_3B_3B
+  (JNIEnv *, jobject, jint, jint, jint, jbyteArray, jbyteArray);
+
+/*
+ * Class:     org_karlsland_m3g_Image2D
+ * Method:    jni_initialize
+ * Signature: (ILjava/lang/Object;)V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__ILjava_lang_Object_2
+  (JNIEnv *, jobject, jint, jobject);
 
 /*
  * Class:     org_karlsland_m3g_Image2D
@@ -3158,10 +3182,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_VertexArray_jni_1getComponentCount
 
 /*
  * Class:     org_karlsland_m3g_VertexArray
- * Method:    jni_getCompoenntType
+ * Method:    jni_getComponentType
  * Signature: ()I
  */
-JNIEXPORT jint JNICALL Java_org_karlsland_m3g_VertexArray_jni_1getCompoenntType
+JNIEXPORT jint JNICALL Java_org_karlsland_m3g_VertexArray_jni_1getComponentType
   (JNIEnv *, jobject);
 
 /*

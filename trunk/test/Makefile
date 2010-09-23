@@ -2,23 +2,22 @@
 # export CLASSPATH=.:/usr/share/java/junit4.jar:../src   
 #
 
-SRCS = $(wildcard *.java)
-#SRCS = $(wildcard TestObject3D.java)
-CLASSS = $(SRCS:.java=.class)
-TARGETS = $(SRCS:.java=)
-CXX = g++
-CXXFLAGS = -Wall -O3 -Wno-deprecated -I../src -I../lib
-LD = g++
-LDFLAGS = -L../src -L../lib
-LIBS =  -lm3g  -lUnitTest++ -lglut -lGL -lz
-CLASSPATH = .:/usr/share/java/junit4.jar:../src
+SRCS       = $(wildcard Test*.java)
+CLASSS     = $(SRCS:.java=.class)
+TARGETS    = org.junit.runner.JUnitCore $(SRCS:.java=)
+JAVAC      = javac
+JAVACFLAGS = -classpath .:../src:/usr/share/java/junit4.jar:/usr/share/java/jogl.jar:/usr/share/java/gluegen-rt.jar
+JAVA       = java
+JAVAFLAGS  = $(JAVACFLAGS) \
+             -Djava.library.path=./:../src:./library
+
 
 all: $(CLASSS)
-	java -classpath $(CLASSPATH) org.junit.runner.JUnitCore $(TARGETS) 
+	$(JAVA) $(JAVAFLAGS) $(TARGETS) 
 	@echo done.
 
 %.class: %.java
-	javac -classpath $(CLASSPATH) $<
+	$(JAVAC) $(JAVACFLAGS) $<
 
 depend:
 	makedepend -- $(CXXFLAGS) -- $(SRCS)

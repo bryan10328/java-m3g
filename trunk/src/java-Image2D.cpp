@@ -9,13 +9,72 @@ using namespace m3g;
 /*
  * Class:     org_karlsland_m3g_Image2D
  * Method:    jni_initialize
- * Signature: ()V
+ * Signature: (III)V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize
-  (JNIEnv* env, jobject obj)
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__III
+  (JNIEnv* env, jobject obj, jint format, jint width, jint height)
 {
-
+    cout << "Java-Image2D: initiazlize1 is called.\n";
+    Image2D* img = new Image2D (format, width, height);
+    setEntity (env, obj, img);
+    jobject entity = env->NewGlobalRef (obj);
+    img->setExportedEntity (entity);
 }
+
+/*
+ * Class:     org_karlsland_m3g_Image2D
+ * Method:    jni_initialize
+ * Signature: (III[B)V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__III_3B
+  (JNIEnv* env, jobject obj, jint format, jint width, jint height, jbyteArray image)
+{
+    cout << "Java-Image2D: initiazlize2 is called.\n";
+    char* pixels = (char*)env->GetByteArrayElements (image, 0);
+    Image2D* img = new Image2D (format, width, height, pixels);
+    env->ReleaseByteArrayElements (image, (jbyte*)pixels, 0);
+    setEntity (env, obj, img);
+    jobject entity = env->NewGlobalRef (obj);
+    img->setExportedEntity (entity);
+}
+
+/*
+ * Class:     org_karlsland_m3g_Image2D
+ * Method:    jni_initialize
+ * Signature: (III[B[B)V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__III_3B_3B
+  (JNIEnv* env, jobject obj, jint format, jint width, jint height, jbyteArray image, jbyteArray palette)
+{
+    cout << "Java-Image2D: initiazlize3 is called.\n";
+    char* pixels = (char*)env->GetByteArrayElements (image, 0);
+    char* palte  = (char*)env->GetByteArrayElements (palette, 0);
+    cout << "piexels = " << (void*)pixels << "\n";
+    cout << "palte = " << (void*)palte << "\n";
+    Image2D* img = new Image2D (format, width, height, pixels, palte);
+    cout << "out\n";
+    env->ReleaseByteArrayElements (image, (jbyte*)pixels, 0);
+    env->ReleaseByteArrayElements (palette, (jbyte*)palte, 0);
+    setEntity (env, obj, img);
+    jobject entity = env->NewGlobalRef (obj);
+    img->setExportedEntity (entity);
+}
+
+/*
+ * Class:     org_karlsland_m3g_Image2D
+ * Method:    jni_initialize
+ * Signature: (ILjava/lang/Object;)V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__ILjava_lang_Object_2
+  (JNIEnv* env, jobject obj, jint format, jobject image)
+{
+    cout << "Java-Image2D: initiazlize4 is called.\n";
+
+    // MIDPやAWTなどのImageクラス
+    // 詳細不明。現在では未実装。
+}
+
+
 
 /*
  * Class:     org_karlsland_m3g_Image2D
@@ -25,7 +84,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1finalize
   (JNIEnv* env, jobject obj)
 {
-
+    cout << "Java-Image2D: finalize is called.\n";
+    Image2D* img = (Image2D*)getEntity (env, obj);
+    delete img;
 }
 
 /*
@@ -36,7 +97,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1finalize
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Image2D_jni_1getFormat
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Image2D: getFormat is called.\n";
+    Image2D* img = (Image2D*)getEntity (env, obj);
+    int format = img->getFormat ();
+    return format;
 }
 
 /*
@@ -47,7 +111,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Image2D_jni_1getFormat
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Image2D_jni_1getHeight
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Image2D: getHeight is called.\n";
+    Image2D* img = (Image2D*)getEntity (env, obj);
+    int height = img->getHeight ();
+    return height;
 }
 
 /*
@@ -58,7 +125,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Image2D_jni_1getHeight
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Image2D_jni_1getWidth
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Image2D: getWidth is called.\n";
+    Image2D* img = (Image2D*)getEntity (env, obj);
+    int width = img->getWidth ();
+    return width;
 }
 
 /*
@@ -69,7 +139,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Image2D_jni_1getWidth
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Image2D_jni_1isMutable
   (JNIEnv* env, jobject obj)
 {
-    return false;
+    cout << "Java-Image2D: isMutable is called.\n";
+    Image2D* img = (Image2D*)getEntity (env, obj);
+    bool mut = img->isMutable ();
+    return mut;
 }
 
 /*
@@ -80,7 +153,11 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Image2D_jni_1isMutable
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1set
   (JNIEnv* env, jobject obj, jint x, jint y, jint width, jint height, jbyteArray image)
 {
-
+    cout << "Java-Image2D: set is called.\n";
+    Image2D* img = (Image2D*)getEntity (env, obj);
+    char* pixels = (char*)env->GetByteArrayElements (image, 0);
+    img->set (x, y, width, height, pixels);
+    env->ReleaseByteArrayElements (image, (jbyte*)pixels, 0);
 }
 
 /*
@@ -89,8 +166,11 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1set
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1print
-  (JNIEnv *, jobject)
+  (JNIEnv* env, jobject obj)
 {
+    cout << "Java-Image2D: print is called.\n";
+    Image2D* img = (Image2D*)getEntity (env, obj);
+    img->print (cout) << "\n";
 }
 
 /*
@@ -99,7 +179,14 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1print
  * Signature: (Ljava/lang/String;)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1writePng
-  (JNIEnv *, jobject, jstring)
+  (JNIEnv* env, jobject obj, jstring file_name)
 {
-
+    cout << "Java-Image2D: writePng is called.\n";
+    jboolean        copied;
+    Image2D*    img  = (Image2D*)getEntity (env, obj);
+    const char* name = env->GetStringUTFChars (file_name, &copied);
+    img->writePNG (name);
+    if (copied) {
+        env->ReleaseStringUTFChars (file_name, name);
+    }
 }

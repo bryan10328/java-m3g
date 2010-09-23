@@ -236,7 +236,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Node_jni_1setScope
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Node_jni_1print
-  (JNIEnv *, jobject)
+  (JNIEnv* env, jobject obj)
 {
-
+    Node* node = (Node*)getEntity (env, obj);
+    node->print (cout) << "\n";
 }

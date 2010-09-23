@@ -203,7 +203,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Object3D_jni_1setUserObject
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Object3D_jni_1print
-  (JNIEnv *, jobject)
+  (JNIEnv* env, jobject obj)
 {
-
+    Object3D* obj3d = (Object3D*)getEntity (env, obj);
+    obj3d->print (cout) << "\n";
 }

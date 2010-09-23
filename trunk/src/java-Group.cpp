@@ -124,7 +124,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1removeChild
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1print
-  (JNIEnv *, jobject)
+  (JNIEnv* env, jobject obj)
 {
-
+    Group* grp = (Group*)getEntity (env, obj);
+    grp->print (cout) << "\n";
 }
