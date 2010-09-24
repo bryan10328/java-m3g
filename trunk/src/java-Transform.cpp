@@ -218,7 +218,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1transform__Lorg_kar
     Transform* trans = (Transform*)getEntity (env, obj);
     VertexArray* varry = (VertexArray*)getEntity (env, in);
     float* ou = env->GetFloatArrayElements (out, 0);
-    //trans->transform (varry, ou, w);
+    trans->transform (varry, ou, w);
     env->ReleaseFloatArrayElements (out, ou, 0);
 }
 

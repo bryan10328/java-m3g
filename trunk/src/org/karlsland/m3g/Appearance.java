@@ -51,7 +51,7 @@ public class Appearance extends Object3D {
     }
 
     public PolygonMode getPolygonMode () {
-        PolygonMode pmode = getPolygonMode ();
+        PolygonMode pmode = jni_getPolygonMode ();
         return pmode;
     }
 

@@ -5,10 +5,11 @@
 SRCS       = Setup.java $(wildcard Test*.java)
 CLASSS     = $(SRCS:.java=.class)
 TARGETS    = org.junit.runner.JUnitCore $(SRCS:.java=)
+CLASSPATH  = -classpath .:../src:/usr/share/java/junit4.jar 
 JAVAC      = javac
-JAVACFLAGS = -classpath .:../src:/usr/share/java/junit4.jar
+JAVACFLAGS = $(CLASSPATH) -Xlint:deprecation
 JAVA       = java
-JAVAFLAGS  = $(JAVACFLAGS) \
+JAVAFLAGS  = $(CLASSPATH) \
              -Djava.library.path=./:../src:./library
 
 

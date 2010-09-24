@@ -14,7 +14,30 @@ using namespace m3g;
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1initialize__Lorg_karlsland_m3g_VertexBuffer_2_3Lorg_karlsland_m3g_VertexBuffer_2_3Lorg_karlsland_m3g_IndexBuffer_2_3Lorg_karlsland_m3g_Appearance_2
   (JNIEnv* env, jobject obj, jobject base, jobjectArray targets, jobjectArray submeshes, jobjectArray appearances)
 {
-
+    cout << "Java-MorhpingMesh: initilize1 is called.\n";
+    VertexBuffer* vbuf = (VertexBuffer*)getEntity (env, base);
+    int tars_len = env->GetArrayLength (targets);
+    VertexBuffer** tars = new VertexBuffer* [tars_len];
+    for (int i = 0; i < tars_len; i++) {
+        tars[i] = (VertexBuffer*)getEntity (env, env->GetObjectArrayElement(targets, i));
+    }
+    int len = env->GetArrayLength (submeshes);
+    IndexBuffer** ibufs = new IndexBuffer* [len];
+    for (int i = 0; i < len; i++) {
+        ibufs[i] = (IndexBuffer*)getEntity (env, env->GetObjectArrayElement(submeshes, i));
+    }
+    len = env->GetArrayLength (appearances);
+    Appearance** apps = new Appearance* [len];
+    for (int i = 0; i < len; i++) {
+        apps[i] = (Appearance*)getEntity (env, env->GetObjectArrayElement(appearances, i));
+    }
+    MorphingMesh* mesh = new MorphingMesh (vbuf, tars_len, tars, len, ibufs, apps);
+    delete[] tars;
+    delete[] ibufs;
+    delete[] apps;
+    setEntity (env, obj, mesh);
+    jobject entity = env->NewGlobalRef (obj);
+    mesh->setExportedEntity (entity);
 }
 
 /*
@@ -25,7 +48,29 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1initialize__Lorg
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1initialize__Lorg_karlsland_m3g_VertexBuffer_2_3Lorg_karlsland_m3g_VertexBuffer_2Lorg_karlsland_m3g_IndexBuffer_2Lorg_karlsland_m3g_Appearance_2
   (JNIEnv* env, jobject obj, jobject base, jobjectArray targets, jobject submesh, jobject appearance)
 {
-
+    cout << "Java-MorhpingMesh: initialize2 is called.\n";
+    VertexBuffer* vbuf = (VertexBuffer*)getEntity (env, base);
+    int len = env->GetArrayLength (targets);
+    VertexBuffer** tars = new VertexBuffer* [len];
+    for (int i = 0; i < len; i++) {
+        tars[i] = (VertexBuffer*)getEntity (env, env->GetObjectArrayElement(targets, i));
+        cout << "tars[" << i << "] = " << tars[i] << "\n";
+    }
+    cout << "1======\n";
+    IndexBuffer*  ibuf = (IndexBuffer*)getEntity (env, submesh);
+    Appearance*   app  = (Appearance*)getEntity (env, appearance);
+    cout << *vbuf << "\n";
+    cout << "len = " << len << "\n";
+    cout << *ibuf << "\n";
+    cout << *app << "\n";
+    cout << "2======\n";
+    MorphingMesh* mesh = new MorphingMesh (vbuf, len, tars, ibuf, app);
+    cout << "3======\n";
+    delete[] tars;
+    setEntity (env, obj, mesh);
+    jobject entity = env->NewGlobalRef (obj);
+    mesh->setExportedEntity (entity);
+    cout << "4======\n";
 }
 
 /*
@@ -36,7 +81,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1initialize__Lorg
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1finalize
   (JNIEnv* env, jobject obj)
 {
-
+    cout << "Java-MorhpingMesh: finalize is called.\n";
+    MorphingMesh* mesh = (MorphingMesh*)getEntity (env, obj);
+    delete mesh;
 }
 
 /*
@@ -47,7 +94,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1finalize
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1getMorphTarget
   (JNIEnv* env, jobject obj, jint index)
 {
-    return (jobject)NULL;
+    cout << "Java-MorhpingMesh: getMorphTarget is called.\n";
+    MorphingMesh* mesh = (MorphingMesh*)getEntity (env, obj);
+    VertexBuffer* target = mesh->getMorphTarget (index);
+    return (target != NULL) ? (jobject)target->getExportedEntity() : (jobject)NULL;
 }
 
 /*
@@ -58,7 +108,10 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1getMorphTarge
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1getMorphTargetCount
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-MorhpingMesh: getMorphTargetCount is called.\n";
+    MorphingMesh* mesh = (MorphingMesh*)getEntity (env, obj);
+    int count = mesh->getMorphTargetCount ();
+    return count;
 }
 
 /*
@@ -69,7 +122,11 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1getMorphTargetCo
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1getWeights
   (JNIEnv* env, jobject obj, jfloatArray weights)
 {
-
+    cout << "Java-MorhpingMesh: getWeights is called.\n";
+    MorphingMesh* mesh = (MorphingMesh*)getEntity (env, obj);
+    float* ws = env->GetFloatArrayElements (weights, 0);
+    mesh->getWeights (ws);
+    env->ReleaseFloatArrayElements (weights, ws, 0);
 }
 
 /*
@@ -80,7 +137,12 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1getWeights
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1setWeights
   (JNIEnv* env, jobject obj, jfloatArray weights)
 {
-
+    cout << "Java-MorhpingMesh: setWeights is called.\n";
+    MorphingMesh* mesh = (MorphingMesh*)getEntity (env, obj);
+    int   len = env->GetArrayLength (weights);
+    float* ws = env->GetFloatArrayElements (weights, 0);
+    mesh->setWeights (len, ws);
+    env->ReleaseFloatArrayElements (weights, ws, 0);
 }
 
 /*
@@ -89,7 +151,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1setWeights
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1print
-  (JNIEnv *, jobject)
+  (JNIEnv* env, jobject obj)
 {
-
+    cout << "Java-MorhpingMesh: print is called.\n";
+    MorphingMesh* mesh = (MorphingMesh*)getEntity (env, obj);
+    mesh->print (cout) << "\n";
 }

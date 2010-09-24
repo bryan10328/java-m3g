@@ -15,7 +15,13 @@ using namespace m3g;
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1initialize
   (JNIEnv* env, jobject obj, jboolean scaled, jobject image, jobject appearance)
 {
-
+    cout << "Java-Sprite3D: initilize is called.\n";
+    Image2D* img = (Image2D*)getEntity (env, image);
+    Appearance* app = (Appearance*)getEntity (env, appearance);
+    Sprite3D* spr = new Sprite3D (scaled, img, app);
+    setEntity (env, obj, spr);
+    jobject entity = env->NewGlobalRef (obj);
+    spr->setExportedEntity (entity);
 }
 
 /*
@@ -26,7 +32,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1initialize
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1finalize
   (JNIEnv* env, jobject obj)
 {
-
+    cout << "Java-Sprite3D: finalize is called.\n";
+    Sprite3D* spr = (Sprite3D*)getEntity (env, obj);
+    delete spr;
 }
 
 /*
@@ -37,7 +45,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1finalize
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getAppearance
   (JNIEnv* env, jobject obj)
 {
-    return (jobject)NULL;
+    cout << "Java-Sprite3D: getAppearance is called.\n";
+    Sprite3D* spr = (Sprite3D*)getEntity (env, obj);
+    Appearance* app = spr->getAppearance ();
+    return (app != NULL) ? (jobject)app->getExportedEntity() : (jobject)NULL;
 }
 
 /*
@@ -48,7 +59,10 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getAppearance
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getCropHeight
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Sprite3D: getCropHeight is called.\n";
+    Sprite3D* spr = (Sprite3D*)getEntity (env, obj);
+    int height = spr->getCropHeight ();
+    return height;
 }
 
 /*
@@ -59,7 +73,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getCropHeight
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getCropWidth
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Sprite3D: getCropWidth is called.\n";
+    Sprite3D* spr = (Sprite3D*)getEntity (env, obj);
+    int width = spr->getCropWidth ();
+    return width;
 }
 
 /*
@@ -70,7 +87,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getCropWidth
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getCropX
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Sprite3D: getCropX is called.\n";
+    Sprite3D* spr = (Sprite3D*)getEntity (env, obj);
+    int x = spr->getCropX ();
+    return x;
 }
 
 /*
@@ -81,7 +101,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getCropX
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getCropY
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Sprite3D: getCropY is called.\n";
+    Sprite3D* spr = (Sprite3D*)getEntity (env, obj);
+    int y = spr->getCropY ();
+    return y;
 }
 
 /*
@@ -92,7 +115,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getCropY
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getImage
   (JNIEnv* env, jobject obj)
 {
-    return (jobject)NULL;
+    cout << "Java-Sprite3D: getImage is called.\n";
+    Sprite3D* spr = (Sprite3D*)getEntity (env, obj);
+    Image2D* img = spr->getImage ();
+    return (img != NULL) ? (jobject)img->getExportedEntity() : (jobject)NULL;
 }
 
 /*
@@ -103,7 +129,10 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getImage
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1isScaled
   (JNIEnv* env, jobject obj)
 {
-    return false;
+    cout << "Java-Sprite3D: isScaled is called.\n";
+    Sprite3D* spr = (Sprite3D*)getEntity (env, obj);
+    bool scaled = spr->isScaled ();
+    return scaled;
 }
 
 /*
@@ -114,7 +143,10 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1isScaled
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1setAppearance
   (JNIEnv* env, jobject obj, jobject appearance)
 {
-
+    cout << "Java-Sprite3D: setAppearance is called.\n";
+    Sprite3D* spr = (Sprite3D*)getEntity (env, obj);
+    Appearance* app = (Appearance*)getEntity (env, appearance);
+    spr->setAppearance (app);
 }
 
 /*
@@ -125,7 +157,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1setAppearance
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1setCrop
   (JNIEnv* env, jobject obj, jint cropX, jint cropY, jint width, jint height)
 {
-
+    cout << "Java-Sprite3D: setCrop is called.\n";
+    Sprite3D* spr = (Sprite3D*)getEntity (env, obj);
+    spr->setCrop (cropX, cropY, width, height);
 }
 
 /*
@@ -136,7 +170,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1setCrop
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1setImage
   (JNIEnv* env, jobject obj, jobject image)
 {
-
+    cout << "Java-Sprite3D: setImage is called.\n";
+    Sprite3D* spr = (Sprite3D*)getEntity (env, obj);
+    Image2D* img = (Image2D*)getEntity (env, image);
+    spr->setImage (img);
 }
 
 /*
@@ -145,6 +182,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1setImage
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1print
-  (JNIEnv *, jobject)
+  (JNIEnv* env, jobject obj)
 {
+    cout << "Java-Sprite3D: print is called.\n";
+    Sprite3D* spr = (Sprite3D*)getEntity (env, obj);
+    spr->print (cout) << "\n";
 }

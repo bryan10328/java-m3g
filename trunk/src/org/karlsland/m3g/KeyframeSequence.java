@@ -1,6 +1,6 @@
 package org.karlsland.m3g;
 
-public class KeyframeSequence {
+public class KeyframeSequence extends Object3D {
     
     public final static int CONSTANT = 192;
     public final static int LINEAR   = 176;
@@ -25,7 +25,7 @@ public class KeyframeSequence {
     native private int  jni_getValidRangeLast    ();
     native private void jni_setDuration          (int duration);
     native private void jni_setKeyframe          (int index, int time, float[] value);
-    native private void jni_setRepeateMode       (int mode);
+    native private void jni_setRepeatMode        (int mode);
     native private void jni_setValidRange        (int first, int last);
     native private void jni_print                ();
 
@@ -86,7 +86,7 @@ public class KeyframeSequence {
     }
 
     public void setRepeatMode (int mode) {
-        jni_setRepeateMode (mode);
+        jni_setRepeatMode (mode);
     }
 
     public void setValidRange (int first, int last) {

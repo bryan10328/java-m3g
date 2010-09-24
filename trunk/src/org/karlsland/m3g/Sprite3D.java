@@ -36,7 +36,7 @@ public class Sprite3D extends Node {
 
     public int getCropHeight () {
         int height = jni_getCropHeight ();
-        return 0;
+        return height;
     }
 
     public int getCropWidth () {

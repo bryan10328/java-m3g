@@ -260,10 +260,10 @@ extern "C" {
 /*
  * Class:     org_karlsland_m3g_AnimationTrack
  * Method:    jni_initialize
- * Signature: ()V
+ * Signature: (Lorg/karlsland/m3g/KeyframeSequence;I)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1initialize
-  (JNIEnv *, jobject);
+  (JNIEnv *, jobject, jobject, jint);
 
 /*
  * Class:     org_karlsland_m3g_AnimationTrack
@@ -2901,10 +2901,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1setKeyframe
 
 /*
  * Class:     org_karlsland_m3g_KeyframeSequence
- * Method:    jni_setRepeateMode
+ * Method:    jni_setRepeatMode
  * Signature: (I)V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1setRepeateMode
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1setRepeatMode
   (JNIEnv *, jobject, jint);
 
 /*
@@ -3076,9 +3076,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1setAttenuation
 /*
  * Class:     org_karlsland_m3g_Light
  * Method:    jni_setColor
- * Signature: (I)I
+ * Signature: (I)V
  */
-JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Light_jni_1setColor
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1setColor
   (JNIEnv *, jobject, jint);
 
 /*

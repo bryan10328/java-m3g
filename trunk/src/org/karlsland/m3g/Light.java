@@ -21,7 +21,7 @@ public class Light extends Object3D {
     native private float jni_getSpotAngle            ();
     native private float jni_getSpotExponent         ();
     native private void  jni_setAttenuation          (float constant, float linear, float quadratic);
-    native private int   jni_setColor                (int   RGB);
+    native private void  jni_setColor                (int   RGB);
     native private void  jni_setIntensity            (float intensity);
     native private void  jni_setMode                 (int   mode);
     native private void  jni_setSpotAngle            (float angle);

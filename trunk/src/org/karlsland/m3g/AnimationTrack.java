@@ -27,7 +27,7 @@ public class AnimationTrack extends Object3D {
     static {
         System.loadLibrary ("javam3g");
     }
-    native private void                jni_initialize          ();
+    native private void                jni_initialize          (KeyframeSequence keyframeSequence, int property);
     native private void                jni_finalize            ();
     native private AnimationController jni_getController       ();
     native private KeyframeSequence    jni_getKeyframeSequence ();
@@ -35,8 +35,8 @@ public class AnimationTrack extends Object3D {
     native private void                jni_setController       (AnimationController controller);
     native private void                jni_print               ();
 
-    public AnimationTrack () {
-        jni_initialize ();
+    public AnimationTrack (KeyframeSequence keyframeSequence, int property) {
+        jni_initialize (keyframeSequence, property);
     }
 
     public void finalzie () {

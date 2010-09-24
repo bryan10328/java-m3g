@@ -14,7 +14,11 @@ using namespace m3g;
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Fog_jni_1initialize
   (JNIEnv* env, jobject obj)
 {
-
+    cout << "Java-Fog: initilize is called.\n";
+    Fog* fog = new Fog ();
+    setEntity (env, obj, fog);
+    jobject entity = env->NewGlobalRef (obj);
+    fog->setExportedEntity (entity);
 }
 
 /*
@@ -25,7 +29,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Fog_jni_1initialize
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Fog_jni_1finalize
   (JNIEnv* env, jobject obj)
 {
-
+    cout << "Java-Fog: finalize is called.\n";
+    Fog* fog = (Fog*)getEntity (env, obj);
+    delete fog;
 }
 
 
@@ -37,7 +43,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Fog_jni_1finalize
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Fog_jni_1getColor
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Fog: getColor is called.\n";
+    Fog* fog = (Fog*)getEntity (env, obj);
+    int RGB = fog->getColor ();
+    return RGB;
 }
 
 /*
@@ -48,7 +57,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Fog_jni_1getColor
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Fog_jni_1getDensity
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Fog: getDensity is called.\n";
+    Fog* fog = (Fog*)getEntity (env, obj);
+    float dens = fog->getDensity ();
+    return dens;
 }
 
 /*
@@ -59,7 +71,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Fog_jni_1getDensity
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Fog_jni_1getFarDistance
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Fog: getFarDistance is called.\n";
+    Fog* fog = (Fog*)getEntity (env, obj);
+    float far = fog->getFarDistance ();
+    return far;
 }
 
 /*
@@ -70,7 +85,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Fog_jni_1getFarDistance
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Fog_jni_1getMode
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Fog: getMode is called.\n";
+    Fog* fog = (Fog*)getEntity (env, obj);
+    int mode = fog->getMode ();
+    return mode;
 }
 
 /*
@@ -81,7 +99,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Fog_jni_1getMode
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Fog_jni_1getNearDistance
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Fog: getNearDistance is called.\n";
+    Fog* fog = (Fog*)getEntity (env, obj);
+    float near = fog->getNearDistance ();
+    return near;
 }
 
 /*
@@ -90,9 +111,11 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Fog_jni_1getNearDistance
  * Signature: (I)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Fog_jni_1setColor
-  (JNIEnv* env, jobject obj, jint color)
+  (JNIEnv* env, jobject obj, jint RGB)
 {
-    
+    cout << "Java-Fog: setColor is called.\n";
+    Fog* fog = (Fog*)getEntity (env, obj);
+    fog->setColor (RGB);
 }
 
 /*
@@ -103,7 +126,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Fog_jni_1setColor
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Fog_jni_1setDensity
   (JNIEnv* env, jobject obj, jfloat density)
 {
-
+    cout << "Java-Fog: setDensity is called.\n";
+    Fog* fog = (Fog*)getEntity (env, obj);
+    fog->setDensity (density);
 }
 
 /*
@@ -114,7 +139,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Fog_jni_1setDensity
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Fog_jni_1setLinear
   (JNIEnv* env, jobject obj, jfloat near, jfloat far)
 {
-
+    cout << "Java-Fog: setLinear is called.\n";
+    Fog* fog = (Fog*)getEntity (env, obj);
+    fog->setLinear (near, far);
 }
 
 /*
@@ -125,7 +152,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Fog_jni_1setLinear
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Fog_jni_1setMode
   (JNIEnv* env, jobject obj, jint mode)
 {
-
+    cout << "Java-Fog: setMode is called.\n";
+    Fog* fog = (Fog*)getEntity (env, obj);
+    fog->setMode (mode);
 }
 
 /*
@@ -134,7 +163,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Fog_jni_1setMode
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Fog_jni_1print
-  (JNIEnv *, jobject)
+  (JNIEnv* env, jobject obj)
 {
-
+    cout << "Java-Fog: print is called.\n";
+    Fog* fog = (Fog*)getEntity (env, obj);
+    fog->print (cout) << "\n";
 }

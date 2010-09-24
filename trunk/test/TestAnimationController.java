@@ -12,16 +12,30 @@ public class TestAnimationController {
     @Test
     public void testInitialize () {
         AnimationController controller = new AnimationController ();
+
+        assertEquals (0,   controller.getActiveIntervalStart());
+        assertEquals (0,   controller.getActiveIntervalEnd());
+        assertEquals (1.f, controller.getWeight(), 0.00001f);
+        assertEquals (1.f, controller.getSpeed(), 0.00001f);
+        assertEquals (0,   controller.getRefWorldTime());
+        assertEquals (0.f, controller.getPosition(0), 0.00001f);
     }
 
     @Test
-    public void testActiveInterval () {
+    public void testGetterSetter () {
         AnimationController controller = new AnimationController ();
         controller.setActiveInterval (10, 20);
-        int start = controller.getActiveIntervalStart();
-        System.out.println ("start = " + start);
+        controller.setWeight   (3);
+        controller.setSpeed    (4, 0);
+        controller.setPosition (2, 1);
+
         assertEquals (10, controller.getActiveIntervalStart());
         assertEquals (20, controller.getActiveIntervalEnd());
+        assertEquals (3.f, controller.getWeight(), 0.00001f);
+        assertEquals (4.f, controller.getSpeed(), 0.00001f);
+        assertEquals (1,   controller.getRefWorldTime());
+        assertEquals (2.f, controller.getPosition(1), 0.00001f);
+        assertEquals (6.f, controller.getPosition(2), 0.00001f);
     }
 
 }

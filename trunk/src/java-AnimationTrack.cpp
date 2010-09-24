@@ -6,17 +6,22 @@
 using namespace std;
 using namespace m3g;
 
-
 /*
  * Class:     org_karlsland_m3g_AnimationTrack
  * Method:    jni_initialize
- * Signature: ()V
+ * Signature: (Lorg/karlsland/m3g/KeyframeSequence;I)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1initialize
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject obj, jobject keyframeSequence, jint property)
 {
-
+    cout << "Java-AnimationTrack: initilize is called.\n";
+    KeyframeSequence* key_seq = (KeyframeSequence*)getEntity (env, keyframeSequence);
+    AnimationTrack* anim_track = new AnimationTrack (key_seq, property);
+    setEntity (env, obj, anim_track);
+    jobject entity = env->NewGlobalRef (obj);
+    anim_track->setExportedEntity (entity);
 }
+
 
 /*
  * Class:     org_karlsland_m3g_AnimationTrack
@@ -26,7 +31,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1initialize
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1finalize
   (JNIEnv* env, jobject obj)
 {
-
+    cout << "Java-AnimationTrack: finalize is called.\n";
+    AnimationTrack* anim_track = (AnimationTrack*)getEntity (env, obj);
+    delete anim_track;
 }
 
 /*
@@ -37,7 +44,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1finalize
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1getController
   (JNIEnv* env, jobject obj)
 {
-    return (jobject)NULL;
+    cout << "Java-AnimationTrack: getController is called.\n";
+    AnimationTrack* anim_track = (AnimationTrack*)getEntity (env, obj);
+    AnimationController* anim_cntr = anim_track->getController ();
+    return (anim_cntr != NULL) ? (jobject)anim_cntr->getExportedEntity() : (jobject)NULL;
 }
 
 /*
@@ -48,7 +58,10 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1getControll
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1getKeyframeSequence
   (JNIEnv* env, jobject obj)
 {
-    return (jobject)NULL;
+    cout << "Java-AnimationTrack: getKeyframeSequence is called.\n";
+    AnimationTrack*   anim_track = (AnimationTrack*)getEntity (env, obj);
+    KeyframeSequence* key_seq    = anim_track->getKeyframeSequence ();
+    return (key_seq != NULL) ? (jobject)key_seq->getExportedEntity() : (jobject)NULL;
 }
 
 
@@ -60,7 +73,10 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1getKeyframe
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1getTargetProperty
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-AnimationTrack: getTargetProperty is called.\n";
+    AnimationTrack* anim_track = (AnimationTrack*)getEntity (env, obj);
+    int property = anim_track->getTargetProperty ();
+    return property;
 }
 
 /*
@@ -69,9 +85,12 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1getTargetPrope
  * Signature: (Lorg/karlsland/m3g/AnimationController;)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1setController
-  (JNIEnv* env, jobject obj, jobject controller)
+  (JNIEnv* env, jobject obj, jobject animationController)
 {
-
+    cout << "Java-AnimationTrack: setController is called.\n";
+    AnimationTrack*      anim_track = (AnimationTrack*)getEntity (env, obj);
+    AnimationController* anim_cntr  = (AnimationController*)getEntity (env, animationController);
+    anim_track->setController (anim_cntr);
 
 }
 
@@ -81,8 +100,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1setController
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1print
-  (JNIEnv *, jobject)
+  (JNIEnv* env, jobject obj)
 {
-
+    cout << "Java-AnimationTrack: print is called.\n";
+    AnimationTrack* anim_track = (AnimationTrack*)getEntity (env, obj);
+    anim_track->print (cout) << "\n";
 }
 

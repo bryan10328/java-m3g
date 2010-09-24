@@ -10,12 +10,16 @@ using namespace m3g;
 /*
  * Class:     org_karlsland_m3g_KeyframeSequence
  * Method:    jni_initialize
- * Signature: ()V
+ * Signature: (III)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1initialize
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject obj, jint numKeyframes, jint numComponents, jint interolation)
 {
-
+    cout << "Java-KeyframeSequence: initilize is called.\n";
+    KeyframeSequence* key_seq = new KeyframeSequence (numKeyframes, numComponents, interolation);
+    setEntity (env, obj, key_seq);
+    jobject entity = env->NewGlobalRef (obj);
+    key_seq->setExportedEntity (entity);
 }
 
 /*
@@ -26,7 +30,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1initialize
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1finalize
   (JNIEnv* env, jobject obj)
 {
-
+    cout << "Java-KeyframeSequence: finalize is called.\n";
+    KeyframeSequence* key_seq = (KeyframeSequence*)getEntity (env, obj);
+    delete key_seq;
 }
 
 /*
@@ -37,7 +43,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1finalize
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getComponentCount
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-KeyframeSequence: getComponentCount is called.\n";
+    KeyframeSequence* key_seq = (KeyframeSequence*)getEntity (env, obj);
+    int count = key_seq->getComponentCount ();
+    return count;
 }
 
 /*
@@ -48,7 +57,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getComponent
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getDuration
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-KeyframeSequence: getDuration is called.\n";
+    KeyframeSequence* key_seq = (KeyframeSequence*)getEntity (env, obj);
+    int duration = key_seq->getDuration ();
+    return duration;
 }
 
 /*
@@ -59,7 +71,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getDuration
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getInterpolationType
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-KeyframeSequence: getInterpolationType is called.\n";
+    KeyframeSequence* key_seq = (KeyframeSequence*)getEntity (env, obj);
+    int type = key_seq->getInterpolationType ();
+    return type;
 }
 
 /*
@@ -70,7 +85,12 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getInterpola
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getKeyframe
   (JNIEnv* env, jobject obj, jint index, jfloatArray value)
 {
-    return 0;
+    cout << "Java-KeyframeSequence: getKeyframe is called.\n";
+    KeyframeSequence* key_seq = (KeyframeSequence*)getEntity (env, obj);
+    float* v = env->GetFloatArrayElements (value, 0);
+    int time = key_seq->getKeyframe (index, v);
+    env->ReleaseFloatArrayElements (value, v, 0);
+    return time;
 }
 
 /*
@@ -81,7 +101,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getKeyframe
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getKeyframeCount
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-KeyframeSequence: getKeyframeCount is called.\n";
+    KeyframeSequence* key_seq = (KeyframeSequence*)getEntity (env, obj);
+    int count = key_seq->getKeyframeCount ();
+    return count;
 }
 
 /*
@@ -92,7 +115,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getKeyframeC
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getRepeatMode
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-KeyframeSequence: getRepeatMode is called.\n";
+    KeyframeSequence* key_seq = (KeyframeSequence*)getEntity (env, obj);
+    int mode = key_seq->getRepeatMode ();
+    return mode;
 }
 
 /*
@@ -103,7 +129,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getRepeatMod
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getValidRangeFirst
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-KeyframeSequence: getValidRnageFirst is called.\n";
+    KeyframeSequence* key_seq = (KeyframeSequence*)getEntity (env, obj);
+    int first = key_seq->getValidRangeFirst ();
+    return first;
 }
 
 /*
@@ -114,7 +143,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getValidRang
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getValidRangeLast
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-KeyframeSequence: getValidRangeLast is called.\n";
+    KeyframeSequence* key_seq = (KeyframeSequence*)getEntity (env, obj);
+    int last = key_seq->getValidRangeLast ();
+    return last;
 }
 
 /*
@@ -125,7 +157,9 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getValidRang
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1setDuration
   (JNIEnv* env, jobject obj, jint duration)
 {
-
+    cout << "Java-KeyframeSequence: setDuration is called.\n";
+    KeyframeSequence* key_seq = (KeyframeSequence*)getEntity (env, obj);
+    key_seq->setDuration (duration);
 }
 
 /*
@@ -136,18 +170,25 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1setDuration
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1setKeyframe
   (JNIEnv* env, jobject obj, jint index, jint time, jfloatArray value)
 {
-
+    cout << "Java-KeyframeSequence: setKeyframe is called.\n";
+    KeyframeSequence* key_seq = (KeyframeSequence*)getEntity (env, obj);
+    float* v = env->GetFloatArrayElements (value, 0);
+    key_seq->setKeyframe (index, time, v);
+    env->ReleaseFloatArrayElements (value, v, 0);
 }
+
 
 /*
  * Class:     org_karlsland_m3g_KeyframeSequence
- * Method:    jni_setRepeateMode
+ * Method:    jni_setRepeatMode
  * Signature: (I)V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1setRepeateMode
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1setRepeatMode
   (JNIEnv* env, jobject obj, jint mode)
 {
-
+    cout << "Java-KeyframeSequence: setRepeatMode is called.\n";
+    KeyframeSequence* key_seq = (KeyframeSequence*)getEntity (env, obj);
+    key_seq->setRepeatMode (mode);
 }
 
 /*
@@ -158,7 +199,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1setRepeateMo
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1setValidRange
   (JNIEnv* env, jobject obj, jint first, jint last)
 {
-
+    cout << "Java-KeyframeSequence: setValidRange is called.\n";
+    KeyframeSequence* key_seq = (KeyframeSequence*)getEntity (env, obj);
+    key_seq->print (cout) << "\n";
+    key_seq->setValidRange (first, last);
 }
 
 /*
@@ -167,7 +211,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1setValidRang
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1print
-  (JNIEnv *, jobject)
+  (JNIEnv* env, jobject obj)
 {
-
+    cout << "Java-KeyframeSequence: print is called.\n";
+    KeyframeSequence* key_seq = (KeyframeSequence*)getEntity (env, obj);
+    key_seq->print (cout) << "\n";
 }

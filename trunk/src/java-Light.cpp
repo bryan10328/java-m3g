@@ -14,7 +14,11 @@ using namespace m3g;
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1initialize
   (JNIEnv* env, jobject obj)
 {
-
+    cout << "Java-Light: initilize is called.\n";
+    Light* lgh = new Light ();
+    setEntity (env, obj, lgh);
+    jobject entity = env->NewGlobalRef (obj);
+    lgh->setExportedEntity (entity);
 }
 
 /*
@@ -25,7 +29,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1initialize
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1finalize
   (JNIEnv* env, jobject obj)
 {
-
+    cout << "Java-Light: finalize is called.\n";
+    Light* lgh = (Light*)getEntity (env, obj);
+    delete lgh;
 }
 
 /*
@@ -36,7 +42,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1finalize
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Light_jni_1getColor
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Light: getColor is called.\n";
+    Light* lgh = (Light*)getEntity (env, obj);
+    int color = lgh->getColor();
+    return color;
 }
 
 /*
@@ -47,7 +56,11 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Light_jni_1getColor
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Light_jni_1getConstantAttenuation
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Light: getConstantAttenuation is called.\n";
+    Light* lgh = (Light*)getEntity (env, obj);
+    float constant = lgh->getConstantAttenuation ();
+    return constant;
+
 }
 
 /*
@@ -58,7 +71,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Light_jni_1getConstantAttenuatio
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Light_jni_1getIntensity
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Light: getIntensity is called.\n";
+    Light* lgh = (Light*)getEntity (env, obj);
+    float intensity = lgh->getIntensity ();
+    return intensity;
 }
 
 /*
@@ -69,7 +85,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Light_jni_1getIntensity
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Light_jni_1getLinearAttenuation
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Light: getLinearAttenuation is called.\n";
+    Light* lgh = (Light*)getEntity (env, obj);
+    float linear = lgh->getLinearAttenuation ();
+    return linear;
 }
 
 /*
@@ -80,7 +99,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Light_jni_1getLinearAttenuation
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Light_jni_1getMode
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Light: getMode is called.\n";
+    Light* lgh = (Light*)getEntity (env, obj);
+    int mode = lgh->getMode ();
+    return mode;
 }
 
 /*
@@ -91,7 +113,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Light_jni_1getMode
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Light_jni_1getQuadraticAttenuation
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Light: getQuadraticAttenation is called.\n";
+    Light* lgh = (Light*)getEntity (env, obj);
+    float quadratic = lgh->getQuadraticAttenuation ();
+    return quadratic;
 }
 
 /*
@@ -102,7 +127,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Light_jni_1getQuadraticAttenuati
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Light_jni_1getSpotAngle
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Light: getSpotAngle is called.\n";
+    Light* lgh = (Light*)getEntity (env, obj);
+    float angle = lgh->getSpotAngle ();
+    return angle;
 }
 
 /*
@@ -113,7 +141,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Light_jni_1getSpotAngle
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Light_jni_1getSpotExponent
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Light: getSpotExponent is called.\n";
+    Light* lgh = (Light*)getEntity (env, obj);
+    float expo = lgh->getSpotExponent ();
+    return expo;
 }
 
 /*
@@ -124,7 +155,9 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Light_jni_1getSpotExponent
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1setAttenuation
   (JNIEnv* env, jobject obj, jfloat constant, jfloat linear, jfloat quadratic)
 {
-
+    cout << "Java-Light: setAttenuation is called.\n";
+    Light* lgh = (Light*)getEntity (env, obj);
+    lgh->setAttenuation (constant, linear, quadratic);
 }
 
 /*
@@ -132,10 +165,12 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1setAttenuation
  * Method:    jni_setColor
  * Signature: (I)I
  */
-JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Light_jni_1setColor
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1setColor
   (JNIEnv* env, jobject obj, jint RGB)
 {
-    return 0;
+    cout << "Java-Light: setColor is called.\n";
+    Light* lgh = (Light*)getEntity (env, obj);
+    lgh->setColor (RGB);
 }
 
 /*
@@ -146,7 +181,9 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Light_jni_1setColor
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1setIntensity
   (JNIEnv* env, jobject obj, jfloat intensity)
 {
-
+    cout << "Java-Light: setIntensity is called.\n";
+    Light* lgh = (Light*)getEntity (env, obj);
+    lgh->setIntensity (intensity);
 }
 
 /*
@@ -157,7 +194,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1setIntensity
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1setMode
   (JNIEnv* env, jobject obj, jint mode)
 {
-
+    cout << "Java-Light: setMode is called.\n";
+    Light* lgh = (Light*)getEntity (env, obj);
+    lgh->setMode (mode);
 }
 
 /*
@@ -168,7 +207,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1setMode
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1setSpotAngle
   (JNIEnv* env, jobject obj, jfloat angle)
 {
-
+    cout << "Java-Light: setSpotAngle is called.\n";
+    Light* lgh = (Light*)getEntity (env, obj);
+    lgh->setSpotAngle (angle);
 }
 
 /*
@@ -179,7 +220,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1setSpotAngle
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1setSpotExponent
   (JNIEnv* env, jobject obj, jfloat exponent)
 {
-
+    cout << "Java-Light: setSpotExponent is called.\n";
+    Light* lgh = (Light*)getEntity (env, obj);
+    lgh->setSpotExponent (exponent);
 }
 
 /*
@@ -188,6 +231,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1setSpotExponent
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1print
-  (JNIEnv *, jobject)
+  (JNIEnv* env, jobject obj)
 {
+    cout << "Java-Light: print is called.\n";
+    Light* lgh = (Light*)getEntity (env, obj);
+    lgh->print (cout) << "\n";
 }

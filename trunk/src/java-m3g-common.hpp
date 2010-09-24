@@ -4,6 +4,9 @@
 static inline 
 long getEntity (JNIEnv* env, jobject obj)
 {
+    if (obj == 0) {
+        return 0;
+    }
     jclass   clazz = env->GetObjectClass (obj);
     jfieldID fid   = env->GetFieldID (clazz, "entity", "J");
     return env->GetLongField (obj, fid);

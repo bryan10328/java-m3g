@@ -14,7 +14,26 @@ using namespace m3g;
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1initialize__Lorg_karlsland_m3g_VertexBuffer_2_3Lorg_karlsland_m3g_IndexBuffer_2_3Lorg_karlsland_m3g_Appearance_2Lorg_karlsland_m3g_Group_2
   (JNIEnv* env, jobject obj, jobject vertices, jobjectArray submeshes, jobjectArray appearances, jobject skeleton)
 {
+    cout << "Java-SkinnedMesh: initialize1 is caleld.\n";
+    VertexBuffer* vbuf = (VertexBuffer*)getEntity (env, vertices);
+    int len = env->GetArrayLength (submeshes);
+    IndexBuffer** ibufs = new IndexBuffer* [len];
+    for (int i = 0; i < len; i++) {
+        ibufs[i] = (IndexBuffer*)getEntity (env, env->GetObjectArrayElement(submeshes, i));
+    }
+    len = env->GetArrayLength (appearances);
+    Appearance** apps = new Appearance* [len];
+    for (int i = 0; i < len; i++) {
+        apps[i] = (Appearance*)getEntity (env, env->GetObjectArrayElement(appearances, i));
+    }
+    Group* skel = (Group*)getEntity (env, skeleton);
 
+    SkinnedMesh* mesh = new SkinnedMesh (vbuf, len, ibufs, apps, skel);
+    delete[] ibufs;
+    delete[] apps;
+    setEntity (env, obj, mesh);
+    jobject entity = env->NewGlobalRef (obj);
+    mesh->setExportedEntity (entity);
 }
 
 /*
@@ -25,8 +44,18 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1initialize__Lorg_
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1initialize__Lorg_karlsland_m3g_VertexBuffer_2Lorg_karlsland_m3g_IndexBuffer_2Lorg_karlsland_m3g_Appearance_2Lorg_karlsland_m3g_Group_2
   (JNIEnv* env, jobject obj, jobject vertices, jobject submesh, jobject appearance, jobject skeleton)
 {
+    cout << "Java-SkinnedMesh: initialize2 is caleld.\n";
+    VertexBuffer* vbuf = (VertexBuffer*)getEntity (env, vertices);
+    IndexBuffer*  ibuf = (IndexBuffer*)getEntity (env, submesh);
+    Appearance*   app  = (Appearance*)getEntity (env, appearance);
+    Group*        skel = (Group*)getEntity (env, skeleton);
 
+    SkinnedMesh* mesh = new SkinnedMesh (vbuf, ibuf, app, skel);
+    setEntity (env, obj, mesh);
+    jobject entity = env->NewGlobalRef (obj);
+    mesh->setExportedEntity (entity);
 }
+
 
 /*
  * Class:     org_karlsland_m3g_SkinnedMesh
@@ -36,7 +65,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1initialize__Lorg_
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1finalize
   (JNIEnv* env, jobject obj)
 {
-
+    cout << "Java-SkinnedMesh: finalize is caleld.\n";
+    SkinnedMesh* mesh = (SkinnedMesh*)getEntity (env, obj);
+    delete mesh;
 }
 
 /*
@@ -47,7 +78,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1finalize
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1addTransform
   (JNIEnv* env, jobject obj, jobject bone, jint weight, jint firstVertex, jint numVertices)
 {
-
+    cout << "Java-SkinnedMesh: daddTransform is caleld.\n";
+    SkinnedMesh* mesh = (SkinnedMesh*)getEntity (env, obj);
+    Group* bon = (Group*)getEntity (env, obj);
+    mesh->addTransform (bon, weight, firstVertex, numVertices);
 }
 
 /*
@@ -58,7 +92,11 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1addTransform
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1getBoneTransform
   (JNIEnv* env, jobject obj, jobject bone, jobject transform)
 {
-
+    cout << "Java-SkinnedMesh: getBoneTransform is caleld.\n";
+    SkinnedMesh* mesh  = (SkinnedMesh*)getEntity (env, obj);
+    Node*       bon   = (Node*)getEntity (env, obj);
+    Transform*  trans = (Transform*)getEntity (env, obj);
+    mesh->getBoneTransform (bon, trans);
 }
 
 /*
@@ -69,7 +107,25 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1getBoneTransform
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1getBoneVertices
   (JNIEnv* env, jobject obj, jobject bone, jintArray indices, jfloatArray weights)
 {
-    return 0;
+    cout << "Java-SkinnedMesh: getBoneVertices is caleld.\n";
+    SkinnedMesh* mesh = (SkinnedMesh*)getEntity (env, obj);
+    Node*       bon  = (Node*)getEntity (env, obj);
+    int*   indcs  = NULL;
+    float* weighs = NULL;
+    if (indices) {
+        indcs = env->GetIntArrayElements (indices, 0);
+    }
+    if (weights) {
+        env->GetFloatArrayElements (weights, 0);
+    }
+    int num = mesh->getBoneVertices (bon, indcs, weighs);
+    if (indices) {
+        env->ReleaseIntArrayElements (indices, indcs, 0);
+    }
+    if (weights) {
+        env->ReleaseFloatArrayElements (weights, weighs, 0);
+    }
+    return num;
 }
 
 /*
@@ -80,7 +136,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1getBoneVertices
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1getSkeleton
   (JNIEnv* env, jobject obj)
 {
-    return (jobject)NULL;
+    cout << "Java-SkinnedMesh: getSkeleton is caleld.\n";
+    SkinnedMesh* mesh = (SkinnedMesh*)getEntity (env, obj);
+    Node* skeleton = mesh->getSkeleton ();
+    return (skeleton != NULL) ? (jobject)skeleton->getExportedEntity() : (jobject)NULL;
 }
 
 /*
@@ -89,7 +148,9 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1getSkeleton
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1print
-  (JNIEnv *, jobject)
+  (JNIEnv* env, jobject obj)
 {
-
+    cout << "Java-SkinnedMesh: print is caleld.\n";
+    SkinnedMesh* mesh = (SkinnedMesh*)getEntity (env, obj);
+    mesh->print (cout) << "\n";
 }
