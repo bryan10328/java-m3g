@@ -16,7 +16,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1initialize
 {
     cout << "Java-Group: initiazlize is called.\n";
     Group* grp = new Group ();
-    setEntity (env, obj, grp);
+    setNativePointer (env, obj, grp);
     jobject entity = env->NewGlobalRef (obj);
     grp->setExportedEntity (entity);
 }
@@ -30,7 +30,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1finalize
   (JNIEnv* env, jobject obj)
 {
     cout << "Java-Group: finalize is called.\n";
-    Group* grp = (Group*)getEntity (env, obj);
+    Group* grp = (Group*)getNativePointer (env, obj);
     delete grp;
 }
 
@@ -43,8 +43,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1addChild
   (JNIEnv* env, jobject obj, jobject child)
 {
     cout << "Java-Group: addChild is called.\n";
-    Group* grp = (Group*)getEntity (env, obj);
-    Node* node = (Node*)getEntity (env, child);
+    Group* grp = (Group*)getNativePointer (env, obj);
+    Node* node = (Node*)getNativePointer (env, child);
     grp->addChild (node);
 }
 
@@ -57,7 +57,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Group_jni_1getChild
   (JNIEnv* env, jobject obj, jint index)
 {
     cout << "Java-Group: getChild is called.\n";
-    Group* grp = (Group*)getEntity (env, obj);
+    Group* grp = (Group*)getNativePointer (env, obj);
     Node* node = grp->getChild (index);
     return (jobject)node->getExportedEntity();
 }
@@ -71,7 +71,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Group_jni_1getChildCount
   (JNIEnv* env, jobject obj)
 {
     cout << "Java-Group: getChildCount is called.\n";
-    Group* grp = (Group*)getEntity (env, obj);
+    Group* grp = (Group*)getNativePointer (env, obj);
     int count = grp->getChildCount ();
     return count;
 }
@@ -85,7 +85,7 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Group_jni_1pick__IFFLorg_karls
   (JNIEnv* env, jobject obj, jint scope, jfloat x, jfloat y, jobject camera, jobject ri)
 {
     cout << "Java-Group: pick is called.\n";
-    //Group* grp = (Group*)getEntity (env, obj);
+    //Group* grp = (Group*)getNativePointer (env, obj);
     // Not implemented.
     return false;
 }
@@ -99,7 +99,7 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Group_jni_1pick__IFFFFFLorg_ka
   (JNIEnv* env, jobject obj, jint scope, jfloat ox, jfloat oy, jfloat dx, jfloat dy, jfloat dz, jobject ri)
 {
     cout << "Java-Group: finalize is called.\n";
-    //Group* grp = (Group*)getEntity (env, obj);
+    //Group* grp = (Group*)getNativePointer (env, obj);
     // Not implemented.
     return false;
 }
@@ -113,8 +113,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1removeChild
   (JNIEnv* env, jobject obj, jobject child)
 {
     cout << "Java-Group: pick is called.\n";
-    Group* grp = (Group*)getEntity (env, obj);
-    Node* node = (Node*)getEntity (env, child);
+    Group* grp = (Group*)getNativePointer (env, obj);
+    Node* node = (Node*)getNativePointer (env, child);
     grp->removeChild (node);
 }
 
@@ -126,6 +126,6 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1removeChild
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1print
   (JNIEnv* env, jobject obj)
 {
-    Group* grp = (Group*)getEntity (env, obj);
+    Group* grp = (Group*)getNativePointer (env, obj);
     grp->print (cout) << "\n";
 }

@@ -16,7 +16,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__III
 {
     cout << "Java-Image2D: initiazlize1 is called.\n";
     Image2D* img = new Image2D (format, width, height);
-    setEntity (env, obj, img);
+    setNativePointer (env, obj, img);
     jobject entity = env->NewGlobalRef (obj);
     img->setExportedEntity (entity);
 }
@@ -33,7 +33,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__III_3B
     char* pixels = (char*)env->GetByteArrayElements (image, 0);
     Image2D* img = new Image2D (format, width, height, pixels);
     env->ReleaseByteArrayElements (image, (jbyte*)pixels, 0);
-    setEntity (env, obj, img);
+    setNativePointer (env, obj, img);
     jobject entity = env->NewGlobalRef (obj);
     img->setExportedEntity (entity);
 }
@@ -55,7 +55,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__III_3B_3B
     cout << "out\n";
     env->ReleaseByteArrayElements (image, (jbyte*)pixels, 0);
     env->ReleaseByteArrayElements (palette, (jbyte*)palte, 0);
-    setEntity (env, obj, img);
+    setNativePointer (env, obj, img);
     jobject entity = env->NewGlobalRef (obj);
     img->setExportedEntity (entity);
 }
@@ -85,7 +85,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1finalize
   (JNIEnv* env, jobject obj)
 {
     cout << "Java-Image2D: finalize is called.\n";
-    Image2D* img = (Image2D*)getEntity (env, obj);
+    Image2D* img = (Image2D*)getNativePointer (env, obj);
     delete img;
 }
 
@@ -98,7 +98,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Image2D_jni_1getFormat
   (JNIEnv* env, jobject obj)
 {
     cout << "Java-Image2D: getFormat is called.\n";
-    Image2D* img = (Image2D*)getEntity (env, obj);
+    Image2D* img = (Image2D*)getNativePointer (env, obj);
     int format = img->getFormat ();
     return format;
 }
@@ -112,7 +112,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Image2D_jni_1getHeight
   (JNIEnv* env, jobject obj)
 {
     cout << "Java-Image2D: getHeight is called.\n";
-    Image2D* img = (Image2D*)getEntity (env, obj);
+    Image2D* img = (Image2D*)getNativePointer (env, obj);
     int height = img->getHeight ();
     return height;
 }
@@ -126,7 +126,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Image2D_jni_1getWidth
   (JNIEnv* env, jobject obj)
 {
     cout << "Java-Image2D: getWidth is called.\n";
-    Image2D* img = (Image2D*)getEntity (env, obj);
+    Image2D* img = (Image2D*)getNativePointer (env, obj);
     int width = img->getWidth ();
     return width;
 }
@@ -140,7 +140,7 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Image2D_jni_1isMutable
   (JNIEnv* env, jobject obj)
 {
     cout << "Java-Image2D: isMutable is called.\n";
-    Image2D* img = (Image2D*)getEntity (env, obj);
+    Image2D* img = (Image2D*)getNativePointer (env, obj);
     bool mut = img->isMutable ();
     return mut;
 }
@@ -154,7 +154,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1set
   (JNIEnv* env, jobject obj, jint x, jint y, jint width, jint height, jbyteArray image)
 {
     cout << "Java-Image2D: set is called.\n";
-    Image2D* img = (Image2D*)getEntity (env, obj);
+    Image2D* img = (Image2D*)getNativePointer (env, obj);
     char* pixels = (char*)env->GetByteArrayElements (image, 0);
     img->set (x, y, width, height, pixels);
     env->ReleaseByteArrayElements (image, (jbyte*)pixels, 0);
@@ -169,7 +169,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1print
   (JNIEnv* env, jobject obj)
 {
     cout << "Java-Image2D: print is called.\n";
-    Image2D* img = (Image2D*)getEntity (env, obj);
+    Image2D* img = (Image2D*)getNativePointer (env, obj);
     img->print (cout) << "\n";
 }
 
@@ -183,7 +183,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1writePng
 {
     cout << "Java-Image2D: writePng is called.\n";
     jboolean        copied;
-    Image2D*    img  = (Image2D*)getEntity (env, obj);
+    Image2D*    img  = (Image2D*)getNativePointer (env, obj);
     const char* name = env->GetStringUTFChars (file_name, &copied);
     img->writePNG (name);
     if (copied) {

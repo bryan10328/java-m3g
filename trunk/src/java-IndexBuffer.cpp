@@ -14,7 +14,11 @@ using namespace m3g;
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1initialize
   (JNIEnv* env, jobject obj)
 {
-
+    cout << "Java-IndexBuffer: initialize is called.\n";
+    IndexBuffer* ibuf = new IndexBuffer ();
+    setNativePointer (env, obj, ibuf);
+    jobject entity = env->NewGlobalRef (obj);
+    ibuf->setExportedEntity (entity);
 }
 
 /*
@@ -25,7 +29,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1initialize
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1finalize
   (JNIEnv* env, jobject obj)
 {
-
+    cout << "Java-IndexBuffer:  is called.\n";
+    IndexBuffer* ibuf = (IndexBuffer*)getNativePointer (env, obj);
+    delete ibuf;
 }
 
 /*
@@ -36,7 +42,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1finalize
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1getIndexCount
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-IndexBuffer: getIndexCount is called.\n";
+    IndexBuffer* ibuf = (IndexBuffer*)getNativePointer (env, obj);
+    int count = ibuf->getIndexCount ();
+    return count;
 }
 
 /*
@@ -47,7 +56,11 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1getIndexCount
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1getIndices
   (JNIEnv* env, jobject obj, jintArray indices)
 {
-
+    cout << "Java-IndexBuffer: getIndices is called.\n";
+    IndexBuffer* ibuf = (IndexBuffer*)getNativePointer (env, obj);
+    int* indcs = env->GetIntArrayElements (indices, 0);
+    ibuf->getIndices (indcs);
+    env->ReleaseIntArrayElements (indices, indcs, 0);
 }
 
 /*
@@ -56,7 +69,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1getIndices
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1print
-  (JNIEnv *, jobject)
+  (JNIEnv* env, jobject obj)
 {
-
+    cout << "Java-IndexBuffer: print is called.\n";
+    IndexBuffer* ibuf = (IndexBuffer*)getNativePointer (env, obj);
+    ibuf->print (cout) << "\n";
 }

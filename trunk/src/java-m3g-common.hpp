@@ -2,18 +2,18 @@
 #define __JAVA_M3G_COMMON_HPP__
 
 static inline 
-long getEntity (JNIEnv* env, jobject obj)
+void* getNativePointer (JNIEnv* env, jobject obj)
 {
     if (obj == 0) {
-        return 0;
+        return NULL;
     }
     jclass   clazz = env->GetObjectClass (obj);
     jfieldID fid   = env->GetFieldID (clazz, "entity", "J");
-    return env->GetLongField (obj, fid);
+    return (void*)env->GetLongField (obj, fid);
 }
 
 static inline
-void setEntity (JNIEnv* env, jobject obj, void* entity)
+void setNativePointer (JNIEnv* env, jobject obj, void* entity)
 {
     jclass   clazz = env->GetObjectClass (obj);
     jfieldID fid   = env->GetFieldID (clazz, "entity", "J");

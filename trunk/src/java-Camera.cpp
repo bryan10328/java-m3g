@@ -16,7 +16,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Camera_jni_1initialize
 {
     cout << "Java-Camera: initiazlize is called.\n";
     Camera* cam = new Camera ();
-    setEntity (env, obj, cam);
+    setNativePointer (env, obj, cam);
     jobject entity = env->NewGlobalRef (obj);
     cam->setExportedEntity (entity);
 }
@@ -30,7 +30,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Camera_jni_1finalize
   (JNIEnv* env, jobject obj)
 {
     cout << "Java-Camera: finalize is called.\n";
-    Camera* cam = (Camera*)getEntity (env, obj);
+    Camera* cam = (Camera*)getNativePointer (env, obj);
     delete cam;
 }
 
@@ -43,7 +43,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Camera_jni_1getProjection___3F
   (JNIEnv* env, jobject obj, jfloatArray params)
 {
     cout << "Java-Camera: getProjection is called.\n";
-    Camera* cam = (Camera*)getEntity (env, obj);
+    Camera* cam = (Camera*)getNativePointer (env, obj);
     float* prms = env->GetFloatArrayElements (params, 0);
     int type = cam->getProjection (prms);
     env->ReleaseFloatArrayElements (params, prms, 0);
@@ -59,8 +59,8 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Camera_jni_1getProjection__Lorg_ka
   (JNIEnv* env, jobject obj, jobject transform)
 {
     cout << "Java-Camera: getProjection is called.\n";
-    Camera*    cam   = (Camera*)getEntity (env, obj);
-    Transform* trans = (Transform*)getEntity (env, transform);
+    Camera*    cam   = (Camera*)getNativePointer (env, obj);
+    Transform* trans = (Transform*)getNativePointer (env, transform);
     int type = cam->getProjection (trans);
     return type;
 }
@@ -74,8 +74,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Camera_jni_1setGeneric
   (JNIEnv* env, jobject obj, jobject transform)
 {
     cout << "Java-Camera: setGeneric is called.\n";
-    Camera*    cam   = (Camera*)getEntity (env, obj);
-    Transform* trans = (Transform*)getEntity (env, transform);
+    Camera*    cam   = (Camera*)getNativePointer (env, obj);
+    Transform* trans = (Transform*)getNativePointer (env, transform);
     cam->setGeneric (*trans);
 }
 
@@ -88,7 +88,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Camera_jni_1setParallel
   (JNIEnv* env, jobject obj, jfloat fovy, jfloat aspectRatio, jfloat near, jfloat far)
 {
     cout << "Java-Camera: setParallel is called.\n";
-    Camera* cam = (Camera*)getEntity (env, obj);
+    Camera* cam = (Camera*)getNativePointer (env, obj);
     cam->setParallel (fovy, aspectRatio, near, far);
 }
 
@@ -101,7 +101,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Camera_jni_1setPerspective
   (JNIEnv* env, jobject obj, jfloat fovy, jfloat aspectRatio, jfloat near, jfloat far)
 {
     cout << "Java-Camera: setPerspective is called.\n";
-    Camera* cam = (Camera*)getEntity (env, obj);
+    Camera* cam = (Camera*)getNativePointer (env, obj);
     cam->setPerspective (fovy, aspectRatio, near, far);
 }
 
@@ -114,6 +114,6 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Camera_jni_1print
   (JNIEnv* env, jobject obj)
 {
     cout << "Java-Camera: print is called.\n";
-    Camera* cam = (Camera*)getEntity (env, obj);
+    Camera* cam = (Camera*)getNativePointer (env, obj);
     cam->print (cout) << "\n";
 }

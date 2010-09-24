@@ -17,7 +17,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationController_jni_1initializ
 {
     cout << "Java-AnimationController: initiazlize is called.\n";
     AnimationController* controller = new AnimationController();
-    setEntity (env, obj, controller);
+    setNativePointer (env, obj, controller);
     jobject entity = env->NewGlobalRef (obj);
     controller->setExportedEntity (entity);
 }
@@ -31,7 +31,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationController_jni_1finalize
   (JNIEnv* env, jobject obj)
 {
     cout << "Java-AnimationController: finalize is called.\n";
-    AnimationController* controller = (AnimationController*)getEntity(env, obj);
+    AnimationController* controller = (AnimationController*)getNativePointer(env, obj);
     delete controller;
 }
 
@@ -44,7 +44,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_AnimationController_jni_1getActive
   (JNIEnv* env, jobject obj)
 {
     cout << "Java-AnimationController: getActiveIntervalEnd is called.\n";
-    AnimationController* controller = (AnimationController*)getEntity(env, obj);
+    AnimationController* controller = (AnimationController*)getNativePointer(env, obj);
     int end = controller->getActiveIntervalEnd ();
     return end;
 }
@@ -58,7 +58,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_AnimationController_jni_1getActive
   (JNIEnv* env, jobject obj)
 {
     cout << "Java-AnimationController: getActiveIntervalStart is called.\n";
-    AnimationController* controller = (AnimationController*)getEntity(env, obj);
+    AnimationController* controller = (AnimationController*)getNativePointer(env, obj);
     int start = controller->getActiveIntervalStart ();
     return start;
 }
@@ -72,7 +72,7 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_AnimationController_jni_1getPosi
   (JNIEnv* env, jobject obj, jfloat worldTime)
 {
     cout << "Java-AnimationController: getPosition is called.\n";
-    AnimationController* controller = (AnimationController*)getEntity(env, obj);
+    AnimationController* controller = (AnimationController*)getNativePointer(env, obj);
     float sequenceTime = controller->getPosition (worldTime);
     return sequenceTime;
 }
@@ -86,7 +86,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_AnimationController_jni_1getRefWor
   (JNIEnv* env, jobject obj)
 {
     cout << "Java-AnimationController: getRefWorldTime is called.\n";
-    AnimationController* controller = (AnimationController*)getEntity(env, obj);
+    AnimationController* controller = (AnimationController*)getNativePointer(env, obj);
     int world_time = controller->getRefWorldTime ();
     return world_time;
 }
@@ -100,7 +100,7 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_AnimationController_jni_1getSpee
   (JNIEnv* env, jobject obj)
 {
     cout << "Java-AnimationController: getSpeed is called.\n";
-    AnimationController* controller = (AnimationController*)getEntity(env, obj);
+    AnimationController* controller = (AnimationController*)getNativePointer(env, obj);
     float speed = controller->getSpeed ();
     return speed;
 }
@@ -114,7 +114,7 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_AnimationController_jni_1getWeig
   (JNIEnv* env, jobject obj)
 {
     cout << "Java-AnimationController: getWeight is called.\n";
-    AnimationController* controller = (AnimationController*)getEntity(env, obj);
+    AnimationController* controller = (AnimationController*)getNativePointer(env, obj);
     float weight = controller->getWeight ();
     return weight;
 }
@@ -128,7 +128,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationController_jni_1setActive
   (JNIEnv* env, jobject obj, jint start, jint end)
 {
     cout << "Java-AnimationController: getActiveInterval is called.\n";
-    AnimationController* controller = (AnimationController*)getEntity(env, obj);
+    AnimationController* controller = (AnimationController*)getNativePointer(env, obj);
     controller->setActiveInterval (start, end);
 }
 
@@ -141,7 +141,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationController_jni_1setPositi
   (JNIEnv* env, jobject obj, jfloat sequenceTime, jint worldTime)
 {
     cout << "Java-AnimationController: setPosition is called.\n";
-    AnimationController* controller = (AnimationController*)getEntity(env, obj);
+    AnimationController* controller = (AnimationController*)getNativePointer(env, obj);
     controller->setPosition (sequenceTime, worldTime);
 }
 
@@ -154,7 +154,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationController_jni_1setSpeed
   (JNIEnv* env, jobject obj, jfloat speed, jint worldTime)
 {
     cout << "Java-AnimationController: setSpeed is called.\n";
-    AnimationController* controller = (AnimationController*)getEntity(env, obj);
+    AnimationController* controller = (AnimationController*)getNativePointer(env, obj);
     controller->setSpeed (speed, worldTime);
 }
 
@@ -167,7 +167,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationController_jni_1setWeight
   (JNIEnv* env, jobject obj, jfloat weight)
 {
     cout << "Java-AnimationController: setWeight is called.\n";
-    AnimationController* controller = (AnimationController*)getEntity(env, obj);
+    AnimationController* controller = (AnimationController*)getNativePointer(env, obj);
     controller->setWeight (weight);
 }
 
@@ -180,7 +180,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationController_jni_1print
   (JNIEnv* env, jobject obj)
 {
     cout << "Java-AnimationController: print is called.\n";
-    AnimationController* controller = (AnimationController*)getEntity(env, obj);
+    AnimationController* controller = (AnimationController*)getNativePointer(env, obj);
     controller->print (cout) << "\n";
 }
 

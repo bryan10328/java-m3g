@@ -342,7 +342,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1setViewport
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1print
-  (JNIEnv *, jobject)
+  (JNIEnv* env, jobject obj)
 {
 
 }

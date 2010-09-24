@@ -15,9 +15,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Texture2D_jni_1initialize
   (JNIEnv* env, jobject obj, jobject image)
 {
     cout << "Java-Texture: initilize is called.\n";
-    Image2D*   img = (Image2D*)getEntity (env, image);
+    Image2D*   img = (Image2D*)getNativePointer (env, image);
     Texture2D* tex = new Texture2D (img);
-    setEntity (env, obj, tex);
+    setNativePointer (env, obj, tex);
     jobject entity = env->NewGlobalRef (obj);
     tex->setExportedEntity (entity);
 }
@@ -31,7 +31,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Texture2D_jni_1finalize
   (JNIEnv* env, jobject obj)
 {
     cout << "Java-Texture: finalize is called.\n";
-    Texture2D* tex = (Texture2D*)getEntity (env, obj);
+    Texture2D* tex = (Texture2D*)getNativePointer (env, obj);
     delete tex;
 
 }

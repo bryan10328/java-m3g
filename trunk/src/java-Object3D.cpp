@@ -14,9 +14,9 @@ using namespace m3g;
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Object3D_jni_1initialize
   (JNIEnv* env, jobject obj)
 {
-    cout << "Jni: Object3D initiazlize is called.\n";
+    cout << "Java-Object3D: Object3D initiazlize is called.\n";
     Object3D* obj3d = new Object3D ();
-    setEntity (env, obj, obj3d);
+    setNativePointer (env, obj, obj3d);
     jobject entity = env->NewGlobalRef (obj);
     obj3d->setExportedEntity (entity);
 }
@@ -29,8 +29,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Object3D_jni_1initialize
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Object3D_jni_1finalize
   (JNIEnv* env, jobject obj)
 {
-    cout << "Jni: Object3D finalize is called.\n";
-    Object3D* obj3d = (Object3D*)getEntity (env, obj);
+    cout << "Java-Object3D: Object3D finalize is called.\n";
+    Object3D* obj3d = (Object3D*)getNativePointer (env, obj);
     delete obj3d;
 }
 
@@ -42,9 +42,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Object3D_jni_1finalize
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Object3D_jni_1addAnimationTrack
   (JNIEnv* env, jobject obj, jobject animationTrack)
 {
-    cout << "Jni: Object3D addAnimationTrack is called.\n";
-    Object3D* obj3d = (Object3D*)getEntity (env, obj);
-    AnimationTrack* track = (AnimationTrack*)getEntity (env, obj);
+    cout << "Java-Object3D: Object3D addAnimationTrack is called.\n";
+    Object3D* obj3d = (Object3D*)getNativePointer (env, obj);
+    AnimationTrack* track = (AnimationTrack*)getNativePointer (env, obj);
     obj3d->addAnimationTrack (track);
 }
 
@@ -56,8 +56,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Object3D_jni_1addAnimationTrack
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Object3D_jni_1animate
   (JNIEnv* env, jobject obj, jint worldTime)
 {
-    cout << "Jni: Object3D animate is called.\n";
-    Object3D* obj3d = (Object3D*)getEntity (env, obj);
+    cout << "Java-Object3D: Object3D animate is called.\n";
+    Object3D* obj3d = (Object3D*)getNativePointer (env, obj);
     int time = obj3d->animate (worldTime);
     return time;
 }
@@ -70,8 +70,8 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Object3D_jni_1animate
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Object3D_jni_1duplicate
   (JNIEnv* env, jobject obj)
 {
-    cout << "Jni: Object3D duplicate is called.\n";
-    Object3D* obj3d = (Object3D*)getEntity (env, obj);
+    cout << "Java-Object3D: Object3D duplicate is called.\n";
+    Object3D* obj3d = (Object3D*)getNativePointer (env, obj);
     Object3D* dup = obj3d->duplicate ();
     cout << "dup = " << dup << "\n";
     return (jobject)dup->getExportedEntity();
@@ -85,8 +85,8 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Object3D_jni_1duplicate
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Object3D_jni_1find
   (JNIEnv* env, jobject obj, jint userID)
 {
-    cout << "Jni: Object3D find is called.\n";
-    Object3D* obj3d = (Object3D*)getEntity (env, obj);
+    cout << "Java-Object3D: Object3D find is called.\n";
+    Object3D* obj3d = (Object3D*)getNativePointer (env, obj);
     Object3D* find = obj3d->find (userID);
     return (jobject)find->getExportedEntity ();
 }
@@ -99,8 +99,8 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Object3D_jni_1find
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Object3D_jni_1getAnimationTrack
   (JNIEnv* env, jobject obj, jint index)
 {
-    cout << "Jni: Object3d getAnimationTrack is called.\n";
-    Object3D* obj3d = (Object3D*)getEntity (env, obj);
+    cout << "Java-Object3D: Object3d getAnimationTrack is called.\n";
+    Object3D* obj3d = (Object3D*)getNativePointer (env, obj);
     AnimationTrack* track = (AnimationTrack*)obj3d->getAnimationTrack (index);
     return (jobject)track->getExportedEntity();
 }
@@ -113,7 +113,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Object3D_jni_1getAnimationTrack
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Object3D_jni_1getAnimationTrackCount
   (JNIEnv* env, jobject obj)
 {
-    Object3D* obj3d = (Object3D*)getEntity (env, obj);
+    Object3D* obj3d = (Object3D*)getNativePointer (env, obj);
     int count = obj3d->getAnimationTrackCount ();
     return count;
 }
@@ -127,7 +127,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Object3D_jni_1getReferences
   (JNIEnv* env, jobject obj, jobjectArray references)
 {
     // TODO: not implemented.
-    //Object3D* obj3d = (Object3D*)getEntity (env, obj);
+    //Object3D* obj3d = (Object3D*)getNativePointer (env, obj);
     return 0;
 }
 
@@ -139,7 +139,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Object3D_jni_1getReferences
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Object3D_jni_1getUserID
   (JNIEnv* env, jobject obj)
 {
-    Object3D* obj3d = (Object3D*)getEntity (env, obj);
+    Object3D* obj3d = (Object3D*)getNativePointer (env, obj);
     int userID = obj3d->getUserID ();
     return userID;
 }
@@ -152,7 +152,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Object3D_jni_1getUserID
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Object3D_jni_1getUserObject
   (JNIEnv* env, jobject obj)
 {
-    Object3D* obj3d = (Object3D*)getEntity (env, obj);
+    Object3D* obj3d = (Object3D*)getNativePointer (env, obj);
     void* userObject = obj3d->getUserObject ();
     return (jobject)userObject;
 }
@@ -165,8 +165,8 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Object3D_jni_1getUserObject
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Object3D_jni_1removeAnimationTrack
   (JNIEnv* env, jobject obj, jobject animationTrack)
 {
-    Object3D* obj3d = (Object3D*)getEntity (env, obj);
-    AnimationTrack* track = (AnimationTrack*)getEntity (env, animationTrack);
+    Object3D* obj3d = (Object3D*)getNativePointer (env, obj);
+    AnimationTrack* track = (AnimationTrack*)getNativePointer (env, animationTrack);
     obj3d->removeAnimationTrack (track);
 }
 
@@ -178,7 +178,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Object3D_jni_1removeAnimationTrack
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Object3D_jni_1setUserID
   (JNIEnv* env, jobject obj, jint userID)
 {
-    Object3D* obj3d = (Object3D*)getEntity (env, obj);
+    Object3D* obj3d = (Object3D*)getNativePointer (env, obj);
     obj3d->setUserID (userID);
 }
 
@@ -190,7 +190,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Object3D_jni_1setUserID
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Object3D_jni_1setUserObject
   (JNIEnv* env, jobject obj, jobject userObject)
 {
-    Object3D* obj3d = (Object3D*)getEntity (env, obj);
+    Object3D* obj3d = (Object3D*)getNativePointer (env, obj);
     obj3d->setUserObject (userObject);
     // TODO:
     // このユーザーオブジェクトに対して
@@ -205,6 +205,6 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Object3D_jni_1setUserObject
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Object3D_jni_1print
   (JNIEnv* env, jobject obj)
 {
-    Object3D* obj3d = (Object3D*)getEntity (env, obj);
+    Object3D* obj3d = (Object3D*)getNativePointer (env, obj);
     obj3d->print (cout) << "\n";
 }
