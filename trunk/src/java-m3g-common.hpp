@@ -21,5 +21,6 @@ void setNativePointer (JNIEnv* env, jobject obj, void* entity)
 }
 
 
+
 #endif
 

@@ -1,7 +1,9 @@
 package org.karlsland.m3g;
 
-public class Graphics3D extends Object {
+public class Graphics3D extends java.lang.Object {
     
+    private long entity;
+
     public final static int ANTIALIAS  = 2;
     public final static int DITHER     = 4;
     public final static int OVERWRITE  = 16;
@@ -44,11 +46,13 @@ public class Graphics3D extends Object {
 
 
     public Graphics3D () {
-        jni_initialize ();
+        // do nothing.
+        //jni_initialize ();
     }
 
     public void finalize () {
-        jni_finalize ();
+        // do nothing.
+        //jni_finalize ();
     }
 
     public int addLight (Light light, Transform transform) {
