@@ -14,8 +14,11 @@ using namespace m3g;
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1initialize__
   (JNIEnv* env, jobject obj)
 {
-    cout << "Java-Transform: Transform initilize is called.\n";
-    Transform* tra = new Transform ();
+    cout << "Java-Transform: Transform initilize1 is called.\n";
+    Transform* tra;
+    __TRY__;
+    tra = new Transform ();
+    __CATCH_VOID__;
     setNativePointer (env, obj, tra);
     jobject entity = env->NewGlobalRef (obj);
     tra->setExportedEntity (entity);
@@ -29,10 +32,12 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1initialize__
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1initialize__Lorg_karlsland_m3g_Transform_2
   (JNIEnv* env, jobject obj, jobject transform)
 {
-    cout << "Java-Transform: Transform initilize is called.\n";
+    cout << "Java-Transform: Transform initilize2 is called.\n";
     Transform* t = (Transform*)getNativePointer (env, transform);
-    cout << "Java-Transform: Entity = " << t << "\n";
-    Transform* tra = new Transform (*t);
+    Transform* tra;
+    __TRY__;
+    tra = new Transform (*t);
+    __CATCH_VOID__;
     setNativePointer (env, obj, tra);
     jobject entity = env->NewGlobalRef (obj);
     tra->setExportedEntity (entity);
@@ -48,7 +53,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1finalize
 {
     cout << "Java-Transform: finalize is called.\n";
     Transform* trans = (Transform*)getNativePointer (env, obj);
+    __TRY__;
     delete trans;
+    __CATCH_VOID__;
 }
 
 /*
@@ -62,7 +69,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1get
     cout << "Java-Transform: get is called.\n";
     Transform* trans = (Transform*)getNativePointer (env, obj);
     float* mat = env->GetFloatArrayElements (matrix, 0);
+    __TRY__;
     trans->get (mat);
+    __CATCH_VOID__;
     env->ReleaseFloatArrayElements (matrix, mat, 0);
 }
 
@@ -76,7 +85,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1invert
 {
     cout << "Java-Transform: invert is called.\n";
     Transform* trans = (Transform*)getNativePointer (env, obj);
+    __TRY__;
     trans->invert ();
+    __CATCH_VOID__;
 }
 
 /*
@@ -90,7 +101,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1postMultiply
     cout << "Java-Transform: postMultiply is called.\n";
     Transform* trans1 = (Transform*)getNativePointer (env, obj);
     Transform* trans2 = (Transform*)getNativePointer (env, transform);
+    __TRY__;
     trans1->postMultiply (*trans2);
+    __CATCH_VOID__;
 }
 
 /*
@@ -103,7 +116,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1postRotate
 {
     cout << "Java-Transform: postRotate is called.\n";
     Transform* trans = (Transform*)getNativePointer (env, obj);
+    __TRY__;
     trans->postRotate  (angle, ax, ay, az);
+    __CATCH_VOID__;
 }
 
 /*
@@ -116,7 +131,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1postRotateQuat
 {
     cout << "Java-Transform: postRotateQuat is called.\n";
     Transform* trans = (Transform*)getNativePointer (env, obj);
+    __TRY__;
     trans->postRotateQuat (qx, qy, qz, qw);
+    __CATCH_VOID__;
 }
 
 /*
@@ -129,7 +146,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1postScale
 {
     cout << "Java-Transform: postScale is called.\n";
     Transform* trans = (Transform*)getNativePointer (env, obj);
+    __TRY__;
     trans->postScale (sx, sy, sz);
+    __CATCH_VOID__;
 }
 
 /*
@@ -142,7 +161,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1postTranslate
 {
     cout << "Java-Transform: postTranslate is called.\n";
     Transform* trans = (Transform*)getNativePointer (env, obj);
+    __TRY__;
     trans->postTranslate (tx, ty, tz);
+    __CATCH_VOID__;
 }
 
 /*
@@ -155,10 +176,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1set___3F
 {
     cout << "Java-Transform: set is called.\n";
     Transform* trans = (Transform*)getNativePointer (env, obj);
-    cout << "trans = " << trans << "\n";
-    cout << "length = " << env->GetArrayLength (matrix) << "\n";
     float* mat = env->GetFloatArrayElements (matrix, 0);
+    __TRY__;
     trans->set (mat);
+    __CATCH_VOID__;
 }
 
 /*
@@ -171,7 +192,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1set__Lorg_karlsland
 {
     Transform* trans = (Transform*)getNativePointer (env, obj);
     Transform* target = (Transform*)getNativePointer (env, transform);
+    __TRY__;
     trans->set (*target);
+    __CATCH_VOID__;
 }
 
 /*
@@ -184,7 +207,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1setIdentity
 {
     cout << "Java-Transform: setIdentity is called.\n";
     Transform* trans = (Transform*)getNativePointer (env, obj);
+    __TRY__;
     trans->setIdentity ();
+    __CATCH_VOID__;
 }
 
 /*
@@ -199,11 +224,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1transform___3F
     Transform* trans = (Transform*)getNativePointer (env, obj);
     float* vec = env->GetFloatArrayElements (vectors, 0);
     int len = env->GetArrayLength (vectors);
-    cout << "len = " << len << "\n";
-    cout << "transform in\n";
     trans->transform (len, vec);
-    cout << "transform out\n";
+    __TRY__;
     env->ReleaseFloatArrayElements (vectors, vec, 0);
+    __CATCH_VOID__;
 }
 
 /*
@@ -218,7 +242,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1transform__Lorg_kar
     Transform* trans = (Transform*)getNativePointer (env, obj);
     VertexArray* varry = (VertexArray*)getNativePointer (env, in);
     float* ou = env->GetFloatArrayElements (out, 0);
+    __TRY__;
     trans->transform (varry, ou, w);
+    __CATCH_VOID__;
     env->ReleaseFloatArrayElements (out, ou, 0);
 }
 
@@ -232,7 +258,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1transpose
 {
     cout << "Java-Transform: transpose is called.\n";
     Transform* trans = (Transform*)getNativePointer (env, obj);
+    __TRY__;
     trans->transpose ();
+    __CATCH_VOID__;
 }
 
 /*
@@ -244,6 +272,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1print
   (JNIEnv* env, jobject obj)
 {
     Transform* trans = (Transform*)getNativePointer (env, obj);
+    __TRY__;
     trans->print (cout) << "\n";
+    __CATCH_VOID__;
 }
 

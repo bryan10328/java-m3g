@@ -4,7 +4,7 @@ import javax.media.opengl.GLEventListener;
 import javax.media.opengl.GLCanvas;
 import org.karlsland.m3g.*;
 
-public class GLRenderer implements GLEventListener {
+public class M3GRenderer implements GLEventListener {
 
     private Graphics3D g3d;
     private World      wld;

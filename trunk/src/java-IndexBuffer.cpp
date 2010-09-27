@@ -15,7 +15,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1initialize
   (JNIEnv* env, jobject obj)
 {
     cout << "Java-IndexBuffer: initialize is called.\n";
-    IndexBuffer* ibuf = new IndexBuffer ();
+    IndexBuffer* ibuf;
+    __TRY__;
+    ibuf = new IndexBuffer ();
+    __CATCH_VOID__;
     setNativePointer (env, obj, ibuf);
     jobject entity = env->NewGlobalRef (obj);
     ibuf->setExportedEntity (entity);
@@ -31,7 +34,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1finalize
 {
     cout << "Java-IndexBuffer:  is called.\n";
     IndexBuffer* ibuf = (IndexBuffer*)getNativePointer (env, obj);
+    __TRY__;
     delete ibuf;
+    __CATCH_VOID__;
 }
 
 /*
@@ -44,7 +49,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1getIndexCount
 {
     cout << "Java-IndexBuffer: getIndexCount is called.\n";
     IndexBuffer* ibuf = (IndexBuffer*)getNativePointer (env, obj);
-    int count = ibuf->getIndexCount ();
+    int count;
+    __TRY__;
+    count = ibuf->getIndexCount ();
+    __CATCH_INT__;
     return count;
 }
 
@@ -59,7 +67,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1getIndices
     cout << "Java-IndexBuffer: getIndices is called.\n";
     IndexBuffer* ibuf = (IndexBuffer*)getNativePointer (env, obj);
     int* indcs = env->GetIntArrayElements (indices, 0);
+    __TRY__;
     ibuf->getIndices (indcs);
+    __CATCH_VOID__;
     env->ReleaseIntArrayElements (indices, indcs, 0);
 }
 
@@ -73,5 +83,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1print
 {
     cout << "Java-IndexBuffer: print is called.\n";
     IndexBuffer* ibuf = (IndexBuffer*)getNativePointer (env, obj);
+    __TRY__;
     ibuf->print (cout) << "\n";
+    __CATCH_VOID__;
 }

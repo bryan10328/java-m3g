@@ -18,7 +18,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1initialize
     int* indcs = env->GetIntArrayElements (indices, 0);
     int  length = env->GetArrayLength (stripLengths);
     int* strip_lengths = env->GetIntArrayElements (stripLengths, 0);
-    TriangleStripArray* tris = new TriangleStripArray (indcs, length, strip_lengths);
+    TriangleStripArray* tris;
+    __TRY__;
+    tris = new TriangleStripArray (indcs, length, strip_lengths);
+    __CATCH_VOID__;
     env->ReleaseIntArrayElements (indices, indcs, 0);
     env->ReleaseIntArrayElements (stripLengths, strip_lengths, 0);
     setNativePointer (env, obj, tris);
@@ -37,7 +40,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1initialize
     cout << "Java-TriangleStripArray: initialize2 is called.\n";
     int  length = env->GetArrayLength (stripLengths);
     int* strip_lengths = env->GetIntArrayElements (stripLengths, 0);
-    TriangleStripArray* tris = new TriangleStripArray (firstIndex, length, strip_lengths);
+    TriangleStripArray* tris;
+    __TRY__;
+    tris = new TriangleStripArray (firstIndex, length, strip_lengths);
+    __CATCH_VOID__;
     env->ReleaseIntArrayElements (stripLengths, strip_lengths, 0);
     setNativePointer (env, obj, tris);
     jobject entity = env->NewGlobalRef (obj);
@@ -55,7 +61,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1finalize
 {
     cout << "Java-TriangleStripArray: finalize is called.\n";
     TriangleStripArray* tris = (TriangleStripArray*)getNativePointer (env, obj);
+    __TRY__;
     delete tris;
+    __CATCH_VOID__;
 }
 
 /*
@@ -66,7 +74,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1finalize
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1print
   (JNIEnv* env, jobject obj)
 {
-    cout << "Java-TriangleStripArray:  is called.\n";
+    cout << "Java-TriangleStripArray: print is called.\n";
     TriangleStripArray* tris = (TriangleStripArray*)getNativePointer (env, obj);
+    __TRY__;
     tris->print (cout) << "\n";
+    __CATCH_VOID__;
 }

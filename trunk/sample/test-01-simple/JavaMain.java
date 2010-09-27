@@ -12,12 +12,12 @@ public class JavaMain {
     
     JFrame     frame;
     GLCanvas   canvas;
-    GLRenderer renderer;
+    M3GRenderer renderer;
 
    public JavaMain () {
        frame    = new JFrame ();
        canvas   = new GLCanvas ();
-       renderer = new GLRenderer ();
+       renderer = new M3GRenderer ();
        canvas.addGLEventListener(renderer);
        frame.add(canvas);
        frame.setSize(300, 300);

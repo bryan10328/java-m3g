@@ -15,7 +15,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Fog_jni_1initialize
   (JNIEnv* env, jobject obj)
 {
     cout << "Java-Fog: initilize is called.\n";
-    Fog* fog = new Fog ();
+    Fog* fog;
+    __TRY__;
+    fog = new Fog ();
+    __CATCH_VOID__;
     setNativePointer (env, obj, fog);
     jobject entity = env->NewGlobalRef (obj);
     fog->setExportedEntity (entity);
@@ -31,7 +34,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Fog_jni_1finalize
 {
     cout << "Java-Fog: finalize is called.\n";
     Fog* fog = (Fog*)getNativePointer (env, obj);
+    __TRY__;
     delete fog;
+    __CATCH_VOID__;
 }
 
 
@@ -45,7 +50,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Fog_jni_1getColor
 {
     cout << "Java-Fog: getColor is called.\n";
     Fog* fog = (Fog*)getNativePointer (env, obj);
-    int RGB = fog->getColor ();
+    int RGB;
+    __TRY__;
+    RGB = fog->getColor ();
+    __CATCH_INT__;
     return RGB;
 }
 
@@ -59,7 +67,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Fog_jni_1getDensity
 {
     cout << "Java-Fog: getDensity is called.\n";
     Fog* fog = (Fog*)getNativePointer (env, obj);
-    float dens = fog->getDensity ();
+    float dens;
+    __TRY__;
+    dens = fog->getDensity ();
+    __CATCH_FLOAT__;
     return dens;
 }
 
@@ -73,7 +84,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Fog_jni_1getFarDistance
 {
     cout << "Java-Fog: getFarDistance is called.\n";
     Fog* fog = (Fog*)getNativePointer (env, obj);
-    float far = fog->getFarDistance ();
+    float far;
+    __TRY__;
+    far = fog->getFarDistance ();
+    __CATCH_FLOAT__;
     return far;
 }
 
@@ -87,7 +101,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Fog_jni_1getMode
 {
     cout << "Java-Fog: getMode is called.\n";
     Fog* fog = (Fog*)getNativePointer (env, obj);
-    int mode = fog->getMode ();
+    int mode;
+    __TRY__;
+    mode = fog->getMode ();
+    __CATCH_INT__;
     return mode;
 }
 
@@ -101,7 +118,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Fog_jni_1getNearDistance
 {
     cout << "Java-Fog: getNearDistance is called.\n";
     Fog* fog = (Fog*)getNativePointer (env, obj);
-    float near = fog->getNearDistance ();
+    float near;
+    __TRY__;
+    near = fog->getNearDistance ();
+    __CATCH_FLOAT__;
     return near;
 }
 
@@ -115,7 +135,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Fog_jni_1setColor
 {
     cout << "Java-Fog: setColor is called.\n";
     Fog* fog = (Fog*)getNativePointer (env, obj);
+    __TRY__;
     fog->setColor (RGB);
+    __CATCH_VOID__;
 }
 
 /*
@@ -128,7 +150,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Fog_jni_1setDensity
 {
     cout << "Java-Fog: setDensity is called.\n";
     Fog* fog = (Fog*)getNativePointer (env, obj);
+    __TRY__;
     fog->setDensity (density);
+    __CATCH_VOID__;
 }
 
 /*
@@ -141,7 +165,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Fog_jni_1setLinear
 {
     cout << "Java-Fog: setLinear is called.\n";
     Fog* fog = (Fog*)getNativePointer (env, obj);
+    __TRY__;
     fog->setLinear (near, far);
+    __CATCH_VOID__;
 }
 
 /*
@@ -154,7 +180,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Fog_jni_1setMode
 {
     cout << "Java-Fog: setMode is called.\n";
     Fog* fog = (Fog*)getNativePointer (env, obj);
+    __TRY__;
     fog->setMode (mode);
+    __CATCH_VOID__;
 }
 
 /*
@@ -167,5 +195,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Fog_jni_1print
 {
     cout << "Java-Fog: print is called.\n";
     Fog* fog = (Fog*)getNativePointer (env, obj);
+    __TRY__;
     fog->print (cout) << "\n";
+    __CATCH_VOID__;
 }

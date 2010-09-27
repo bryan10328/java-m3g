@@ -16,7 +16,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1initialize
 {
     cout << "Java-AnimationTrack: initilize is called.\n";
     KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, keyframeSequence);
-    AnimationTrack* anim_track = new AnimationTrack (key_seq, property);
+    AnimationTrack* anim_track;
+    __TRY__;
+    anim_track = new AnimationTrack (key_seq, property);
+    __CATCH_VOID__;
     setNativePointer (env, obj, anim_track);
     jobject entity = env->NewGlobalRef (obj);
     anim_track->setExportedEntity (entity);
@@ -33,7 +36,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1finalize
 {
     cout << "Java-AnimationTrack: finalize is called.\n";
     AnimationTrack* anim_track = (AnimationTrack*)getNativePointer (env, obj);
+    __TRY__;
     delete anim_track;
+    __CATCH_VOID__;
 }
 
 /*
@@ -46,7 +51,10 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1getControll
 {
     cout << "Java-AnimationTrack: getController is called.\n";
     AnimationTrack* anim_track = (AnimationTrack*)getNativePointer (env, obj);
-    AnimationController* anim_cntr = anim_track->getController ();
+    AnimationController* anim_cntr;
+    __TRY__;
+    anim_cntr = anim_track->getController ();
+    __CATCH_JOBJECT__;
     return (anim_cntr != NULL) ? (jobject)anim_cntr->getExportedEntity() : (jobject)NULL;
 }
 
@@ -60,7 +68,10 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1getKeyframe
 {
     cout << "Java-AnimationTrack: getKeyframeSequence is called.\n";
     AnimationTrack*   anim_track = (AnimationTrack*)getNativePointer (env, obj);
-    KeyframeSequence* key_seq    = anim_track->getKeyframeSequence ();
+    KeyframeSequence* key_seq;
+    __TRY__;
+    key_seq = anim_track->getKeyframeSequence ();
+    __CATCH_JOBJECT__;
     return (key_seq != NULL) ? (jobject)key_seq->getExportedEntity() : (jobject)NULL;
 }
 
@@ -75,7 +86,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1getTargetPrope
 {
     cout << "Java-AnimationTrack: getTargetProperty is called.\n";
     AnimationTrack* anim_track = (AnimationTrack*)getNativePointer (env, obj);
-    int property = anim_track->getTargetProperty ();
+    int property;
+    __TRY__;
+    property = anim_track->getTargetProperty ();
+    __CATCH_INT__;
     return property;
 }
 
@@ -90,8 +104,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1setController
     cout << "Java-AnimationTrack: setController is called.\n";
     AnimationTrack*      anim_track = (AnimationTrack*)getNativePointer (env, obj);
     AnimationController* anim_cntr  = (AnimationController*)getNativePointer (env, animationController);
+    __TRY__;
     anim_track->setController (anim_cntr);
-
+    __CATCH_VOID__;
 }
 
 /*
@@ -104,6 +119,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1print
 {
     cout << "Java-AnimationTrack: print is called.\n";
     AnimationTrack* anim_track = (AnimationTrack*)getNativePointer (env, obj);
+    __TRY__;
     anim_track->print (cout) << "\n";
+    __CATCH_VOID__;
 }
 

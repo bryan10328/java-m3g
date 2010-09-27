@@ -11,7 +11,7 @@ public class Group extends Node {
     native private Node    jni_getChild      (int  index);
     native private int     jni_getChildCount ();
     native private boolean jni_pick          (int  scope, float x, float y, Camera camera, RayIntersection ri);
-    native private boolean jni_pick          (int  scope, float ox, float oy, float dx, float dy, float dz, RayIntersection ri);
+    native private boolean jni_pick          (int  scope, float ox, float oy, float oz, float dx, float dy, float dz, RayIntersection ri);
     native private void    jni_removeChild   (Node child);
     native private void    jni_print         ();
 
@@ -42,8 +42,8 @@ public class Group extends Node {
         return picked;
     }
 
-    public boolean pick (int scope, float ox, float oy, float dx, float dy, float dz, RayIntersection ri) {
-        boolean picked = jni_pick (scope, ox, oy, dx, dy, dz, ri);
+    public boolean pick (int scope, float ox, float oy, float oz, float dx, float dy, float dz, RayIntersection ri) {
+        boolean picked = jni_pick (scope, ox, oy, oz, dx, dy, dz, ri);
         return picked;
     }
 

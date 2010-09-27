@@ -2152,10 +2152,10 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Group_jni_1pick__IFFLorg_karls
 /*
  * Class:     org_karlsland_m3g_Group
  * Method:    jni_pick
- * Signature: (IFFFFFLorg/karlsland/m3g/RayIntersection;)Z
+ * Signature: (IFFFFFFLorg/karlsland/m3g/RayIntersection;)Z
  */
-JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Group_jni_1pick__IFFFFFLorg_karlsland_m3g_RayIntersection_2
-  (JNIEnv *, jobject, jint, jfloat, jfloat, jfloat, jfloat, jfloat, jobject);
+JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Group_jni_1pick__IFFFFFFLorg_karlsland_m3g_RayIntersection_2
+  (JNIEnv *, jobject, jint, jfloat, jfloat, jfloat, jfloat, jfloat, jfloat, jobject);
 
 /*
  * Class:     org_karlsland_m3g_Group

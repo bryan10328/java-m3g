@@ -5,6 +5,7 @@
 #include "m3g.hpp"
 using namespace std;
 using namespace m3g;
+#include <cstdlib>
 
 /*
  * Class:     org_karlsland_m3g_Graphics3D
@@ -37,8 +38,14 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1addLight
   (JNIEnv* env, jobject obj, jobject light, jobject transform)
 {
     cout << "Java-Graphics3D: addLight is called.\n";
-    // not implemented.
-    return 0;
+    Graphics3D* g3d   = (Graphics3D*)getNativePointer (env, obj);
+    Light*      lgh   = (Light*)getNativePointer (env, light);
+    Transform*  trans = (Transform*)getNativePointer (env, transform);
+    int index;
+    __TRY__;
+    index = g3d->addLight (lgh, *trans);
+    __CATCH_INT__;
+    return index;
 }
 
 /*
@@ -50,7 +57,11 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1bindTarget__Ljava_
   (JNIEnv* env, jobject obj, jobject target)
 {
     cout << "Java-Graphics3D: bindTarget is called.\n";
-    // not implemented.
+    Graphics3D* g3d = (Graphics3D*)getNativePointer (env, obj);
+    void*       tar = (void*)getNativePointer (env, target);
+    __TRY__;
+    g3d->bindTarget (tar);
+    __CATCH_VOID__;
 }
 
 /*
@@ -62,7 +73,11 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1bindTarget__Ljava_
   (JNIEnv* env, jobject obj, jobject target, jboolean depthBufferEnable, jint hints)
 {
     cout << "Java-Graphics3D: bindTarget is called.\n";
-    // not implemented.
+    Graphics3D* g3d = (Graphics3D*)getNativePointer (env, obj);
+    void*       tar = (void*)getNativePointer (env, target);
+    __TRY__;
+    g3d->bindTarget (tar, depthBufferEnable, hints);
+    __CATCH_VOID__;
 }
 
 /*
@@ -74,7 +89,11 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1clear
   (JNIEnv* env, jobject obj, jobject background)
 {
     cout << "Java-Graphics3D: clear is called.\n";
-    // not implemented.
+    Graphics3D* g3d = (Graphics3D*)getNativePointer (env, obj);
+    Background* bg = (Background*)getNativePointer (env, background);
+    __TRY__;
+    g3d->clear (bg);
+    __CATCH_VOID__;
 }
 
 /*
@@ -86,8 +105,13 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getCamera
   (JNIEnv* env, jobject obj, jobject transform)
 {
     cout << "Java-Graphics3D: getCamera is called.\n";
-    // not implemented.
-    return (jobject)NULL;
+    Graphics3D* g3d   = (Graphics3D*)getNativePointer (env, obj);
+    Transform*  trans = (Transform*)getNativePointer (env, transform);
+    Camera* cam;
+    __TRY__;
+    cam = g3d->getCamera (trans);
+    __CATCH_JOBJECT__;
+    return (cam != NULL) ? (jobject)cam->getExportedEntity() : (jobject)NULL;
 }
 
 /*
@@ -99,8 +123,12 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getDepthRangeFar
   (JNIEnv* env, jobject obj)
 {
     cout << "Java-Graphics3D: getDepthRangeFar is called.\n";
-    // not implemented.
-    return 0;
+    Graphics3D* g3d = (Graphics3D*)getNativePointer (env, obj);
+    float far;
+    __TRY__;
+    far = g3d->getDepthRangeFar ();
+    __CATCH_FLOAT__;
+    return far;
 }
 
 /*
@@ -112,8 +140,12 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getDepthRangeNea
   (JNIEnv* env, jobject obj)
 {
     cout << "Java-Graphics3D: getDepthRangeNear is called.\n";
-    // not implemented.
-    return 0;
+    Graphics3D* g3d = (Graphics3D*)getNativePointer (env, obj);
+    float near;
+    __TRY__;
+    near = g3d->getDepthRangeNear ();
+    __CATCH_FLOAT__;
+    return near;
 }
 
 /*
@@ -125,8 +157,12 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getHints
   (JNIEnv* env, jobject obj)
 {
     cout << "Java-Graphics3D: getHints is called.\n";
-    // not implemented.
-    return 0;
+    Graphics3D* g3d = (Graphics3D*)getNativePointer (env, obj);
+    int hints;
+    __TRY__;
+    hints = g3d->getHints ();
+    __CATCH_INT__;
+    return hints;
 }
 
 /*
@@ -140,15 +176,14 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getInstance
     cout << "Java-Graphics3D: getInstance is called.\n";
     Graphics3D* g3d = Graphics3D:: getInstance ();
     if (g3d->getExportedEntity() == NULL) {
-        cout << "Java-Graphic3D: create Graphics3D.\n";
+        cout << "Java-Graphic3D: create Graphics3D object of Java.\n";
         jmethodID mid = env->GetMethodID (clazz, "<init>", "()V");
-        cout << "Java-Graphics3D: mid = " << mid << "\n";
         jobject obj = env->NewObject (clazz, mid);
-        cout << "Java-Graphics3D: obj = " << (void*)obj << "\n";
         setNativePointer (env, obj, g3d);
         jobject entity = env->NewGlobalRef (obj);
-        cout << "Java-Graphics3D: entity = " << (void*)entity << "\n";
         g3d->setExportedEntity (entity);
+        cout << "Java-Graphics3D: created Graphics3D object of Java,";
+        cout << hex << "nativePointer=" << g3d << ",jobject=" << obj << ",GrobalRef=" << entity << dec << "\n";
     }
     return (g3d != NULL) ? (jobject)g3d->getExportedEntity() : (jobject)NULL;
 }
@@ -162,8 +197,13 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getLight
   (JNIEnv* env, jobject obj, jint index, jobject transform)
 {
     cout << "Java-Graphics3D: getLight is called.\n";
-    // not implemented.
-    return (jobject)NULL;
+    Graphics3D* g3d = (Graphics3D*)getNativePointer (env, obj);
+    Transform* trans = (Transform*)getNativePointer (env, transform);
+    Light* lgh;
+    __TRY__;
+    lgh = g3d->getLight (index, trans);
+    __CATCH_JOBJECT__;
+    return (lgh != NULL) ? (jobject)lgh->getExportedEntity() : (jobject)NULL;
 }
 
 /*
@@ -175,8 +215,12 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getLightCount
   (JNIEnv* env, jobject obj)
 {
     cout << "Java-Graphics3D: getLightCount is called.\n";
-    // not implemented.
-    return 0;
+    Graphics3D* g3d = (Graphics3D*)getNativePointer (env, obj);
+    int count;
+    __TRY__;
+    count = g3d->getLightCount ();
+    __CATCH_INT__;
+    return count;
 }
 
 /*
@@ -188,6 +232,9 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getProperties
   (JNIEnv* env, jclass clazz)
 {
     cout << "Java-Graphics3D: getProperties is called.\n";
+    cout << "Go to abort()\n";
+    abort ();
+    //Graphics3D* g3d = (Graphics3D*)getNativePointer (env, obj);
     // not implemented.
     return (jobject)NULL;
 }
@@ -201,7 +248,11 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getTarget
   (JNIEnv* env, jobject obj)
 {
     cout << "Java-Graphics3D: getTarget is called.\n";
-    // not implemented.
+    Graphics3D* g3d = (Graphics3D*)getNativePointer (env, obj);
+    void* target;
+    __TRY__;
+    target = g3d->getTarget ();
+    __CATCH_JOBJECT__;
     return (jobject)NULL;
 }
 
@@ -215,7 +266,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getViewportHeight
 {
     cout << "Java-Graphics3D: getViewportHeight is called.\n";
     Graphics3D* g3d = (Graphics3D*)getNativePointer (env, obj);
-    int height = g3d->getViewportHeight ();
+    int height;
+    __TRY__;
+    height = g3d->getViewportHeight ();
+    __CATCH_INT__;
     return height;
 }
 
@@ -229,7 +283,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getViewportWidth
 {
     cout << "Java-Graphics3D: getViewportWidth is called.\n";
     Graphics3D* g3d = (Graphics3D*)getNativePointer (env, obj);
-    int width = g3d->getViewportWidth ();
+    int width;
+    __TRY__;
+    width = g3d->getViewportWidth ();
+    __CATCH_INT__;
     return width;
 }
 
@@ -243,7 +300,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getViewportX
 {
     cout << "Java-Graphics3D: getViewportX is called.\n";
     Graphics3D* g3d = (Graphics3D*)getNativePointer (env, obj);
-    float x = g3d->getViewportX ();
+    float x;
+    __TRY__;
+    x = g3d->getViewportX ();
+    __CATCH_INT__;
     return x;
 }
 
@@ -257,7 +317,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getViewportY
 {
     cout << "Java-Graphics3D: getViewportY is called.\n";
     Graphics3D* g3d = (Graphics3D*)getNativePointer (env, obj);
-    float y = g3d->getViewportY ();
+    float y;
+    __TRY__;
+    y = g3d->getViewportY ();
+    __CATCH_INT__;
     return y;
 }
 
@@ -271,7 +334,10 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1isDepthBufferE
 {
     cout << "Java-Graphics3D: isDepthBufferEnabled is called.\n";
     Graphics3D* g3d = (Graphics3D*)getNativePointer (env, obj);
-    bool enabled = g3d->isDepthBufferEnabled ();
+    bool enabled;
+    __TRY__;
+    enabled = g3d->isDepthBufferEnabled ();
+    __CATCH_BOOL__;
     return enabled;
 }
 
@@ -284,7 +350,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1releaseTarget
   (JNIEnv* env, jobject obj)
 {
     cout << "Java-Graphics3D: releaseTarget is called.\n";
-    // not implemented.
+    Graphics3D* g3d = (Graphics3D*)getNativePointer (env, obj);    
+    __TRY__;
+    g3d->releaseTarget ();
+    __CATCH_VOID__;
 }
 
 /*
@@ -296,7 +365,12 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1render__Lorg_karls
   (JNIEnv* env, jobject obj, jobject node, jobject transform)
 {
     cout << "Java-Graphics3D: render1 is called.\n";
-    // not implemented.
+    Graphics3D* g3d = (Graphics3D*)getNativePointer (env, obj);
+    Node*       nod = (Node*)getNativePointer (env, node);
+    Transform*  trans = (Transform*)getNativePointer (env, transform);
+    __TRY__;
+    g3d->render (nod, *trans);
+    __CATCH_VOID__;
 }
 
 /*
@@ -308,7 +382,14 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1render__Lorg_karls
   (JNIEnv* env, jobject obj, jobject vertices, jobject triangles, jobject appearances, jobject transform)
 {
     cout << "Java-Graphics3D: render2 is called.\n";
-    // not implemented.
+    Graphics3D*   g3d   = (Graphics3D*)getNativePointer (env, obj);    
+    VertexBuffer* vbuf  = (VertexBuffer*)getNativePointer (env, vertices);
+    IndexBuffer*  ibuf  = (IndexBuffer*)getNativePointer (env, triangles);
+    Appearance*   apps  = (Appearance*)getNativePointer (env, appearances);
+    Transform*    trans = (Transform*)getNativePointer (env, transform);
+    __TRY__;
+    g3d->render (vbuf, ibuf, apps, *trans);
+    __CATCH_VOID__;
 }
 
 /*
@@ -320,7 +401,14 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1render__Lorg_karls
   (JNIEnv* env, jobject obj, jobject vertices, jobject triangles, jobject appearances, jobject transform, jint scope)
 {
     cout << "Java-Graphics3D: render3 is called.\n";
-    // not implemented.
+    Graphics3D*   g3d   = (Graphics3D*)getNativePointer (env, obj);    
+    VertexBuffer* vbuf  = (VertexBuffer*)getNativePointer (env, vertices);
+    IndexBuffer*  ibuf  = (IndexBuffer*)getNativePointer (env, triangles);
+    Appearance*   apps  = (Appearance*)getNativePointer (env, appearances);
+    Transform*    trans = (Transform*)getNativePointer (env, transform);
+    __TRY__;
+    g3d->render (vbuf, ibuf, apps, *trans, scope);
+    __CATCH_VOID__;
 }
 
 /*
@@ -334,7 +422,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1render__Lorg_karls
     cout << "Java-Graphics3D: render4(world) is called.\n";
     Graphics3D* g3d = (Graphics3D*)getNativePointer (env, obj);
     World*      wld = (World*)getNativePointer (env, world);
+    __TRY__;
     g3d->render (wld);
+    __CATCH_VOID__;
 }
 
 /*
@@ -346,7 +436,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1resetLights
   (JNIEnv* env, jobject obj)
 {
     cout << "Java-Graphics3D: resetLights is called.\n";
-    // not implemented.
+    Graphics3D* g3d = (Graphics3D*)getNativePointer (env, obj);
+    __TRY__;
+    g3d->resetLights ();
+    __CATCH_VOID__;
 }
 
 /*
@@ -358,7 +451,12 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1setCamera
   (JNIEnv* env, jobject obj, jobject camera, jobject transform)
 {
     cout << "Java-Graphics3D: setCamera is called.\n";
-    // not implemented.
+    Graphics3D* g3d   = (Graphics3D*)getNativePointer (env, obj);
+    Camera*     cam   = (Camera*)getNativePointer (env, camera);
+    Transform*  trans = (Transform*)getNativePointer (env, transform);
+    __TRY__;
+    g3d->setCamera (cam, *trans);
+    __CATCH_VOID__;
 }
 
 /*
@@ -367,10 +465,13 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1setCamera
  * Signature: (FF)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1setDepthRange
-  (JNIEnv* env, jobject obj, jfloat, jfloat)
+  (JNIEnv* env, jobject obj, jfloat near, jfloat far)
 {
     cout << "Java-Graphics3D: setDepthRange is called.\n";
-    // not implemented.
+    Graphics3D* g3d = (Graphics3D*)getNativePointer (env, obj);
+    __TRY__;
+    g3d->setDepthRange (near, far);
+    __CATCH_VOID__;
 }
 
 /*
@@ -382,7 +483,12 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1setLight
   (JNIEnv* env, jobject obj, jint index, jobject light, jobject transform)
 {
     cout << "Java-Graphics3D: setLight is called.\n";
-    // not implemented.
+    Graphics3D* g3d   = (Graphics3D*)getNativePointer (env, obj);
+    Light*      lgh   = (Light*)getNativePointer (env, light);
+    Transform*  trans = (Transform*)getNativePointer (env, transform);
+    __TRY__;
+    g3d->setLight (index, lgh, *trans);
+    __CATCH_VOID__;
 }
 
 /*
@@ -394,8 +500,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1setViewport
   (JNIEnv* env, jobject obj, jint x, jint y, jint width, jint height)
 {
     cout << "Java-Graphics3D: setViewport is called.\n";
-    Graphics3D* g3d = (Graphics3D*)getNativePointer (env, obj);    
+    Graphics3D* g3d = (Graphics3D*)getNativePointer (env, obj);
+    __TRY__;
     g3d->setViewport (x, y, width, height);
+    __CATCH_VOID__;
 }
 
 /*
@@ -408,5 +516,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1print
 {
     cout << "Java-Graphics3D: print is called.\n";
     Graphics3D* g3d = (Graphics3D*)getNativePointer (env, obj);
+    __TRY__;
     g3d->print (cout) << "\n";
+    __CATCH_VOID__;
 }
+

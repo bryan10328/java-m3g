@@ -16,7 +16,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Texture2D_jni_1initialize
 {
     cout << "Java-Texture: initilize is called.\n";
     Image2D*   img = (Image2D*)getNativePointer (env, image);
-    Texture2D* tex = new Texture2D (img);
+    Texture2D* tex;
+    __TRY__;
+    tex = new Texture2D (img);
+    __CATCH_VOID__;
     setNativePointer (env, obj, tex);
     jobject entity = env->NewGlobalRef (obj);
     tex->setExportedEntity (entity);
@@ -30,9 +33,11 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Texture2D_jni_1initialize
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Texture2D_jni_1finalize
   (JNIEnv* env, jobject obj)
 {
-    cout << "Java-Texture: finalize is called.\n";
+    cout << "Java-Texture2D: finalize is called.\n";
     Texture2D* tex = (Texture2D*)getNativePointer (env, obj);
+    __TRY__;
     delete tex;
+    __CATCH_VOID__;
 
 }
 
@@ -44,7 +49,13 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Texture2D_jni_1finalize
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Texture2D_jni_1getBlendColor
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Texture2D: getBlendColor is called.\n";
+    Texture2D* tex = (Texture2D*)getNativePointer (env, obj);
+    int color;
+    __TRY__;
+    color = tex->getBlendColor ();
+    __CATCH_INT__;
+    return color;
 }
 
 /*
@@ -55,7 +66,13 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Texture2D_jni_1getBlendColor
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Texture2D_jni_1getBlending
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Texture2D: getBlending is called.\n";
+    Texture2D* tex = (Texture2D*)getNativePointer (env, obj);
+    int blending;
+    __TRY__;
+    blending = tex->getBlending ();
+    __CATCH_INT__;
+    return blending;
 }
 
 /*
@@ -66,7 +83,13 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Texture2D_jni_1getBlending
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Texture2D_jni_1getImage
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Texture2D: getImage is called.\n";
+    Texture2D* tex = (Texture2D*)getNativePointer (env, obj);
+    Image2D* img;
+    __TRY__;
+    img = tex->getImage ();
+    __CATCH_JOBJECT__;
+    return (img != NULL) ? (jobject)img->getExportedEntity() : (jobject)0;
 }
 
 /*
@@ -77,7 +100,13 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Texture2D_jni_1getImage
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Texture2D_jni_1getImageFilter
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Texture2D: getImageFilter is called.\n";
+    Texture2D* tex = (Texture2D*)getNativePointer (env, obj);
+    int filter;
+    __TRY__;
+    filter = tex->getImageFilter ();
+    __CATCH_INT__;
+    return filter;
 }
 
 /*
@@ -88,7 +117,13 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Texture2D_jni_1getImageFilter
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Texture2D_jni_1getLevelFilter
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Texture2D: getLevelFilter is called.\n";
+    Texture2D* tex = (Texture2D*)getNativePointer (env, obj);
+    int filter;
+    __TRY__;
+    filter = tex->getLevelFilter ();
+    __CATCH_INT__;
+    return filter;
 }
 
 /*
@@ -99,7 +134,13 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Texture2D_jni_1getLevelFilter
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Texture2D_jni_1getWrappingS
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Texture2D: getWrappingS is called.\n";
+    Texture2D* tex = (Texture2D*)getNativePointer (env, obj);
+    int wrap;
+    __TRY__;
+    wrap = tex->getWrappingS ();
+    __CATCH_INT__;
+    return wrap;
 }
 
 /*
@@ -110,7 +151,13 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Texture2D_jni_1getWrappingS
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Texture2D_jni_1getWrappingT
   (JNIEnv* env, jobject obj)
 {
-    return 0;
+    cout << "Java-Texture2D: getWrappingT is called.\n";
+    Texture2D* tex = (Texture2D*)getNativePointer (env, obj);
+    int wrap;
+    __TRY__;
+    wrap = tex->getWrappingT ();
+    __CATCH_INT__;
+    return wrap;
 }
 
 /*
@@ -121,7 +168,11 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Texture2D_jni_1getWrappingT
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Texture2D_jni_1setBlendColor
   (JNIEnv* env, jobject obj, jint RGB)
 {
-
+    cout << "Java-Texture2D: setBlendColor is called.\n";
+    Texture2D* tex = (Texture2D*)getNativePointer (env, obj);
+    __TRY__;
+    tex->setBlendColor (RGB);
+    __CATCH_VOID__;
 }
 
 /*
@@ -132,7 +183,11 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Texture2D_jni_1setBlendColor
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Texture2D_jni_1setBlending
   (JNIEnv* env, jobject obj, jint func)
 {
-
+    cout << "Java-Texture2D: setBlending is called.\n";
+    Texture2D* tex = (Texture2D*)getNativePointer (env, obj);
+    __TRY__;
+    tex->setBlending (func);
+    __CATCH_VOID__;
 }
 
 /*
@@ -143,7 +198,11 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Texture2D_jni_1setBlending
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Texture2D_jni_1setFiltering
   (JNIEnv* env, jobject obj, jint levelFilter, jint imageFilter)
 {
-
+    cout << "Java-Texture2D: setFiltering is called.\n";
+    Texture2D* tex = (Texture2D*)getNativePointer (env, obj);
+    __TRY__;
+    tex->setFiltering (levelFilter, imageFilter);
+    __CATCH_VOID__;
 }
 
 /*
@@ -154,7 +213,12 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Texture2D_jni_1setFiltering
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Texture2D_jni_1setImage
   (JNIEnv* env, jobject obj, jobject image)
 {
-
+    cout << "Java-Texture2D: setImage is called.\n";
+    Texture2D* tex = (Texture2D*)getNativePointer (env, obj);
+    Image2D*   img = (Image2D*)getNativePointer (env, image);
+    __TRY__;
+    tex->setImage (img);
+    __CATCH_VOID__;
 }
 
 /*
@@ -165,7 +229,11 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Texture2D_jni_1setImage
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Texture2D_jni_1setWrapping
   (JNIEnv* env, jobject obj, jint wrapS, jint wrapT)
 {
-
+    cout << "Java-Texture2D: setWrapping is called.\n";
+    Texture2D* tex = (Texture2D*)getNativePointer (env, obj);
+    __TRY__;
+    tex->setWrapping (wrapS, wrapT);
+    __CATCH_VOID__;
 }
 
 /*
@@ -174,6 +242,11 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Texture2D_jni_1setWrapping
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Texture2D_jni_1print
-  (JNIEnv *, jobject)
+  (JNIEnv* env, jobject obj)
 {
+    cout << "Java-Texture2D: print is called.\n";
+    Texture2D* tex = (Texture2D*)getNativePointer (env, obj);
+    __TRY__;
+    tex->print (cout) << "\n";
+    __CATCH_VOID__;
 }

@@ -15,7 +15,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Appearance_jni_1initialize
   (JNIEnv* env, jobject obj)
 {
     cout << "Java-Appearance: initilize is called.\n";
-    Appearance* app = new Appearance ();
+    Appearance* app;
+    __TRY__;
+    app = new Appearance ();
+    __CATCH_VOID__;
     setNativePointer (env, obj, app);
     jobject entity = env->NewGlobalRef (obj);
     app->setExportedEntity (entity);
@@ -31,7 +34,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Appearance_jni_1finalize
 {
     cout << "Java-Appearance: finalize is called.\n";
     Appearance* app = (Appearance*)getNativePointer (env, obj);
+    __TRY__;
     delete app;
+    __CATCH_VOID__;
 }
 
 /*
@@ -44,7 +49,10 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Appearance_jni_1getCompositingM
 {
     cout << "Java-Appearance: getCompositingMode is called.\n";
     Appearance* app = (Appearance*)getNativePointer (env, obj);
-    CompositingMode* cmode = app->getCompositingMode ();
+    CompositingMode* cmode;
+    __TRY__;
+    cmode = app->getCompositingMode ();
+    __CATCH_JOBJECT__;
     return (cmode != NULL) ? (jobject)cmode->getExportedEntity() : (jobject)NULL;
 }
 
@@ -58,7 +66,10 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Appearance_jni_1getFog
 {
     cout << "Java-Appearance: getFog is called.\n";
     Appearance* app = (Appearance*)getNativePointer (env, obj);
-    Fog* fog = app->getFog ();
+    Fog* fog;
+    __TRY__;
+    fog = app->getFog ();
+    __CATCH_JOBJECT__;
     return (fog != NULL) ? (jobject)fog->getExportedEntity() : (jobject)NULL;
 }
 
@@ -72,7 +83,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Appearance_jni_1getLayer
 {
     cout << "Java-Appearance: getLayer is called.\n";
     Appearance* app = (Appearance*)getNativePointer (env, obj);
-    int layer = app->getLayer ();
+    int layer;
+    __TRY__;
+    layer = app->getLayer ();
+    __CATCH_INT__;
     return layer;
 }
 
@@ -86,7 +100,10 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Appearance_jni_1getMaterial
 {
     cout << "Java-Appearance: getMaterial is called.\n";
     Appearance* app = (Appearance*)getNativePointer (env, obj);
-    Material* mat = app->getMaterial ();
+    Material* mat;
+    __TRY__;
+    mat = app->getMaterial ();
+    __CATCH_JOBJECT__;
     return (mat != NULL) ? (jobject)mat->getExportedEntity() : (jobject)NULL;
 }
 
@@ -100,7 +117,10 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Appearance_jni_1getPolygonMode
 {
     cout << "Java-Appearance: getPolygonMode is called.\n";
     Appearance* app = (Appearance*)getNativePointer (env, obj);
-    PolygonMode* pmode = app->getPolygonMode ();
+    PolygonMode* pmode;
+    __TRY__;
+    pmode = app->getPolygonMode ();
+    __CATCH_JOBJECT__;
     return (pmode != NULL) ? (jobject)pmode->getExportedEntity() : (jobject)NULL;
 }
 
@@ -114,7 +134,10 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Appearance_jni_1getTexture
 {
     cout << "Java-Appearance: getTexture is called.\n";
     Appearance* app = (Appearance*)getNativePointer (env, obj);
-    Texture2D* tex = app->getTexture (index);
+    Texture2D* tex;
+    __TRY__;
+    tex = app->getTexture (index);
+    __CATCH_JOBJECT__;
     return (tex != NULL) ? (jobject)tex->getExportedEntity() : (jobject)NULL;
 }
 
@@ -130,7 +153,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Appearance_jni_1setCompositingMode
     cout << "Java-Appearance: getCompositingMode is called.\n";
     Appearance* app = (Appearance*)getNativePointer (env, obj);
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, compositingMode);
+    __TRY__;
     app->setCompositingMode (cmode);
+    __CATCH_VOID__;
 }
 
 /*
@@ -144,7 +169,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Appearance_jni_1setFog
     cout << "Java-Appearance: setFog is called.\n";
     Appearance* app = (Appearance*)getNativePointer (env, obj);
     Fog* fg = (Fog*)getNativePointer (env, fog);
+    __TRY__;
     app->setFog (fg);
+    __CATCH_VOID__;
 }
 
 /*
@@ -157,7 +184,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Appearance_jni_1setLayer
 {
     cout << "Java-Appearance: setLayer is called.\n";
     Appearance* app = (Appearance*)getNativePointer (env, obj);
+    __TRY__;
     app->setLayer (layer);
+    __CATCH_VOID__;
 }
 
 /*
@@ -171,7 +200,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Appearance_jni_1setMaterial
     cout << "Java-Appearance: setMaterial is called.\n";
     Appearance* app = (Appearance*)getNativePointer (env, obj);
     Material* mat = (Material*)getNativePointer (env, material);
+    __TRY__;
     app->setMaterial (mat);
+    __CATCH_VOID__;
 }
 
 /*
@@ -185,7 +216,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Appearance_jni_1setPolygonMode
     cout << "Java-Appearance: setPolygonMode is called.\n";
     Appearance* app = (Appearance*)getNativePointer (env, obj);
     PolygonMode* pmode = (PolygonMode*)getNativePointer (env, polygonMode);
+    __TRY__;
     app->setPolygonMode (pmode);
+    __CATCH_VOID__;
 }
 
 /*
@@ -199,7 +232,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Appearance_jni_1setTexture
     cout << "Java-Appearance: setTexture is called.\n";
     Appearance* app = (Appearance*)getNativePointer (env, obj);
     Texture2D* tex = (Texture2D*)getNativePointer (env, texture);
+    __TRY__;
     app->setTexture (index, tex);
+    __CATCH_VOID__;
 }
 
 /*
@@ -212,6 +247,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Appearance_jni_1print
 {
     cout << "Java-Appearance: print is called.\n";
     Appearance* app = (Appearance*)getNativePointer (env, obj);
+    __TRY__;
     app->print (cout);
+    __CATCH_VOID__;
 }
 
