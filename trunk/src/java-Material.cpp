@@ -12,15 +12,15 @@ using namespace m3g;
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Material_jni_1initialize
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Material: initilize is called.\n";
     Material* mat;
     __TRY__;
     mat = new Material ();
     __CATCH_VOID__;
-    setNativePointer (env, obj, mat);
-    jobject entity = env->NewGlobalRef (obj);
+    setNativePointer (env, thiz, mat);
+    jobject entity = env->NewGlobalRef (thiz);
     mat->setExportedEntity (entity);
 }
 
@@ -30,10 +30,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Material_jni_1initialize
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Material_jni_1finalize
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Material: finalize is called.\n";
-    Material* mat = (Material*)getNativePointer (env, obj);
+    Material* mat = (Material*)getNativePointer (env, thiz);
     __TRY__;
     delete mat;
     __CATCH_VOID__;
@@ -45,10 +45,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Material_jni_1finalize
  * Signature: (I)I
  */
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Material_jni_1getColor
-  (JNIEnv* env, jobject obj, jint target)
+  (JNIEnv* env, jobject thiz, jint target)
 {
     cout << "Java-Material: getColor is called.\n";
-    Material* mat = (Material*)getNativePointer (env, obj);
+    Material* mat = (Material*)getNativePointer (env, thiz);
     int color;
     __TRY__;
     color = mat->getColor (target);
@@ -62,10 +62,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Material_jni_1getColor
  * Signature: ()F
  */
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Material_jni_1getShininess
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Material: getShininess is called.\n";
-    Material* mat = (Material*)getNativePointer (env, obj);
+    Material* mat = (Material*)getNativePointer (env, thiz);
     float shine;
     __TRY__;
     shine = mat->getShininess ();
@@ -79,10 +79,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Material_jni_1getShininess
  * Signature: ()Z
  */
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Material_jni_1isVertexColorTrackingEnabled
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Material: isVertexColorTrackingEnabled is called.\n";
-    Material* mat = (Material*)getNativePointer (env, obj);
+    Material* mat = (Material*)getNativePointer (env, thiz);
     bool enabled;
     __TRY__;
     enabled = mat->isVertexColorTrackingEnabled ();
@@ -96,10 +96,10 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Material_jni_1isVertexColorTra
  * Signature: (II)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Material_jni_1setColor
-  (JNIEnv* env, jobject obj, jint target, jint ARGB)
+  (JNIEnv* env, jobject thiz, jint target, jint ARGB)
 {
     cout << "Java-Material: setColor is called.\n";
-    Material* mat = (Material*)getNativePointer (env, obj);
+    Material* mat = (Material*)getNativePointer (env, thiz);
     __TRY__;
     mat->setColor (target, ARGB);
     __CATCH_VOID__;
@@ -111,10 +111,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Material_jni_1setColor
  * Signature: (F)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Material_jni_1setShininess
-  (JNIEnv* env, jobject obj, jfloat shininess)
+  (JNIEnv* env, jobject thiz, jfloat shininess)
 {
     cout << "Java-Material: setShininess is called.\n";
-    Material* mat = (Material*)getNativePointer (env, obj);
+    Material* mat = (Material*)getNativePointer (env, thiz);
     __TRY__;
     mat->setShininess (shininess);
     __CATCH_VOID__;
@@ -126,10 +126,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Material_jni_1setShininess
  * Signature: (Z)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Material_jni_1setVertexColorTrackingEnable
-  (JNIEnv* env, jobject obj, jboolean enable)
+  (JNIEnv* env, jobject thiz, jboolean enable)
 {
     cout << "Java-Material: setVerteColorTrackingEnable is called.\n";
-    Material* mat = (Material*)getNativePointer (env, obj);
+    Material* mat = (Material*)getNativePointer (env, thiz);
     __TRY__;
     mat->setVertexColorTrackingEnable (enable);
     __CATCH_VOID__;
@@ -141,10 +141,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Material_jni_1setVertexColorTracki
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Material_jni_1print
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Material: print is called.\n";
-    Material* mat = (Material*)getNativePointer (env, obj);
+    Material* mat = (Material*)getNativePointer (env, thiz);
     __TRY__;
     mat->print (cout) << "\n";
     __CATCH_VOID__;

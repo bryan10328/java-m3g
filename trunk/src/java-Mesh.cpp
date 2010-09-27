@@ -12,7 +12,7 @@ using namespace m3g;
  * Signature: (Lorg/karlsland/m3g/VertexBuffer;[Lorg/karlsland/m3g/IndexBuffer;[Lorg/karlsland/m3g/Appearance;)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Mesh_jni_1initialize__Lorg_karlsland_m3g_VertexBuffer_2_3Lorg_karlsland_m3g_IndexBuffer_2_3Lorg_karlsland_m3g_Appearance_2
-  (JNIEnv* env, jobject obj, jobject vertices, jobjectArray submeshes, jobjectArray appearances)
+  (JNIEnv* env, jobject thiz, jobject vertices, jobjectArray submeshes, jobjectArray appearances)
 {
     cout << "Java-Mesh: initialize1 is called.\n";
     VertexBuffer* vbuf = (VertexBuffer*)getNativePointer (env, vertices);
@@ -32,8 +32,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Mesh_jni_1initialize__Lorg_karlsla
     __CATCH_VOID__;
     delete[] ibufs;
     delete[] apps;
-    setNativePointer (env, obj, mesh);
-    jobject entity = env->NewGlobalRef (obj);
+    setNativePointer (env, thiz, mesh);
+    jobject entity = env->NewGlobalRef (thiz);
     mesh->setExportedEntity (entity);
 }
 
@@ -43,7 +43,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Mesh_jni_1initialize__Lorg_karlsla
  * Signature: (Lorg/karlsland/m3g/VertexBuffer;Lorg/karlsland/m3g/IndexBuffer;Lorg/karlsland/m3g/Appearance;)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Mesh_jni_1initialize__Lorg_karlsland_m3g_VertexBuffer_2Lorg_karlsland_m3g_IndexBuffer_2Lorg_karlsland_m3g_Appearance_2
-  (JNIEnv* env, jobject obj, jobject vertices, jobject submesh, jobject appearance)
+  (JNIEnv* env, jobject thiz, jobject vertices, jobject submesh, jobject appearance)
 {
     cout << "Java-Mesh: initialize2 is called.\n";
     VertexBuffer* vbuf = (VertexBuffer*)getNativePointer (env, vertices);
@@ -53,8 +53,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Mesh_jni_1initialize__Lorg_karlsla
     __TRY__;
     mesh = new Mesh (vbuf, ibuf, app);
     __CATCH_VOID__;
-    setNativePointer (env, obj, mesh);
-    jobject entity = env->NewGlobalRef (obj);
+    setNativePointer (env, thiz, mesh);
+    jobject entity = env->NewGlobalRef (thiz);
     mesh->setExportedEntity (entity);
 }
 
@@ -64,10 +64,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Mesh_jni_1initialize__Lorg_karlsla
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Mesh_jni_1finalize
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Mesh: finalize is called.\n";
-    Mesh* mesh = (Mesh*)getNativePointer (env, obj);
+    Mesh* mesh = (Mesh*)getNativePointer (env, thiz);
     __TRY__;
     delete mesh;
     __CATCH_VOID__;
@@ -79,10 +79,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Mesh_jni_1finalize
  * Signature: (I)Lorg/karlsland/m3g/Appearance;
  */
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Mesh_jni_1getAppearance
-  (JNIEnv* env, jobject obj, jint index)
+  (JNIEnv* env, jobject thiz, jint index)
 {
     cout << "Java-Mesh: getAppearance is called.\n";
-    Mesh*       mesh = (Mesh*)getNativePointer (env, obj);
+    Mesh*       mesh = (Mesh*)getNativePointer (env, thiz);
     Appearance* app;
     __TRY__;
     app = mesh->getAppearance (index);
@@ -96,10 +96,10 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Mesh_jni_1getAppearance
  * Signature: (I)Lorg/karlsland/m3g/IndexBuffer;
  */
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Mesh_jni_1getIndexBuffer
-  (JNIEnv* env, jobject obj, jint index)
+  (JNIEnv* env, jobject thiz, jint index)
 {
     cout << "Java-Mesh: getIndexBuffer is called.\n";
-    Mesh*        mesh = (Mesh*)getNativePointer (env, obj);
+    Mesh*        mesh = (Mesh*)getNativePointer (env, thiz);
     IndexBuffer* ibuf;
     __TRY__;
     ibuf = mesh->getIndexBuffer (index);
@@ -113,10 +113,10 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Mesh_jni_1getIndexBuffer
  * Signature: ()I
  */
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Mesh_jni_1getSubmeshCount
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Mesh: getSubmeshCount is called.\n";
-    Mesh* mesh = (Mesh*)getNativePointer (env, obj);
+    Mesh* mesh = (Mesh*)getNativePointer (env, thiz);
     int count;
     __TRY__;
     count = mesh->getSubmeshCount ();
@@ -130,10 +130,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Mesh_jni_1getSubmeshCount
  * Signature: ()Lorg/karlsland/m3g/VertexBuffer;
  */
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Mesh_jni_1getVertexBuffer
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Mesh: getVertexBuffer is called.\n";
-    Mesh* mesh = (Mesh*)getNativePointer (env, obj);
+    Mesh* mesh = (Mesh*)getNativePointer (env, thiz);
     VertexBuffer* vbuf;
     __TRY__;
     vbuf = (VertexBuffer*)mesh->getVertexBuffer ();
@@ -147,10 +147,10 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Mesh_jni_1getVertexBuffer
  * Signature: (ILorg/karlsland/m3g/Appearance;)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Mesh_jni_1setAppearance
-  (JNIEnv* env, jobject obj, jint index, jobject appearance)
+  (JNIEnv* env, jobject thiz, jint index, jobject appearance)
 {
     cout << "Java-Mesh: setAppearance is called.\n";
-    Mesh*       mesh = (Mesh*)getNativePointer (env, obj);
+    Mesh*       mesh = (Mesh*)getNativePointer (env, thiz);
     Appearance* app = (Appearance*)getNativePointer (env, appearance);
     __TRY__;
     mesh->setAppearance (index, app);
@@ -163,10 +163,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Mesh_jni_1setAppearance
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Mesh_jni_1print
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Mesh: print is called.\n";
-    Mesh* mesh = (Mesh*)getNativePointer (env, obj);
+    Mesh* mesh = (Mesh*)getNativePointer (env, thiz);
     __TRY__;
     mesh->print (cout) << "\n";
     __CATCH_VOID__;

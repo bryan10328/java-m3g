@@ -2,7 +2,7 @@ package org.karlsland.m3g;
 
 public class Graphics3D extends java.lang.Object {
     
-    private long entity;
+    private long nativePointer;
 
     public final static int ANTIALIAS  = 2;
     public final static int DITHER     = 4;
@@ -46,6 +46,8 @@ public class Graphics3D extends java.lang.Object {
 
 
     public Graphics3D () {
+        nativePointer = 0;
+        System.out.println ("Java: Graphics3D initialized.");
         // do nothing.
         //jni_initialize ();
     }

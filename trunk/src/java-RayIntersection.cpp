@@ -12,15 +12,15 @@ using namespace m3g;
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1initialize
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-RayIntersection: initialize is called.\n";
     RayIntersection* ri;
     __TRY__;
     ri = new RayIntersection ();
     __CATCH_VOID__;
-    setNativePointer (env, obj, ri);
-    jobject entity = env->NewGlobalRef (obj);
+    setNativePointer (env, thiz, ri);
+    jobject entity = env->NewGlobalRef (thiz);
     ri->setExportedEntity (entity);
 }
 
@@ -30,10 +30,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1initialize
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1finalize
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-RayIntersection: finalize is called.\n";
-    RayIntersection* ri = (RayIntersection*)getNativePointer (env, obj);
+    RayIntersection* ri = (RayIntersection*)getNativePointer (env, thiz);
     __TRY__;
     delete ri;
     __CATCH_VOID__;
@@ -45,10 +45,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1finalize
  * Signature: ()F
  */
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getDistance
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-RayIntersection: getDistance is called.\n";
-    RayIntersection* ri = (RayIntersection*)getNativePointer (env, obj);
+    RayIntersection* ri = (RayIntersection*)getNativePointer (env, thiz);
     float distance;
     __TRY__;
     distance = ri->getDistance ();
@@ -62,10 +62,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getDistance
  * Signature: ()Lorg/karlsland/m3g/Node;
  */
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getIntersected
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-RayIntersection: getIntersected is called.\n";
-    RayIntersection* ri = (RayIntersection*)getNativePointer (env, obj);
+    RayIntersection* ri = (RayIntersection*)getNativePointer (env, thiz);
     Node* node;
     __TRY__;
     node = ri->getIntersected ();
@@ -79,10 +79,10 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getInterse
  * Signature: ()F
  */
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getNormalX
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-RayIntersection: getNormalX is called.\n";
-    RayIntersection* ri = (RayIntersection*)getNativePointer (env, obj);
+    RayIntersection* ri = (RayIntersection*)getNativePointer (env, thiz);
     float nx;
     __TRY__;
     nx = ri->getNormalX ();
@@ -96,10 +96,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getNormalX
  * Signature: ()F
  */
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getNormalY
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-RayIntersection: getNormalY is called.\n";
-    RayIntersection* ri = (RayIntersection*)getNativePointer (env, obj);
+    RayIntersection* ri = (RayIntersection*)getNativePointer (env, thiz);
     float ny;
     __TRY__;
     ny = ri->getNormalY ();
@@ -113,10 +113,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getNormalY
  * Signature: ()F
  */
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getNormalZ
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-RayIntersection: getNormalZ is called.\n";
-    RayIntersection* ri = (RayIntersection*)getNativePointer (env, obj);
+    RayIntersection* ri = (RayIntersection*)getNativePointer (env, thiz);
     float nz;
     __TRY__;
     nz = ri->getNormalZ ();
@@ -130,10 +130,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getNormalZ
  * Signature: ([F)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getRay
-  (JNIEnv* env, jobject obj, jfloatArray ray)
+  (JNIEnv* env, jobject thiz, jfloatArray ray)
 {
     cout << "Java-RayIntersection: getRay is called.\n";
-    RayIntersection* ri = (RayIntersection*)getNativePointer (env, obj);
+    RayIntersection* ri = (RayIntersection*)getNativePointer (env, thiz);
     float*r = env->GetFloatArrayElements (ray, 0);
     __TRY__;
     ri->getRay (r);
@@ -147,10 +147,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getRay
  * Signature: ()I
  */
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getSubmeshIndex
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-RayIntersection: getSubmeshIndex is called.\n";
-    RayIntersection* ri = (RayIntersection*)getNativePointer (env, obj);
+    RayIntersection* ri = (RayIntersection*)getNativePointer (env, thiz);
     int index;
     __TRY__;
     index = ri->getSubmeshIndex ();
@@ -164,10 +164,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getSubmeshInd
  * Signature: (I)F
  */
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getTextureS
-  (JNIEnv* env, jobject obj, jint index)
+  (JNIEnv* env, jobject thiz, jint index)
 {
     cout << "Java-RayIntersection: getTextureS is called.\n";
-    RayIntersection* ri = (RayIntersection*)getNativePointer (env, obj);
+    RayIntersection* ri = (RayIntersection*)getNativePointer (env, thiz);
     float s;
     __TRY__;
     s = ri->getTextureS (index);
@@ -181,10 +181,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getTextureS
  * Signature: (I)F
  */
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getTextureT
-  (JNIEnv* env, jobject obj, jint index)
+  (JNIEnv* env, jobject thiz, jint index)
 {
     cout << "Java-RayIntersection: getTextureT is called.\n";
-    RayIntersection* ri = (RayIntersection*)getNativePointer (env, obj);
+    RayIntersection* ri = (RayIntersection*)getNativePointer (env, thiz);
     float t;
     __TRY__;
     t = ri->getTextureT (index);
@@ -198,10 +198,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getTextureT
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1print
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-RayIntersection: print is called.\n";
-    RayIntersection* ri = (RayIntersection*)getNativePointer (env, obj);
+    RayIntersection* ri = (RayIntersection*)getNativePointer (env, thiz);
     __TRY__;
     ri->print (cout) << "\n";
     __CATCH_VOID__;

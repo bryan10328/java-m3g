@@ -13,15 +13,15 @@ using namespace m3g;
  * Signature: (III)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1initialize
-  (JNIEnv* env, jobject obj, jint numKeyframes, jint numComponents, jint interolation)
+  (JNIEnv* env, jobject thiz, jint numKeyframes, jint numComponents, jint interolation)
 {
     cout << "Java-KeyframeSequence: initilize is called.\n";
     KeyframeSequence* key_seq;
     __TRY__;
     key_seq = new KeyframeSequence (numKeyframes, numComponents, interolation);
     __CATCH_VOID__;
-    setNativePointer (env, obj, key_seq);
-    jobject entity = env->NewGlobalRef (obj);
+    setNativePointer (env, thiz, key_seq);
+    jobject entity = env->NewGlobalRef (thiz);
     key_seq->setExportedEntity (entity);
 }
 
@@ -31,10 +31,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1initialize
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1finalize
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-KeyframeSequence: finalize is called.\n";
-    KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, obj);
+    KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, thiz);
     __TRY__;
     delete key_seq;
     __CATCH_VOID__;
@@ -46,10 +46,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1finalize
  * Signature: ()I
  */
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getComponentCount
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-KeyframeSequence: getComponentCount is called.\n";
-    KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, obj);
+    KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, thiz);
     int count;
     __TRY__;
     count = key_seq->getComponentCount ();
@@ -63,10 +63,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getComponent
  * Signature: ()I
  */
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getDuration
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-KeyframeSequence: getDuration is called.\n";
-    KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, obj);
+    KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, thiz);
     int duration;
     __TRY__;
     duration = key_seq->getDuration ();
@@ -80,10 +80,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getDuration
  * Signature: ()I
  */
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getInterpolationType
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-KeyframeSequence: getInterpolationType is called.\n";
-    KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, obj);
+    KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, thiz);
     int type;
     __TRY__;
     type = key_seq->getInterpolationType ();
@@ -97,10 +97,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getInterpola
  * Signature: (I[F)I
  */
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getKeyframe
-  (JNIEnv* env, jobject obj, jint index, jfloatArray value)
+  (JNIEnv* env, jobject thiz, jint index, jfloatArray value)
 {
     cout << "Java-KeyframeSequence: getKeyframe is called.\n";
-    KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, obj);
+    KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, thiz);
     float* v = env->GetFloatArrayElements (value, 0);
     int time;
     __TRY__;
@@ -116,10 +116,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getKeyframe
  * Signature: ()I
  */
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getKeyframeCount
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-KeyframeSequence: getKeyframeCount is called.\n";
-    KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, obj);
+    KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, thiz);
     int count;
     __TRY__;
     count = key_seq->getKeyframeCount ();
@@ -133,10 +133,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getKeyframeC
  * Signature: ()I
  */
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getRepeatMode
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-KeyframeSequence: getRepeatMode is called.\n";
-    KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, obj);
+    KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, thiz);
     int mode;
     __TRY__;
     mode = key_seq->getRepeatMode ();
@@ -150,10 +150,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getRepeatMod
  * Signature: ()I
  */
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getValidRangeFirst
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-KeyframeSequence: getValidRnageFirst is called.\n";
-    KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, obj);
+    KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, thiz);
     int first;
     __TRY__;
     first = key_seq->getValidRangeFirst ();
@@ -167,10 +167,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getValidRang
  * Signature: ()I
  */
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getValidRangeLast
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-KeyframeSequence: getValidRangeLast is called.\n";
-    KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, obj);
+    KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, thiz);
     int last;
     __TRY__;
     last = key_seq->getValidRangeLast ();
@@ -184,10 +184,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getValidRang
  * Signature: (I)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1setDuration
-  (JNIEnv* env, jobject obj, jint duration)
+  (JNIEnv* env, jobject thiz, jint duration)
 {
     cout << "Java-KeyframeSequence: setDuration is called.\n";
-    KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, obj);
+    KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, thiz);
     __TRY__;
     key_seq->setDuration (duration);
     __CATCH_VOID__;
@@ -199,10 +199,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1setDuration
  * Signature: (II[F)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1setKeyframe
-  (JNIEnv* env, jobject obj, jint index, jint time, jfloatArray value)
+  (JNIEnv* env, jobject thiz, jint index, jint time, jfloatArray value)
 {
     cout << "Java-KeyframeSequence: setKeyframe is called.\n";
-    KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, obj);
+    KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, thiz);
     float* v = env->GetFloatArrayElements (value, 0);
     __TRY__;
     key_seq->setKeyframe (index, time, v);
@@ -217,10 +217,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1setKeyframe
  * Signature: (I)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1setRepeatMode
-  (JNIEnv* env, jobject obj, jint mode)
+  (JNIEnv* env, jobject thiz, jint mode)
 {
     cout << "Java-KeyframeSequence: setRepeatMode is called.\n";
-    KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, obj);
+    KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, thiz);
     __TRY__;
     key_seq->setRepeatMode (mode);
     __CATCH_VOID__;
@@ -232,10 +232,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1setRepeatMod
  * Signature: (II)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1setValidRange
-  (JNIEnv* env, jobject obj, jint first, jint last)
+  (JNIEnv* env, jobject thiz, jint first, jint last)
 {
     cout << "Java-KeyframeSequence: setValidRange is called.\n";
-    KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, obj);
+    KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, thiz);
     __TRY__;
     key_seq->setValidRange (first, last);
     __CATCH_VOID__;
@@ -247,10 +247,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1setValidRang
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1print
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-KeyframeSequence: print is called.\n";
-    KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, obj);
+    KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, thiz);
     __TRY__;
     key_seq->print (cout) << "\n";
     __CATCH_VOID__;

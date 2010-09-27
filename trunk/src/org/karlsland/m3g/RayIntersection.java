@@ -2,7 +2,7 @@ package org.karlsland.m3g;
 
 public class RayIntersection extends java.lang.Object {
 
-    protected long entity;
+    protected long nativePointer;
 
     static {
         System.loadLibrary ("javam3g");
@@ -21,6 +21,7 @@ public class RayIntersection extends java.lang.Object {
     native private void  jni_print           ();
 
     public RayIntersection () {
+        nativePointer = 0;
         jni_initialize ();
     }
 

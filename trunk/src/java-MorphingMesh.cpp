@@ -12,7 +12,7 @@ using namespace m3g;
  * Signature: (Lorg/karlsland/m3g/VertexBuffer;[Lorg/karlsland/m3g/VertexBuffer;[Lorg/karlsland/m3g/IndexBuffer;[Lorg/karlsland/m3g/Appearance;)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1initialize__Lorg_karlsland_m3g_VertexBuffer_2_3Lorg_karlsland_m3g_VertexBuffer_2_3Lorg_karlsland_m3g_IndexBuffer_2_3Lorg_karlsland_m3g_Appearance_2
-  (JNIEnv* env, jobject obj, jobject base, jobjectArray targets, jobjectArray submeshes, jobjectArray appearances)
+  (JNIEnv* env, jobject thiz, jobject base, jobjectArray targets, jobjectArray submeshes, jobjectArray appearances)
 {
     cout << "Java-MorhpingMesh: initilize1 is called.\n";
     VertexBuffer* vbuf = (VertexBuffer*)getNativePointer (env, base);
@@ -38,8 +38,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1initialize__Lorg
     delete[] tars;
     delete[] ibufs;
     delete[] apps;
-    setNativePointer (env, obj, mesh);
-    jobject entity = env->NewGlobalRef (obj);
+    setNativePointer (env, thiz, mesh);
+    jobject entity = env->NewGlobalRef (thiz);
     mesh->setExportedEntity (entity);
 }
 
@@ -49,7 +49,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1initialize__Lorg
  * Signature: (Lorg/karlsland/m3g/VertexBuffer;[Lorg/karlsland/m3g/VertexBuffer;Lorg/karlsland/m3g/IndexBuffer;Lorg/karlsland/m3g/Appearance;)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1initialize__Lorg_karlsland_m3g_VertexBuffer_2_3Lorg_karlsland_m3g_VertexBuffer_2Lorg_karlsland_m3g_IndexBuffer_2Lorg_karlsland_m3g_Appearance_2
-  (JNIEnv* env, jobject obj, jobject base, jobjectArray targets, jobject submesh, jobject appearance)
+  (JNIEnv* env, jobject thiz, jobject base, jobjectArray targets, jobject submesh, jobject appearance)
 {
     cout << "Java-MorhpingMesh: initialize2 is called.\n";
     VertexBuffer* vbuf = (VertexBuffer*)getNativePointer (env, base);
@@ -65,8 +65,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1initialize__Lorg
     mesh = new MorphingMesh (vbuf, len, tars, ibuf, app);
     __CATCH_VOID__;
     delete[] tars;
-    setNativePointer (env, obj, mesh);
-    jobject entity = env->NewGlobalRef (obj);
+    setNativePointer (env, thiz, mesh);
+    jobject entity = env->NewGlobalRef (thiz);
     mesh->setExportedEntity (entity);
 }
 
@@ -76,10 +76,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1initialize__Lorg
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1finalize
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-MorhpingMesh: finalize is called.\n";
-    MorphingMesh* mesh = (MorphingMesh*)getNativePointer (env, obj);
+    MorphingMesh* mesh = (MorphingMesh*)getNativePointer (env, thiz);
     __TRY__;
     delete mesh;
     __CATCH_VOID__;
@@ -91,10 +91,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1finalize
  * Signature: (I)Lorg/karlsland/m3g/IndexBuffer;
  */
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1getMorphTarget
-  (JNIEnv* env, jobject obj, jint index)
+  (JNIEnv* env, jobject thiz, jint index)
 {
     cout << "Java-MorhpingMesh: getMorphTarget is called.\n";
-    MorphingMesh* mesh = (MorphingMesh*)getNativePointer (env, obj);
+    MorphingMesh* mesh = (MorphingMesh*)getNativePointer (env, thiz);
     VertexBuffer* target;
     __TRY__;
     target = mesh->getMorphTarget (index);
@@ -108,10 +108,10 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1getMorphTarge
  * Signature: ()I
  */
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1getMorphTargetCount
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-MorhpingMesh: getMorphTargetCount is called.\n";
-    MorphingMesh* mesh = (MorphingMesh*)getNativePointer (env, obj);
+    MorphingMesh* mesh = (MorphingMesh*)getNativePointer (env, thiz);
     int count;
     __TRY__;
     count = mesh->getMorphTargetCount ();
@@ -125,10 +125,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1getMorphTargetCo
  * Signature: ([F)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1getWeights
-  (JNIEnv* env, jobject obj, jfloatArray weights)
+  (JNIEnv* env, jobject thiz, jfloatArray weights)
 {
     cout << "Java-MorhpingMesh: getWeights is called.\n";
-    MorphingMesh* mesh = (MorphingMesh*)getNativePointer (env, obj);
+    MorphingMesh* mesh = (MorphingMesh*)getNativePointer (env, thiz);
     float* ws = env->GetFloatArrayElements (weights, 0);
     __TRY__;
     mesh->getWeights (ws);
@@ -142,10 +142,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1getWeights
  * Signature: ([F)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1setWeights
-  (JNIEnv* env, jobject obj, jfloatArray weights)
+  (JNIEnv* env, jobject thiz, jfloatArray weights)
 {
     cout << "Java-MorhpingMesh: setWeights is called.\n";
-    MorphingMesh* mesh = (MorphingMesh*)getNativePointer (env, obj);
+    MorphingMesh* mesh = (MorphingMesh*)getNativePointer (env, thiz);
     int   len = env->GetArrayLength (weights);
     float* ws = env->GetFloatArrayElements (weights, 0);
     __TRY__;
@@ -160,10 +160,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1setWeights
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1print
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-MorhpingMesh: print is called.\n";
-    MorphingMesh* mesh = (MorphingMesh*)getNativePointer (env, obj);
+    MorphingMesh* mesh = (MorphingMesh*)getNativePointer (env, thiz);
     __TRY__;
     mesh->print (cout) << "\n";
     __CATCH_VOID__;

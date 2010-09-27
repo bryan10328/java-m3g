@@ -13,15 +13,15 @@ using namespace m3g;
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_World_jni_1initialize
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-World: initialize is called.\n";
     World* wld;
     __TRY__;
     wld = new World ();
     __CATCH_VOID__;
-    setNativePointer (env, obj, wld);
-    jobject entity = env->NewGlobalRef (obj);
+    setNativePointer (env, thiz, wld);
+    jobject entity = env->NewGlobalRef (thiz);
     wld->setExportedEntity (entity);
 }
 
@@ -31,10 +31,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_World_jni_1initialize
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_World_jni_1finalize
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-World: finalize is called.\n";
-    World* wld = (World*)getNativePointer (env, obj);
+    World* wld = (World*)getNativePointer (env, thiz);
     __TRY__;
     delete wld;
     __CATCH_VOID__;
@@ -46,10 +46,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_World_jni_1finalize
  * Signature: ()Lorg/karlsland/m3g/Camera;
  */
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_World_jni_1getActiveCamera
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-World: getActiveCamera is called.\n";
-    World*  wld = (World*)getNativePointer (env, obj);
+    World*  wld = (World*)getNativePointer (env, thiz);
     Camera* cam;
     __TRY__;
     cam = wld->getActiveCamera ();
@@ -63,10 +63,10 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_World_jni_1getActiveCamera
  * Signature: ()Lorg/karlsland/m3g/Background;
  */
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_World_jni_1getBackground
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-World: getBackground is called.\n";
-    World* wld = (World*)getNativePointer (env, obj);
+    World* wld = (World*)getNativePointer (env, thiz);
     Background* bg;
     __TRY__;
     bg = wld->getBackground ();
@@ -80,10 +80,10 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_World_jni_1getBackground
  * Signature: (Lorg/karlsland/m3g/Camera;)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_World_jni_1setActiveCamera
-  (JNIEnv* env, jobject obj, jobject camera)
+  (JNIEnv* env, jobject thiz, jobject camera)
 {
     cout << "Java-World: setActiveCamera is called.\n";
-    World*  wld = (World*)getNativePointer (env, obj);
+    World*  wld = (World*)getNativePointer (env, thiz);
     Camera* cam = (Camera*)getNativePointer (env, camera);
     __TRY__;
     wld->setActiveCamera (cam);
@@ -96,10 +96,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_World_jni_1setActiveCamera
  * Signature: (Lorg/karlsland/m3g/Background;)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_World_jni_1setBackground
-  (JNIEnv* env, jobject obj, jobject background)
+  (JNIEnv* env, jobject thiz, jobject background)
 {
     cout << "Java-World: setBackground is called.\n";
-    World* wld = (World*)getNativePointer (env, obj);
+    World* wld = (World*)getNativePointer (env, thiz);
     Background* bg = (Background*)getNativePointer (env, background);
     __TRY__;
     wld->setBackground (bg);
@@ -112,10 +112,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_World_jni_1setBackground
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_World_jni_1print
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-World: print is called.\n";
-    World* wld = (World*)getNativePointer (env, obj);
+    World* wld = (World*)getNativePointer (env, thiz);
     __TRY__;
     wld->print (cout) << "\n";
     __CATCH_VOID__;

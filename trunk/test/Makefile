@@ -27,3 +27,4 @@ clean:
 	rm -rf *.o *.so *.a *~ *.out *.log *.class
 	@echo done.
 
+# DO NOT DELETE

@@ -12,7 +12,7 @@ using namespace m3g;
  * Signature: (Lorg/karlsland/m3g/KeyframeSequence;I)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1initialize
-  (JNIEnv* env, jobject obj, jobject keyframeSequence, jint property)
+  (JNIEnv* env, jobject thiz, jobject keyframeSequence, jint property)
 {
     cout << "Java-AnimationTrack: initilize is called.\n";
     KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, keyframeSequence);
@@ -20,8 +20,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1initialize
     __TRY__;
     anim_track = new AnimationTrack (key_seq, property);
     __CATCH_VOID__;
-    setNativePointer (env, obj, anim_track);
-    jobject entity = env->NewGlobalRef (obj);
+    setNativePointer (env, thiz, anim_track);
+    jobject entity = env->NewGlobalRef (thiz);
     anim_track->setExportedEntity (entity);
 }
 
@@ -32,10 +32,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1initialize
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1finalize
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-AnimationTrack: finalize is called.\n";
-    AnimationTrack* anim_track = (AnimationTrack*)getNativePointer (env, obj);
+    AnimationTrack* anim_track = (AnimationTrack*)getNativePointer (env, thiz);
     __TRY__;
     delete anim_track;
     __CATCH_VOID__;
@@ -47,10 +47,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1finalize
  * Signature: ()Lorg/karlsland/m3g/AnimationController;
  */
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1getController
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-AnimationTrack: getController is called.\n";
-    AnimationTrack* anim_track = (AnimationTrack*)getNativePointer (env, obj);
+    AnimationTrack* anim_track = (AnimationTrack*)getNativePointer (env, thiz);
     AnimationController* anim_cntr;
     __TRY__;
     anim_cntr = anim_track->getController ();
@@ -64,10 +64,10 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1getControll
  * Signature: ()Lorg/karlsland/m3g/KeyframeSequence;
  */
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1getKeyframeSequence
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-AnimationTrack: getKeyframeSequence is called.\n";
-    AnimationTrack*   anim_track = (AnimationTrack*)getNativePointer (env, obj);
+    AnimationTrack*   anim_track = (AnimationTrack*)getNativePointer (env, thiz);
     KeyframeSequence* key_seq;
     __TRY__;
     key_seq = anim_track->getKeyframeSequence ();
@@ -82,10 +82,10 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1getKeyframe
  * Signature: ()I
  */
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1getTargetProperty
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-AnimationTrack: getTargetProperty is called.\n";
-    AnimationTrack* anim_track = (AnimationTrack*)getNativePointer (env, obj);
+    AnimationTrack* anim_track = (AnimationTrack*)getNativePointer (env, thiz);
     int property;
     __TRY__;
     property = anim_track->getTargetProperty ();
@@ -99,10 +99,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1getTargetPrope
  * Signature: (Lorg/karlsland/m3g/AnimationController;)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1setController
-  (JNIEnv* env, jobject obj, jobject animationController)
+  (JNIEnv* env, jobject thiz, jobject animationController)
 {
     cout << "Java-AnimationTrack: setController is called.\n";
-    AnimationTrack*      anim_track = (AnimationTrack*)getNativePointer (env, obj);
+    AnimationTrack*      anim_track = (AnimationTrack*)getNativePointer (env, thiz);
     AnimationController* anim_cntr  = (AnimationController*)getNativePointer (env, animationController);
     __TRY__;
     anim_track->setController (anim_cntr);
@@ -115,10 +115,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1setController
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1print
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-AnimationTrack: print is called.\n";
-    AnimationTrack* anim_track = (AnimationTrack*)getNativePointer (env, obj);
+    AnimationTrack* anim_track = (AnimationTrack*)getNativePointer (env, thiz);
     __TRY__;
     anim_track->print (cout) << "\n";
     __CATCH_VOID__;

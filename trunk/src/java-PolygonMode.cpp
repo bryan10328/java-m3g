@@ -12,15 +12,15 @@ using namespace m3g;
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1initialize
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-PolygonMode: initialize is called.";
     PolygonMode* pmode;
     __TRY__;
     pmode = new PolygonMode ();
     __CATCH_VOID__;
-    setNativePointer (env, obj, pmode);
-    jobject entity = env->NewGlobalRef (obj);
+    setNativePointer (env, thiz, pmode);
+    jobject entity = env->NewGlobalRef (thiz);
     pmode->setExportedEntity (entity);
 }
 
@@ -30,10 +30,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1initialize
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1finalize
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-PolygonMode: finalize is called.";
-    PolygonMode* pmode = (PolygonMode*)getNativePointer (env, obj);
+    PolygonMode* pmode = (PolygonMode*)getNativePointer (env, thiz);
     __TRY__;
     delete pmode;
     __CATCH_VOID__;
@@ -45,10 +45,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1finalize
  * Signature: ()I
  */
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1getCulling
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-PolygonMode: getCulling is called.";
-    PolygonMode* pmode = (PolygonMode*)getNativePointer (env, obj);
+    PolygonMode* pmode = (PolygonMode*)getNativePointer (env, thiz);
     int culling;
     __TRY__;
     culling = pmode->getCulling ();
@@ -62,10 +62,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1getCulling
  * Signature: ()I
  */
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1getShading
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-PolygonMode: getShading is called.";
-    PolygonMode* pmode = (PolygonMode*)getNativePointer (env, obj);
+    PolygonMode* pmode = (PolygonMode*)getNativePointer (env, thiz);
     int shading;
     __TRY__;
     shading = pmode->getShading ();
@@ -79,10 +79,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1getShading
  * Signature: ()I
  */
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1getWinding
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-PolygonMode: getWinding is called.";
-    PolygonMode* pmode = (PolygonMode*)getNativePointer (env, obj);
+    PolygonMode* pmode = (PolygonMode*)getNativePointer (env, thiz);
     int winding;
     __TRY__;
     winding = pmode->getWinding ();
@@ -96,10 +96,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1getWinding
  * Signature: ()Z
  */
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1isLocalCameraLightingEnabled
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-PolygonMode: isLocalCameraLightingEnabled is called.";
-    PolygonMode* pmode = (PolygonMode*)getNativePointer (env, obj);
+    PolygonMode* pmode = (PolygonMode*)getNativePointer (env, thiz);
     bool enabled;
     __TRY__;
     enabled = pmode->isLocalCameraLightingEnabled ();
@@ -113,10 +113,10 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1isLocalCamera
  * Signature: ()Z
  */
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1isPerspectiveCorrectionEnabled
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-PolygonMode: isPerspectiveCorrectionEnabled is called.";
-    PolygonMode* pmode = (PolygonMode*)getNativePointer (env, obj);
+    PolygonMode* pmode = (PolygonMode*)getNativePointer (env, thiz);
     bool enabled;
     __TRY__;
     enabled = pmode->isPerspectiveCorrectionEnabled ();
@@ -130,10 +130,10 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1isPerspective
  * Signature: ()Z
  */
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1isTwoSidedLightingEnabled
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-PolygonMode: isTwoSidedLightingEnabled is called.";
-    PolygonMode* pmode = (PolygonMode*)getNativePointer (env, obj);
+    PolygonMode* pmode = (PolygonMode*)getNativePointer (env, thiz);
     bool enabled;
     __TRY__;
     enabled = pmode->isTwoSidedLightingEnabled ();
@@ -147,10 +147,10 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1isTwoSidedLig
  * Signature: (I)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1setCulling
-  (JNIEnv* env, jobject obj, jint culling)
+  (JNIEnv* env, jobject thiz, jint culling)
 {
     cout << "Java-PolygonMode: setCulling is called.";
-    PolygonMode* pmode = (PolygonMode*)getNativePointer (env, obj);
+    PolygonMode* pmode = (PolygonMode*)getNativePointer (env, thiz);
     __TRY__;
     pmode->setCulling (culling);
     __CATCH_VOID__;
@@ -162,10 +162,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1setCulling
  * Signature: (Z)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1setLocalCameraLightingEnable
-  (JNIEnv* env, jobject obj, jboolean enable)
+  (JNIEnv* env, jobject thiz, jboolean enable)
 {
     cout << "Java-PolygonMode: setLocalCameraLighting is called.";
-    PolygonMode* pmode = (PolygonMode*)getNativePointer (env, obj);
+    PolygonMode* pmode = (PolygonMode*)getNativePointer (env, thiz);
     __TRY__;
     pmode->setLocalCameraLightingEnable (enable);
     __CATCH_VOID__;
@@ -177,10 +177,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1setLocalCameraLig
  * Signature: (Z)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1setPerspectiveCorrectionEnable
-  (JNIEnv* env, jobject obj, jboolean enable)
+  (JNIEnv* env, jobject thiz, jboolean enable)
 {
     cout << "Java-PolygonMode: setPerspectiveCorrectionEnable is called.";
-    PolygonMode* pmode = (PolygonMode*)getNativePointer (env, obj);
+    PolygonMode* pmode = (PolygonMode*)getNativePointer (env, thiz);
     __TRY__;
     pmode->setPerspectiveCorrectionEnable (enable);
     __CATCH_VOID__;
@@ -192,10 +192,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1setPerspectiveCor
  * Signature: (I)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1setShading
-  (JNIEnv* env, jobject obj, jint shading)
+  (JNIEnv* env, jobject thiz, jint shading)
 {
     cout << "Java-PolygonMode: setShading is called.";
-    PolygonMode* pmode = (PolygonMode*)getNativePointer (env, obj);
+    PolygonMode* pmode = (PolygonMode*)getNativePointer (env, thiz);
     __TRY__;
     pmode->setShading (shading);
     __CATCH_VOID__;
@@ -207,10 +207,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1setShading
  * Signature: (Z)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1setTwoSidedLightingEnable
-  (JNIEnv* env, jobject obj, jboolean enable)
+  (JNIEnv* env, jobject thiz, jboolean enable)
 {
     cout << "Java-PolygonMode: setTwoSidedLightingEnable is called.";
-    PolygonMode* pmode = (PolygonMode*)getNativePointer (env, obj);
+    PolygonMode* pmode = (PolygonMode*)getNativePointer (env, thiz);
     __TRY__;
     pmode->setTwoSidedLightingEnable (enable);
     __CATCH_VOID__;
@@ -222,10 +222,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1setTwoSidedLighti
  * Signature: (I)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1setWinding
-  (JNIEnv* env, jobject obj, jint winding)
+  (JNIEnv* env, jobject thiz, jint winding)
 {
     cout << "Java-PolygonMode: setWinding is called.";
-    PolygonMode* pmode = (PolygonMode*)getNativePointer (env, obj);
+    PolygonMode* pmode = (PolygonMode*)getNativePointer (env, thiz);
     __TRY__;
     pmode->setWinding (winding);
     __CATCH_VOID__;
@@ -237,10 +237,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1setWinding
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1print
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-PolygonMode: print is called.";
-    PolygonMode* pmode = (PolygonMode*)getNativePointer (env, obj);
+    PolygonMode* pmode = (PolygonMode*)getNativePointer (env, thiz);
     __TRY__;
     pmode->print (cout) << "\n";
     __CATCH_VOID__;

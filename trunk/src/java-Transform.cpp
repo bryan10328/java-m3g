@@ -12,15 +12,15 @@ using namespace m3g;
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1initialize__
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Transform: Transform initilize1 is called.\n";
     Transform* tra;
     __TRY__;
     tra = new Transform ();
     __CATCH_VOID__;
-    setNativePointer (env, obj, tra);
-    jobject entity = env->NewGlobalRef (obj);
+    setNativePointer (env, thiz, tra);
+    jobject entity = env->NewGlobalRef (thiz);
     tra->setExportedEntity (entity);
 }
 
@@ -30,7 +30,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1initialize__
  * Signature: (Lorg/karlsland/m3g/Transform;)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1initialize__Lorg_karlsland_m3g_Transform_2
-  (JNIEnv* env, jobject obj, jobject transform)
+  (JNIEnv* env, jobject thiz, jobject transform)
 {
     cout << "Java-Transform: Transform initilize2 is called.\n";
     Transform* t = (Transform*)getNativePointer (env, transform);
@@ -38,8 +38,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1initialize__Lorg_ka
     __TRY__;
     tra = new Transform (*t);
     __CATCH_VOID__;
-    setNativePointer (env, obj, tra);
-    jobject entity = env->NewGlobalRef (obj);
+    setNativePointer (env, thiz, tra);
+    jobject entity = env->NewGlobalRef (thiz);
     tra->setExportedEntity (entity);
 }
 
@@ -49,10 +49,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1initialize__Lorg_ka
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1finalize
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Transform: finalize is called.\n";
-    Transform* trans = (Transform*)getNativePointer (env, obj);
+    Transform* trans = (Transform*)getNativePointer (env, thiz);
     __TRY__;
     delete trans;
     __CATCH_VOID__;
@@ -64,10 +64,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1finalize
  * Signature: ([F)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1get
-  (JNIEnv* env, jobject obj, jfloatArray matrix)
+  (JNIEnv* env, jobject thiz, jfloatArray matrix)
 {
     cout << "Java-Transform: get is called.\n";
-    Transform* trans = (Transform*)getNativePointer (env, obj);
+    Transform* trans = (Transform*)getNativePointer (env, thiz);
     float* mat = env->GetFloatArrayElements (matrix, 0);
     __TRY__;
     trans->get (mat);
@@ -81,10 +81,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1get
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1invert
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Transform: invert is called.\n";
-    Transform* trans = (Transform*)getNativePointer (env, obj);
+    Transform* trans = (Transform*)getNativePointer (env, thiz);
     __TRY__;
     trans->invert ();
     __CATCH_VOID__;
@@ -96,10 +96,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1invert
  * Signature: (Lorg/karlsland/m3g/Transform;)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1postMultiply
-  (JNIEnv* env, jobject obj, jobject transform)
+  (JNIEnv* env, jobject thiz, jobject transform)
 {
     cout << "Java-Transform: postMultiply is called.\n";
-    Transform* trans1 = (Transform*)getNativePointer (env, obj);
+    Transform* trans1 = (Transform*)getNativePointer (env, thiz);
     Transform* trans2 = (Transform*)getNativePointer (env, transform);
     __TRY__;
     trans1->postMultiply (*trans2);
@@ -112,10 +112,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1postMultiply
  * Signature: (FFFF)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1postRotate
-  (JNIEnv* env, jobject obj, jfloat angle, jfloat ax, jfloat ay, jfloat az)
+  (JNIEnv* env, jobject thiz, jfloat angle, jfloat ax, jfloat ay, jfloat az)
 {
     cout << "Java-Transform: postRotate is called.\n";
-    Transform* trans = (Transform*)getNativePointer (env, obj);
+    Transform* trans = (Transform*)getNativePointer (env, thiz);
     __TRY__;
     trans->postRotate  (angle, ax, ay, az);
     __CATCH_VOID__;
@@ -127,10 +127,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1postRotate
  * Signature: (FFFF)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1postRotateQuat
-  (JNIEnv* env, jobject obj, jfloat qx, jfloat qy, jfloat qz, jfloat qw)
+  (JNIEnv* env, jobject thiz, jfloat qx, jfloat qy, jfloat qz, jfloat qw)
 {
     cout << "Java-Transform: postRotateQuat is called.\n";
-    Transform* trans = (Transform*)getNativePointer (env, obj);
+    Transform* trans = (Transform*)getNativePointer (env, thiz);
     __TRY__;
     trans->postRotateQuat (qx, qy, qz, qw);
     __CATCH_VOID__;
@@ -142,10 +142,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1postRotateQuat
  * Signature: (FFF)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1postScale
-  (JNIEnv* env, jobject obj, jfloat sx, jfloat sy, jfloat sz)
+  (JNIEnv* env, jobject thiz, jfloat sx, jfloat sy, jfloat sz)
 {
     cout << "Java-Transform: postScale is called.\n";
-    Transform* trans = (Transform*)getNativePointer (env, obj);
+    Transform* trans = (Transform*)getNativePointer (env, thiz);
     __TRY__;
     trans->postScale (sx, sy, sz);
     __CATCH_VOID__;
@@ -157,10 +157,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1postScale
  * Signature: (FFF)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1postTranslate
-  (JNIEnv* env, jobject obj, jfloat tx, jfloat ty, jfloat tz)
+  (JNIEnv* env, jobject thiz, jfloat tx, jfloat ty, jfloat tz)
 {
     cout << "Java-Transform: postTranslate is called.\n";
-    Transform* trans = (Transform*)getNativePointer (env, obj);
+    Transform* trans = (Transform*)getNativePointer (env, thiz);
     __TRY__;
     trans->postTranslate (tx, ty, tz);
     __CATCH_VOID__;
@@ -172,10 +172,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1postTranslate
  * Signature: ([F)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1set___3F
-  (JNIEnv* env, jobject obj, jfloatArray matrix)
+  (JNIEnv* env, jobject thiz, jfloatArray matrix)
 {
     cout << "Java-Transform: set is called.\n";
-    Transform* trans = (Transform*)getNativePointer (env, obj);
+    Transform* trans = (Transform*)getNativePointer (env, thiz);
     float* mat = env->GetFloatArrayElements (matrix, 0);
     __TRY__;
     trans->set (mat);
@@ -188,9 +188,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1set___3F
  * Signature: (Lorg/karlsland/m3g/Transform;)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1set__Lorg_karlsland_m3g_Transform_2
-  (JNIEnv* env, jobject obj, jobject transform)
+  (JNIEnv* env, jobject thiz, jobject transform)
 {
-    Transform* trans = (Transform*)getNativePointer (env, obj);
+    Transform* trans = (Transform*)getNativePointer (env, thiz);
     Transform* target = (Transform*)getNativePointer (env, transform);
     __TRY__;
     trans->set (*target);
@@ -203,10 +203,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1set__Lorg_karlsland
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1setIdentity
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Transform: setIdentity is called.\n";
-    Transform* trans = (Transform*)getNativePointer (env, obj);
+    Transform* trans = (Transform*)getNativePointer (env, thiz);
     __TRY__;
     trans->setIdentity ();
     __CATCH_VOID__;
@@ -218,10 +218,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1setIdentity
  * Signature: ([F)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1transform___3F
-  (JNIEnv* env, jobject obj, jfloatArray vectors)
+  (JNIEnv* env, jobject thiz, jfloatArray vectors)
 {
     cout << "Java-Transform: transform is called.\n";
-    Transform* trans = (Transform*)getNativePointer (env, obj);
+    Transform* trans = (Transform*)getNativePointer (env, thiz);
     float* vec = env->GetFloatArrayElements (vectors, 0);
     int len = env->GetArrayLength (vectors);
     trans->transform (len, vec);
@@ -236,10 +236,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1transform___3F
  * Signature: (Lorg/karlsland/m3g/VertexArray;[FZ)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1transform__Lorg_karlsland_m3g_VertexArray_2_3FZ
-  (JNIEnv* env, jobject obj, jobject in, jfloatArray out, jboolean w)
+  (JNIEnv* env, jobject thiz, jobject in, jfloatArray out, jboolean w)
 {
     cout << "Java-Transform: transform vertex-array is called.\n";
-    Transform* trans = (Transform*)getNativePointer (env, obj);
+    Transform* trans = (Transform*)getNativePointer (env, thiz);
     VertexArray* varry = (VertexArray*)getNativePointer (env, in);
     float* ou = env->GetFloatArrayElements (out, 0);
     __TRY__;
@@ -254,10 +254,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1transform__Lorg_kar
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1transpose
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Transform: transpose is called.\n";
-    Transform* trans = (Transform*)getNativePointer (env, obj);
+    Transform* trans = (Transform*)getNativePointer (env, thiz);
     __TRY__;
     trans->transpose ();
     __CATCH_VOID__;
@@ -269,9 +269,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1transpose
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1print
-  (JNIEnv* env, jobject obj)
+  (JNIEnv* env, jobject thiz)
 {
-    Transform* trans = (Transform*)getNativePointer (env, obj);
+    Transform* trans = (Transform*)getNativePointer (env, thiz);
     __TRY__;
     trans->print (cout) << "\n";
     __CATCH_VOID__;

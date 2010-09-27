@@ -3,7 +3,7 @@ package org.karlsland.m3g;
 
 public class Loader extends java.lang.Object {
     
-    protected long entity;
+    protected long nativePointer;
 
     static {
         System.loadLibrary ("javam3g");

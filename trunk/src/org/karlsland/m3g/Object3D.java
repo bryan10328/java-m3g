@@ -4,7 +4,7 @@ package org.karlsland.m3g;
 abstract 
 public class Object3D extends java.lang.Object {
 
-    protected long entity;
+    protected long nativePointer;
 
     static {
         System.loadLibrary ("javam3g");
@@ -26,7 +26,7 @@ public class Object3D extends java.lang.Object {
     native private void             jni_print                  ();
 
     public Object3D () {
-        entity = 0;
+        nativePointer = 0;
         jni_initialize ();
     }
 

@@ -8,7 +8,7 @@ void* getNativePointer (JNIEnv* env, jobject obj)
         return NULL;
     }
     jclass   clazz = env->GetObjectClass (obj);
-    jfieldID fid   = env->GetFieldID (clazz, "entity", "J");
+    jfieldID fid   = env->GetFieldID (clazz, "nativePointer", "J");
     return (void*)env->GetLongField (obj, fid);
 }
 
@@ -16,8 +16,10 @@ static inline
 void setNativePointer (JNIEnv* env, jobject obj, void* entity)
 {
     jclass   clazz = env->GetObjectClass (obj);
-    jfieldID fid   = env->GetFieldID (clazz, "entity", "J");
-    env->SetLongField (obj, fid, (long)entity);
+    jfieldID fid   = env->GetFieldID (clazz, "nativePointer", "J");
+    if (fid > 0) {
+        env->SetLongField (obj, fid, (long)entity);
+    }
 }
 
 
