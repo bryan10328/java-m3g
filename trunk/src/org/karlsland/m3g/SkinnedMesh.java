@@ -17,6 +17,7 @@ public class SkinnedMesh extends Mesh {
     private Group         skeleton;
 
     public SkinnedMesh (VertexBuffer vertices, IndexBuffer[] submeshes, Appearance[] appearances, Group skeleton) {
+        super ();
         this.vertices    = vertices;
         this.submeshes   = submeshes;
         this.appearances = appearances;
@@ -25,6 +26,7 @@ public class SkinnedMesh extends Mesh {
     }
 
     public SkinnedMesh (VertexBuffer vertices, IndexBuffer submesh, Appearance appearance, Group skeleton) {
+        super ();
         this.vertices    = vertices;
         this.submeshes   = new IndexBuffer[] {submesh}; 
         this.appearances = new Appearance[] {appearance};

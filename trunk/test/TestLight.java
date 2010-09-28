@@ -43,5 +43,7 @@ public class TestLight {
         assertEquals (3.f  , lgh.getQuadraticAttenuation(), 0.00001f);
         assertEquals (90.f , lgh.getSpotAngle()           , 0.00001f);
         assertEquals (2.f  , lgh.getSpotExponent()        , 0.00001f);
+
+        lgh = null;
     }
 }

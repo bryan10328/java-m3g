@@ -20,7 +20,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1initialize
     ri = new RayIntersection ();
     __CATCH_VOID__;
     setNativePointer (env, thiz, ri);
-    jobject entity = env->NewGlobalRef (thiz);
+    jobject entity = env->NewWeakGlobalRef (thiz);
     ri->setExportedEntity (entity);
 }
 
@@ -34,6 +34,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1finalize
 {
     cout << "Java-RayIntersection: finalize is called.\n";
     RayIntersection* ri = (RayIntersection*)getNativePointer (env, thiz);
+    env->DeleteWeakGlobalRef ((jobject)ri->getExportedEntity());
     __TRY__;
     delete ri;
     __CATCH_VOID__;

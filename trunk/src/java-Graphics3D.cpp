@@ -176,14 +176,15 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getInstance
     cout << "Java-Graphics3D: getInstance is called.\n";
     Graphics3D* g3d = Graphics3D:: getInstance ();
     if (g3d->getExportedEntity() == NULL) {
-        cout << "Java-Graphic3D: create Graphics3D object of Java.\n";
+        // 必ず「グローバル参照」を返す。
+        // Graphics3Dクラスは決して削除されない。
+        cout << "Java-Graphic3D: create Graphics3D object.\n";
         jmethodID mid = env->GetMethodID (clazz, "<init>", "()V");
         jobject thiz = env->NewObject (clazz, mid);
         setNativePointer (env, thiz, g3d);
-        cout << "SetNativePointer\n";
         jobject entity = env->NewGlobalRef (thiz);
         g3d->setExportedEntity (entity);
-        cout << "Java-Graphics3D: created Graphics3D object of Java,";
+        cout << "Java-Graphics3D: created Graphics3D object, ";
         cout << hex << "nativePointer=" << g3d << ",thiz=" << thiz << ",GlobalRef=" << entity << dec << "\n";
     }
     return (g3d != NULL) ? (jobject)g3d->getExportedEntity() : (jobject)NULL;

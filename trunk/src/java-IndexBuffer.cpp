@@ -20,7 +20,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1initialize
     ibuf = new IndexBuffer ();
     __CATCH_VOID__;
     setNativePointer (env, thiz, ibuf);
-    jobject entity = env->NewGlobalRef (thiz);
+    jobject entity = env->NewWeakGlobalRef (thiz);
     ibuf->setExportedEntity (entity);
 }
 
@@ -32,8 +32,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1initialize
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1finalize
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-IndexBuffer:  is called.\n";
+    cout << "Java-IndexBuffer: finalize is called.\n";
     IndexBuffer* ibuf = (IndexBuffer*)getNativePointer (env, thiz);
+    env->DeleteWeakGlobalRef ((jobject)ibuf->getExportedEntity());
     __TRY__;
     delete ibuf;
     __CATCH_VOID__;

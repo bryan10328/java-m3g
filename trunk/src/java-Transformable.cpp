@@ -20,7 +20,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1initialize
     trans = new Transformable ();
     __CATCH_VOID__;
     setNativePointer (env, thiz, trans);
-    jobject entity = env->NewGlobalRef (thiz);
+    jobject entity = env->NewWeakGlobalRef (thiz);
     trans->setExportedEntity (entity);
 }
 
@@ -34,6 +34,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1finalize
 {
     cout << "Java-Transformable: finalize is called.\n";
     Transformable* trans = (Transformable*)getNativePointer (env, thiz);
+    env->DeleteWeakGlobalRef ((jobject)trans->getExportedEntity());
     __TRY__;
     delete trans;
     __CATCH_VOID__;

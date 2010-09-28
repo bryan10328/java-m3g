@@ -23,7 +23,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1initialize
     spr = new Sprite3D (scaled, img, app);
     __CATCH_VOID__;
     setNativePointer (env, thiz, spr);
-    jobject entity = env->NewGlobalRef (thiz);
+    jobject entity = env->NewWeakGlobalRef (thiz);
     spr->setExportedEntity (entity);
 }
 
@@ -37,6 +37,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1finalize
 {
     cout << "Java-Sprite3D: finalize is called.\n";
     Sprite3D* spr = (Sprite3D*)getNativePointer (env, thiz);
+    env->DeleteWeakGlobalRef ((jobject)spr->getExportedEntity());
     __TRY__;
     delete spr;
     __CATCH_VOID__;

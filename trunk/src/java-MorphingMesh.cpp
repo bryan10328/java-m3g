@@ -39,7 +39,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1initialize__Lorg
     delete[] ibufs;
     delete[] apps;
     setNativePointer (env, thiz, mesh);
-    jobject entity = env->NewGlobalRef (thiz);
+    jobject entity = env->NewWeakGlobalRef (thiz);
     mesh->setExportedEntity (entity);
 }
 
@@ -66,7 +66,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1initialize__Lorg
     __CATCH_VOID__;
     delete[] tars;
     setNativePointer (env, thiz, mesh);
-    jobject entity = env->NewGlobalRef (thiz);
+    jobject entity = env->NewWeakGlobalRef (thiz);
     mesh->setExportedEntity (entity);
 }
 
@@ -80,6 +80,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1finalize
 {
     cout << "Java-MorhpingMesh: finalize is called.\n";
     MorphingMesh* mesh = (MorphingMesh*)getNativePointer (env, thiz);
+    env->DeleteWeakGlobalRef ((jobject)mesh->getExportedEntity());
     __TRY__;
     delete mesh;
     __CATCH_VOID__;

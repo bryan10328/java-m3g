@@ -20,7 +20,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Material_jni_1initialize
     mat = new Material ();
     __CATCH_VOID__;
     setNativePointer (env, thiz, mat);
-    jobject entity = env->NewGlobalRef (thiz);
+    jobject entity = env->NewWeakGlobalRef (thiz);
     mat->setExportedEntity (entity);
 }
 
@@ -34,6 +34,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Material_jni_1finalize
 {
     cout << "Java-Material: finalize is called.\n";
     Material* mat = (Material*)getNativePointer (env, thiz);
+    env->DeleteWeakGlobalRef ((jobject)mat->getExportedEntity());
     __TRY__;
     delete mat;
     __CATCH_VOID__;

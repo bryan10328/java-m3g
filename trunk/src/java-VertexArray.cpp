@@ -20,8 +20,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1initialize
     __TRY__;
     varry = new VertexArray (numVertices, numComponents, componentSize);
     __CATCH_VOID__;
+    cout << "new varry = " << varry << "\n";
     setNativePointer (env, thiz, varry);
-    jobject entity = env->NewGlobalRef (thiz);
+    jobject entity = env->NewWeakGlobalRef (thiz);
     varry->setExportedEntity (entity);
 }
 
@@ -35,9 +36,14 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1finalize
 {
     cout << "Java-VertexArray: finalize is called.\n";
     VertexArray* varry = (VertexArray*)getNativePointer (env, thiz);
+    cout << "delete varry = " << varry << "\n";
+    env->DeleteWeakGlobalRef ((jobject)varry->getExportedEntity());
+    varry->print_raw_data (cout) << "\n";
+    cout << "start delete\n";
     __TRY__;
     delete varry;
     __CATCH_VOID__;
+    cout << "done delete\n";
 }
 
 /*
@@ -175,6 +181,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1set__II_3S
     varry->set (firstVertex, numVertices, v);
     __CATCH_VOID__;
     env->ReleaseShortArrayElements (values, v, 0);
+    varry->print_raw_data (cout) << "\n";
 }
 
 /*

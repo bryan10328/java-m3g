@@ -2,8 +2,6 @@ import static org.junit.Assert.*;
 import junit.framework.JUnit4TestAdapter;
 import org.junit.Test;
 import org.junit.BeforeClass;
-import org.junit.AfterClass;
-
 
 public class Setup {
 
@@ -20,15 +18,11 @@ public class Setup {
 
     @BeforeClass
     public static void testSetup () {
-        System.out.println ("Global Setup is called.");
+        System.out.println ("Global Setup is called.========================================");
         glut = new JniGlut ();
         glut.init ();
     }
 
-    @AfterClass
-    public static void testTearDown () {
-        System.out.println ("Global TearDown is called.");
-    }
 
 
 }

@@ -35,7 +35,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1initialize__Lorg_
     delete[] ibufs;
     delete[] apps;
     setNativePointer (env, thiz, mesh);
-    jobject entity = env->NewGlobalRef (thiz);
+    jobject entity = env->NewWeakGlobalRef (thiz);
     mesh->setExportedEntity (entity);
 }
 
@@ -55,9 +55,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1initialize__Lorg_
     SkinnedMesh* mesh;
     __TRY__;
     mesh = new SkinnedMesh (vbuf, ibuf, app, skel);
+    mesh->print (cout) << "\n";
     __CATCH_VOID__;
     setNativePointer (env, thiz, mesh);
-    jobject entity = env->NewGlobalRef (thiz);
+    jobject entity = env->NewWeakGlobalRef (thiz);
     mesh->setExportedEntity (entity);
 }
 
@@ -72,6 +73,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1finalize
 {
     cout << "Java-SkinnedMesh: finalize is caleld.\n";
     SkinnedMesh* mesh = (SkinnedMesh*)getNativePointer (env, thiz);
+    env->DeleteWeakGlobalRef ((jobject)mesh->getExportedEntity());
     __TRY__;
     delete mesh;
     __CATCH_VOID__;

@@ -2,7 +2,7 @@
 # export CLASSPATH=.:/usr/share/java/junit4.jar:../src   
 #
 
-SRCS       = Setup.java $(wildcard Test*.java)
+SRCS       = Setup.java $(wildcard Test*.java) TearDown.java
 CLASSS     = $(SRCS:.java=.class)
 TARGETS    = org.junit.runner.JUnitCore $(SRCS:.java=)
 CLASSPATH  = -classpath .:../src:/usr/share/java/junit4.jar 

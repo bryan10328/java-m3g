@@ -21,7 +21,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Object3D_jni_1initialize
     obj3d = new Object3D ();
     __CATCH_VOID__;
     setNativePointer (env, thiz, obj3d);
-    jobject entity = env->NewGlobalRef (thiz);
+    jobject entity = env->NewWeakGlobalRef (thiz);
     obj3d->setExportedEntity (entity);
 }
 
@@ -35,6 +35,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Object3D_jni_1finalize
 {
     cout << "Java-Object3D: Object3D finalize is called.\n";
     Object3D* obj3d = (Object3D*)getNativePointer (env, thiz);
+    env->DeleteWeakGlobalRef ((jobject)obj3d->getExportedEntity());
     __TRY__;
     delete obj3d;
     __CATCH_VOID__;
@@ -248,7 +249,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Object3D_jni_1setUserObject
 {
     cout << "Java-Object3D: setUserObject is called.\n";
     Object3D* obj3d = (Object3D*)getNativePointer (env, thiz);
-    jobject entity = env->NewGlobalRef (userObject);
+    jobject entity = env->NewWeakGlobalRef (userObject);
     __TRY__;
     obj3d->setUserObject (entity);
     __CATCH_VOID__;

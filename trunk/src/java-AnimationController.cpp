@@ -20,7 +20,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationController_jni_1initializ
     controller = new AnimationController();
     __CATCH_VOID__;
     setNativePointer (env, thiz, controller);
-    jobject entity = env->NewGlobalRef (thiz);
+    jobject entity = env->NewWeakGlobalRef (thiz);
     controller->setExportedEntity (entity);
 }
 
@@ -34,7 +34,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationController_jni_1finalize
 {
     cout << "Java-AnimationController: finalize is called.\n";
     AnimationController* controller = (AnimationController*)getNativePointer(env, thiz);
+    env->DeleteWeakGlobalRef ((jobject)controller->getExportedEntity());
+    __TRY__;
     delete controller;
+    __CATCH_VOID__;
 }
 
 /*

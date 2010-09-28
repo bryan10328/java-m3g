@@ -9,22 +9,32 @@ public class TestSkinnedMesh {
         return new JUnit4TestAdapter(TestSkinnedMesh.class);
     }
 
+
     @Test
     public void testInitialize1 () {
+
         VertexArray        positions = new VertexArray (4, 3, 2);
         VertexBuffer       vertices  = new VertexBuffer ();
-        TriangleStripArray tris      = new TriangleStripArray (0, new int[]{3});
+        TriangleStripArray tris      = new TriangleStripArray (0, new int[]{4});
         Appearance         app       = new Appearance ();
         Group              skeleton  = new Group ();
-        vertices.setPositions (positions, 1, new float[]{0,0,0});
+        positions.set (0, 4, new short[]{0,1,2,3,4,5,6,7,8,9,10,11});
 
-        SkinnedMesh mesh = new SkinnedMesh (vertices, tris, app, skeleton);
+        float   scale = 1;
+        float[] bias  = {0,0,0};
+        vertices.setPositions (positions, scale, bias);
+
+        IndexBuffer[] triss = new IndexBuffer[] {tris};
+        Appearance[]  apps  = new Appearance[] {app};
+        SkinnedMesh mesh = new SkinnedMesh (vertices, triss, apps, skeleton);
+        //Mesh mesh = new Mesh (vertices, triss, apps);
 
         assertEquals (vertices, mesh.getVertexBuffer());
         assertEquals (1       , mesh.getSubmeshCount());
         assertEquals (tris    , mesh.getIndexBuffer(0));
         assertEquals (app     , mesh.getAppearance(0));
         assertEquals (skeleton, mesh.getSkeleton());
+
     }
 
     @Test
@@ -47,4 +57,7 @@ public class TestSkinnedMesh {
         assertEquals (tris0    , mesh.getIndexBuffer(0));
 
     }
+
+
+
 }

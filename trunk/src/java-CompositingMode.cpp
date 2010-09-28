@@ -14,13 +14,13 @@ using namespace m3g;
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1initialzie
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-CompositingMode: initilize is called.";
+    cout << "Java-CompositingMode: initilize is called.\n";
     CompositingMode* cmode;
     __TRY__;
     cmode = new CompositingMode ();
     __CATCH_VOID__;
     setNativePointer (env, thiz, cmode);
-    jobject entity = env->NewGlobalRef (thiz);
+    jobject entity = env->NewWeakGlobalRef (thiz);
     cmode->setExportedEntity (entity);
 }
 
@@ -32,8 +32,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1initialzie
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1finalize
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-CompositingMode: finalize is called.";
+    cout << "Java-CompositingMode: finalize is called.\n";
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
+    env->DeleteWeakGlobalRef ((jobject)cmode->getExportedEntity());
     __TRY__;
     delete cmode;
     __CATCH_VOID__;
@@ -47,7 +48,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1finalize
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1getAlphaThreshold
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-CompositingMode: getAlphaThreshold is called.";
+    cout << "Java-CompositingMode: getAlphaThreshold is called.\n";
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
     float th;
     __TRY__;
@@ -64,7 +65,7 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1getAlphaThr
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1getBlending
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-CompositingMode: getBlending is called.";
+    cout << "Java-CompositingMode: getBlending is called.\n";
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
     int func;
     __TRY__;
@@ -81,7 +82,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1getBlending
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1getDepthOffsetFactor
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-CompositingMode: getDepthOffsetFactor is called.";
+    cout << "Java-CompositingMode: getDepthOffsetFactor is called.\n";
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
     float factor;
     __TRY__;
@@ -98,7 +99,7 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1getDepthOff
 JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1getDepthOffsetUnits
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-CompositingMode: getDepthOffsetUnits is called.";
+    cout << "Java-CompositingMode: getDepthOffsetUnits is called.\n";
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
     float units;
     __TRY__;
@@ -115,7 +116,7 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1getDepthOff
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1isAlphaWriteEnable
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-CompositingMode: isAlphaWriteEnable is called.";
+    cout << "Java-CompositingMode: isAlphaWriteEnable is called.\n";
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
     bool enable;
     __TRY__;
@@ -132,7 +133,7 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1isAlphaWr
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1isColorWriteEnable
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-CompositingMode: isColorWriteEnable is called.";
+    cout << "Java-CompositingMode: isColorWriteEnable is called.\n";
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
     bool enable;
     __TRY__;
@@ -150,7 +151,7 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1isColorWr
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1isDepthTestEnabled
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-CompositingMode: isDepthTestEnable is called.";
+    cout << "Java-CompositingMode: isDepthTestEnable is called.\n";
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
     bool enable;
     __TRY__;
@@ -167,7 +168,7 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1isDepthTe
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1isDepthWriteEnabled
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-CompositingMode: isDepthWriteEnabled is called.";
+    cout << "Java-CompositingMode: isDepthWriteEnabled is called.\n";
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
     bool enabled;
     __TRY__;
@@ -184,7 +185,7 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1isDepthWr
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1setAlphaThreshold
   (JNIEnv* env, jobject thiz, jfloat threshold)
 {
-    cout << "Java-CompositingMode: setAlphaThreshold is called.";
+    cout << "Java-CompositingMode: setAlphaThreshold is called.\n";
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
     __TRY__;
     cmode->setAlphaThreshold (threshold);
@@ -199,7 +200,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1setAlphaThres
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1setAlphaWriteEnable
   (JNIEnv* env, jobject thiz, jboolean enable)
 {
-    cout << "Java-CompositingMode: setAlphaWriteEnable is called.";
+    cout << "Java-CompositingMode: setAlphaWriteEnable is called.\n";
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
     __TRY__;
     cmode->setAlphaWriteEnable (enable);
@@ -214,7 +215,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1setAlphaWrite
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1setBlending
   (JNIEnv* env, jobject thiz, jint func)
 {
-    cout << "Java-CompositingMode: setBlending is called.";
+    cout << "Java-CompositingMode: setBlending is called.\n";
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
     __TRY__;
     cmode->setBlending (func);
@@ -229,7 +230,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1setBlending
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1setColorWriteEnable
   (JNIEnv* env, jobject thiz, jboolean enable)
 {
-    cout << "Java-CompositingMode: setColorWriteEnable is called.";
+    cout << "Java-CompositingMode: setColorWriteEnable is called.\n";
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
     __TRY__;
     cmode->setColorWriteEnable (enable);
@@ -244,7 +245,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1setColorWrite
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1setDepthOffset
   (JNIEnv* env, jobject thiz, jfloat factor, jfloat units)
 {
-    cout << "Java-CompositingMode: setDepthOffset is called.";
+    cout << "Java-CompositingMode: setDepthOffset is called.\n";
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
     __TRY__;
     cmode->setDepthOffset (factor, units);
@@ -259,7 +260,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1setDepthOffse
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1setDepthTestEnable
   (JNIEnv* env, jobject thiz, jboolean enable)
 {
-    cout << "Java-CompositingMode: setDepthEnable is called.";
+    cout << "Java-CompositingMode: setDepthEnable is called.\n";
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
     __TRY__;
     cmode->setDepthTestEnable (enable);
@@ -274,7 +275,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1setDepthTestE
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1setDepthWriteEnable
   (JNIEnv* env, jobject thiz, jboolean enable)
 {
-    cout << "Java-CompositingMode: setDepthWriteEnable is called.";
+    cout << "Java-CompositingMode: setDepthWriteEnable is called.\n";
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
     __TRY__;
     cmode->setDepthWriteEnable (enable);
@@ -289,7 +290,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1setDepthWrite
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1print
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-CompositingMode: print is called.";
+    cout << "Java-CompositingMode: print is called.\n";
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
     __TRY__;
     cmode->print (cout) << "\n";

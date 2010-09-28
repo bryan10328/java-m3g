@@ -20,7 +20,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Node_jni_1initialize
     node = new Node ();
     __CATCH_VOID__;
     setNativePointer (env, thiz, node);
-    jobject entity = env->NewGlobalRef (thiz);
+    jobject entity = env->NewWeakGlobalRef (thiz);
     node->setExportedEntity (entity);
 }
 
@@ -34,6 +34,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Node_jni_1finalize
 {
     cout << "Java-Node: finalize is called.\n";
     Node* node = (Node*)getNativePointer (env, thiz);
+    env->DeleteWeakGlobalRef ((jobject)node->getExportedEntity());
     __TRY__;
     delete node;
     __CATCH_VOID__;
