@@ -14,7 +14,7 @@ public class AnimationController extends Object3D {
     native private int   jni_getRefWorldTime           ();
     native private float jni_getSpeed                  ();
     native private float jni_getWeight                 ();
-    native private void  jni_setActiveInterval         (int start, int end);
+    native private void  jni_setActiveInterval         (int   start, int end);
     native private void  jni_setPosition               (float sequenceTime, int worldTime);
     native private void  jni_setSpeed                  (float speed, int worldTime);
     native private void  jni_setWeight                 (float weight);

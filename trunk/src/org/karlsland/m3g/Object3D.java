@@ -1,10 +1,9 @@
 package org.karlsland.m3g;
+import java.util.*;
 
 
 abstract 
 public class Object3D extends java.lang.Object {
-
-    protected long nativePointer;
 
     static {
         System.loadLibrary ("javam3g");
@@ -25,16 +24,25 @@ public class Object3D extends java.lang.Object {
     native private void             jni_setUserObject          (java.lang.Object userObject);
     native private void             jni_print                  ();
 
+    private long                 nativePointer;
+    private List<AnimationTrack> animationTracks;
+    private java.lang.Object     userObject;
+
+
     public Object3D () {
-        nativePointer = 0;
-        jni_initialize ();
+        nativePointer   = 0;
+        animationTracks = new ArrayList<AnimationTrack> ();
+        userObject      = null;
     }
 
     public void finalize () {
-        jni_finalize ();
     }
 
+
+    // 以下M3Gで定義された関数
+
     public void addAnimationTrack (AnimationTrack animationTrack) {
+        animationTracks.add (animationTrack);
         jni_addAnimationTrack (animationTrack);
     }
 
@@ -80,6 +88,7 @@ public class Object3D extends java.lang.Object {
     }
 
     public void removeAnimationTrack (AnimationTrack animationTrack) {
+        animationTracks.remove (animationTrack);
         jni_removeAnimationTrack (animationTrack);
     }
 
@@ -88,12 +97,13 @@ public class Object3D extends java.lang.Object {
     }
 
     public void setUserObject (java.lang.Object userObject) {
+        this.userObject = userObject;
         jni_setUserObject (userObject);
     }
 
     public void print () {
         jni_print ();
     }
-    
+
 }
 

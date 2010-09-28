@@ -1,9 +1,14 @@
 package org.karlsland.m3g;
+import java.util.*;
 
+/**
+ * Graphics3Dクラス.
+ * 注意: - このクラスは直接newできない。getInstance()を使う。
+ *       - immediateモードは実装していない。将来的にも実装しない。
+ *       - 現状ではchildrenを持つ必要が無い.
+ */
 public class Graphics3D extends java.lang.Object {
     
-    private long nativePointer;
-
     public final static int ANTIALIAS  = 2;
     public final static int DITHER     = 4;
     public final static int OVERWRITE  = 16;
@@ -26,7 +31,7 @@ public class Graphics3D extends java.lang.Object {
     native private Light   jni_getLight             (int index, Transform transform);
     native private int     jni_getLightCount        ();
     native private static java.util.Hashtable jni_getProperties ();
-    native private java.lang.Object jni_getTarget        ();
+    native private java.lang.Object jni_getTarget   ();
     native private int     jni_getViewportHeight    ();
     native private int     jni_getViewportWidth     ();
     native private int     jni_getViewportX         ();
@@ -44,29 +49,41 @@ public class Graphics3D extends java.lang.Object {
     native private void    jni_setViewport          (int     x     , int   y    , int       width    , int height);
     native private void    jni_print                ();
 
+    private long        nativePointer;
+    private Camera      activeCamera;
+    private List<Light> lights;
+    private java.lang.Object target;
 
-    public Graphics3D () {
-        nativePointer = 0;
+    // 注意: このコンストラクタはC++側から呼ばれる。
+    //       private宣言しているのでJava側からは呼べない。
+    private Graphics3D () {
+        this.nativePointer = 0;
+        this.activeCamera  = null;
+        this.lights        = new ArrayList<Light> ();
+        this.target        = null;
         System.out.println ("Java: Graphics3D initialized.");
-        // do nothing.
-        //jni_initialize ();
     }
 
     public void finalize () {
         // do nothing.
-        //jni_finalize ();
     }
 
+
+    // 以下M3Gで定義された関数
+
     public int addLight (Light light, Transform transform) {
+        this.lights.add (light);
         int index = jni_addLight (light, transform);
         return index;
     }
 
     public void bindTarget (java.lang.Object target) {
+        this.target = target;
         jni_bindTarget (target);
     }
 
     public void bindTarget (java.lang.Object target, boolean depthBuffer, int hints) {
+        this.target = target;
         jni_bindTarget (target, depthBuffer, hints);
     }
 
@@ -145,6 +162,7 @@ public class Graphics3D extends java.lang.Object {
     }
 
     public void releaseTarget () {
+        this.target = null;
         jni_releaseTarget ();
     }
 
@@ -165,10 +183,12 @@ public class Graphics3D extends java.lang.Object {
     }
 
     public void resetLights () {
+        this.lights.clear ();
         jni_resetLights ();
     }
 
     public void setCamera (Camera camera, Transform transform) {
+        this.activeCamera = camera;
         jni_setCamera (camera, transform);
     }
 

@@ -30,12 +30,15 @@ public class Node extends Transformable {
     native private void    jni_setScope              (int scope);
     native private void    jni_print                 ();
 
+    private Node yRef;
+    private Node zRef;
+
     public Node () {
-        jni_initialize ();
+        this.yRef = null;
+        this.zRef = null;
     }
 
     public void finalize () {
-        jni_finalize ();
     }
 
     public void align (Node reference) {
@@ -84,6 +87,8 @@ public class Node extends Transformable {
     }
 
     public void setAlignment (Node zRef, int zTarget, Node yRef, int yTarget) {
+        this.zRef = zRef;
+        this.yRef = yRef;
         jni_setAlignment (zRef, zTarget, yRef, yTarget);
     }
 

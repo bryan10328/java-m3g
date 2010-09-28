@@ -22,7 +22,18 @@ public class Appearance extends Object3D {
     native private void            jni_setTexture         (int index, Texture2D texture);
     native private void            jni_print              ();
 
+    private CompositingMode compositingMode;
+    private Fog             fog;
+    private Material        material;
+    private PolygonMode     polygonMode;
+    private Texture2D[]     textures;
+
     public Appearance () {
+        this.compositingMode = compositingMode;
+        this.fog             = fog;
+        this.material        = material;
+        this.polygonMode     = polygonMode;
+        this.textures        = new Texture2D[4];
         jni_initialize ();
     }
 
@@ -61,10 +72,12 @@ public class Appearance extends Object3D {
     }
 
     public void setCompositingMode (CompositingMode compositingMode) {
+        this.compositingMode = compositingMode;
         jni_setCompositingMode (compositingMode);
     }
 
     public void setFog (Fog fog) {
+        this.fog = fog;
         jni_setFog (fog);
     }
 
@@ -73,14 +86,17 @@ public class Appearance extends Object3D {
     }
 
     public void setMaterial (Material material) {
+        this.material = material;
         jni_setMaterial (material);
     }
 
     public void setPolygonMode (PolygonMode polygonMode) {
+        this.polygonMode = polygonMode;
         jni_setPolygonMode (polygonMode);
     }
 
     public void setTexture (int index, Texture2D texture) {
+        this.textures[index] = texture;
         jni_setTexture (index, texture);
     }
 

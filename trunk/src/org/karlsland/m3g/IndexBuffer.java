@@ -13,11 +13,9 @@ public class IndexBuffer extends Object3D {
     native private void jni_print         ();
 
     public IndexBuffer () {
-        jni_initialize ();
     }
 
     public void finalize () {
-        jni_finalize ();
     }
 
     public int getIndexCount () {

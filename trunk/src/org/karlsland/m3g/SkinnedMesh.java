@@ -14,11 +14,21 @@ public class SkinnedMesh extends Mesh {
     native private Group jni_getSkeleton      ();
     native private void  jni_print            ();
 
+    private Group         skeleton;
+
     public SkinnedMesh (VertexBuffer vertices, IndexBuffer[] submeshes, Appearance[] appearances, Group skeleton) {
+        this.vertices    = vertices;
+        this.submeshes   = submeshes;
+        this.appearances = appearances;
+        this.skeleton    = skeleton;
         jni_initialize (vertices, submeshes, appearances, skeleton);
     }
 
     public SkinnedMesh (VertexBuffer vertices, IndexBuffer submesh, Appearance appearance, Group skeleton) {
+        this.vertices    = vertices;
+        this.submeshes   = new IndexBuffer[] {submesh}; 
+        this.appearances = new Appearance[] {appearance};
+        this.skeleton    = skeleton;
         jni_initialize (vertices, submesh, appearance, skeleton);
     }
 

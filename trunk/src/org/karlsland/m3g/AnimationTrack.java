@@ -35,11 +35,16 @@ public class AnimationTrack extends Object3D {
     native private void                jni_setController       (AnimationController controller);
     native private void                jni_print               ();
 
+    private KeyframeSequence    keyframeSequence;
+    private AnimationController animationController;
+
     public AnimationTrack (KeyframeSequence keyframeSequence, int property) {
+        this.keyframeSequence    = keyframeSequence;
+        this.animationController = animationController;
         jni_initialize (keyframeSequence, property);
     }
 
-    public void finalzie () {
+    public void finalize () {
         jni_finalize ();
     }
 
@@ -59,6 +64,7 @@ public class AnimationTrack extends Object3D {
     }
 
     public void setController (AnimationController controller) {
+        this.animationController = controller;
         jni_setController (controller);
     }
 

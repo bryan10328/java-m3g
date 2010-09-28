@@ -32,8 +32,10 @@ public class Texture2D extends Transformable {
     native private void    jni_setWrapping    (int wrapS, int wrapT);
     native private void    jni_print          ();
 
+    private Image2D image;
 
     public Texture2D (Image2D image) {
+        this.image = image;
         jni_initialize (image);
     }
 

@@ -29,9 +29,10 @@ public class Background extends Object3D {
     native private void    jni_setImageMode        (int modeX, int modeY);
     native private void    jni_print               ();
 
-
+    private Image2D image;
 
     public Background () {
+        this.image = null;
         jni_initialize ();
     }
 
@@ -106,6 +107,7 @@ public class Background extends Object3D {
     }
 
     public void setImage (Image2D image) {
+        this.image = image;
         jni_setImage (image);
     }
 

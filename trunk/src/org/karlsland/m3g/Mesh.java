@@ -16,19 +16,29 @@ public class Mesh extends Node {
     native private void         jni_setAppearance   (int index, Appearance appearance);
     native private void         jni_print           ();
 
-    protected Mesh () {
-        // nothing to do,
-        // do not delete this.
-        // M3G非標準のコンストラクタ.
-        // SkinnedMeshをインスタンス化するときに使われる
-    }
+    protected VertexBuffer  vertices;
+    protected IndexBuffer[] submeshes;
+    protected Appearance[]  appearances;
 
     public Mesh (VertexBuffer vertices, IndexBuffer[] submeshes, Appearance[] appearances) {
+        this.vertices    = vertices;
+        this.submeshes   = submeshes;
+        this.appearances = appearances;
         jni_initialize (vertices, submeshes, appearances);
     }
 
     public Mesh (VertexBuffer vertices, IndexBuffer submesh, Appearance appearance) {
+        this.vertices    = vertices;
+        this.submeshes   = new IndexBuffer[] {submesh}; 
+        this.appearances = new Appearance[] {appearance};
         jni_initialize (vertices, submesh, appearance);
+    }
+
+    // C++側を呼び出さないダミーのコンストラクタ
+    protected Mesh () {
+        this.vertices    = null;
+        this.submeshes   = null;
+        this.appearances = null;
     }
 
     public void finalize () {
@@ -54,8 +64,9 @@ public class Mesh extends Node {
         VertexBuffer vbuf = jni_getVertexBuffer ();
         return vbuf;
     }
-
+    
     public void setAppearance (int index, Appearance appearance) {
+        this.appearances[index] = appearance;
         jni_setAppearance (index, appearance);
     }
 

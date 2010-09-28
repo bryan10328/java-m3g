@@ -20,8 +20,12 @@ public class Sprite3D extends Node {
     native private void       jni_setImage      (Image2D image);
     native private void       jni_print         ();
 
+    private Appearance appearance;
+    private Image2D    image;
 
     public Sprite3D (boolean scaled, Image2D image, Appearance appearance) {
+        this.image      = image;
+        this.appearance = appearance;
         jni_initialize (scaled, image, appearance);
     }
 
@@ -65,6 +69,7 @@ public class Sprite3D extends Node {
     }
 
     public void setAppearance (Appearance appearance) {
+        this.appearance = appearance;
         jni_setAppearance (appearance);
     }
 
@@ -73,6 +78,7 @@ public class Sprite3D extends Node {
     }
 
     public void setImage (Image2D image) {
+        this.image = image;
         jni_setImage (image);
     }
 

@@ -15,15 +15,22 @@ public class VertexBuffer extends Object3D {
     native private VertexArray jni_getTexCoords    (int index, float[] scaleBias);
     native private int         jni_getVertexCount  ();
     native private void        jni_setColors       (VertexArray colors);
-    native private void        jni_setDefaultColor (int ARGB);
+    native private void        jni_setDefaultColor (int         ARGB);
     native private void        jni_setNormals      (VertexArray normals);
     native private void        jni_setPositions    (VertexArray positions, float scale, float[] bias);
     native private void        jni_setTexCoords    (int index, VertexArray texCoords, float scale, float[] bias);
     native private void        jni_print           ();
 
-
+    private VertexArray positions;
+    private VertexArray normals;
+    private VertexArray colors;
+    private VertexArray[] texCoords;
 
     public VertexBuffer () {
+        positions = null;
+        normals   = null;
+        colors    = null;
+        texCoords = new VertexArray[4];
         jni_initialize ();
     }
 
@@ -62,6 +69,7 @@ public class VertexBuffer extends Object3D {
     }
 
     public void setColors (VertexArray colors) {
+        this.colors = colors;
         jni_setColors (colors);
     }
 
@@ -70,14 +78,17 @@ public class VertexBuffer extends Object3D {
     }
 
     public void setNormals (VertexArray normals) {
+        this.normals = normals;
         jni_setNormals (normals);
     }
 
     public void setPositions (VertexArray positions, float scale, float[] bias) {
+        this.positions = positions;
         jni_setPositions (positions, scale, bias);
     }
 
     public void setTexCoords (int index, VertexArray texCoords, float scale, float[] bias) {
+        this.texCoords[index] = texCoords;
         jni_setTexCoords (index, texCoords, scale, bias);
     }
 

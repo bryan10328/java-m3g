@@ -1,4 +1,6 @@
 package org.karlsland.m3g;
+import java.util.*;
+
 
 public class Group extends Node {
 
@@ -15,8 +17,16 @@ public class Group extends Node {
     native private void    jni_removeChild   (Node child);
     native private void    jni_print         ();
 
+    private List<Node> children;
+
     public Group () {
+        this.children = new ArrayList<Node>();
         jni_initialize ();
+    }
+    
+    // C++側を呼び出さないダミーのコンストラクタ
+    protected Group (int dummy) {
+        this.children = new ArrayList<Node>();
     }
 
     public void finalize () {
@@ -24,6 +34,7 @@ public class Group extends Node {
     }
 
     public void addChild (Node child) {
+        children.add (child);
         jni_addChild (child);
     }
 
@@ -48,6 +59,7 @@ public class Group extends Node {
     }
 
     public void removeChild (Node child) {
+        children.remove (child);
         jni_removeChild (child);
     }
 

@@ -2,8 +2,6 @@ package org.karlsland.m3g;
 
 public class Transform extends java.lang.Object {
 
-    protected long nativePointer;
-
     static {
         System.loadLibrary ("javam3g");
     }
@@ -25,6 +23,8 @@ public class Transform extends java.lang.Object {
     native private void jni_transpose      ();
     native private void jni_print          ();
 
+    protected long nativePointer;
+
 
     public Transform () {
         nativePointer = 0;
@@ -32,6 +32,7 @@ public class Transform extends java.lang.Object {
     }
 
     public Transform (Transform transform) {
+        nativePointer = 0;
         jni_initialize (transform);
     }
 

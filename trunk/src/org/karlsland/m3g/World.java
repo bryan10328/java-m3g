@@ -13,7 +13,13 @@ public class World extends Group {
     native private void       jni_setBackground   (Background background);
     native private void       jni_print           ();
 
+    private Camera     activeCamera;
+    private Background background;
+
     public World () {
+        super (0);
+        activeCamera = null;
+        background   = null;
         jni_initialize ();
     }
 
@@ -32,10 +38,12 @@ public class World extends Group {
     }
 
     public void setActiveCamera (Camera camera) {
+        this.activeCamera = camera;
         jni_setActiveCamera (camera);
     }
 
     public void setBackground (Background background) {
+        this.background = background;
         jni_setBackground (background);
     }
 
