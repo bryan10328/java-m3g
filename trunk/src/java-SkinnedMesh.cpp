@@ -89,7 +89,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1addTransform
 {
     cout << "Java-SkinnedMesh: daddTransform is caleld.\n";
     SkinnedMesh* mesh = (SkinnedMesh*)getNativePointer (env, thiz);
-    Group* bon = (Group*)getNativePointer (env, thiz);
+    Group*       bon  = (Group*)getNativePointer (env, bone);
     __TRY__;
     mesh->addTransform (bon, weight, firstVertex, numVertices);
     __CATCH_VOID__;
@@ -105,8 +105,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1getBoneTransform
 {
     cout << "Java-SkinnedMesh: getBoneTransform is caleld.\n";
     SkinnedMesh* mesh  = (SkinnedMesh*)getNativePointer (env, thiz);
-    Node*       bon   = (Node*)getNativePointer (env, thiz);
-    Transform*  trans = (Transform*)getNativePointer (env, thiz);
+    Node*        bon   = (Node*)getNativePointer (env, bone);
+    Transform*   trans = (Transform*)getNativePointer (env, transform);
     __TRY__;
     mesh->getBoneTransform (bon, trans);
     __CATCH_VOID__;
@@ -122,9 +122,9 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1getBoneVertices
 {
     cout << "Java-SkinnedMesh: getBoneVertices is caleld.\n";
     SkinnedMesh* mesh = (SkinnedMesh*)getNativePointer (env, thiz);
-    Node*       bon  = (Node*)getNativePointer (env, thiz);
-    int*   indcs  = NULL;
-    float* weighs = NULL;
+    Node*        bon  = (Node*)getNativePointer (env, bone);
+    int*         indcs  = NULL;
+    float*       weighs = NULL;
     if (indices) {
         indcs = env->GetIntArrayElements (indices, 0);
     }

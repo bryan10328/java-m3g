@@ -79,6 +79,24 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Camera_jni_1getProjection__Lorg_ka
 
 /*
  * Class:     org_karlsland_m3g_Camera
+ * Method:    jni_lookAt
+ * Signature: (FFFFFFFFF)V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Camera_jni_1lookAt
+  (JNIEnv* env, jobject thiz, jfloat fromX, jfloat fromY, jfloat fromZ, jfloat toX, jfloat toY, jfloat toZ, jfloat upX, jfloat upY, jfloat upZ)
+{
+    cout << "Java-Camera: lookAt is called.\n";
+    Camera*    cam   = (Camera*)getNativePointer (env, thiz);
+    __TRY__;
+    cam->lookAt (fromX, fromY, fromZ,
+                 toX, toY, toZ,
+                 upX, upY, upZ);
+    __CATCH_VOID__;
+}
+
+
+/*
+ * Class:     org_karlsland_m3g_Camera
  * Method:    jni_setGeneric
  * Signature: (Lorg/karlsland/m3g/Transform;)V
  */

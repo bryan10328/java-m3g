@@ -5,7 +5,7 @@ public class MorphingMesh extends Mesh {
     static {
         System.loadLibrary ("javam3g");
     }
-    native private void         jni_initialize          (VertexBuffer base, VertexBuffer[] targets, IndexBuffer submeshes[], Appearance[] appearances);
+    native private void         jni_initialize          (VertexBuffer base, VertexBuffer[] targets, IndexBuffer[] submeshes, Appearance[] appearances);
     native private void         jni_initialize          (VertexBuffer base, VertexBuffer[] targets, IndexBuffer submesh, Appearance appearance);
     native private void         jni_finalize            ();
     native private IndexBuffer  jni_getMorphTarget      (int index);
@@ -16,7 +16,7 @@ public class MorphingMesh extends Mesh {
 
     private VertexBuffer[] morphTargets;
 
-    public MorphingMesh (VertexBuffer base, VertexBuffer[] targets, IndexBuffer submeshes[], Appearance[] appearances) {
+    public MorphingMesh (VertexBuffer base, VertexBuffer[] targets, IndexBuffer[] submeshes, Appearance[] appearances) {
         this.vertices     = base;
         this.morphTargets = targets;
         this.submeshes    = submeshes;

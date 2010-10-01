@@ -51,7 +51,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Object3D_jni_1addAnimationTrack
 {
     cout << "Java-Object3D: Object3D addAnimationTrack is called.\n";
     Object3D* obj3d = (Object3D*)getNativePointer (env, thiz);
-    AnimationTrack* track = (AnimationTrack*)getNativePointer (env, thiz);
+    AnimationTrack* track = (AnimationTrack*)getNativePointer (env, animationTrack);
     __TRY__;
     obj3d->addAnimationTrack (track);
     __CATCH_VOID__;

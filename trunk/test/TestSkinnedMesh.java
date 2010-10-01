@@ -36,7 +36,7 @@ public class TestSkinnedMesh {
         assertEquals (skeleton, mesh.getSkeleton());
 
     }
-
+/*
     @Test
     public void testInitialize2 () {
         VertexArray          positions = new VertexArray (4, 3, 2);
@@ -57,7 +57,7 @@ public class TestSkinnedMesh {
         assertEquals (tris0    , mesh.getIndexBuffer(0));
 
     }
-
+*/
 
 
 }

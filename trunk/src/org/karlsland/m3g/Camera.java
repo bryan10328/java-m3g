@@ -13,6 +13,9 @@ public class Camera extends Node {
     native private void jni_finalize       ();
     native private int  jni_getProjection  (float[]   params);
     native private int  jni_getProjection  (Transform transform);
+    native private void jni_lookAt         (float fromX, float fromY, float fromZ,
+                                            float toX  , float toY  , float toZ  ,
+                                            float upX  , float upY  , float upZ  );
     native private void jni_setGeneric     (Transform transform);
     native private void jni_setParallel    (float fovy, float aspectRatio, float near, float far);
     native private void jni_setPerspective (float fovy, float aspectRatio, float near, float far);
@@ -24,6 +27,12 @@ public class Camera extends Node {
 
     public void finalize () {
         jni_finalize ();
+    }
+
+    public void lookAt (float fromX, float fromY, float fromZ,
+                        float toX  , float toY  , float toZ  ,
+                        float upX  , float upY  , float upZ  ) {
+        jni_lookAt (fromX, fromY, fromZ, toX, toY, toZ, upX, upY, upZ);
     }
 
     public int getProjection (float[] params) {

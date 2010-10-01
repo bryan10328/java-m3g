@@ -1,6 +1,6 @@
 package org.karlsland.m3g;
 
-public class Light extends Object3D {
+public class Light extends Node {
 
     public final static int AMBIENT     = 128;
     public final static int DIRECTIONAL = 129;

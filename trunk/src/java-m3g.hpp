@@ -1045,6 +1045,14 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Camera_jni_1getProjection__Lorg_ka
 
 /*
  * Class:     org_karlsland_m3g_Camera
+ * Method:    jni_lookAt
+ * Signature: (FFFFFFFFF)V
+ */
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_Camera_jni_1lookAt
+  (JNIEnv *, jobject, jfloat, jfloat, jfloat, jfloat, jfloat, jfloat, jfloat, jfloat, jfloat);
+
+/*
+ * Class:     org_karlsland_m3g_Camera
  * Method:    jni_setGeneric
  * Signature: (Lorg/karlsland/m3g/Transform;)V
  */
@@ -2977,6 +2985,16 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1print
 #ifdef __cplusplus
 extern "C" {
 #endif
+#undef org_karlsland_m3g_Light_NONE
+#define org_karlsland_m3g_Light_NONE 144L
+#undef org_karlsland_m3g_Light_ORIGIN
+#define org_karlsland_m3g_Light_ORIGIN 145L
+#undef org_karlsland_m3g_Light_X_AXIS
+#define org_karlsland_m3g_Light_X_AXIS 146L
+#undef org_karlsland_m3g_Light_Y_AXIS
+#define org_karlsland_m3g_Light_Y_AXIS 147L
+#undef org_karlsland_m3g_Light_Z_AXIS
+#define org_karlsland_m3g_Light_Z_AXIS 148L
 #undef org_karlsland_m3g_Light_AMBIENT
 #define org_karlsland_m3g_Light_AMBIENT 128L
 #undef org_karlsland_m3g_Light_DIRECTIONAL
