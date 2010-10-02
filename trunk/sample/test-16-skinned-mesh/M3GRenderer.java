@@ -95,6 +95,7 @@ public class M3GRenderer implements GLEventListener {
  
     public void display(GLAutoDrawable drawable) {
         // 描画処理
+        wld.animate (worldTime);
         g3d.render (wld);
     }
  
@@ -112,8 +113,7 @@ public class M3GRenderer implements GLEventListener {
         }
         else if (key == ' ') {
             System.out.println ("main: time = " + worldTime + "\n");
-            worldTime = worldTime + 2;
-            wld.animate (worldTime);
+            worldTime = worldTime + 10;
         }
 
         drawer.display();

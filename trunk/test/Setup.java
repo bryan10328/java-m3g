@@ -18,7 +18,7 @@ public class Setup {
 
     @BeforeClass
     public static void testSetup () {
-        System.out.println ("Global Setup is called.========================================");
+        System.out.println ("================ Global Setup is called.========================");
         glut = new JniGlut ();
         glut.init ();
     }

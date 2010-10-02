@@ -2,6 +2,7 @@ import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.GLCanvas;
+import javax.media.opengl.GLContext;
 import org.karlsland.m3g.*;
 
 public class M3GRenderer implements GLEventListener {
@@ -70,7 +71,7 @@ public class M3GRenderer implements GLEventListener {
         target_vertices[1] = new VertexBuffer ();
         target_vertices[1].setPositions (target2_positions, scale, bias);
 
-        int[] strips = {42};
+        int[] strips = {4};
         TriangleStripArray tris = new TriangleStripArray (0, strips);
         Appearance app = new Appearance ();
   
@@ -81,7 +82,6 @@ public class M3GRenderer implements GLEventListener {
         mesh.addAnimationTrack (animation_track);
 
         wld.addChild (mesh);
-
     }
  
     public void reshape(GLAutoDrawable drawable,
@@ -95,6 +95,7 @@ public class M3GRenderer implements GLEventListener {
  
     public void display(GLAutoDrawable drawable) {
         // 描画処理
+        wld.animate (worldTime);
         g3d.render (wld);
     }
  
@@ -106,14 +107,14 @@ public class M3GRenderer implements GLEventListener {
 
     public void update (char key) {
 
-        System.out.println (key+"のキーが押された");
+        drawer.setAutoSwapBufferMode (true);
+        System.out.println (key+"のキーが押されたよ。");
         if (key == 'q') {
             System.exit (0);
         }
         else if (key == ' ') {
             System.out.println ("main: time = " + worldTime + "\n");
-            worldTime = worldTime + 2;
-            wld.animate (worldTime);
+            worldTime = worldTime + 20;
         }
 
         drawer.display();

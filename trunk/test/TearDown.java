@@ -20,9 +20,10 @@ public class TearDown {
     @AfterClass
     public static void testTearDown () {
         System.out.println ("Global TearDown is called.");
-        System.out.println ("GC start");
-        System.gc ();
-        System.out.println ("GC done================================================");
+        System.out.println ("================ Global Tear is called. ========================");
+        //System.out.println ("GC start");
+        //System.gc ();
+        System.out.println ("================ GC not done. ========================");
     }
 
 
