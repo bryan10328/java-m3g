@@ -177,6 +177,21 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1print
 }
 
 
+
+void Java_new_SkinnedMesh         (JNIEnv* env, m3g::Object3D* obj)
+{
+    cout << "Java-Loader: build java SkinnedMesh.\n";
+    SkinnedMesh* mesh          = dynamic_cast<SkinnedMesh*>(obj);
+    jobject      mesh_obj      = allocJavaObject (env, "org/karlsland/m3g/SkinnedMesh", mesh);
+
+    Java_build_Object3D      (env, mesh_obj, mesh);
+    Java_build_Transformable (env, mesh_obj, mesh);
+    Java_build_Node          (env, mesh_obj, mesh);
+    Java_build_Mesh          (env, mesh_obj, mesh);
+    Java_build_SkinnedMesh  (env, mesh_obj, mesh);
+}
+
+
 void Java_build_SkinnedMesh (JNIEnv* env, jobject mesh_obj, m3g::SkinnedMesh* mesh)
 {
     jclass       mesh_class    = env->GetObjectClass (mesh_obj);

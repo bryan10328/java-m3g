@@ -25,7 +25,7 @@ public class Mesh extends Node {
     public Mesh (VertexBuffer vertices, IndexBuffer[] submeshes, Appearance[] appearances) {
         this.vertices    = vertices;
         this.submeshes   = Arrays.asList (submeshes);
-        this.appearances = arrays.asList (appearances);
+        this.appearances = Arrays.asList (appearances);
         jni_initialize (vertices, submeshes, appearances);
     }
 
@@ -66,7 +66,7 @@ public class Mesh extends Node {
     }
     
     public void setAppearance (int index, Appearance appearance) {
-        this.appearances[index] = appearance;
+        this.appearances.set (index, appearance);
         jni_setAppearance (index, appearance);
     }
 

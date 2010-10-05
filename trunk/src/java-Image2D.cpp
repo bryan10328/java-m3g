@@ -214,6 +214,18 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1writePng
 }
 
 
+
+void Java_new_Image2D             (JNIEnv* env, m3g::Object3D* obj)
+{
+    cout << "Java-Loader: build java Image2D.\n";
+    Image2D* img     = dynamic_cast<Image2D*>(obj);
+    jobject  img_obj = allocJavaObject (env, "org/karlsland/m3g/Image2D", img);
+
+    Java_build_Object3D (env, img_obj, img);
+    Java_build_Image2D  (env, img_obj, img);
+}
+
+
 void Java_build_Image2D (JNIEnv* env, jobject img_obj, m3g::Image2D* img)
 {
     // nothing to do

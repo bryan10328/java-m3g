@@ -287,14 +287,28 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Node_jni_1print
     __CATCH_VOID__;
 }
 
+
+
 void Java_build_Node (JNIEnv* env, jobject node_obj, m3g::Node* node)
 {
     jclass   node_class  = env->GetObjectClass (node_obj);
     jfieldID node_parent = env->GetFieldID (node_class, "parent", "Lorg/karlsland/m3g/Node;");
+    jfieldID node_yRef   = env->GetFieldID (node_class, "yRef"  , "Lorg/karlsland/m3g/Node;");
+    jfieldID node_zRef   = env->GetFieldID (node_class, "zRef"  , "Lorg/karlsland/m3g/Node;");
 
     Node* parent = node->getParent ();
     if (parent) {
         env->SetObjectField (node_obj, node_parent, (jobject)parent->getExportedEntity());
+    }
+
+    Node* yRef = node->getAlignmentReference (Node::Y_AXIS);
+    if (yRef) {
+        env->SetObjectField (node_obj, node_yRef, (jobject)yRef->getExportedEntity());
+    }
+
+    Node* zRef = node->getAlignmentReference (Node::Z_AXIS);
+    if (yRef) {
+        env->SetObjectField (node_obj, node_zRef, (jobject)zRef->getExportedEntity());
     }
 
     // 注意:このほかにNode* duplicatedを持っているが

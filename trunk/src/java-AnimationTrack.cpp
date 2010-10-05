@@ -126,6 +126,17 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1print
 }
 
 
+void Java_new_AnimationTrack      (JNIEnv* env, m3g::Object3D* obj)
+{
+    cout << "Java-Loader: build java AnimationTrack.\n";
+    AnimationTrack* track     = dynamic_cast<AnimationTrack*>(obj);
+    jobject         track_obj = allocJavaObject (env, "org/karlsland/m3g/AnimationTrack", track);
+
+    Java_build_Object3D       (env, track_obj, track);
+    Java_build_AnimationTrack (env, track_obj, track);
+}
+
+
 
 void Java_build_AnimationTrack (JNIEnv* env, jobject track_obj, m3g::AnimationTrack* track)
 {
@@ -140,6 +151,6 @@ void Java_build_AnimationTrack (JNIEnv* env, jobject track_obj, m3g::AnimationTr
 
     AnimationController* controller = track->getController ();
     if (controller) {
-        env->SetObjectField (track_obj, track_key_seq, (jobject)controller->getExportedEntity());
+        env->SetObjectField (track_obj, track_controller, (jobject)controller->getExportedEntity());
     }
 }

@@ -297,6 +297,19 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1print
     __CATCH_VOID__;
 }
 
+
+
+void Java_new_CompositingMode     (JNIEnv* env, m3g::Object3D* obj)
+{
+    cout << "Java-Loader: build java CompositingMode.\n";
+    CompositingMode* cmode     = dynamic_cast<CompositingMode*>(obj);
+    jobject          cmode_obj = allocJavaObject (env, "org/karlsland/m3g/CompositingMode", cmode);
+
+    Java_build_Object3D        (env, cmode_obj, cmode);
+    Java_build_CompositingMode (env, cmode_obj, cmode);
+}
+
+
 void Java_build_CompositingMode (JNIEnv* env, jobject cmode_obj, m3g::CompositingMode* cmode)
 {
     // nothing to do

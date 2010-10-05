@@ -254,6 +254,16 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1print
     __CATCH_VOID__;
 }
 
+void Java_new_VertexBuffer        (JNIEnv* env, m3g::Object3D* obj)
+{
+    cout << "Java-Loader: build java VertexBuffer.\n";
+    VertexBuffer* vbuf     = dynamic_cast<VertexBuffer*>(obj);
+    jobject       vbuf_obj = allocJavaObject (env, "org/karlsland/m3g/VertexBuffer", vbuf);
+
+    Java_build_Object3D     (env, vbuf_obj, vbuf);
+    Java_build_VertexBuffer (env, vbuf_obj, vbuf);
+}
+
 void Java_build_VertexBuffer (JNIEnv* env, jobject vbuf_obj, m3g::VertexBuffer* vbuf)
 {
     jclass   vbuf_class      = env->GetObjectClass (vbuf_obj);
@@ -279,7 +289,7 @@ void Java_build_VertexBuffer (JNIEnv* env, jobject vbuf_obj, m3g::VertexBuffer* 
 
     jclass    tex_coords_class = env->FindClass   ("java/util/ArrayList");
     jmethodID tex_coords_init  = env->GetMethodID (tex_coords_class, "<init>", "()V");
-    jmethodID tex_coords_add   = env->GetMethodID (tex_coords_class, "add", "(Lorg/karlsland/m3g/VertexArray;)Z");
+    jmethodID tex_coords_add   = env->GetMethodID (tex_coords_class, "add", "(Ljava/lang/Object;)Z");
     jobject   tex_coords_obj   = env->NewObject   (tex_coords_class, tex_coords_init);
     
     for (int i = 0; i < MAX_TEXTURE_UNITS; i++) {

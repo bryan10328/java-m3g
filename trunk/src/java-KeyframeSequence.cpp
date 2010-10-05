@@ -258,6 +258,18 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1print
 }
 
 
+
+void Java_new_KeyframeSequence    (JNIEnv* env, m3g::Object3D* obj)
+{
+    cout << "Java-Loader: build java KeyframeSequence.\n";
+    KeyframeSequence* key_seq     = dynamic_cast<KeyframeSequence*>(obj);
+    jobject           key_seq_obj = allocJavaObject (env, "org/karlsland/m3g/KeyframeSequence", key_seq);
+
+    Java_build_Object3D         (env, key_seq_obj, key_seq);
+    Java_build_KeyframeSequence (env, key_seq_obj, key_seq);
+}
+
+
 void Java_build_KeyframeSequence (JNIEnv* env, jobject key_seq_obj, m3g::KeyframeSequence* key_seq)
 {
     // nothing to do

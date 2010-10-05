@@ -151,6 +151,17 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Material_jni_1print
     __CATCH_VOID__;
 }
 
+
+void Java_new_Material            (JNIEnv* env, m3g::Object3D* obj)
+{
+    cout << "Java-Loader: build java Material.\n";
+    Material* mat     = dynamic_cast<Material*>(obj);
+    jobject   mat_obj = allocJavaObject (env, "org/karlsland/m3g/Material", mat);
+
+    Java_build_Object3D (env, mat_obj, mat);
+    Java_build_Material (env, mat_obj, mat);
+}
+
 void Java_build_Material (JNIEnv* env, jobject mat_obj, m3g::Material* mat)
 {
     // nothing to do

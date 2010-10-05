@@ -1,4 +1,6 @@
 package org.karlsland.m3g;
+import java.util.*;
+
 
 
 public class Appearance extends Object3D {
@@ -33,7 +35,7 @@ public class Appearance extends Object3D {
         this.fog             = fog;
         this.material        = material;
         this.polygonMode     = polygonMode;
-        this.textures        = Arrays.asList (new Texture2D[]{0,0,0,0});
+        this.textures        = Arrays.asList (new Texture2D[]{null,null,null,null});
         jni_initialize ();
     }
 
@@ -96,7 +98,7 @@ public class Appearance extends Object3D {
     }
 
     public void setTexture (int index, Texture2D texture) {
-        this.textures[index] = texture;
+        this.textures.set(index, texture);
         jni_setTexture (index, texture);
     }
 

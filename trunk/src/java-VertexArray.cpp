@@ -232,6 +232,18 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1print_1raw_1data
     __CATCH_VOID__;
 }
 
+
+void Java_new_VertexArray         (JNIEnv* env, m3g::Object3D* obj)
+{
+    cout << "Java-Loader: build java VertexArray.\n";
+    VertexArray* varry     = dynamic_cast<VertexArray*>(obj);
+    jobject      varry_obj = allocJavaObject (env, "org/karlsland/m3g/VertexArray", varry);
+
+    Java_build_Object3D    (env, varry_obj, varry);
+    Java_build_VertexArray (env, varry_obj, varry);
+}
+
+
 void Java_build_VertexArray (JNIEnv* env, jobject varry_obj, m3g::VertexArray* varry)
 {
     // nothing to do

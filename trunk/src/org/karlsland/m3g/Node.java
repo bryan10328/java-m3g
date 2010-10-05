@@ -30,12 +30,11 @@ public class Node extends Transformable {
     native private void    jni_setScope              (int scope);
     native private void    jni_print                 ();
 
+    private Node parent;
     private Node yRef;
     private Node zRef;
 
     public Node () {
-        this.yRef = null;
-        this.zRef = null;
     }
 
     public void finalize () {

@@ -173,6 +173,18 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Mesh_jni_1print
     __CATCH_VOID__;
 }
 
+void Java_new_Mesh                (JNIEnv* env, m3g::Object3D* obj)
+{
+    cout << "Java-Loader: build java Mesh.\n";
+    Mesh*    mesh             = dynamic_cast<Mesh*>(obj);
+    jobject  mesh_obj         = allocJavaObject (env, "org/karlsland/m3g/Mesh", mesh);
+
+    Java_build_Object3D      (env, mesh_obj, mesh);
+    Java_build_Transformable (env, mesh_obj, mesh);
+    Java_build_Node          (env, mesh_obj, mesh);
+    Java_build_Mesh          (env, mesh_obj, mesh);
+}
+
 void Java_build_Mesh (JNIEnv* env, jobject mesh_obj, m3g::Mesh* mesh)
 {
     jclass   mesh_class       = env->GetObjectClass (mesh_obj);
@@ -189,7 +201,7 @@ void Java_build_Mesh (JNIEnv* env, jobject mesh_obj, m3g::Mesh* mesh)
 
     jclass    submeshes_class = env->FindClass   ("java/util/ArrayList");
     jmethodID submeshes_init  = env->GetMethodID (submeshes_class, "<init>", "()V");
-    jmethodID submeshes_add   = env->GetMethodID (submeshes_class, "add", "(Lorg/karlsland/m3g/IndexBuffer;)Z");
+    jmethodID submeshes_add   = env->GetMethodID (submeshes_class, "add", "(Ljava/lang/Object;)Z");
     jobject   submeshes_obj   = env->NewObject   (submeshes_class, submeshes_init);
     for (int i = 0; i < count; i++) {
         IndexBuffer* ibuf = mesh->getIndexBuffer (i);
@@ -203,7 +215,7 @@ void Java_build_Mesh (JNIEnv* env, jobject mesh_obj, m3g::Mesh* mesh)
 
     jclass    appearances_class = env->FindClass   ("java/util/ArrayList");
     jmethodID appearances_init  = env->GetMethodID (appearances_class, "<init>", "()V");
-    jmethodID appearances_add   = env->GetMethodID (appearances_class, "add", "(Lorg/karlsland/m3g/Appearance;)Z");
+    jmethodID appearances_add   = env->GetMethodID (appearances_class, "add", "(Ljava/lang/Object;)Z");
     jobject   appearances_obj   = env->NewObject   (appearances_class, appearances_init);
     for (int i = 0; i < count; i++) {
         Appearance* app = mesh->getAppearance (i);

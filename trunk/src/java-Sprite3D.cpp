@@ -225,6 +225,17 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1print
 }
 
 
+
+void Java_new_Sprite3D            (JNIEnv* env, m3g::Object3D* obj)
+{
+    cout << "Java-Loader: build java Sprite3D.\n";
+    Sprite3D* spr            = dynamic_cast<Sprite3D*>(obj);
+    jobject   spr_obj        = allocJavaObject     (env, "org/karlsland/m3g/Sprite3D", spr);
+
+    Java_build_Object3D (env, spr_obj, spr);
+    Java_build_Sprite3D (env, spr_obj, spr);
+}
+
 void Java_build_Sprite3D (JNIEnv* env, jobject spr_obj, m3g::Sprite3D* spr)
 {
     jclass    spr_class      = env->GetObjectClass (spr_obj);

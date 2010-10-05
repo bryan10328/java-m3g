@@ -219,6 +219,17 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationController_jni_1print
 }
 
 
+void Java_new_AnimationController (JNIEnv* env, m3g::Object3D* obj)
+{
+    cout << "Java-Loader: build java AnimationController.\n";
+    AnimationController* controller     = dynamic_cast<AnimationController*>(obj);
+    jobject              controller_obj = allocJavaObject (env, "org/karlsland/m3g/AnimationController", controller);
+    
+    Java_build_Object3D            (env, controller_obj, controller);
+    Java_build_AnimationController (env, controller_obj, controller);
+}
+
+
 void Java_build_AnimationController (JNIEnv* /* env */, jobject /* controller_obj */, m3g::AnimationController* /* controller */)
 {
     // nothing to do

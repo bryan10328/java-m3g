@@ -2,10 +2,11 @@
 #include <iostream>
 #include "java-m3g.hpp"
 #include "java-m3g-common.hpp"
+#include "java-Graphics3D.hpp"
 #include "m3g.hpp"
 using namespace std;
 using namespace m3g;
-#include <cstdlib>
+
 
 /*
  * Class:     org_karlsland_m3g_Graphics3D
@@ -176,16 +177,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getInstance
     cout << "Java-Graphics3D: getInstance is called.\n";
     Graphics3D* g3d = Graphics3D:: getInstance ();
     if (g3d->getExportedEntity() == NULL) {
-        // 必ず「グローバル参照」を返す。
-        // Graphics3Dクラスは決して削除されない。
-        cout << "Java-Graphic3D: create Graphics3D object.\n";
-        jmethodID mid = env->GetMethodID (clazz, "<init>", "()V");
-        jobject thiz = env->NewObject (clazz, mid);
-        setNativePointer (env, thiz, g3d);
-        jobject entity = env->NewGlobalRef (thiz);
-        g3d->setExportedEntity (entity);
-        cout << "Java-Graphics3D: created Graphics3D object, ";
-        cout << hex << "nativePointer=" << g3d << ",thiz=" << thiz << ",GlobalRef=" << entity << dec << "\n";
+        Java_new_Graphics3D (env, g3d);
     }
     return (g3d != NULL) ? (jobject)g3d->getExportedEntity() : (jobject)NULL;
 }
@@ -234,11 +226,10 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getProperties
   (JNIEnv* env, jclass clazz)
 {
     cout << "Java-Graphics3D: getProperties is called.\n";
-    cout << "Go to abort()\n";
-    abort ();
-    //Graphics3D* g3d = (Graphics3D*)getNativePointer (env, thiz);
-    // not implemented.
-    return (jobject)NULL;
+    jclass    hash_class    = env->FindClass   ("java/util/Hashtable");
+    jmethodID children_init = env->GetMethodID (hash_class, "<init>", "()V");
+    jobject   hash_obj      = env->NewObject   (hash_class, children_init);
+    return hash_obj;
 }
 
 /*
@@ -503,7 +494,6 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1setViewport
 {
     cout << "Java-Graphics3D: setViewport is called.\n";
     Graphics3D* g3d = (Graphics3D*)getNativePointer (env, thiz);
-    cout << "g3d = " << g3d << "\n";
     __TRY__;
     g3d->setViewport (x, y, width, height);
     __CATCH_VOID__;
@@ -524,8 +514,21 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1print
     __CATCH_VOID__;
 }
 
+void Java_new_Graphics3D               (JNIEnv* env, m3g::Graphics3D* g3d)
+{
+    cout << "Java-Graphics3D: new java Graphics3D.\n";
+
+    jclass   g3d_class         = env->FindClass ("org/karlsland/m3g/Graphics3D");
+    jobject  g3d_obj           = env->AllocObject (g3d_class);
+    jobject  g3d_entity        = env->NewGlobalRef (g3d_obj);
+
+    setNativePointer (env, g3d_obj, g3d_entity);
+    g3d->setExportedEntity (g3d_entity);
+}
+
+
 void Java_build_Graphics3D (JNIEnv* env, jobject g3d_obj, m3g::Graphics3D* bg)
 {
-    // これ必要か?
+    // nothing to do
 }
 

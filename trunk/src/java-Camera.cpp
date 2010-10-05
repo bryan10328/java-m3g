@@ -156,6 +156,19 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Camera_jni_1print
     __CATCH_VOID__;
 }
 
+
+void Java_new_Camera              (JNIEnv* env, m3g::Object3D* obj)
+{
+    cout << "Java-Loader: build java Camera.\n";
+    Camera* cam     = dynamic_cast<Camera*>(obj);
+    jobject cam_obj = allocJavaObject (env, "org/karlsland/m3g/Camera", cam);
+
+    Java_build_Object3D      (env, cam_obj, cam);
+    Java_build_Transformable (env, cam_obj, cam);
+    Java_build_Node          (env, cam_obj, cam);
+    Java_build_Camera        (env, cam_obj, cam);
+}
+
 void Java_build_Camera (JNIEnv* env, jobject cam_obj, m3g::Camera* cam)
 {
     // nothing to do

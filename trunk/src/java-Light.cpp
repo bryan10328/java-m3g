@@ -282,6 +282,18 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1print
 }
 
 
+void Java_new_Light               (JNIEnv* env, m3g::Object3D* obj)
+{
+    cout << "Java-Loader: build java Light.\n";
+    Light*  lgh     = dynamic_cast<Light*>(obj);
+    jobject lgh_obj = allocJavaObject (env, "org/karlsland/m3g/Light", lgh);
+
+    Java_build_Object3D      (env, lgh_obj, lgh);
+    Java_build_Transformable (env, lgh_obj, lgh);
+    Java_build_Node          (env, lgh_obj, lgh);
+    Java_build_Light         (env, lgh_obj, lgh);
+}
+
 void Java_build_Light (JNIEnv* env, jobject lgh_obj, m3g::Light* lgh)
 {
     // nothing to do

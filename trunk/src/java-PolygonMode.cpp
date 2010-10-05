@@ -247,6 +247,17 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1print
     __CATCH_VOID__;
 }
 
+
+void Java_new_PolygonMode         (JNIEnv* env, m3g::Object3D* obj)
+{
+    cout << "Java-Loader: build java PolygonMode.\n";
+    PolygonMode* pmode     = dynamic_cast<PolygonMode*>(obj);
+    jobject      pmode_obj = allocJavaObject (env, "org/karlsland/m3g/PolygonMode", pmode);
+
+    Java_build_Object3D    (env, pmode_obj, pmode);
+    Java_build_PolygonMode (env, pmode_obj, pmode);
+}
+
 void Java_build_PolygonMode (JNIEnv* env, jobject pmode_obj, m3g::PolygonMode* pmode)
 {
     // nothing to do

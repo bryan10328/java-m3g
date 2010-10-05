@@ -1,4 +1,6 @@
 package org.karlsland.m3g;
+import java.util.*;
+
 
 public class MorphingMesh extends Mesh {
 
@@ -20,13 +22,13 @@ public class MorphingMesh extends Mesh {
         this.vertices     = base;
         this.morphTargets = Arrays.asList (targets);
         this.submeshes    = Arrays.asList (submeshes);
-        this.appearances  = appearances;
+        this.appearances  = Arrays.asList (appearances);
         jni_initialize (base, targets, submeshes, appearances);
     }
 
     public MorphingMesh (VertexBuffer base, VertexBuffer[] targets, IndexBuffer submesh, Appearance appearance) {
         this.vertices     = base;
-        this.morphTargets = targets;
+        this.morphTargets = Arrays.asList (targets);
         this.submeshes    = Arrays.asList (submesh);
         this.appearances  = Arrays.asList (appearance);
         jni_initialize (base, targets, submesh, appearance);

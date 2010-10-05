@@ -201,6 +201,15 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Fog_jni_1print
     __CATCH_VOID__;
 }
 
+void Java_new_Fog                 (JNIEnv* env, m3g::Object3D* obj)
+{
+    cout << "Java-Loader: build java Fog.\n";
+    Fog*    fog     = dynamic_cast<Fog*>(obj);
+    jobject fog_obj = allocJavaObject (env, "org/karlsland/m3g/Fog", fog);
+
+    Java_build_Object3D (env, fog_obj, fog);
+    Java_build_Fog      (env, fog_obj, fog);
+}
 
 void Java_build_Fog (JNIEnv* env, jobject fog_obj, m3g::Fog* fog)
 {

@@ -252,6 +252,18 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Texture2D_jni_1print
 }
 
 
+
+void Java_new_Texture2D           (JNIEnv* env, m3g::Object3D* obj)
+{
+    cout << "Java-Loader: build java Texture2D.\n";
+    Texture2D* tex       = dynamic_cast<Texture2D*>(obj);
+    jobject    tex_obj   = allocJavaObject     (env, "org/karlsland/m3g/Texture2D", tex);
+
+    Java_build_Object3D  (env, tex_obj, tex);
+    Java_build_Texture2D (env, tex_obj, tex);
+
+}
+
 void Java_build_Texture2D (JNIEnv* env, jobject tex_obj, m3g::Texture2D* tex)
 {
     jclass     tex_class = env->GetObjectClass (tex_obj);

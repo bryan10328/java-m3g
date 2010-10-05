@@ -159,6 +159,19 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1print
 }
 
 
+void Java_new_Group               (JNIEnv* env, m3g::Object3D* obj)
+{
+    cout << "Java-Loader: build java Group.\n";
+    Group*   grp     = dynamic_cast<Group*>(obj);
+    jobject  grp_obj = allocJavaObject (env, "org/karlsland/m3g/Group", grp);
+
+    Java_build_Object3D      (env, grp_obj, grp);
+    Java_build_Transformable (env, grp_obj, grp);
+    Java_build_Node          (env, grp_obj, grp);
+    Java_build_Group         (env, grp_obj, grp);
+}
+
+
 void Java_build_Group (JNIEnv* env, jobject grp_obj, m3g::Group* grp)
 {
     jclass   grp_class    = env->GetObjectClass (grp_obj);
@@ -167,7 +180,7 @@ void Java_build_Group (JNIEnv* env, jobject grp_obj, m3g::Group* grp)
 
     jclass    children_class = env->FindClass   ("java/util/ArrayList");
     jmethodID children_init  = env->GetMethodID (children_class, "<init>", "()V");
-    jmethodID children_add   = env->GetMethodID (children_class, "add", "(Lorg/karlsland/m3g/Node;)Z");
+    jmethodID children_add   = env->GetMethodID (children_class, "add", "(Ljava/lang/Object;)Z");
     jobject   children_obj   = env->NewObject   (children_class, children_init);
 
     for (int i = 0; i < grp->getChildCount(); i++) {

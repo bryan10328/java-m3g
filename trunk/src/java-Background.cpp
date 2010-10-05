@@ -317,6 +317,17 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1print
 }
 
 
+void Java_new_Background          (JNIEnv* env, m3g::Object3D* obj)
+{
+    cout << "Java-Loader: build java Background.\n";
+    Background* bg     = dynamic_cast<Background*>(obj);
+    jobject     bg_obj = allocJavaObject (env, "org/karlsland/m3g/Background", bg);
+
+    Java_build_Object3D   (env, bg_obj, bg);
+    Java_build_Background (env, bg_obj, bg);
+}
+
+
 void Java_build_Background (JNIEnv* env, jobject bg_obj, m3g::Background* bg)
 {
     jclass   bg_class = env->GetObjectClass (bg_obj);

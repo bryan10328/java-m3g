@@ -123,17 +123,26 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_World_jni_1print
 }
 
 
-void Java_build_World (JNIEnv* env, jobject wld_obj, m3g::World* wld)
+
+void Java_new_World               (JNIEnv* env, m3g::Object3D* obj)
 {
-    jclass   wld_class         = env->GetObjectClass (wld_obj);
-    jfieldID wld_active_camera = env->GetFieldID     (wld_class, "activeCamera", "Lorg/karlsland/m3g/Camera;");
-    jfieldID wld_background    = env->GetFieldID     (wld_class, "background"  , "Lorg/karlsland/m3g/Background;");
+    cout << "Java-Loader: build java World.\n";
+    World*  wld     = dynamic_cast<World*>(obj);
+    jobject wld_obj = allocJavaObject (env, "org/karlsland/m3g/World", wld);
 
     Java_build_Object3D      (env, wld_obj, wld);
     Java_build_Transformable (env, wld_obj, wld);
     Java_build_Node          (env, wld_obj, wld);
     Java_build_Group         (env, wld_obj, wld);
     Java_build_World         (env, wld_obj, wld);
+}
+
+
+void Java_build_World (JNIEnv* env, jobject wld_obj, m3g::World* wld)
+{
+    jclass   wld_class         = env->GetObjectClass (wld_obj);
+    jfieldID wld_active_camera = env->GetFieldID     (wld_class, "activeCamera", "Lorg/karlsland/m3g/Camera;");
+    jfieldID wld_background    = env->GetFieldID     (wld_class, "background"  , "Lorg/karlsland/m3g/Background;");
 
     Camera* cam = wld->getActiveCamera ();
     if (cam) {

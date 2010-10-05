@@ -1,4 +1,5 @@
 package org.karlsland.m3g;
+import java.util.*;
 
 
 public class VertexBuffer extends Object3D {
@@ -30,7 +31,7 @@ public class VertexBuffer extends Object3D {
         positions = null;
         normals   = null;
         colors    = null;
-        texCoords = Arrays.asList (new VertexArray[]{0,0,0,0});
+        texCoords = Arrays.asList (new VertexArray[]{null,null,null,null});
         jni_initialize ();
     }
 
@@ -88,7 +89,7 @@ public class VertexBuffer extends Object3D {
     }
 
     public void setTexCoords (int index, VertexArray texCoords, float scale, float[] bias) {
-        this.texCoords[index] = texCoords;
+        this.texCoords.set (index, texCoords);
         jni_setTexCoords (index, texCoords, scale, bias);
     }
 

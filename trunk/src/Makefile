@@ -1400,3 +1400,50 @@ java-World.o: /usr/include/m3g/M3GReader.hpp
 java-World.o: /usr/include/m3g/InMemoryStream.hpp
 java-World.o: /usr/include/m3g/M3GStruct.hpp /usr/include/m3g/Exception.hpp
 java-World.o: /usr/include/m3g/RenderState.hpp
+java-m3g-common.o: /usr/lib/jvm/java-6-openjdk/include/jni.h
+java-m3g-common.o: /usr/include/stdio.h /usr/include/features.h
+java-m3g-common.o: /usr/include/bits/predefs.h /usr/include/sys/cdefs.h
+java-m3g-common.o: /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h
+java-m3g-common.o: /usr/include/gnu/stubs-64.h /usr/include/bits/types.h
+java-m3g-common.o: /usr/include/bits/typesizes.h /usr/include/libio.h
+java-m3g-common.o: /usr/include/_G_config.h /usr/include/wchar.h
+java-m3g-common.o: /usr/include/bits/stdio_lim.h
+java-m3g-common.o: /usr/include/bits/sys_errlist.h
+java-m3g-common.o: /usr/lib/jvm/java-6-openjdk/include/jni_md.h
+java-m3g-common.o: java-m3g-common.hpp /usr/include/m3g/m3g.hpp
+java-m3g-common.o: /usr/include/m3g/m3gdef.hpp
+java-m3g-common.o: /usr/include/m3g/Graphics3D.hpp
+java-m3g-common.o: /usr/include/m3g/Object.hpp /usr/include/m3g/Object3D.hpp
+java-m3g-common.o: /usr/include/m3g/m3ginternal.hpp
+java-m3g-common.o: /usr/include/m3g/AnimationController.hpp
+java-m3g-common.o: /usr/include/m3g/AnimationTrack.hpp
+java-m3g-common.o: /usr/include/m3g/Appearance.hpp
+java-m3g-common.o: /usr/include/m3g/Background.hpp
+java-m3g-common.o: /usr/include/m3g/CompositingMode.hpp
+java-m3g-common.o: /usr/include/m3g/Fog.hpp /usr/include/m3g/Image2D.hpp
+java-m3g-common.o: /usr/include/m3g/IndexBuffer.hpp
+java-m3g-common.o: /usr/include/m3g/TriangleStripArray.hpp
+java-m3g-common.o: /usr/include/m3g/KeyframeSequence.hpp
+java-m3g-common.o: /usr/include/m3g/Keyframe.hpp
+java-m3g-common.o: /usr/include/m3g/Material.hpp
+java-m3g-common.o: /usr/include/m3g/PolygonMode.hpp
+java-m3g-common.o: /usr/include/m3g/Transformable.hpp
+java-m3g-common.o: /usr/include/m3g/Quaternion.hpp
+java-m3g-common.o: /usr/include/m3g/Transform.hpp /usr/include/m3g/Matrix.hpp
+java-m3g-common.o: /usr/include/m3g/Node.hpp /usr/include/m3g/Camera.hpp
+java-m3g-common.o: /usr/include/m3g/Group.hpp /usr/include/m3g/World.hpp
+java-m3g-common.o: /usr/include/m3g/Light.hpp /usr/include/m3g/Mesh.hpp
+java-m3g-common.o: /usr/include/m3g/MorphingMesh.hpp
+java-m3g-common.o: /usr/include/m3g/SkinnedMesh.hpp
+java-m3g-common.o: /usr/include/m3g/BoneIndex.hpp
+java-m3g-common.o: /usr/include/m3g/Sprite3D.hpp
+java-m3g-common.o: /usr/include/m3g/Texture2D.hpp
+java-m3g-common.o: /usr/include/m3g/VertexArray.hpp
+java-m3g-common.o: /usr/include/m3g/VertexBuffer.hpp
+java-m3g-common.o: /usr/include/m3g/RayIntersection.hpp
+java-m3g-common.o: /usr/include/m3g/Vector.hpp /usr/include/m3g/Loader.hpp
+java-m3g-common.o: /usr/include/m3g/M3GReader.hpp
+java-m3g-common.o: /usr/include/m3g/InMemoryStream.hpp
+java-m3g-common.o: /usr/include/m3g/M3GStruct.hpp
+java-m3g-common.o: /usr/include/m3g/Exception.hpp
+java-m3g-common.o: /usr/include/m3g/RenderState.hpp

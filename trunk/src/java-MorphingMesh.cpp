@@ -171,6 +171,20 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1print
 }
 
 
+void Java_new_MorphingMesh        (JNIEnv* env, m3g::Object3D* obj)
+{
+    cout << "Java-Loader: build java MorphingMesh.\n";
+    MorphingMesh* mesh         = dynamic_cast<MorphingMesh*>(obj);
+    jobject       mesh_obj     = allocJavaObject (env, "org/karlsland/m3g/MorphingMesh", mesh);
+
+    Java_build_Object3D      (env, mesh_obj, mesh);
+    Java_build_Transformable (env, mesh_obj, mesh);
+    Java_build_Node          (env, mesh_obj, mesh);
+    Java_build_Mesh          (env, mesh_obj, mesh);
+    Java_build_MorphingMesh  (env, mesh_obj, mesh);
+}
+
+
 void Java_build_MorphingMesh (JNIEnv* env, jobject mesh_obj, m3g::MorphingMesh* mesh)
 {
     jclass        mesh_class   = env->GetObjectClass (mesh_obj);
@@ -181,7 +195,7 @@ void Java_build_MorphingMesh (JNIEnv* env, jobject mesh_obj, m3g::MorphingMesh* 
 
     jclass    targets_class = env->FindClass   ("java/util/ArrayList");
     jmethodID targets_init  = env->GetMethodID (targets_class, "<init>", "()V");
-    jmethodID targets_add   = env->GetMethodID (targets_class, "add", "(Lorg/karlsland/m3g/VertexBuffer;)Z");
+    jmethodID targets_add   = env->GetMethodID (targets_class, "add", "(Ljava/lang/Object;)Z");
     jobject   targets_obj   = env->NewObject   (targets_class, targets_init);
     
     for (int i = 0; i < count; i++) {

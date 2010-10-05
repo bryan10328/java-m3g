@@ -273,12 +273,17 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Object3D_jni_1print
 
 void Java_build_Object3D (JNIEnv* env, jobject obj3d_obj, m3g::Object3D* obj3d)
 {
-    jclass   obj3d_class  = env->GetObjectClass (obj3d_obj);
-    jfieldID obj3d_tracks = env->GetFieldID     (obj3d_class, "animationTracks", "Ljava/util/List;");
+    jclass   obj3d_class         = env->GetObjectClass (obj3d_obj);
+    jfieldID obj3d_nativePointer = env->GetFieldID     (obj3d_class, "nativePointer", "J");
+    jfieldID obj3d_tracks        = env->GetFieldID     (obj3d_class, "animationTracks", "Ljava/util/List;");
+    jfieldID obj3d_userObject    = env->GetFieldID     (obj3d_class, "userObject", "Ljava/lang/Object;");
+    
+    env->SetLongField   (obj3d_obj, obj3d_nativePointer, (long)obj3d);
+    env->SetObjectField (obj3d_obj, obj3d_userObject, (jobject)obj3d->getUserObject());
 
     jclass    tracks_class = env->FindClass   ("java/util/ArrayList");
     jmethodID tracks_init  = env->GetMethodID (tracks_class, "<init>", "()V");
-    jmethodID tracks_add   = env->GetMethodID (tracks_class, "add", "(Lorg/karlsland/m3g/AnimationTracks;)Z");
+    jmethodID tracks_add   = env->GetMethodID (tracks_class, "add", "(Ljava/lang/Object;)Z");
     jobject   tracks_obj   = env->NewObject   (tracks_class, tracks_init);
 
     for (int i = 0; i < (int)obj3d->getAnimationTrackCount(); i++) {
@@ -289,6 +294,8 @@ void Java_build_Object3D (JNIEnv* env, jobject obj3d_obj, m3g::Object3D* obj3d)
     }
 
     env->SetObjectField (obj3d_obj, obj3d_tracks, tracks_obj);
+
+
 }
 
 

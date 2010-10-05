@@ -82,6 +82,19 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1print
     __CATCH_VOID__;
 }
 
+
+void Java_new_TriangleStripArray  (JNIEnv* env, m3g::Object3D* obj)
+{
+    cout << "Java-Loader: build java TriangleStripArray.\n";
+    TriangleStripArray* tris     = dynamic_cast<TriangleStripArray*>(obj);
+    jobject             tris_obj = allocJavaObject (env, "org/karlsland/m3g/TriangleStripArray", tris);
+
+    Java_build_Object3D           (env, tris_obj, tris);
+    Java_build_IndexBuffer        (env, tris_obj, tris);
+    Java_build_TriangleStripArray (env, tris_obj, tris);
+}
+
+
 void Java_build_TriangleStripArray (JNIEnv* env, jobject tris_obj, m3g::TriangleStripArray* tris)
 {
     // nothing to do

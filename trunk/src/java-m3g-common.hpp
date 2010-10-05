@@ -20,21 +20,18 @@ void setNativePointer (JNIEnv* env, jobject obj, void* entity)
 {
     jclass   clazz = env->GetObjectClass (obj);
     jfieldID fid   = env->GetFieldID (clazz, "nativePointer", "J");
-    if (fid > 0) {
-        env->SetLongField (obj, fid, (long)entity);
-    }
+    env->SetLongField (obj, fid, (long)entity);
 }
 
 // 注意: Java側のオブジェクトのコンストラクタは呼ばれない
 static inline
 jobject allocJavaObject (JNIEnv* env, const char* name, m3g::Object* obj)
 {
-    jclass  clazz = env->FindClass (name);
-    jobject thiz  = env->AllocObject (clazz);
-    setNativePointer (env, thiz, obj);
+    jclass  clazz  = env->FindClass (name);
+    jobject thiz   = env->AllocObject (clazz);
     jobject entity = env->NewWeakGlobalRef (thiz);
     obj->setExportedEntity (entity);
-    return thiz;
+    return entity;
 }
 
 
@@ -92,7 +89,7 @@ jobject allocJavaObject (JNIEnv* env, const char* name, m3g::Object* obj)
 
 
 void Java_build_AnimationController (JNIEnv* env, jobject controller_obj, m3g::AnimationController* controller);
-void Java_build_AnimationTrack      (JNIEnv* env, jobject track_obj     , m3g::AnimationTrack* track);
+void Java_build_AnimationTrack      (JNIEnv* env, jobject track_obj     , m3g::AnimationTrack*      track);
 void Java_build_Appearance          (JNIEnv* env, jobject app_obj       , m3g::Appearance*          app);
 void Java_build_Background          (JNIEnv* env, jobject bg_obj        , m3g::Background*          bg);
 void Java_build_Camera              (JNIEnv* env, jobject cam_obj       , m3g::Camera*              cam);
@@ -120,6 +117,7 @@ void Java_build_TriangleStripArray  (JNIEnv* env, jobject tris_obj      , m3g::T
 void Java_build_VertexArray         (JNIEnv* env, jobject varry_obj     , m3g::VertexArray*         varry);
 void Java_build_VertexBuffer        (JNIEnv* env, jobject vbuf_obj      , m3g::VertexBuffer*        vbuf);
 void Java_build_World               (JNIEnv* env, jobject wld_obj       , m3g::World*               wld);
+
 
 
 
