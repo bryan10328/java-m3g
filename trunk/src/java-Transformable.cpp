@@ -259,3 +259,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1print
     __CATCH_VOID__;
 }
 
+void Java_build_Transformable (JNIEnv* env, jobject trans_obj, m3g::Transformable* trans)
+{
+    // nothing to do    
+}

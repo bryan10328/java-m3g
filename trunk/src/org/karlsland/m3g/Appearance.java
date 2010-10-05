@@ -26,14 +26,14 @@ public class Appearance extends Object3D {
     private Fog             fog;
     private Material        material;
     private PolygonMode     polygonMode;
-    private Texture2D[]     textures;
+    private List<Texture2D> textures;
 
     public Appearance () {
         this.compositingMode = compositingMode;
         this.fog             = fog;
         this.material        = material;
         this.polygonMode     = polygonMode;
-        this.textures        = new Texture2D[4];
+        this.textures        = Arrays.asList (new Texture2D[]{0,0,0,0});
         jni_initialize ();
     }
 

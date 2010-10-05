@@ -13,6 +13,8 @@ public class Loader extends java.lang.Object {
     native private static Object3D[] jni_load (byte[] data, int offset);
     native private static Object3D[] jni_load (java.lang.String name);
 
+    private Loader () {
+    }
 
     public static Object3D[] load (byte[] data, int offset) {
         Object3D[] objs = jni_load (data, offset);

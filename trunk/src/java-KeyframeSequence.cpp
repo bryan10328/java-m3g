@@ -256,3 +256,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1print
     key_seq->print (cout) << "\n";
     __CATCH_VOID__;
 }
+
+
+void Java_build_KeyframeSequence (JNIEnv* env, jobject key_seq_obj, m3g::KeyframeSequence* key_seq)
+{
+    // nothing to do
+}

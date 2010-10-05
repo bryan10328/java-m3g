@@ -14,12 +14,12 @@ public class MorphingMesh extends Mesh {
     native private void         jni_setWeights          (float[] weights);
     native private void         jni_print               ();
 
-    private VertexBuffer[] morphTargets;
+    private List<VertexBuffer> morphTargets;
 
     public MorphingMesh (VertexBuffer base, VertexBuffer[] targets, IndexBuffer[] submeshes, Appearance[] appearances) {
         this.vertices     = base;
-        this.morphTargets = targets;
-        this.submeshes    = submeshes;
+        this.morphTargets = Arrays.asList (targets);
+        this.submeshes    = Arrays.asList (submeshes);
         this.appearances  = appearances;
         jni_initialize (base, targets, submeshes, appearances);
     }
@@ -27,8 +27,8 @@ public class MorphingMesh extends Mesh {
     public MorphingMesh (VertexBuffer base, VertexBuffer[] targets, IndexBuffer submesh, Appearance appearance) {
         this.vertices     = base;
         this.morphTargets = targets;
-        this.submeshes    = new IndexBuffer[] {submesh};
-        this.appearances  = new Appearance[] {appearance};
+        this.submeshes    = Arrays.asList (submesh);
+        this.appearances  = Arrays.asList (appearance);
         jni_initialize (base, targets, submesh, appearance);
     }
 

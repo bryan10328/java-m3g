@@ -286,3 +286,17 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Node_jni_1print
     node->print (cout) << "\n";
     __CATCH_VOID__;
 }
+
+void Java_build_Node (JNIEnv* env, jobject node_obj, m3g::Node* node)
+{
+    jclass   node_class  = env->GetObjectClass (node_obj);
+    jfieldID node_parent = env->GetFieldID (node_class, "parent", "Lorg/karlsland/m3g/Node;");
+
+    Node* parent = node->getParent ();
+    if (parent) {
+        env->SetObjectField (node_obj, node_parent, (jobject)parent->getExportedEntity());
+    }
+
+    // 注意:このほかにNode* duplicatedを持っているが
+    // Rubyでしか使わないハックなので無視する
+}

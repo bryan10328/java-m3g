@@ -278,3 +278,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1print
     __CATCH_VOID__;
 }
 
+
+void Java_build_Transform (JNIEnv* env, jobject trans_obj, m3g::Transform* trans)
+{
+    // nothing to do
+}

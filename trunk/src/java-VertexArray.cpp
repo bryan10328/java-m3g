@@ -232,3 +232,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1print_1raw_1data
     __CATCH_VOID__;
 }
 
+void Java_build_VertexArray (JNIEnv* env, jobject varry_obj, m3g::VertexArray* varry)
+{
+    // nothing to do
+}
+
+

@@ -219,3 +219,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationController_jni_1print
 }
 
 
+void Java_build_AnimationController (JNIEnv* /* env */, jobject /* controller_obj */, m3g::AnimationController* /* controller */)
+{
+    // nothing to do
+}

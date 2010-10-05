@@ -173,3 +173,46 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Mesh_jni_1print
     __CATCH_VOID__;
 }
 
+void Java_build_Mesh (JNIEnv* env, jobject mesh_obj, m3g::Mesh* mesh)
+{
+    jclass   mesh_class       = env->GetObjectClass (mesh_obj);
+    jfieldID mesh_vertices    = env->GetFieldID (mesh_class, "vertices"   , "Lorg/karlsland/m3g/VertexBuffer;");
+    jfieldID mesh_submeshes   = env->GetFieldID (mesh_class, "submeshes"  , "Ljava/util/List;");
+    jfieldID mesh_appearances = env->GetFieldID (mesh_class, "appearances", "Ljava/util/List;");
+
+    VertexBuffer* vertices = mesh->getVertexBuffer ();
+    if (vertices) {
+        env->SetObjectField (mesh_obj, mesh_vertices, (jobject)vertices->getExportedEntity());
+    }
+
+    int count = mesh->getSubmeshCount();
+
+    jclass    submeshes_class = env->FindClass   ("java/util/ArrayList");
+    jmethodID submeshes_init  = env->GetMethodID (submeshes_class, "<init>", "()V");
+    jmethodID submeshes_add   = env->GetMethodID (submeshes_class, "add", "(Lorg/karlsland/m3g/IndexBuffer;)Z");
+    jobject   submeshes_obj   = env->NewObject   (submeshes_class, submeshes_init);
+    for (int i = 0; i < count; i++) {
+        IndexBuffer* ibuf = mesh->getIndexBuffer (i);
+        if (ibuf) {
+            env->CallObjectMethod (submeshes_obj, submeshes_add, (jobject)ibuf->getExportedEntity());
+        } else {
+            env->CallObjectMethod (submeshes_obj, submeshes_add, (jobject)0);
+        }
+    }
+    env->SetObjectField (mesh_obj, mesh_submeshes, submeshes_obj);
+
+    jclass    appearances_class = env->FindClass   ("java/util/ArrayList");
+    jmethodID appearances_init  = env->GetMethodID (appearances_class, "<init>", "()V");
+    jmethodID appearances_add   = env->GetMethodID (appearances_class, "add", "(Lorg/karlsland/m3g/Appearance;)Z");
+    jobject   appearances_obj   = env->NewObject   (appearances_class, appearances_init);
+    for (int i = 0; i < count; i++) {
+        Appearance* app = mesh->getAppearance (i);
+        if (app) {
+            env->CallObjectMethod (appearances_obj, appearances_add, (jobject)app->getExportedEntity());
+        } else {
+            env->CallObjectMethod (appearances_obj, appearances_add, (jobject)0);
+        }
+    }
+    env->SetObjectField (mesh_obj, mesh_appearances, appearances_obj);
+
+}

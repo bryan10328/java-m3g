@@ -524,3 +524,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1print
     __CATCH_VOID__;
 }
 
+void Java_build_Graphics3D (JNIEnv* env, jobject g3d_obj, m3g::Graphics3D* bg)
+{
+    // これ必要か?
+}
+

@@ -88,3 +88,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1print
     ibuf->print (cout) << "\n";
     __CATCH_VOID__;
 }
+
+void Java_build_IndexBuffer (JNIEnv* env, jobject ibuf_obj, m3g::IndexBuffer* ibuf)
+{
+    // nothing to do
+}

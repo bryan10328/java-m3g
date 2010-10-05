@@ -280,3 +280,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1print
     lgh->print (cout) << "\n";
     __CATCH_VOID__;
 }
+
+
+void Java_build_Light (JNIEnv* env, jobject lgh_obj, m3g::Light* lgh)
+{
+    // nothing to do
+}

@@ -175,3 +175,17 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1print
     mesh->print (cout) << "\n";
     __CATCH_VOID__;
 }
+
+
+void Java_build_SkinnedMesh (JNIEnv* env, jobject mesh_obj, m3g::SkinnedMesh* mesh)
+{
+    jclass       mesh_class    = env->GetObjectClass (mesh_obj);
+    jfieldID     mesh_skeleton = env->GetFieldID     (mesh_class, "skeleton", "Lorg/karlsland/m3g/Group;");
+
+    Group* skeleton = mesh->getSkeleton ();
+    if (skeleton) {
+        env->SetObjectField (mesh_obj, mesh_skeleton, (jobject)skeleton->getExportedEntity());
+    }
+
+
+}

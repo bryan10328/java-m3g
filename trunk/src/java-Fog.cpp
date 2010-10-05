@@ -200,3 +200,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Fog_jni_1print
     fog->print (cout) << "\n";
     __CATCH_VOID__;
 }
+
+
+void Java_build_Fog (JNIEnv* env, jobject fog_obj, m3g::Fog* fog)
+{
+    // nothing to do
+}

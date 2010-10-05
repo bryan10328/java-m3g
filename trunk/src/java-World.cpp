@@ -121,3 +121,28 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_World_jni_1print
     wld->print (cout) << "\n";
     __CATCH_VOID__;
 }
+
+
+void Java_build_World (JNIEnv* env, jobject wld_obj, m3g::World* wld)
+{
+    jclass   wld_class         = env->GetObjectClass (wld_obj);
+    jfieldID wld_active_camera = env->GetFieldID     (wld_class, "activeCamera", "Lorg/karlsland/m3g/Camera;");
+    jfieldID wld_background    = env->GetFieldID     (wld_class, "background"  , "Lorg/karlsland/m3g/Background;");
+
+    Java_build_Object3D      (env, wld_obj, wld);
+    Java_build_Transformable (env, wld_obj, wld);
+    Java_build_Node          (env, wld_obj, wld);
+    Java_build_Group         (env, wld_obj, wld);
+    Java_build_World         (env, wld_obj, wld);
+
+    Camera* cam = wld->getActiveCamera ();
+    if (cam) {
+        env->SetObjectField (wld_obj, wld_active_camera, (jobject)cam->getExportedEntity());
+    }
+
+    Background* bg = wld->getBackground ();
+    if (bg) {
+        env->SetObjectField (wld_obj, wld_background, (jobject)bg->getExportedEntity());
+    }
+
+}

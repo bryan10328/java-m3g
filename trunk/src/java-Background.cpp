@@ -315,3 +315,17 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1print
     bg->print (cout) << "\n";
     __CATCH_VOID__;
 }
+
+
+void Java_build_Background (JNIEnv* env, jobject bg_obj, m3g::Background* bg)
+{
+    jclass   bg_class = env->GetObjectClass (bg_obj);
+    jfieldID bg_image = env->GetFieldID     (bg_class, "image", "Lorg/karlsland/m3g/Image2D;");
+
+    Image2D* img = bg->getImage ();
+    if (img) {
+        env->SetObjectField (bg_obj, bg_image, (jobject)img->getExportedEntity());
+    }
+
+}
+

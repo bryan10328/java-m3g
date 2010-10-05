@@ -24,13 +24,13 @@ public class VertexBuffer extends Object3D {
     private VertexArray positions;
     private VertexArray normals;
     private VertexArray colors;
-    private VertexArray[] texCoords;
+    private List<VertexArray> texCoords;
 
     public VertexBuffer () {
         positions = null;
         normals   = null;
         colors    = null;
-        texCoords = new VertexArray[4];
+        texCoords = Arrays.asList (new VertexArray[]{0,0,0,0});
         jni_initialize ();
     }
 

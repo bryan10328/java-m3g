@@ -297,3 +297,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1print
     __CATCH_VOID__;
 }
 
+void Java_build_CompositingMode (JNIEnv* env, jobject cmode_obj, m3g::CompositingMode* cmode)
+{
+    // nothing to do
+}
+

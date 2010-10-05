@@ -253,3 +253,44 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1print
     vbuf->print (cout) << "\n";
     __CATCH_VOID__;
 }
+
+void Java_build_VertexBuffer (JNIEnv* env, jobject vbuf_obj, m3g::VertexBuffer* vbuf)
+{
+    jclass   vbuf_class      = env->GetObjectClass (vbuf_obj);
+    jfieldID vbuf_positions  = env->GetFieldID     (vbuf_class, "positions", "Lorg/karlsland/m3g/VertexArray;");
+    jfieldID vbuf_normals    = env->GetFieldID     (vbuf_class, "normals"  , "Lorg/karlsland/m3g/VertexArray;");
+    jfieldID vbuf_colors     = env->GetFieldID     (vbuf_class, "colors"   , "Lorg/karlsland/m3g/VertexArray;");
+    jfieldID vbuf_tex_coords = env->GetFieldID     (vbuf_class, "texCoords", "Ljava/util/List;");
+
+    VertexArray* positions = vbuf->getPositions (0);
+    if (positions) {
+        env->SetObjectField (vbuf_obj, vbuf_positions, (jobject)positions->getExportedEntity());
+    }
+
+    VertexArray* normals = vbuf->getNormals ();
+    if (normals) {
+        env->SetObjectField (vbuf_obj, vbuf_normals, (jobject)normals->getExportedEntity());
+    }
+
+    VertexArray* colors = vbuf->getColors ();
+    if (colors) {
+        env->SetObjectField (vbuf_obj, vbuf_colors, (jobject)colors->getExportedEntity());
+    }
+
+    jclass    tex_coords_class = env->FindClass   ("java/util/ArrayList");
+    jmethodID tex_coords_init  = env->GetMethodID (tex_coords_class, "<init>", "()V");
+    jmethodID tex_coords_add   = env->GetMethodID (tex_coords_class, "add", "(Lorg/karlsland/m3g/VertexArray;)Z");
+    jobject   tex_coords_obj   = env->NewObject   (tex_coords_class, tex_coords_init);
+    
+    for (int i = 0; i < MAX_TEXTURE_UNITS; i++) {
+        VertexArray* varry = vbuf->getTexCoords (i, 0);
+        if (varry) {
+            env->CallObjectMethod (tex_coords_obj, tex_coords_add, (jobject)varry->getExportedEntity());
+        } else {
+            env->CallObjectMethod (tex_coords_obj, tex_coords_add, (jobject)0);
+        }
+    }
+
+    env->SetObjectField (vbuf_obj, vbuf_tex_coords, tex_coords_obj);
+
+}

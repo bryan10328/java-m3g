@@ -207,3 +207,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1print
     ri->print (cout) << "\n";
     __CATCH_VOID__;
 }
+
+
+void Java_build_RayIntersection (JNIEnv* env, jobject ri_obj, m3g::RayIntersection* ri)
+{
+    // nothing to do
+}

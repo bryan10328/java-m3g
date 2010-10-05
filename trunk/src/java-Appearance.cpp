@@ -253,3 +253,51 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Appearance_jni_1print
     __CATCH_VOID__;
 }
 
+
+void Java_build_Appearance (JNIEnv* env, jobject app_obj, m3g::Appearance* app)
+{
+    jclass   app_class           = env->GetObjectClass (app_obj);
+    jfieldID app_polygonMode     = env->GetFieldID     (app_class, "polygonMode"    , "Lorg/karlsland/m3g/PolygonMode;");
+    jfieldID app_compositingMode = env->GetFieldID     (app_class, "compositingMode", "Lorg/karlsland/m3g/CompositingMode;");
+    jfieldID app_material        = env->GetFieldID     (app_class, "material"       , "Lorg/karlsland/m3g/Material;");
+    jfieldID app_textures        = env->GetFieldID     (app_class, "textures"       , "Lorg/karlsland/m3g/Texture2D;");
+    jfieldID app_fog             = env->GetFieldID     (app_class, "fog"            , "Lorg/karlsland/m3g/Fog;");
+
+
+    PolygonMode* pmode = app->getPolygonMode ();
+    if (pmode) {
+        env->SetObjectField (app_obj, app_polygonMode, (jobject)pmode->getExportedEntity());
+    }
+
+    CompositingMode* cmode = app->getCompositingMode ();
+    if (cmode) {
+        env->SetObjectField (app_obj, app_compositingMode, (jobject)cmode->getExportedEntity());
+    }
+
+    Material* mat = app->getMaterial ();
+    if (mat) {
+        env->SetObjectField (app_obj, app_material, (jobject)mat->getExportedEntity());
+    }
+
+    jclass    textures_class = env->FindClass   ("java/util/ArrayList");
+    jmethodID textures_init  = env->GetMethodID (textures_class, "<init>", "()V");
+    jmethodID textures_add   = env->GetMethodID (textures_class, "add", "(Lorg/karlsland/m3g/Texture2D;)Z");
+    jobject   textures_obj   = env->NewObject   (textures_class, textures_init);
+
+    for (int i = 0; i < MAX_TEXTURE_UNITS; i++) {
+        Texture2D* tex = app->getTexture (i);
+        if (tex) {
+            env->CallObjectMethod (textures_obj, textures_add, (jobject)tex->getExportedEntity());
+        } else {
+            env->CallObjectMethod (textures_obj, textures_add, (jobject)0);
+        }
+    }
+
+    Fog* fog = app->getFog ();
+    if (fog) {
+        env->SetObjectField (app_obj, app_fog, (jobject)fog->getExportedEntity());
+    }
+
+
+}
+

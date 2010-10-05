@@ -223,3 +223,22 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1print
     spr->print (cout) << "\n";
     __CATCH_VOID__;
 }
+
+
+void Java_build_Sprite3D (JNIEnv* env, jobject spr_obj, m3g::Sprite3D* spr)
+{
+    jclass    spr_class      = env->GetObjectClass (spr_obj);
+    jfieldID  spr_appearance = env->GetFieldID     (spr_class, "appearance", "Lorg/karlsland/m3g/Appearance;");
+    jfieldID  spr_image      = env->GetFieldID     (spr_class, "image"     , "Lorg/karlsland/m3g/Image2D;");
+
+    Appearance* app = spr->getAppearance ();
+    if (app) {
+        env->SetObjectField (spr_obj, spr_appearance, (jobject)app->getExportedEntity());
+    }
+
+    Image2D* img = spr->getImage ();
+    if (img) {
+        env->SetObjectField (spr_obj, spr_image, (jobject)img->getExportedEntity());
+    }
+
+}

@@ -155,3 +155,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Camera_jni_1print
     cam->print (cout) << "\n";
     __CATCH_VOID__;
 }
+
+void Java_build_Camera (JNIEnv* env, jobject cam_obj, m3g::Camera* cam)
+{
+    // nothing to do
+}

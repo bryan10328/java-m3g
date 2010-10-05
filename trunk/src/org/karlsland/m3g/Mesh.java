@@ -1,4 +1,5 @@
 package org.karlsland.m3g;
+import java.util.*;
 
 
 public class Mesh extends Node {
@@ -16,29 +17,28 @@ public class Mesh extends Node {
     native private void         jni_setAppearance   (int index, Appearance appearance);
     native private void         jni_print           ();
 
-    protected VertexBuffer  vertices;
-    protected IndexBuffer[] submeshes;
-    protected Appearance[]  appearances;
+    protected VertexBuffer      vertices;
+    protected List<IndexBuffer> submeshes;
+    protected List<Appearance>  appearances;
+
 
     public Mesh (VertexBuffer vertices, IndexBuffer[] submeshes, Appearance[] appearances) {
         this.vertices    = vertices;
-        this.submeshes   = submeshes;
-        this.appearances = appearances;
+        this.submeshes   = Arrays.asList (submeshes);
+        this.appearances = arrays.asList (appearances);
         jni_initialize (vertices, submeshes, appearances);
     }
 
     public Mesh (VertexBuffer vertices, IndexBuffer submesh, Appearance appearance) {
         this.vertices    = vertices;
-        this.submeshes   = new IndexBuffer[] {submesh}; 
-        this.appearances = new Appearance[] {appearance};
+        this.submeshes   = Arrays.asList (submesh);
+        this.appearances = Arrays.asList (appearance);
         jni_initialize (vertices, submesh, appearance);
     }
 
-    // C++側を呼び出さないダミーのコンストラクタ
+    // C++側を呼び出さないためのダミーのコンストラクタ.
+    // SkinnedMesh, MorphingMeshから呼ばれる。
     protected Mesh () {
-        this.vertices    = null;
-        this.submeshes   = null;
-        this.appearances = null;
     }
 
     public void finalize () {

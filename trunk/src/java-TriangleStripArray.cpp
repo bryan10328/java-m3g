@@ -81,3 +81,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1print
     tris->print (cout) << "\n";
     __CATCH_VOID__;
 }
+
+void Java_build_TriangleStripArray (JNIEnv* env, jobject tris_obj, m3g::TriangleStripArray* tris)
+{
+    // nothing to do
+}

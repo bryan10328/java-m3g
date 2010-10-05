@@ -125,3 +125,21 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1print
     __CATCH_VOID__;
 }
 
+
+
+void Java_build_AnimationTrack (JNIEnv* env, jobject track_obj, m3g::AnimationTrack* track)
+{
+    jclass   track_class   = env->GetObjectClass (track_obj);
+    jfieldID track_key_seq = env->GetFieldID     (track_class, "keyframeSequence", "Lorg/karlsland/m3g/KeyframeSequence;");
+    jfieldID track_controller = env->GetFieldID (track_class, "animationController", "Lorg/karlsland/m3g/AnimationController;");
+
+    KeyframeSequence* key_seq = track->getKeyframeSequence ();
+    if (key_seq) {
+        env->SetObjectField (track_obj, track_key_seq, (jobject)key_seq->getExportedEntity());
+    }
+
+    AnimationController* controller = track->getController ();
+    if (controller) {
+        env->SetObjectField (track_obj, track_key_seq, (jobject)controller->getExportedEntity());
+    }
+}

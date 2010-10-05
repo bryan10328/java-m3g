@@ -150,3 +150,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Material_jni_1print
     mat->print (cout) << "\n";
     __CATCH_VOID__;
 }
+
+void Java_build_Material (JNIEnv* env, jobject mat_obj, m3g::Material* mat)
+{
+    // nothing to do
+}

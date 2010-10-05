@@ -250,3 +250,17 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Texture2D_jni_1print
     tex->print (cout) << "\n";
     __CATCH_VOID__;
 }
+
+
+void Java_build_Texture2D (JNIEnv* env, jobject tex_obj, m3g::Texture2D* tex)
+{
+    jclass     tex_class = env->GetObjectClass (tex_obj);
+    jfieldID   tex_image = env->GetFieldID     (tex_class, "image", "Lorg/karlsland/m3g/Image2D;");
+
+    Image2D* img = tex->getImage ();
+    if (img) {
+        env->SetObjectField (tex_obj, tex_image, (jobject)tex->getExportedEntity());
+    }
+
+
+}

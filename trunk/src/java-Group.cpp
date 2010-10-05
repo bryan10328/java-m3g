@@ -157,3 +157,26 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1print
     grp->print (cout) << "\n";
     __CATCH_VOID__;
 }
+
+
+void Java_build_Group (JNIEnv* env, jobject grp_obj, m3g::Group* grp)
+{
+    jclass   grp_class    = env->GetObjectClass (grp_obj);
+    jfieldID grp_children = env->GetFieldID     (grp_class, "children", "Ljava/util/List;");
+
+
+    jclass    children_class = env->FindClass   ("java/util/ArrayList");
+    jmethodID children_init  = env->GetMethodID (children_class, "<init>", "()V");
+    jmethodID children_add   = env->GetMethodID (children_class, "add", "(Lorg/karlsland/m3g/Node;)Z");
+    jobject   children_obj   = env->NewObject   (children_class, children_init);
+
+    for (int i = 0; i < grp->getChildCount(); i++) {
+        Node* child = grp->getChild (i);
+        if (child) {
+            env->CallObjectMethod (children_obj, children_add, (jobject)child->getExportedEntity());
+        }
+    }
+
+    env->SetObjectField (grp_obj, grp_children, children_obj);
+
+}

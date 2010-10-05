@@ -19,8 +19,8 @@ public class SkinnedMesh extends Mesh {
     public SkinnedMesh (VertexBuffer vertices, IndexBuffer[] submeshes, Appearance[] appearances, Group skeleton) {
         super ();
         this.vertices    = vertices;
-        this.submeshes   = submeshes;
-        this.appearances = appearances;
+        this.submeshes   = Arrays.asList (submeshes);
+        this.appearances = Arrays.asList (appearances);
         this.skeleton    = skeleton;
         jni_initialize (vertices, submeshes, appearances, skeleton);
     }
@@ -28,8 +28,8 @@ public class SkinnedMesh extends Mesh {
     public SkinnedMesh (VertexBuffer vertices, IndexBuffer submesh, Appearance appearance, Group skeleton) {
         super ();
         this.vertices    = vertices;
-        this.submeshes   = new IndexBuffer[] {submesh}; 
-        this.appearances = new Appearance[] {appearance};
+        this.submeshes   = Arrays.asList (submesh);
+        this.appearances = Arrays.asList (appearance);
         this.skeleton    = skeleton;
         jni_initialize (vertices, submesh, appearance, skeleton);
     }

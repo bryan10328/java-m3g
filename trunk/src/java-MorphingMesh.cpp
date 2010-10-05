@@ -170,3 +170,28 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1print
     __CATCH_VOID__;
 }
 
+
+void Java_build_MorphingMesh (JNIEnv* env, jobject mesh_obj, m3g::MorphingMesh* mesh)
+{
+    jclass        mesh_class   = env->GetObjectClass (mesh_obj);
+    jfieldID      mesh_targets = env->GetFieldID (mesh_class, "morphTargets", "Ljava/util/List;");
+
+
+    int count = mesh->getMorphTargetCount ();
+
+    jclass    targets_class = env->FindClass   ("java/util/ArrayList");
+    jmethodID targets_init  = env->GetMethodID (targets_class, "<init>", "()V");
+    jmethodID targets_add   = env->GetMethodID (targets_class, "add", "(Lorg/karlsland/m3g/VertexBuffer;)Z");
+    jobject   targets_obj   = env->NewObject   (targets_class, targets_init);
+    
+    for (int i = 0; i < count; i++) {
+        VertexBuffer* target = mesh->getMorphTarget (i);
+        if (target) {
+            env->CallObjectMethod (targets_obj, targets_add, (jobject)target->getExportedEntity());
+        } else {
+            env->CallObjectMethod (targets_obj, targets_add, (jobject)0);
+        }
+    }
+
+    env->SetObjectField (mesh_obj, mesh_targets, targets_obj);
+}

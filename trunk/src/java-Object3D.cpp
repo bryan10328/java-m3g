@@ -269,3 +269,26 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Object3D_jni_1print
     obj3d->print (cout) << "\n";
     __CATCH_VOID__;
 }
+
+
+void Java_build_Object3D (JNIEnv* env, jobject obj3d_obj, m3g::Object3D* obj3d)
+{
+    jclass   obj3d_class  = env->GetObjectClass (obj3d_obj);
+    jfieldID obj3d_tracks = env->GetFieldID     (obj3d_class, "animationTracks", "Ljava/util/List;");
+
+    jclass    tracks_class = env->FindClass   ("java/util/ArrayList");
+    jmethodID tracks_init  = env->GetMethodID (tracks_class, "<init>", "()V");
+    jmethodID tracks_add   = env->GetMethodID (tracks_class, "add", "(Lorg/karlsland/m3g/AnimationTracks;)Z");
+    jobject   tracks_obj   = env->NewObject   (tracks_class, tracks_init);
+
+    for (int i = 0; i < (int)obj3d->getAnimationTrackCount(); i++) {
+        AnimationTrack* track = obj3d->getAnimationTrack (i);
+        if (track) {
+            env->CallObjectMethod (tracks_obj, tracks_add, (jobject)track->getExportedEntity());
+        }
+    }
+
+    env->SetObjectField (obj3d_obj, obj3d_tracks, tracks_obj);
+}
+
+

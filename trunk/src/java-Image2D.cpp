@@ -212,3 +212,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1writePng
     img->writePNG (file_name);
     env->ReleaseStringUTFChars (fileName, file_name);
 }
+
+
+void Java_build_Image2D (JNIEnv* env, jobject img_obj, m3g::Image2D* img)
+{
+    // nothing to do
+}
