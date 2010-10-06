@@ -29,7 +29,7 @@ public class M3GRenderer implements GLEventListener {
         positions.set (0, 4, position_values);
 
         VertexArray colors       = new VertexArray (4, 4, 1);
-        byte[]      color_values = {127,0,0,127,  0,127,0,127,  0,0,127,127,  127,127,127,127};
+        byte[]      color_values = {127,-128,-128,127,  -128,127,-128,127,  -128,-128,127,127,  127,127,127,127};
         colors.set (0, 4, color_values);
 
         float   scale = 1;

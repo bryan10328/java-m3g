@@ -162,13 +162,28 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1getVertexCount
  * Signature: (Lorg/karlsland/m3g/VertexArray;)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1setColors
-  (JNIEnv* env, jobject thiz, jobject colors)
+  (JNIEnv* env, jobject vbuf_obj, jobject colors_obj)
 {
     cout << "Java-VertexBuffer: setColors is called.\n";
-    VertexBuffer* vbuf = (VertexBuffer*)getNativePointer (env, thiz);
-    VertexArray*  colrs = (VertexArray*)getNativePointer (env, colors);
+    VertexBuffer* vbuf   = (VertexBuffer*)getNativePointer (env, vbuf_obj);
+    VertexArray*  colors = (VertexArray*)getNativePointer (env, colors_obj);
     __TRY__;
-    vbuf->setColors (colrs);
+    if (colors->getComponentType() == 1) {
+        // byte(-128～127) --> unsigned char(0～255)
+        int component_count = colors->getComponentCount ();
+        int vertex_count    = colors->getVertexCount ();
+        int size            = component_count * vertex_count;
+        char*          char_colors  = new char[size];
+        unsigned char* uchar_colors = new unsigned char[size];
+        colors->get (0, vertex_count, char_colors);
+        for (int i = 0; i < size; i++) {
+            uchar_colors[i] = char_colors[i] + 128;
+        }
+        colors->set (0, vertex_count, (char*)uchar_colors);
+        delete[] char_colors;
+        delete[] uchar_colors;
+    }
+    vbuf->setColors (colors);
     __CATCH_VOID__;
 }
 
