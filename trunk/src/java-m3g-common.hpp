@@ -16,11 +16,11 @@ void* getNativePointer (JNIEnv* env, jobject obj)
 }
 
 static inline
-void setNativePointer (JNIEnv* env, jobject obj, void* entity)
+void setNativePointer (JNIEnv* env, jobject obj, void* pointer)
 {
     jclass   clazz = env->GetObjectClass (obj);
     jfieldID fid   = env->GetFieldID (clazz, "nativePointer", "J");
-    env->SetLongField (obj, fid, (long)entity);
+    env->SetLongField (obj, fid, (long)pointer);
 }
 
 // 注意: Java側のオブジェクトのコンストラクタは呼ばれない

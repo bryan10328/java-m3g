@@ -50,7 +50,7 @@ public class M3GRenderer implements GLEventListener {
 
         TriangleStripArray tris = new TriangleStripArray (indices, strips);
 
-        Image2D   img0    = (Image2D)Loader.load ("yummemi.png")[0];
+        Image2D   img0    = (Image2D)Loader.load ("yumemi.png")[0];
         Texture2D tex0  = new Texture2D (img0);
         tex0.setBlending (Texture2D.FUNC_REPLACE);
 
@@ -70,7 +70,7 @@ public class M3GRenderer implements GLEventListener {
 
         Mesh mesh = new Mesh (vertices, tris, app);
         mesh.translate (0,0,2);
-  
+        wld.addChild (mesh);
 
     }
  

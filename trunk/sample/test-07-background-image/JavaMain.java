@@ -12,8 +12,8 @@ import javax.media.opengl.GLCanvas;
 
 public class JavaMain {
     
-    JFrame      frame;
-    GLCanvas    canvas;
+    JFrame     frame;
+    GLCanvas   canvas;
     M3GRenderer renderer;
 
    public JavaMain () {
@@ -33,6 +33,8 @@ public class JavaMain {
                    renderer.update (e.getKeyChar());
                }
            });
+
+
 
        frame.setVisible(true);
     }

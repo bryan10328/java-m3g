@@ -522,8 +522,9 @@ void Java_new_Graphics3D               (JNIEnv* env, m3g::Graphics3D* g3d)
     jobject  g3d_obj           = env->AllocObject (g3d_class);
     jobject  g3d_entity        = env->NewGlobalRef (g3d_obj);
 
-    setNativePointer (env, g3d_obj, g3d_entity);
+    setNativePointer (env, g3d_obj, g3d);
     g3d->setExportedEntity (g3d_entity);
+
 }
 
 

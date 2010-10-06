@@ -6,8 +6,9 @@ import org.karlsland.m3g.*;
 
 public class M3GRenderer implements GLEventListener {
 
-    private Graphics3D g3d;
-    private World      wld;
+    private GLAutoDrawable drawer;
+    private Graphics3D     g3d;
+    private World          wld;
 
     public void init(GLAutoDrawable drawable) {
         // 初期化処理
@@ -75,6 +76,14 @@ public class M3GRenderer implements GLEventListener {
         // 
     }
  
+    public void update (char key) {
+
+        System.out.println (key+"のキーが押された");
+        if (key == 'q') {
+            System.exit (0);
+        }
+        drawer.display();
+    }
 
 
 }

@@ -6,13 +6,15 @@ import org.karlsland.m3g.*;
 
 public class M3GRenderer implements GLEventListener {
 
-    private Graphics3D g3d;
-    private World      wld;
+    private GLAutoDrawable drawer;
+    private Graphics3D     g3d;
+    private World          wld;
 
     public void init(GLAutoDrawable drawable) {
         // 初期化処理
-        g3d = Graphics3D.getInstance ();
-        wld = new World ();
+        this.drawer = drawable;
+        this.g3d    = Graphics3D.getInstance ();
+        this.wld    = new World ();
         
         Camera cam = new Camera ();
         cam.translate (0,0,5);
@@ -62,6 +64,14 @@ public class M3GRenderer implements GLEventListener {
         // 
     }
  
+    public void update (char key) {
 
+        System.out.println (key+"のキーが押された");
+        if (key == 'q') {
+            System.exit (0);
+        }
+        drawer.display();
+    }
+    
 
 }

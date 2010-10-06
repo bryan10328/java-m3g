@@ -13,12 +13,18 @@ public class M3GRenderer implements GLEventListener {
 
     public void init(GLAutoDrawable drawable) {
 
+        GL gl = drawable.getGL ();        
+        gl.glEnable( GL.GL_DEPTH_TEST );
+        gl.glDepthFunc(GL.GL_LEQUAL);
+
         // 初期化処理
         this.drawer = drawable;
         this.g3d    = Graphics3D.getInstance ();
         this.wld    = new World ();
         this.worldTime = 0;
-        
+
+        g3d.print ();
+
         Camera cam = new Camera ();
         cam.lookAt (3,0,3,
                     0,0,-2,
@@ -78,16 +84,17 @@ public class M3GRenderer implements GLEventListener {
         mesh5.translate (0,0,-5);
 
         Group grp = new Group ();
+        wld.addChild (grp);
         grp.addChild (mesh1);
         grp.addChild (mesh2);
         grp.addChild (mesh3);
         grp.addChild (mesh4);
         grp.addChild (mesh5);
-        wld.addChild (grp);
 
         Background bg = new Background ();
         bg.setColor (0xff3f3f3f);
         wld.setBackground (bg);
+
     }
  
     public void reshape(GLAutoDrawable drawable,
@@ -101,6 +108,10 @@ public class M3GRenderer implements GLEventListener {
  
     public void display(GLAutoDrawable drawable) {
         // 描画処理
+        GL gl = drawable.getGL ();
+        gl.glClearDepth(1.0f);        // Depth Buffer Setup
+        gl.glDepthFunc(GL.GL_LEQUAL);  // The Type Of Depth Testing (Less Or Equal)
+        gl.glDisable(GL.GL_DEPTH_TEST);
         g3d.render (wld);
     }
  

@@ -6,8 +6,9 @@ import org.karlsland.m3g.*;
 
 public class M3GRenderer implements GLEventListener {
 
-    private Graphics3D g3d;
-    private World      wld;
+    private GLAutoDrawable drawer;
+    private Graphics3D     g3d;
+    private World          wld;
 
     public void init(GLAutoDrawable drawable) {
         // 初期化処理
@@ -24,43 +25,41 @@ public class M3GRenderer implements GLEventListener {
         positions.set (0, 4, positionValues);
 
         VertexArray colors = new VertexArray (4, 3, 1);
-        byte colorValues[] = {255,255,255, 255,255,255, 255,255,255, 255,255,255};
-        colors.set (0, 4, color_values);
+        byte colorValues[] = {127,127,127, 127,127,127, 127,127,127, 127,127,127};
+        colors.set (0, 4, colorValues);
 
         VertexArray texCoords = new VertexArray (4, 2, 2);
         short texCoordValues[] = {1,0, 1,1, 0,0, 0,1};
         texCoords.set (0, 4, texCoordValues);
 
-        flaot scale = 1;
-        float bias[3] = {0,0,0};
-        VertexBuffer vertices = new VertexBuffer;
+        float scale = 1;
+        float[] bias = {0,0,0};
+        VertexBuffer vertices = new VertexBuffer ();
         vertices.setPositions (positions, scale, bias);
         vertices.setColors (colors);
         vertices.setTexCoords (0, texCoords, scale, bias);
         vertices.setTexCoords (1, texCoords, scale, bias);
         
-        int strips[2];
+        int[] strips  = {3,3};
+        int[] indices = {0,1,2, 2,1,3};
 
-
-        // ここから
-        // load関数がないのでこのサンプルは無理
-
-
-        float scale = 1;
-        float[] bias = {0,0,0};
-        vertices.setPositions (positions, scale, bias);
         
-        int[] indices = {0,1,2,3};
-        int[] strips = {4};
         TriangleStripArray tris = new TriangleStripArray (indices, strips);
 
-        Material mat = new Material ();
-        mat.setColor (Material.DIFFUSE, 0xff7f7fff);
-  
+
+        Image2D   img0 = (Image2D)(Loader.load ("yumemi.png")[0]);
+        Texture2D tex0 = new Texture2D (img0);
+
+        Image2D   img1 = (Image2D)(Loader.load ("onnanoko.png")[0]);
+        Texture2D tex1 = new Texture2D (img1);
+        tex1.setBlending (Texture2D.FUNC_DECAL);
+
         Appearance app = new Appearance ();
-        app.setMaterial (mat);
-        
+        app.setTexture (0, tex0);
+        app.setTexture (1, tex1);
+
         Mesh mesh = new Mesh (vertices, tris, app);
+        mesh.translate (0,0,2);
         wld.addChild (mesh);
     }
  
@@ -84,6 +83,14 @@ public class M3GRenderer implements GLEventListener {
         // 
     }
  
+    public void update (char key) {
+
+        System.out.println (key+"のキーが押された");
+        if (key == 'q') {
+            System.exit (0);
+        }
+        drawer.display();
+    }
 
 
 }

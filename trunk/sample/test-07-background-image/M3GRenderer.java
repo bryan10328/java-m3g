@@ -20,33 +20,21 @@ public class M3GRenderer implements GLEventListener {
         this.worldTime = 0;
         
 
-        Object3D[] objs = Loader.load ("simple.m3g");
-        //Object3D[] objs = Loader.load ("test.m3g");
-        
-        for (int i = 0; i < objs.length; i++) {
-        if (objs[i] instanceof World) {
-            wld = (World)objs[i];
-            wld.print ();
-            break;
-        }
-        }
+        Camera cam = new Camera ();
+        cam.translate (0,0,5);
+        wld.addChild (cam);
+        wld.setActiveCamera (cam);
 
-        Camera cam = wld.getActiveCamera ();
-        if (cam == null) {
-            cam = new Camera ();
-            cam.lookAt (0,0,10,
-                        0,0,0,
-                        0,1,0);
-            wld.addChild (cam);
-            wld.setActiveCamera (cam);
-        }
-
-        Background bg = wld.getBackground ();
-        if (bg == null) {
-            bg = new Background ();
-            wld.setBackground (bg);
-        }
-        bg.setColor (0xff3f7fff);
+        Image2D img = (Image2D)(Loader.load ("mizugi.png")[0]);
+        int width    = img.getWidth();
+        int height   = img.getHeight();
+        Background bg  = new Background ();
+        bg.setImage (img);
+        //bg.setCrop (0,0,width,height);
+        bg.setColor (0xffff0000);
+        bg.setImageMode (Background.REPEAT, Background.REPEAT);
+        bg.setCrop (-width,-height,width*2,height*2);
+        wld.setBackground (bg);
 
     }
  
@@ -75,14 +63,14 @@ public class M3GRenderer implements GLEventListener {
         System.out.println (key+"のキーが押された");
         if (key == 'q') {
             System.exit (0);
-        }
-        else if (key == ' ') {
+        } else if (key == ' ') {
             System.out.println ("main: time = " + worldTime + "\n");
-            worldTime = worldTime + 2;
+            worldTime = worldTime + 5;
             wld.animate (worldTime);
+            drawer.display();
         }
 
-        drawer.display();
     }
+
 
 }
