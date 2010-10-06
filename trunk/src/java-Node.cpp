@@ -19,7 +19,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Node_jni_1initialize
     Node* node;
     __TRY__;
     node = new Node ();
-    __CATCH_VOID__;
+    __CATCH__;
+    if (env->ExceptionOccurred ()) {
+        return;
+    }
     setNativePointer (env, thiz, node);
     jobject entity = env->NewWeakGlobalRef (thiz);
     node->setExportedEntity (entity);
@@ -38,7 +41,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Node_jni_1finalize
     env->DeleteWeakGlobalRef ((jobject)node->getExportedEntity());
     __TRY__;
     delete node;
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -50,11 +53,11 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Node_jni_1align
   (JNIEnv* env, jobject thiz, jobject reference)
 {
     cout << "Java-Node: align is called.\n";
-    Node* node = (Node*)getNativePointer (env, thiz);
+    Node* node   = (Node*)getNativePointer (env, thiz);
     Node* target = (Node*)getNativePointer (env, reference);
     __TRY__;
     node->align (target);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 
@@ -68,10 +71,10 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Node_jni_1getAlignmentReference
 {
     cout << "Java-Node: getAlignmentReference is called.\n";
     Node* node = (Node*)getNativePointer (env, thiz);
-    Node* ref;
+    Node* ref  = NULL;
     __TRY__;
     ref = node->getAlignmentReference (axis);
-    __CATCH_JOBJECT__;
+    __CATCH__;
     return (ref != NULL) ? (jobject)ref->getExportedEntity() : (jobject)NULL;
 }
 
@@ -84,11 +87,11 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Node_jni_1getAlignmentTarget
   (JNIEnv* env, jobject thiz, jint axis)
 {
     cout << "Java-Node: getAlignmentTarget is called.\n";
-    Node* node = (Node*)getNativePointer (env, thiz);
-    int   target;
+    Node* node   = (Node*)getNativePointer (env, thiz);
+    int   target = 0;
     __TRY__;
     target = node->getAlignmentTarget (axis);
-    __CATCH_INT__;
+    __CATCH__;
     return target;
 }
 
@@ -102,10 +105,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Node_jni_1getAlphaFactor
 {
     cout << "Java-Node: getAlphaFactor is called.\n";
     Node* node  = (Node*)getNativePointer (env, thiz);
-    float alpha;
+    float alpha = 0;
     __TRY__;
     alpha = node->getAlphaFactor ();
-    __CATCH_FLOAT__;
+    __CATCH__;
     return alpha;
 }
 
@@ -119,10 +122,10 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Node_jni_1getParent
 {
     cout << "Java-Node: getParent is called.\n";
     Node* node = (Node*)getNativePointer (env, thiz);
-    Node* parent;
+    Node* parent = NULL;
     __TRY__;
     parent = node->getParent ();
-    __CATCH_JOBJECT__;
+    __CATCH__;
     return (parent != NULL) ? (jobject)parent->getExportedEntity() : (jobject)NULL;
 }
 
@@ -136,10 +139,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Node_jni_1getScope
 {
     cout << "Java-Node: getScope is called.\n";
     Node* node = (Node*)getNativePointer (env, thiz);
-    int scope;
+    int scope = 0;
     __TRY__;
     scope = node->getScope ();
-    __CATCH_INT__;
+    __CATCH__;
     return scope;
 }
 
@@ -152,13 +155,13 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Node_jni_1getTransformTo
   (JNIEnv* env, jobject thiz, jobject target, jobject transform)
 {
     cout << "Java-Node: getTransdformTo is called.\n";
-    Node* node = (Node*)getNativePointer (env, thiz);
-    Node* targt = (Node*)getNativePointer (env, target);
+    Node*      node  = (Node*)getNativePointer (env, thiz);
+    Node*      targt = (Node*)getNativePointer (env, target);
     Transform* trans = (Transform*)getNativePointer (env, transform);
-    bool enable;
+    bool enable = false;
     __TRY__;
     enable = node->getTransformTo (targt, trans);
-    __CATCH_BOOL__;
+    __CATCH__;
     return enable;
 }
 
@@ -172,10 +175,10 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Node_jni_1isPickingEnabled
 {
     cout << "Java-Node: isPickingEnable is called.\n";
     Node* node = (Node*)getNativePointer (env, thiz);
-    bool  enable;
+    bool  enable = false;
     __TRY__;
     enable = node->isPickingEnabled ();
-    __CATCH_BOOL__;
+    __CATCH__;
     return enable;
 }
 
@@ -188,11 +191,11 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Node_jni_1isRenderingEnabled
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Node: isRenderingEnabled is called.\n";
-    Node* node = (Node*)getNativePointer (env, thiz);
-    bool  enable;
+    Node* node   = (Node*)getNativePointer (env, thiz);
+    bool  enable = false;
     __TRY__;
     enable = node->isRenderingEnabled ();
-    __CATCH_BOOL__;
+    __CATCH__;
     return enable;
 }
 
@@ -210,7 +213,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Node_jni_1setAlignment
     Node* y_ref = (Node*)getNativePointer (env, yRef);
     __TRY__;
     node->setAlignment (z_ref, zTarget, y_ref, yTarget);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -225,7 +228,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Node_jni_1setAlphaFactor
     Node* node = (Node*)getNativePointer (env, thiz);
     __TRY__;
     node->setAlphaFactor (alpha);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -240,7 +243,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Node_jni_1setPickingEnable
     Node* node = (Node*)getNativePointer (env, thiz);
     __TRY__;
     node->setPickingEnable (enable);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -255,7 +258,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Node_jni_1setRenderingEnable
     Node* node = (Node*)getNativePointer (env, thiz);
     __TRY__;
     node->setRenderingEnable (enable);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -270,7 +273,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Node_jni_1setScope
     Node* node = (Node*)getNativePointer (env, thiz);
     __TRY__;
     node->setScope (scope);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -286,7 +289,7 @@ JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Node_jni_1print
     ostringstream oss;
     __TRY__;
     node->print (oss);
-    __CATCH_JSTRING__;
+    __CATCH__;
     return env->NewStringUTF (oss.str().c_str());
 }
 

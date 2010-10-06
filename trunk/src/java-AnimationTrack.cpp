@@ -16,11 +16,14 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1initialize
   (JNIEnv* env, jobject thiz, jobject keyframeSequence, jint property)
 {
     cout << "Java-AnimationTrack: initilize is called.\n";
-    KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, keyframeSequence);
-    AnimationTrack* anim_track;
+    KeyframeSequence* key_seq    = (KeyframeSequence*)getNativePointer (env, keyframeSequence);
+    AnimationTrack*   anim_track = NULL;
     __TRY__;
     anim_track = new AnimationTrack (key_seq, property);
-    __CATCH_VOID__;
+    __CATCH__;
+    if (env->ExceptionOccurred ()) {
+        return;
+    }
     setNativePointer (env, thiz, anim_track);
     jobject entity = env->NewWeakGlobalRef (thiz);
     anim_track->setExportedEntity (entity);
@@ -40,7 +43,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1finalize
     env->DeleteWeakGlobalRef ((jobject)anim_track->getExportedEntity());
     __TRY__;
     delete anim_track;
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -52,11 +55,11 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1getControll
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-AnimationTrack: getController is called.\n";
-    AnimationTrack* anim_track = (AnimationTrack*)getNativePointer (env, thiz);
-    AnimationController* anim_cntr;
+    AnimationTrack*      anim_track = (AnimationTrack*)getNativePointer (env, thiz);
+    AnimationController* anim_cntr  = NULL;
     __TRY__;
     anim_cntr = anim_track->getController ();
-    __CATCH_JOBJECT__;
+    __CATCH__;
     return (anim_cntr != NULL) ? (jobject)anim_cntr->getExportedEntity() : (jobject)NULL;
 }
 
@@ -70,10 +73,10 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1getKeyframe
 {
     cout << "Java-AnimationTrack: getKeyframeSequence is called.\n";
     AnimationTrack*   anim_track = (AnimationTrack*)getNativePointer (env, thiz);
-    KeyframeSequence* key_seq;
+    KeyframeSequence* key_seq    = NULL;
     __TRY__;
     key_seq = anim_track->getKeyframeSequence ();
-    __CATCH_JOBJECT__;
+    __CATCH__;
     return (key_seq != NULL) ? (jobject)key_seq->getExportedEntity() : (jobject)NULL;
 }
 
@@ -88,10 +91,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1getTargetPrope
 {
     cout << "Java-AnimationTrack: getTargetProperty is called.\n";
     AnimationTrack* anim_track = (AnimationTrack*)getNativePointer (env, thiz);
-    int property;
+    int property = 0;
     __TRY__;
     property = anim_track->getTargetProperty ();
-    __CATCH_INT__;
+    __CATCH__;
     return property;
 }
 
@@ -108,7 +111,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1setController
     AnimationController* anim_cntr  = (AnimationController*)getNativePointer (env, animationController);
     __TRY__;
     anim_track->setController (anim_cntr);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -124,7 +127,7 @@ JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1print
     ostringstream oss;
     __TRY__;
     anim_track->print (oss);
-    __CATCH_JSTRING__;
+    __CATCH__;
     return env->NewStringUTF (oss.str().c_str());
 }
 
@@ -143,9 +146,9 @@ void Java_new_AnimationTrack      (JNIEnv* env, m3g::Object3D* obj)
 
 void Java_build_AnimationTrack (JNIEnv* env, jobject track_obj, m3g::AnimationTrack* track)
 {
-    jclass   track_class   = env->GetObjectClass (track_obj);
-    jfieldID track_key_seq = env->GetFieldID     (track_class, "keyframeSequence", "Lorg/karlsland/m3g/KeyframeSequence;");
-    jfieldID track_controller = env->GetFieldID (track_class, "animationController", "Lorg/karlsland/m3g/AnimationController;");
+    jclass   track_class      = env->GetObjectClass (track_obj);
+    jfieldID track_key_seq    = env->GetFieldID     (track_class, "keyframeSequence", "Lorg/karlsland/m3g/KeyframeSequence;");
+    jfieldID track_controller = env->GetFieldID     (track_class, "animationController", "Lorg/karlsland/m3g/AnimationController;");
 
     KeyframeSequence* key_seq = track->getKeyframeSequence ();
     if (key_seq) {

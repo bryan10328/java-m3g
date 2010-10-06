@@ -16,10 +16,13 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1initialize
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-IndexBuffer: initialize is called.\n";
-    IndexBuffer* ibuf;
+    IndexBuffer* ibuf = NULL;
     __TRY__;
     ibuf = new IndexBuffer ();
-    __CATCH_VOID__;
+    __CATCH__;
+    if (env->ExceptionOccurred ()) {
+        return;
+    }
     setNativePointer (env, thiz, ibuf);
     jobject entity = env->NewWeakGlobalRef (thiz);
     ibuf->setExportedEntity (entity);
@@ -38,7 +41,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1finalize
     env->DeleteWeakGlobalRef ((jobject)ibuf->getExportedEntity());
     __TRY__;
     delete ibuf;
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -51,10 +54,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1getIndexCount
 {
     cout << "Java-IndexBuffer: getIndexCount is called.\n";
     IndexBuffer* ibuf = (IndexBuffer*)getNativePointer (env, thiz);
-    int count;
+    int count = 0;
     __TRY__;
     count = ibuf->getIndexCount ();
-    __CATCH_INT__;
+    __CATCH__;
     return count;
 }
 
@@ -71,7 +74,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1getIndices
     int* indcs = env->GetIntArrayElements (indices, 0);
     __TRY__;
     ibuf->getIndices (indcs);
-    __CATCH_VOID__;
+    __CATCH__;
     env->ReleaseIntArrayElements (indices, indcs, 0);
 }
 
@@ -88,7 +91,7 @@ JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1print
     ostringstream oss;
     __TRY__;
     ibuf->print (oss);
-    __CATCH_JSTRING__;
+    __CATCH__;
     return env->NewStringUTF (oss.str().c_str());
 }
 

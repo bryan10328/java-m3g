@@ -30,7 +30,10 @@ JNIEXPORT jobjectArray JNICALL Java_org_karlsland_m3g_Loader_jni_1load___3BI
     cout << "Java-Loader: offset    = " << offset    << "\n";
     __TRY__;
     objs = Loader::load (data_size, data_ptr, offset);
-    __CATCH_JOBJECT_ARRAY__;
+    __CATCH__;
+    if (env->ExceptionOccurred ()) {
+        return (jobjectArray)0;
+    }
     env->ReleaseByteArrayElements (data, (jbyte*)data_ptr, 0);
 
     cout << "Java-Loader: create " << objs.size() << " Object3D array.\n";
@@ -60,9 +63,12 @@ JNIEXPORT jobjectArray JNICALL Java_org_karlsland_m3g_Loader_jni_1load__Ljava_la
     vector<Object3D*> objs;
     __TRY__;
     objs = Loader::load (file_name);
-    __CATCH_JOBJECT_ARRAY__;
-    cout << "Java-Loader: opened\n";
+    __CATCH__;
+    if (env->ExceptionOccurred ()) {
+        return (jobjectArray)0;
+    }
     env->ReleaseStringUTFChars (fileName, file_name);
+    cout << "Java-Loader: opened\n";
 
     cout << "Java-Loader: start of build java objects.\n";
     Java_build_objects (env, objs);

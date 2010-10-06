@@ -16,10 +16,13 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Material_jni_1initialize
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Material: initilize is called.\n";
-    Material* mat;
+    Material* mat = NULL;
     __TRY__;
     mat = new Material ();
-    __CATCH_VOID__;
+    __CATCH__;
+    if (env->ExceptionOccurred ()) {
+        return;
+    }
     setNativePointer (env, thiz, mat);
     jobject entity = env->NewWeakGlobalRef (thiz);
     mat->setExportedEntity (entity);
@@ -38,7 +41,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Material_jni_1finalize
     env->DeleteWeakGlobalRef ((jobject)mat->getExportedEntity());
     __TRY__;
     delete mat;
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -51,10 +54,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Material_jni_1getColor
 {
     cout << "Java-Material: getColor is called.\n";
     Material* mat = (Material*)getNativePointer (env, thiz);
-    int color;
+    int color = 0;
     __TRY__;
     color = mat->getColor (target);
-    __CATCH_INT__;
+    __CATCH__;
     return color;
 }
 
@@ -68,10 +71,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Material_jni_1getShininess
 {
     cout << "Java-Material: getShininess is called.\n";
     Material* mat = (Material*)getNativePointer (env, thiz);
-    float shine;
+    float shine = 0;
     __TRY__;
     shine = mat->getShininess ();
-    __CATCH_FLOAT__;
+    __CATCH__;
     return shine;
 }
 
@@ -85,10 +88,10 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Material_jni_1isVertexColorTra
 {
     cout << "Java-Material: isVertexColorTrackingEnabled is called.\n";
     Material* mat = (Material*)getNativePointer (env, thiz);
-    bool enabled;
+    bool enabled = false;
     __TRY__;
     enabled = mat->isVertexColorTrackingEnabled ();
-    __CATCH_BOOL__;
+    __CATCH__;
     return enabled;
 }
 
@@ -104,7 +107,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Material_jni_1setColor
     Material* mat = (Material*)getNativePointer (env, thiz);
     __TRY__;
     mat->setColor (target, ARGB);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -119,7 +122,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Material_jni_1setShininess
     Material* mat = (Material*)getNativePointer (env, thiz);
     __TRY__;
     mat->setShininess (shininess);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -134,7 +137,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Material_jni_1setVertexColorTracki
     Material* mat = (Material*)getNativePointer (env, thiz);
     __TRY__;
     mat->setVertexColorTrackingEnable (enable);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -150,7 +153,7 @@ JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Material_jni_1print
     ostringstream oss;
     __TRY__;
     mat->print (oss);
-    __CATCH_JSTRING__;
+    __CATCH__;
     return env->NewStringUTF (oss.str().c_str());
 }
 

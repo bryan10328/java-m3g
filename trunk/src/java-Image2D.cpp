@@ -16,10 +16,13 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__III
   (JNIEnv* env, jobject thiz, jint format, jint width, jint height)
 {
     cout << "Java-Image2D: initiazlize1 is called.\n";
-    Image2D* img;
+    Image2D* img = NULL;
     __TRY__;
     img = new Image2D (format, width, height);
-    __CATCH_VOID__;
+    __CATCH__;
+    if (env->ExceptionOccurred ()) {
+        return;
+    }
     setNativePointer (env, thiz, img);
     jobject entity = env->NewWeakGlobalRef (thiz);
     img->setExportedEntity (entity);
@@ -34,11 +37,14 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__III_3B
   (JNIEnv* env, jobject thiz, jint format, jint width, jint height, jbyteArray image)
 {
     cout << "Java-Image2D: initiazlize2 is called.\n";
-    char* pixels = (char*)env->GetByteArrayElements (image, 0);
-    Image2D* img;
+    char*    pixels = (char*)env->GetByteArrayElements (image, 0);
+    Image2D* img    = NULL;
     __TRY__;
     img = new Image2D (format, width, height, pixels);
-    __CATCH_VOID__;
+    __CATCH__;
+    if (env->ExceptionOccurred ()) {
+        return;
+    }
     env->ReleaseByteArrayElements (image, (jbyte*)pixels, 0);
     setNativePointer (env, thiz, img);
     jobject entity = env->NewWeakGlobalRef (thiz);
@@ -54,12 +60,15 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__III_3B_3B
   (JNIEnv* env, jobject thiz, jint format, jint width, jint height, jbyteArray image, jbyteArray palette)
 {
     cout << "Java-Image2D: initiazlize3 is called.\n";
-    char* pixels = (char*)env->GetByteArrayElements (image, 0);
-    char* palte  = (char*)env->GetByteArrayElements (palette, 0);
-    Image2D* img;
+    char*    pixels = (char*)env->GetByteArrayElements (image, 0);
+    char*    palte  = (char*)env->GetByteArrayElements (palette, 0);
+    Image2D* img    = NULL;
     __TRY__;
     img = new Image2D (format, width, height, pixels, palte);
-    __CATCH_VOID__;
+    __CATCH__;
+    if (env->ExceptionOccurred ()) {
+        return;
+    }
     env->ReleaseByteArrayElements (image, (jbyte*)pixels, 0);
     env->ReleaseByteArrayElements (palette, (jbyte*)palte, 0);
     setNativePointer (env, thiz, img);
@@ -96,7 +105,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1finalize
     env->DeleteWeakGlobalRef ((jobject)img->getExportedEntity());
     __TRY__;
     delete img;
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -109,10 +118,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Image2D_jni_1getFormat
 {
     cout << "Java-Image2D: getFormat is called.\n";
     Image2D* img = (Image2D*)getNativePointer (env, thiz);
-    int format;
+    int format = 0;
     __TRY__;
     format = img->getFormat ();
-    __CATCH_INT__;
+    __CATCH__;
     return format;
 }
 
@@ -126,10 +135,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Image2D_jni_1getHeight
 {
     cout << "Java-Image2D: getHeight is called.\n";
     Image2D* img = (Image2D*)getNativePointer (env, thiz);
-    int height;
+    int height = 0;
     __TRY__;
     height = img->getHeight ();
-    __CATCH_INT__;
+    __CATCH__;
     return height;
 }
 
@@ -143,10 +152,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Image2D_jni_1getWidth
 {
     cout << "Java-Image2D: getWidth is called.\n";
     Image2D* img = (Image2D*)getNativePointer (env, thiz);
-    int width;
+    int width = 0;
     __TRY__;
     width = img->getWidth ();
-    __CATCH_INT__;
+    __CATCH__;
     return width;
 }
 
@@ -160,10 +169,10 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Image2D_jni_1isMutable
 {
     cout << "Java-Image2D: isMutable is called.\n";
     Image2D* img = (Image2D*)getNativePointer (env, thiz);
-    bool mut;
+    bool mut = false;
     __TRY__;
     mut = img->isMutable ();
-    __CATCH_BOOL__;
+    __CATCH__;
     return mut;
 }
 
@@ -180,7 +189,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1set
     char*    pixels = (char*)env->GetByteArrayElements (image, 0);
     __TRY__;
     img->set (x, y, width, height, pixels);
-    __CATCH_VOID__;
+    __CATCH__;
     env->ReleaseByteArrayElements (image, (jbyte*)pixels, 0);
 }
 
@@ -197,7 +206,7 @@ JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Image2D_jni_1print
     ostringstream oss;
     __TRY__;
     img->print (oss);
-    __CATCH_JSTRING__;
+    __CATCH__;
     return env->NewStringUTF (oss.str().c_str());
 }
 

@@ -36,68 +36,18 @@ jobject allocJavaObject (JNIEnv* env, const char* name, m3g::Object* obj)
 
 
 #define __TRY__ try {
-#define __CATCH_VOID__ } \
-        catch (const m3g::ArithmeticException&       e) { jclass clazz = env->FindClass("java/lang/ArithmaticException"            ); env->ThrowNew(clazz, e.what()); return; } \
-        catch (const m3g::IllegalArgumentException&  e) { jclass clazz = env->FindClass("java/lang/IllegalArgumentException"       ); env->ThrowNew(clazz, e.what()); return; } \
-        catch (const m3g::IllegalStateException&     e) { jclass clazz = env->FindClass("java/lang/IllegalStateException"          ); env->ThrowNew(clazz, e.what()); return; } \
-        catch (const m3g::IndexOutOfBoundsException& e) { jclass clazz = env->FindClass("java/lang/IndexOutOfBoundsException"      ); env->ThrowNew(clazz, e.what()); return; } \
-        catch (const m3g::IOException&               e) { jclass clazz = env->FindClass("java/lang/IOException"                    ); env->ThrowNew(clazz, e.what()); return; } \
-        catch (const m3g::NullPointerException&      e) { jclass clazz = env->FindClass("java/lang/NullPointerException"           ); env->ThrowNew(clazz, e.what()); return; } \
-        catch (const m3g::SecurityException&         e) { jclass clazz = env->FindClass("java/lang/SecurityException"              ); env->ThrowNew(clazz, e.what()); return; } \
-        catch (const m3g::NotImplementedException&   e) { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, e.what()); return; } \
-        catch (const m3g::OpenGLException&           e) { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, e.what()); return; } \
-        catch (const m3g::InternalException&         e) { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, e.what()); return; } \
-        catch (...)                                     { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, "Unknown exception."); return; }
-#define __CATCH_INT__ } \
-        catch (const m3g::ArithmeticException&       e) { jclass clazz = env->FindClass("java/lang/ArithmaticException"            ); env->ThrowNew(clazz, e.what()); return 0; } \
-        catch (const m3g::IllegalArgumentException&  e) { jclass clazz = env->FindClass("java/lang/IllegalArgumentException"       ); env->ThrowNew(clazz, e.what()); return 0; } \
-        catch (const m3g::IllegalStateException&     e) { jclass clazz = env->FindClass("java/lang/IllegalStateException"          ); env->ThrowNew(clazz, e.what()); return 0; } \
-        catch (const m3g::IndexOutOfBoundsException& e) { jclass clazz = env->FindClass("java/lang/IndexOutOfBoundsException"      ); env->ThrowNew(clazz, e.what()); return 0; } \
-        catch (const m3g::IOException&               e) { jclass clazz = env->FindClass("java/lang/IOException"                    ); env->ThrowNew(clazz, e.what()); return 0; } \
-        catch (const m3g::NullPointerException&      e) { jclass clazz = env->FindClass("java/lang/NullPointerException"           ); env->ThrowNew(clazz, e.what()); return 0; } \
-        catch (const m3g::SecurityException&         e) { jclass clazz = env->FindClass("java/lang/SecurityException"              ); env->ThrowNew(clazz, e.what()); return 0; } \
-        catch (const m3g::NotImplementedException&   e) { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, e.what()); return 0; } \
-        catch (const m3g::OpenGLException&           e) { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, e.what()); return 0; } \
-        catch (const m3g::InternalException&         e) { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, e.what()); return 0; } \
-        catch (...)                                     { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, "Unknown exception."); return 0; } 
-#define __CATCH_BOOL__ __CATCH_INT__
-#define __CATCH_FLOAT__ __CATCH_INT__
-#define __CATCH_JOBJECT__ } \
-        catch (const m3g::ArithmeticException&       e) { jclass clazz = env->FindClass("java/lang/ArithmaticException"            ); env->ThrowNew(clazz, e.what()); return (jobject)NULL; } \
-        catch (const m3g::IllegalArgumentException&  e) { jclass clazz = env->FindClass("java/lang/IllegalArgumentException"       ); env->ThrowNew(clazz, e.what()); return (jobject)NULL; } \
-        catch (const m3g::IllegalStateException&     e) { jclass clazz = env->FindClass("java/lang/IllegalStateException"          ); env->ThrowNew(clazz, e.what()); return (jobject)NULL; } \
-        catch (const m3g::IndexOutOfBoundsException& e) { jclass clazz = env->FindClass("java/lang/IndexOutOfBoundsException"      ); env->ThrowNew(clazz, e.what()); return (jobject)NULL; } \
-        catch (const m3g::IOException&               e) { jclass clazz = env->FindClass("java/lang/IOException"                    ); env->ThrowNew(clazz, e.what()); return (jobject)NULL; } \
-        catch (const m3g::NullPointerException&      e) { jclass clazz = env->FindClass("java/lang/NullPointerException"           ); env->ThrowNew(clazz, e.what()); return (jobject)NULL; } \
-        catch (const m3g::SecurityException&         e) { jclass clazz = env->FindClass("java/lang/SecurityException"              ); env->ThrowNew(clazz, e.what()); return (jobject)NULL; } \
-        catch (const m3g::NotImplementedException&   e) { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, e.what()); return (jobject)NULL; } \
-        catch (const m3g::OpenGLException&           e) { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, e.what()); return (jobject)NULL; } \
-        catch (const m3g::InternalException&         e) { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, e.what()); return (jobject)NULL; } \
-        catch (...)                                     { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, "Unknown exception."); return (jobject)NULL; } 
-#define __CATCH_JOBJECT_ARRAY__ } \
-        catch (const m3g::ArithmeticException&       e) { jclass clazz = env->FindClass("java/lang/ArithmaticException"            ); env->ThrowNew(clazz, e.what()); return (jobjectArray)NULL; } \
-        catch (const m3g::IllegalArgumentException&  e) { jclass clazz = env->FindClass("java/lang/IllegalArgumentException"       ); env->ThrowNew(clazz, e.what()); return (jobjectArray)NULL; } \
-        catch (const m3g::IllegalStateException&     e) { jclass clazz = env->FindClass("java/lang/IllegalStateException"          ); env->ThrowNew(clazz, e.what()); return (jobjectArray)NULL; } \
-        catch (const m3g::IndexOutOfBoundsException& e) { jclass clazz = env->FindClass("java/lang/IndexOutOfBoundsException"      ); env->ThrowNew(clazz, e.what()); return (jobjectArray)NULL; } \
-        catch (const m3g::IOException&               e) { jclass clazz = env->FindClass("java/lang/IOException"                    ); env->ThrowNew(clazz, e.what()); return (jobjectArray)NULL; } \
-        catch (const m3g::NullPointerException&      e) { jclass clazz = env->FindClass("java/lang/NullPointerException"           ); env->ThrowNew(clazz, e.what()); return (jobjectArray)NULL; } \
-        catch (const m3g::SecurityException&         e) { jclass clazz = env->FindClass("java/lang/SecurityException"              ); env->ThrowNew(clazz, e.what()); return (jobjectArray)NULL; } \
-        catch (const m3g::NotImplementedException&   e) { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, e.what()); return (jobjectArray)NULL; } \
-        catch (const m3g::OpenGLException&           e) { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, e.what()); return (jobjectArray)NULL; } \
-        catch (const m3g::InternalException&         e) { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, e.what()); return (jobjectArray)NULL; } \
-        catch (...)                                     { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, "Unknown exception."); return (jobjectArray)NULL; } 
-#define __CATCH_JSTRING__ } \
-        catch (const m3g::ArithmeticException&       e) { jclass clazz = env->FindClass("java/lang/ArithmaticException"            ); env->ThrowNew(clazz, e.what()); return (jstring)NULL; } \
-        catch (const m3g::IllegalArgumentException&  e) { jclass clazz = env->FindClass("java/lang/IllegalArgumentException"       ); env->ThrowNew(clazz, e.what()); return (jstring)NULL; } \
-        catch (const m3g::IllegalStateException&     e) { jclass clazz = env->FindClass("java/lang/IllegalStateException"          ); env->ThrowNew(clazz, e.what()); return (jstring)NULL; } \
-        catch (const m3g::IndexOutOfBoundsException& e) { jclass clazz = env->FindClass("java/lang/IndexOutOfBoundsException"      ); env->ThrowNew(clazz, e.what()); return (jstring)NULL; } \
-        catch (const m3g::IOException&               e) { jclass clazz = env->FindClass("java/lang/IOException"                    ); env->ThrowNew(clazz, e.what()); return (jstring)NULL; } \
-        catch (const m3g::NullPointerException&      e) { jclass clazz = env->FindClass("java/lang/NullPointerException"           ); env->ThrowNew(clazz, e.what()); return (jstring)NULL; } \
-        catch (const m3g::SecurityException&         e) { jclass clazz = env->FindClass("java/lang/SecurityException"              ); env->ThrowNew(clazz, e.what()); return (jstring)NULL; } \
-        catch (const m3g::NotImplementedException&   e) { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, e.what()); return (jstring)NULL; } \
-        catch (const m3g::OpenGLException&           e) { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, e.what()); return (jstring)NULL; } \
-        catch (const m3g::InternalException&         e) { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, e.what()); return (jstring)NULL; } \
-        catch (...)                                     { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, "Unknown exception."); return (jstring)NULL; } 
+#define __CATCH__ } \
+        catch (const m3g::ArithmeticException&       e) { jclass clazz = env->FindClass("java/lang/ArithmaticException"            ); env->ThrowNew(clazz, e.what()); } \
+        catch (const m3g::IllegalArgumentException&  e) { jclass clazz = env->FindClass("java/lang/IllegalArgumentException"       ); env->ThrowNew(clazz, e.what()); } \
+        catch (const m3g::IllegalStateException&     e) { jclass clazz = env->FindClass("java/lang/IllegalStateException"          ); env->ThrowNew(clazz, e.what()); } \
+        catch (const m3g::IndexOutOfBoundsException& e) { jclass clazz = env->FindClass("java/lang/IndexOutOfBoundsException"      ); env->ThrowNew(clazz, e.what()); } \
+        catch (const m3g::IOException&               e) { jclass clazz = env->FindClass("java/lang/IOException"                    ); env->ThrowNew(clazz, e.what()); } \
+        catch (const m3g::NullPointerException&      e) { jclass clazz = env->FindClass("java/lang/NullPointerException"           ); env->ThrowNew(clazz, e.what()); } \
+        catch (const m3g::SecurityException&         e) { jclass clazz = env->FindClass("java/lang/SecurityException"              ); env->ThrowNew(clazz, e.what()); } \
+        catch (const m3g::NotImplementedException&   e) { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, e.what()); } \
+        catch (const m3g::OpenGLException&           e) { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, e.what()); } \
+        catch (const m3g::InternalException&         e) { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, e.what()); } \
+        catch (...)                                     { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, "Unknown exception."); }
 
 
 void Java_build_AnimationController (JNIEnv* env, jobject controller_obj, m3g::AnimationController* controller);

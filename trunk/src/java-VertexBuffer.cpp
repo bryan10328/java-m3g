@@ -16,10 +16,13 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1initialize
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-VertexBuffer: initiazlize is called.\n";
-    VertexBuffer* vbuf;
+    VertexBuffer* vbuf = NULL;
     __TRY__;
     vbuf = new VertexBuffer ();
-    __CATCH_VOID__;
+    __CATCH__;
+    if (env->ExceptionOccurred ()) {
+        return;
+    }
     setNativePointer (env, thiz, vbuf);
     jobject entity = env->NewWeakGlobalRef (thiz);
     vbuf->setExportedEntity (entity);
@@ -38,7 +41,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1finalize
     env->DeleteWeakGlobalRef ((jobject)vbuf->getExportedEntity());
     __TRY__;
     delete vbuf;
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -50,11 +53,11 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1getColors
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-VertexBuffer: getColors is called.\n";
-    VertexBuffer* vbuf = (VertexBuffer*)getNativePointer (env, thiz);
-    VertexArray*  colors;
+    VertexBuffer* vbuf   = (VertexBuffer*)getNativePointer (env, thiz);
+    VertexArray*  colors = NULL;
     __TRY__;
     colors = vbuf->getColors ();
-    __CATCH_JOBJECT__;
+    __CATCH__;
     return (colors != NULL) ? (jobject)colors->getExportedEntity() : (jobject)NULL;
 }
 
@@ -68,10 +71,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1getDefaultColor
 {
     cout << "Java-VertexBuffer: getDefaultColor is called.\n";
     VertexBuffer* vbuf = (VertexBuffer*)getNativePointer (env, thiz);
-    int color;
+    int color = 0;
     __TRY__;
     color = vbuf->getDefaultColor ();
-    __CATCH_INT__;
+    __CATCH__;
     return color;
 }
 
@@ -84,11 +87,11 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1getNormals
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-VertexBuffer: getNormals is called.\n";
-    VertexBuffer* vbuf = (VertexBuffer*)getNativePointer (env, thiz);
-    VertexArray*  normals;
+    VertexBuffer* vbuf    = (VertexBuffer*)getNativePointer (env, thiz);
+    VertexArray*  normals = NULL;
     __TRY__;
     normals = vbuf->getNormals();
-    __CATCH_JOBJECT__;
+    __CATCH__;
     return (normals != NULL) ? (jobject)normals->getExportedEntity() : (jobject)NULL;
 }
 
@@ -106,10 +109,10 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1getPositions
     if (scaleBias != NULL) {
         scale_bias = env->GetFloatArrayElements (scaleBias, 0);
     }
-    VertexArray* positions;
+    VertexArray* positions = NULL;
     __TRY__;
     positions = vbuf->getPositions (scale_bias);
-    __CATCH_JOBJECT__;
+    __CATCH__;
     if (scaleBias != NULL) {
         env->ReleaseFloatArrayElements (scaleBias, scale_bias, 0);
     }
@@ -133,7 +136,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1getTexCoords
     VertexArray* tex_coords;
     __TRY__;
     tex_coords = vbuf->getTexCoords (index, scale_bias);
-    __CATCH_JOBJECT__;
+    __CATCH__;
     if (scaleBias) {
         env->ReleaseFloatArrayElements (scaleBias, scale_bias, 0);
     }
@@ -150,10 +153,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1getVertexCount
 {
     cout << "Java-VertexBuffer: getVetexCount is called.\n";
     VertexBuffer* vbuf = (VertexBuffer*)getNativePointer (env, thiz);
-    int count;
+    int count = 0;
     __TRY__;
     count = vbuf->getVertexCount ();
-    __CATCH_INT__;
+    __CATCH__;
     return count;
 }
 
@@ -185,7 +188,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1setColors
         delete[] uchar_colors;
     }
     vbuf->setColors (colors);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -200,7 +203,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1setDefaultColor
     VertexBuffer* vbuf = (VertexBuffer*)getNativePointer (env, thiz);
     __TRY__;
     vbuf->setDefaultColor (ARGB);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -216,7 +219,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1setNormals
     VertexArray*  normls = (VertexArray*)getNativePointer (env, normals);
     __TRY__;
     vbuf->setNormals (normls);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -233,7 +236,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1setPositions
     float*        bs   = env->GetFloatArrayElements (bias, 0);
     __TRY__;
     vbuf->setPositions (poss, scale, bs);
-    __CATCH_VOID__;
+    __CATCH__;
     env->ReleaseFloatArrayElements (bias, bs, 0);
 }
 
@@ -251,7 +254,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1setTexCoords
     float*        biaas      = env->GetFloatArrayElements (bias, 0);
     __TRY__;
     vbuf->setTexCoords (index, tex_coords, scale, biaas);
-    __CATCH_VOID__;
+    __CATCH__;
     env->ReleaseFloatArrayElements (bias, biaas, 0);
 }
 
@@ -268,7 +271,7 @@ JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1print
     ostringstream oss;
     __TRY__;
     vbuf->print (oss);
-    __CATCH_JSTRING__;
+    __CATCH__;
     return env->NewStringUTF (oss.str().c_str());
 }
 

@@ -16,10 +16,13 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationController_jni_1initializ
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-AnimationController: initiazlize is called.\n";
-    AnimationController* controller;
+    AnimationController* controller = NULL;
     __TRY__;
     controller = new AnimationController();
-    __CATCH_VOID__;
+    __CATCH__;
+    if (env->ExceptionOccurred ()) {
+        return;
+    }
     setNativePointer (env, thiz, controller);
     jobject entity = env->NewWeakGlobalRef (thiz);
     controller->setExportedEntity (entity);
@@ -38,7 +41,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationController_jni_1finalize
     env->DeleteWeakGlobalRef ((jobject)controller->getExportedEntity());
     __TRY__;
     delete controller;
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -51,10 +54,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_AnimationController_jni_1getActive
 {
     cout << "Java-AnimationController: getActiveIntervalEnd is called.\n";
     AnimationController* controller = (AnimationController*)getNativePointer(env, thiz);
-    int end;
+    int end = 0;
     __TRY__;
     end = controller->getActiveIntervalEnd ();
-    __CATCH_INT__;
+    __CATCH__;
     return end;
 }
 
@@ -69,10 +72,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_AnimationController_jni_1getActive
 {
     cout << "Java-AnimationController: getActiveIntervalStart is called.\n";
     AnimationController* controller = (AnimationController*)getNativePointer(env, thiz);
-    int start;
+    int start = 0;
     __TRY__;
     start = controller->getActiveIntervalStart ();
-    __CATCH_INT__;
+    __CATCH__;
     return start;
 }
 
@@ -86,10 +89,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_AnimationController_jni_1getPosi
 {
     cout << "Java-AnimationController: getPosition is called.\n";
     AnimationController* controller = (AnimationController*)getNativePointer(env, thiz);
-    float sequence_time;
+    float sequence_time = 0;
     __TRY__;
     sequence_time = controller->getPosition (worldTime);
-    __CATCH_FLOAT__;
+    __CATCH__;
     return sequence_time;
 }
 
@@ -103,10 +106,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_AnimationController_jni_1getRefWor
 {
     cout << "Java-AnimationController: getRefWorldTime is called.\n";
     AnimationController* controller = (AnimationController*)getNativePointer(env, thiz);
-    int world_time;
+    int world_time = 0;
     __TRY__;
     world_time = controller->getRefWorldTime ();
-    __CATCH_INT__;
+    __CATCH__;
     return world_time;
 }
 
@@ -120,10 +123,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_AnimationController_jni_1getSpee
 {
     cout << "Java-AnimationController: getSpeed is called.\n";
     AnimationController* controller = (AnimationController*)getNativePointer(env, thiz);
-    float speed;
+    float speed = 0;
     __TRY__;
     speed = controller->getSpeed ();
-    __CATCH_FLOAT__;
+    __CATCH__;
     return speed;
 }
 
@@ -137,10 +140,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_AnimationController_jni_1getWeig
 {
     cout << "Java-AnimationController: getWeight is called.\n";
     AnimationController* controller = (AnimationController*)getNativePointer(env, thiz);
-    float weight;
+    float weight = 0;
     __TRY__;
     weight = controller->getWeight ();
-    __CATCH_FLOAT__;
+    __CATCH__;
     return weight;
 }
 
@@ -156,7 +159,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationController_jni_1setActive
     AnimationController* controller = (AnimationController*)getNativePointer(env, thiz);
     __TRY__;
     controller->setActiveInterval (start, end);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -171,7 +174,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationController_jni_1setPositi
     AnimationController* controller = (AnimationController*)getNativePointer(env, thiz);
     __TRY__;
     controller->setPosition (sequenceTime, worldTime);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -186,7 +189,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationController_jni_1setSpeed
     AnimationController* controller = (AnimationController*)getNativePointer(env, thiz);
     __TRY__;
     controller->setSpeed (speed, worldTime);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -201,7 +204,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationController_jni_1setWeight
     AnimationController* controller = (AnimationController*)getNativePointer(env, thiz);
     __TRY__;
     controller->setWeight (weight);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -217,7 +220,7 @@ JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_AnimationController_jni_1print
     ostringstream oss;
     __TRY__;
     controller->print (oss);
-    __CATCH_JSTRING__;
+    __CATCH__;
     return env->NewStringUTF (oss.str().c_str());
 }
 

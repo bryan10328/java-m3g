@@ -16,10 +16,13 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1initialize
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Light: initilize is called.\n";
-    Light* lgh;
+    Light* lgh = NULL;
     __TRY__;
     lgh = new Light ();
-    __CATCH_VOID__;
+    __CATCH__;
+    if (env->ExceptionOccurred ()) {
+        return;
+    }
     setNativePointer (env, thiz, lgh);
     jobject entity = env->NewWeakGlobalRef (thiz);
     lgh->setExportedEntity (entity);
@@ -38,7 +41,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1finalize
     env->DeleteWeakGlobalRef ((jobject)lgh->getExportedEntity());
     __TRY__;
     delete lgh;
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -51,10 +54,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Light_jni_1getColor
 {
     cout << "Java-Light: getColor is called.\n";
     Light* lgh = (Light*)getNativePointer (env, thiz);
-    int color;
+    int color = 0;
     __TRY__;
     color = lgh->getColor();
-    __CATCH_INT__;
+    __CATCH__;
     return color;
 }
 
@@ -68,10 +71,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Light_jni_1getConstantAttenuatio
 {
     cout << "Java-Light: getConstantAttenuation is called.\n";
     Light* lgh = (Light*)getNativePointer (env, thiz);
-    float constant;
+    float constant = 0;
     __TRY__;
     constant = lgh->getConstantAttenuation ();
-    __CATCH_FLOAT__;
+    __CATCH__;
     return constant;
 }
 
@@ -85,10 +88,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Light_jni_1getIntensity
 {
     cout << "Java-Light: getIntensity is called.\n";
     Light* lgh = (Light*)getNativePointer (env, thiz);
-    float intensity;
+    float intensity = 0;
     __TRY__;
     intensity = lgh->getIntensity ();
-    __CATCH_FLOAT__;
+    __CATCH__;
     return intensity;
 }
 
@@ -102,10 +105,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Light_jni_1getLinearAttenuation
 {
     cout << "Java-Light: getLinearAttenuation is called.\n";
     Light* lgh = (Light*)getNativePointer (env, thiz);
-    float linear;
+    float linear = 0;
     __TRY__;
     linear = lgh->getLinearAttenuation ();
-    __CATCH_FLOAT__;
+    __CATCH__;
     return linear;
 }
 
@@ -119,10 +122,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Light_jni_1getMode
 {
     cout << "Java-Light: getMode is called.\n";
     Light* lgh = (Light*)getNativePointer (env, thiz);
-    int mode;
+    int mode = 0;
     __TRY__;
     mode = lgh->getMode ();
-    __CATCH_INT__;
+    __CATCH__;
     return mode;
 }
 
@@ -136,10 +139,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Light_jni_1getQuadraticAttenuati
 {
     cout << "Java-Light: getQuadraticAttenation is called.\n";
     Light* lgh = (Light*)getNativePointer (env, thiz);
-    float  quadratic;
+    float  quadratic = 0;
     __TRY__;
     quadratic = lgh->getQuadraticAttenuation ();
-    __CATCH_FLOAT__;
+    __CATCH__;
     return quadratic;
 }
 
@@ -152,11 +155,11 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Light_jni_1getSpotAngle
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Light: getSpotAngle is called.\n";
-    Light* lgh = (Light*)getNativePointer (env, thiz);
-    float  angle;
+    Light* lgh   = (Light*)getNativePointer (env, thiz);
+    float  angle = 0;
     __TRY__;
     angle = lgh->getSpotAngle ();
-    __CATCH_FLOAT__;
+    __CATCH__;
     return angle;
 }
 
@@ -169,11 +172,11 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Light_jni_1getSpotExponent
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Light: getSpotExponent is called.\n";
-    Light* lgh = (Light*)getNativePointer (env, thiz);
-    float  expo;
+    Light* lgh  = (Light*)getNativePointer (env, thiz);
+    float  expo = 0;
     __TRY__;
     expo = lgh->getSpotExponent ();
-    __CATCH_FLOAT__;
+    __CATCH__;
     return expo;
 }
 
@@ -189,7 +192,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1setAttenuation
     Light* lgh = (Light*)getNativePointer (env, thiz);
     __TRY__;
     lgh->setAttenuation (constant, linear, quadratic);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -204,7 +207,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1setColor
     Light* lgh = (Light*)getNativePointer (env, thiz);
     __TRY__;
     lgh->setColor (RGB);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -219,7 +222,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1setIntensity
     Light* lgh = (Light*)getNativePointer (env, thiz);
     __TRY__;
     lgh->setIntensity (intensity);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -234,7 +237,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1setMode
     Light* lgh = (Light*)getNativePointer (env, thiz);
     __TRY__;
     lgh->setMode (mode);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -249,7 +252,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1setSpotAngle
     Light* lgh = (Light*)getNativePointer (env, thiz);
     __TRY__;
     lgh->setSpotAngle (angle);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -264,7 +267,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1setSpotExponent
     Light* lgh = (Light*)getNativePointer (env, thiz);
     __TRY__;
     lgh->setSpotExponent (exponent);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -280,7 +283,7 @@ JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Light_jni_1print
     ostringstream oss;
     __TRY__;
     lgh->print (oss);
-    __CATCH_JSTRING__;
+    __CATCH__;
     return env->NewStringUTF (oss.str().c_str());
 }
 

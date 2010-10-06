@@ -16,10 +16,13 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Camera_jni_1initialize
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Camera: initiazlize is called.\n";
-    Camera* cam;
+    Camera* cam = NULL;
     __TRY__;
     cam = new Camera ();
-    __CATCH_VOID__;
+    __CATCH__;
+    if (env->ExceptionOccurred ()) {
+        return;
+    }
     setNativePointer (env, thiz, cam);
     jobject entity = env->NewWeakGlobalRef (thiz);
     cam->setExportedEntity (entity);
@@ -38,7 +41,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Camera_jni_1finalize
     env->DeleteWeakGlobalRef ((jobject)cam->getExportedEntity());
     __TRY__;
     delete cam;
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -50,12 +53,12 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Camera_jni_1getProjection___3F
   (JNIEnv* env, jobject thiz, jfloatArray params)
 {
     cout << "Java-Camera: getProjection is called.\n";
-    Camera* cam = (Camera*)getNativePointer (env, thiz);
-    float* prms = env->GetFloatArrayElements (params, 0);
-    int type;
+    Camera* cam  = (Camera*)getNativePointer (env, thiz);
+    float*  prms = env->GetFloatArrayElements (params, 0);
+    int type = 0;
     __TRY__;
     type = cam->getProjection (prms);
-    __CATCH_INT__;
+    __CATCH__;
     env->ReleaseFloatArrayElements (params, prms, 0);
     return type;
 }
@@ -71,10 +74,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Camera_jni_1getProjection__Lorg_ka
     cout << "Java-Camera: getProjection is called.\n";
     Camera*    cam   = (Camera*)getNativePointer (env, thiz);
     Transform* trans = (Transform*)getNativePointer (env, transform);
-    int type;
+    int type = 0;
     __TRY__;
     type = cam->getProjection (trans);
-    __CATCH_INT__;
+    __CATCH__;
     return type;
 }
 
@@ -87,12 +90,12 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Camera_jni_1lookAt
   (JNIEnv* env, jobject thiz, jfloat fromX, jfloat fromY, jfloat fromZ, jfloat toX, jfloat toY, jfloat toZ, jfloat upX, jfloat upY, jfloat upZ)
 {
     cout << "Java-Camera: lookAt is called.\n";
-    Camera*    cam   = (Camera*)getNativePointer (env, thiz);
+    Camera* cam = (Camera*)getNativePointer (env, thiz);
     __TRY__;
     cam->lookAt (fromX, fromY, fromZ,
                  toX, toY, toZ,
                  upX, upY, upZ);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 
@@ -109,7 +112,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Camera_jni_1setGeneric
     Transform* trans = (Transform*)getNativePointer (env, transform);
     __TRY__;
     cam->setGeneric (*trans);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -124,7 +127,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Camera_jni_1setParallel
     Camera* cam = (Camera*)getNativePointer (env, thiz);
     __TRY__;
     cam->setParallel (fovy, aspectRatio, near, far);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -139,7 +142,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Camera_jni_1setPerspective
     Camera* cam = (Camera*)getNativePointer (env, thiz);
     __TRY__;
     cam->setPerspective (fovy, aspectRatio, near, far);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -155,7 +158,7 @@ JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Camera_jni_1print
     ostringstream oss;
     __TRY__;
     cam->print (oss);
-    __CATCH_JSTRING__;
+    __CATCH__;
     return env->NewStringUTF (oss.str().c_str());
 }
 

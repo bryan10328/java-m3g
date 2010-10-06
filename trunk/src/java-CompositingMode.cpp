@@ -16,10 +16,13 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1initialzie
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-CompositingMode: initilize is called.\n";
-    CompositingMode* cmode;
+    CompositingMode* cmode = NULL;
     __TRY__;
     cmode = new CompositingMode ();
-    __CATCH_VOID__;
+    __CATCH__;
+    if (env->ExceptionOccurred ()) {
+        return;
+    }
     setNativePointer (env, thiz, cmode);
     jobject entity = env->NewWeakGlobalRef (thiz);
     cmode->setExportedEntity (entity);
@@ -38,7 +41,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1finalize
     env->DeleteWeakGlobalRef ((jobject)cmode->getExportedEntity());
     __TRY__;
     delete cmode;
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -51,10 +54,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1getAlphaThr
 {
     cout << "Java-CompositingMode: getAlphaThreshold is called.\n";
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
-    float th;
+    float th = 0;
     __TRY__;
     th = cmode->getAlphaThreshold ();
-    __CATCH_FLOAT__;
+    __CATCH__;
     return th;
 }
 
@@ -68,10 +71,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1getBlending
 {
     cout << "Java-CompositingMode: getBlending is called.\n";
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
-    int func;
+    int func = 0;
     __TRY__;
     func = cmode->getBlending ();
-    __CATCH_INT__;
+    __CATCH__;
     return func;
 }
 
@@ -85,10 +88,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1getDepthOff
 {
     cout << "Java-CompositingMode: getDepthOffsetFactor is called.\n";
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
-    float factor;
+    float factor = 0;
     __TRY__;
     factor = cmode->getDepthOffsetFactor ();
-    __CATCH_FLOAT__;
+    __CATCH__;
     return factor;
 }
 
@@ -102,10 +105,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1getDepthOff
 {
     cout << "Java-CompositingMode: getDepthOffsetUnits is called.\n";
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
-    float units;
+    float units = 0;
     __TRY__;
     units = cmode->getDepthOffsetUnits ();
-    __CATCH_FLOAT__;
+    __CATCH__;
     return units;
 }
 
@@ -119,10 +122,10 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1isAlphaWr
 {
     cout << "Java-CompositingMode: isAlphaWriteEnable is called.\n";
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
-    bool enable;
+    bool enable = false;
     __TRY__;
     enable = cmode->isAlphaWriteEnabled ();
-    __CATCH_BOOL__;
+    __CATCH__;
     return enable;
 }
 
@@ -136,10 +139,10 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1isColorWr
 {
     cout << "Java-CompositingMode: isColorWriteEnable is called.\n";
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
-    bool enable;
+    bool enable = false;
     __TRY__;
     enable = cmode->isColorWriteEnabled ();
-    __CATCH_BOOL__;
+    __CATCH__;
     return enable;
 }
 
@@ -154,10 +157,10 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1isDepthTe
 {
     cout << "Java-CompositingMode: isDepthTestEnable is called.\n";
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
-    bool enable;
+    bool enable = false;
     __TRY__;
     enable = cmode->isDepthTestEnabled ();
-    __CATCH_BOOL__;
+    __CATCH__;
     return enable;
 }
 
@@ -171,10 +174,10 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1isDepthWr
 {
     cout << "Java-CompositingMode: isDepthWriteEnabled is called.\n";
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
-    bool enabled;
+    bool enabled = false;
     __TRY__;
     enabled = cmode->isDepthWriteEnabled ();
-    __CATCH_BOOL__;
+    __CATCH__;
     return enabled;
 }
 
@@ -190,7 +193,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1setAlphaThres
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
     __TRY__;
     cmode->setAlphaThreshold (threshold);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -205,7 +208,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1setAlphaWrite
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
     __TRY__;
     cmode->setAlphaWriteEnable (enable);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -220,7 +223,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1setBlending
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
     __TRY__;
     cmode->setBlending (func);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -235,7 +238,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1setColorWrite
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
     __TRY__;
     cmode->setColorWriteEnable (enable);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -250,7 +253,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1setDepthOffse
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
     __TRY__;
     cmode->setDepthOffset (factor, units);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -265,7 +268,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1setDepthTestE
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
     __TRY__;
     cmode->setDepthTestEnable (enable);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -280,7 +283,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1setDepthWrite
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
     __TRY__;
     cmode->setDepthWriteEnable (enable);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -296,7 +299,7 @@ JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1print
     ostringstream oss;
     __TRY__;
     cmode->print (oss);
-    __CATCH_JSTRING__;
+    __CATCH__;
     return env->NewStringUTF (oss.str().c_str());
 }
 

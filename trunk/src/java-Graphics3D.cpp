@@ -11,28 +11,6 @@ using namespace m3g;
 
 /*
  * Class:     org_karlsland_m3g_Graphics3D
- * Method:    jni_initialize
- * Signature: ()V
- */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1initialize
-  (JNIEnv* env, jobject thiz)
-{
-    cout << "Java-Graphics3D: initialize is called.\n";
-}
-
-/*
- * Class:     org_karlsland_m3g_Graphics3D
- * Method:    jni_finalize
- * Signature: ()V
- */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1finalize
-  (JNIEnv* env, jobject thiz)
-{
-    cout << "Java-Graphics3D: finalize is called.\n";
-}
-
-/*
- * Class:     org_karlsland_m3g_Graphics3D
  * Method:    jni_addLight
  * Signature: (Lorg/karlsland/m3g/Light;Lorg/karlsland/m3g/Transform;)I
  */
@@ -43,10 +21,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1addLight
     Graphics3D* g3d   = (Graphics3D*)getNativePointer (env, thiz);
     Light*      lgh   = (Light*)getNativePointer (env, light);
     Transform*  trans = (Transform*)getNativePointer (env, transform);
-    int index;
+    int index = 0;
     __TRY__;
     index = g3d->addLight (lgh, *trans);
-    __CATCH_INT__;
+    __CATCH__;
     return index;
 }
 
@@ -63,7 +41,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1bindTarget__Ljava_
     void*       tar = (void*)getNativePointer (env, target);
     __TRY__;
     g3d->bindTarget (tar);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -79,7 +57,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1bindTarget__Ljava_
     void*       tar = (void*)getNativePointer (env, target);
     __TRY__;
     g3d->bindTarget (tar, depthBufferEnable, hints);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -95,7 +73,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1clear
     Background* bg = (Background*)getNativePointer (env, background);
     __TRY__;
     g3d->clear (bg);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -109,10 +87,10 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getCamera
     cout << "Java-Graphics3D: getCamera is called.\n";
     Graphics3D* g3d   = (Graphics3D*)getNativePointer (env, thiz);
     Transform*  trans = (Transform*)getNativePointer (env, transform);
-    Camera* cam;
+    Camera*     cam   = NULL;
     __TRY__;
     cam = g3d->getCamera (trans);
-    __CATCH_JOBJECT__;
+    __CATCH__;
     return (cam != NULL) ? (jobject)cam->getExportedEntity() : (jobject)NULL;
 }
 
@@ -126,10 +104,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getDepthRangeFar
 {
     cout << "Java-Graphics3D: getDepthRangeFar is called.\n";
     Graphics3D* g3d = (Graphics3D*)getNativePointer (env, thiz);
-    float far;
+    float far = 0;
     __TRY__;
     far = g3d->getDepthRangeFar ();
-    __CATCH_FLOAT__;
+    __CATCH__;
     return far;
 }
 
@@ -143,10 +121,10 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getDepthRangeNea
 {
     cout << "Java-Graphics3D: getDepthRangeNear is called.\n";
     Graphics3D* g3d = (Graphics3D*)getNativePointer (env, thiz);
-    float near;
+    float near = 0;
     __TRY__;
     near = g3d->getDepthRangeNear ();
-    __CATCH_FLOAT__;
+    __CATCH__;
     return near;
 }
 
@@ -160,10 +138,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getHints
 {
     cout << "Java-Graphics3D: getHints is called.\n";
     Graphics3D* g3d = (Graphics3D*)getNativePointer (env, thiz);
-    int hints;
+    int hints = 0;
     __TRY__;
     hints = g3d->getHints ();
-    __CATCH_INT__;
+    __CATCH__;
     return hints;
 }
 
@@ -192,12 +170,12 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getLight
   (JNIEnv* env, jobject thiz, jint index, jobject transform)
 {
     cout << "Java-Graphics3D: getLight is called.\n";
-    Graphics3D* g3d = (Graphics3D*)getNativePointer (env, thiz);
-    Transform* trans = (Transform*)getNativePointer (env, transform);
-    Light* lgh;
+    Graphics3D* g3d   = (Graphics3D*)getNativePointer (env, thiz);
+    Transform*  trans = (Transform*)getNativePointer (env, transform);
+    Light*      lgh   = NULL;
     __TRY__;
     lgh = g3d->getLight (index, trans);
-    __CATCH_JOBJECT__;
+    __CATCH__;
     return (lgh != NULL) ? (jobject)lgh->getExportedEntity() : (jobject)NULL;
 }
 
@@ -211,10 +189,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getLightCount
 {
     cout << "Java-Graphics3D: getLightCount is called.\n";
     Graphics3D* g3d = (Graphics3D*)getNativePointer (env, thiz);
-    int count;
+    int count = 0;
     __TRY__;
     count = g3d->getLightCount ();
-    __CATCH_INT__;
+    __CATCH__;
     return count;
 }
 
@@ -242,11 +220,11 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getTarget
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Graphics3D: getTarget is called.\n";
-    Graphics3D* g3d = (Graphics3D*)getNativePointer (env, thiz);
-    void* target;
+    Graphics3D* g3d    = (Graphics3D*)getNativePointer (env, thiz);
+    void*       target = NULL;
     __TRY__;
     target = g3d->getTarget ();
-    __CATCH_JOBJECT__;
+    __CATCH__;
     return (jobject)NULL;
 }
 
@@ -260,10 +238,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getViewportHeight
 {
     cout << "Java-Graphics3D: getViewportHeight is called.\n";
     Graphics3D* g3d = (Graphics3D*)getNativePointer (env, thiz);
-    int height;
+    int height = 0;
     __TRY__;
     height = g3d->getViewportHeight ();
-    __CATCH_INT__;
+    __CATCH__;
     return height;
 }
 
@@ -277,10 +255,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getViewportWidth
 {
     cout << "Java-Graphics3D: getViewportWidth is called.\n";
     Graphics3D* g3d = (Graphics3D*)getNativePointer (env, thiz);
-    int width;
+    int width = 0;
     __TRY__;
     width = g3d->getViewportWidth ();
-    __CATCH_INT__;
+    __CATCH__;
     return width;
 }
 
@@ -294,10 +272,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getViewportX
 {
     cout << "Java-Graphics3D: getViewportX is called.\n";
     Graphics3D* g3d = (Graphics3D*)getNativePointer (env, thiz);
-    float x;
+    float x = 0;
     __TRY__;
     x = g3d->getViewportX ();
-    __CATCH_INT__;
+    __CATCH__;
     return x;
 }
 
@@ -311,10 +289,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getViewportY
 {
     cout << "Java-Graphics3D: getViewportY is called.\n";
     Graphics3D* g3d = (Graphics3D*)getNativePointer (env, thiz);
-    float y;
+    float y = 0;
     __TRY__;
     y = g3d->getViewportY ();
-    __CATCH_INT__;
+    __CATCH__;
     return y;
 }
 
@@ -328,10 +306,10 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1isDepthBufferE
 {
     cout << "Java-Graphics3D: isDepthBufferEnabled is called.\n";
     Graphics3D* g3d = (Graphics3D*)getNativePointer (env, thiz);
-    bool enabled;
+    bool enabled = 0;
     __TRY__;
     enabled = g3d->isDepthBufferEnabled ();
-    __CATCH_BOOL__;
+    __CATCH__;
     return enabled;
 }
 
@@ -347,7 +325,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1releaseTarget
     Graphics3D* g3d = (Graphics3D*)getNativePointer (env, thiz);    
     __TRY__;
     g3d->releaseTarget ();
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -359,12 +337,12 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1render__Lorg_karls
   (JNIEnv* env, jobject thiz, jobject node, jobject transform)
 {
     cout << "Java-Graphics3D: render1 is called.\n";
-    Graphics3D* g3d = (Graphics3D*)getNativePointer (env, thiz);
-    Node*       nod = (Node*)getNativePointer (env, node);
+    Graphics3D* g3d   = (Graphics3D*)getNativePointer (env, thiz);
+    Node*       nod   = (Node*)getNativePointer (env, node);
     Transform*  trans = (Transform*)getNativePointer (env, transform);
     __TRY__;
     g3d->render (nod, *trans);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -383,7 +361,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1render__Lorg_karls
     Transform*    trans = (Transform*)getNativePointer (env, transform);
     __TRY__;
     g3d->render (vbuf, ibuf, apps, *trans);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -402,7 +380,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1render__Lorg_karls
     Transform*    trans = (Transform*)getNativePointer (env, transform);
     __TRY__;
     g3d->render (vbuf, ibuf, apps, *trans, scope);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -418,7 +396,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1render__Lorg_karls
     World*      wld = (World*)getNativePointer (env, world);
     __TRY__;
     g3d->render (wld);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -433,7 +411,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1resetLights
     Graphics3D* g3d = (Graphics3D*)getNativePointer (env, thiz);
     __TRY__;
     g3d->resetLights ();
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -450,7 +428,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1setCamera
     Transform*  trans = (Transform*)getNativePointer (env, transform);
     __TRY__;
     g3d->setCamera (cam, *trans);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -465,7 +443,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1setDepthRange
     Graphics3D* g3d = (Graphics3D*)getNativePointer (env, thiz);
     __TRY__;
     g3d->setDepthRange (near, far);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -482,7 +460,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1setLight
     Transform*  trans = (Transform*)getNativePointer (env, transform);
     __TRY__;
     g3d->setLight (index, lgh, *trans);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -497,7 +475,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1setViewport
     Graphics3D* g3d = (Graphics3D*)getNativePointer (env, thiz);
     __TRY__;
     g3d->setViewport (x, y, width, height);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -513,7 +491,7 @@ JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1print
     ostringstream oss;
     __TRY__;
     g3d->print (oss);
-    __CATCH_JSTRING__;
+    __CATCH__;
     return env->NewStringUTF (oss.str().c_str());
 }
 

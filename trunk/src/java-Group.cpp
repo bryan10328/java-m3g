@@ -16,10 +16,13 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1initialize
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Group: initiazlize is called.\n";
-    Group* grp;
+    Group* grp = NULL;
     __TRY__;
     grp = new Group ();
-    __CATCH_VOID__;
+    __CATCH__;
+    if (env->ExceptionOccurred ()) {
+        return;
+    }
     setNativePointer (env, thiz, grp);
     jobject entity = env->NewWeakGlobalRef (thiz);
     grp->setExportedEntity (entity);
@@ -38,7 +41,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1finalize
     env->DeleteWeakGlobalRef ((jobject)grp->getExportedEntity());
     __TRY__;
     delete grp;
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -54,7 +57,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1addChild
     Node*  node = (Node*)getNativePointer (env, child);
     __TRY__;
     grp->addChild (node);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -66,11 +69,11 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Group_jni_1getChild
   (JNIEnv* env, jobject thiz, jint index)
 {
     cout << "Java-Group: getChild is called.\n";
-    Group* grp = (Group*)getNativePointer (env, thiz);
-    Node* node;
+    Group* grp  = (Group*)getNativePointer (env, thiz);
+    Node*  node = NULL;
     __TRY__;
     node = grp->getChild (index);
-    __CATCH_JOBJECT__;
+    __CATCH__;
     return (node != NULL) ? (jobject)node->getExportedEntity() : (jobject)NULL;
 }
 
@@ -84,10 +87,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Group_jni_1getChildCount
 {
     cout << "Java-Group: getChildCount is called.\n";
     Group* grp = (Group*)getNativePointer (env, thiz);
-    int count;
+    int count = 0;
     __TRY__;
     count = grp->getChildCount ();
-    __CATCH_INT__;
+    __CATCH__;
     return count;
 }
 
@@ -100,13 +103,13 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Group_jni_1pick__IFFLorg_karls
   (JNIEnv* env, jobject thiz, jint scope, jfloat x, jfloat y, jobject camera, jobject rayIntersection)
 {
     cout << "Java-Group: pick1 is called.\n";
-    Group* grp = (Group*)getNativePointer (env, thiz);
-    Camera* cam = (Camera*)getNativePointer (env, camera);
-    RayIntersection* ri = (RayIntersection*)getNativePointer (env, rayIntersection);
-    bool picked;
+    Group*           grp = (Group*)getNativePointer (env, thiz);
+    Camera*          cam = (Camera*)getNativePointer (env, camera);
+    RayIntersection* ri  = (RayIntersection*)getNativePointer (env, rayIntersection);
+    bool picked = false;
     __TRY__;
     picked = grp->pick (scope, x, y, cam, ri);
-    __CATCH_BOOL__;
+    __CATCH__;
     return picked;
 }
 
@@ -119,12 +122,12 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Group_jni_1pick__IFFFFFFLorg_k
 (JNIEnv* env, jobject thiz, jint scope, jfloat ox, jfloat oy, jfloat oz, jfloat dx, jfloat dy, jfloat dz, jobject rayIntersection)
 {
     cout << "Java-Group: pick2 is called.\n";
-    Group* grp = (Group*)getNativePointer (env, thiz);
-    RayIntersection* ri = (RayIntersection*)getNativePointer (env, rayIntersection);
-    bool picked;
+    Group*           grp = (Group*)getNativePointer (env, thiz);
+    RayIntersection* ri  = (RayIntersection*)getNativePointer (env, rayIntersection);
+    bool picked = false;
     __TRY__;
     picked = grp->pick (scope, ox, oy, oz, dx, dy, dz, ri);
-    __CATCH_BOOL__;
+    __CATCH__;
     return picked;
 }
 
@@ -137,11 +140,11 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1removeChild
   (JNIEnv* env, jobject thiz, jobject child)
 {
     cout << "Java-Group: removeChild is called.\n";
-    Group* grp = (Group*)getNativePointer (env, thiz);
-    Node* node = (Node*)getNativePointer (env, child);
+    Group* grp  = (Group*)getNativePointer (env, thiz);
+    Node*  node = (Node*)getNativePointer (env, child);
     __TRY__;
     grp->removeChild (node);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -157,7 +160,7 @@ JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Group_jni_1print
     ostringstream oss;
     __TRY__;
     grp->print (oss);
-    __CATCH_JSTRING__;
+    __CATCH__;
     return env->NewStringUTF (oss.str().c_str());
 }
 

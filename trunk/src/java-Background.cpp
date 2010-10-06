@@ -16,10 +16,13 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1initialize
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Background: initilize is called.\n";
-    Background* bg;
+    Background* bg = NULL;
     __TRY__;
     bg = new Background ();
-    __CATCH_VOID__;
+    __CATCH__;
+    if (env->ExceptionOccurred ()) {
+        return;
+    }
     setNativePointer (env, thiz, bg);
     jobject entity = env->NewWeakGlobalRef (thiz);
     bg->setExportedEntity (entity);
@@ -38,7 +41,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1finalize
     env->DeleteWeakGlobalRef ((jobject)bg->getExportedEntity());
     __TRY__;
     delete bg;
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -51,10 +54,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getColor
 {
     cout << "Java-Background: getColor is called.\n";
     Background* bg = (Background*)getNativePointer (env, thiz);
-    int color;
+    int color = 0;
     __TRY__;
     color = bg->getColor ();
-    __CATCH_INT__;
+    __CATCH__;
     return color;
 }
 
@@ -68,10 +71,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getCropHeight
 {
     cout << "Java-Background: getCropHeight is called.\n";
     Background* bg = (Background*)getNativePointer (env, thiz);
-    int height;
+    int height = 0;
     __TRY__;
     height = bg->getCropHeight ();
-    __CATCH_INT__;
+    __CATCH__;
     return height;
 }
 
@@ -85,10 +88,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getCropWidth
 {
     cout << "Java-Background: getCropWidth is called.\n";
     Background* bg = (Background*)getNativePointer (env, thiz);
-    int width;
+    int width = 0;
     __TRY__;
     width = bg->getCropWidth ();
-    __CATCH_INT__;
+    __CATCH__;
     return width;
 }
 
@@ -102,10 +105,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getCropX
 {
     cout << "Java-Background: getCropX is called.\n";
     Background* bg = (Background*)getNativePointer (env, thiz);
-    int x;
+    int x = 0;
     __TRY__;
     x = bg->getCropX ();
-    __CATCH_INT__;
+    __CATCH__;
     return x;
 }
 
@@ -119,10 +122,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getCropY
 {
     cout << "Java-Background: getCropY is called.\n";
     Background* bg = (Background*)getNativePointer (env, thiz);
-    int y;
+    int y = 0;
     __TRY__;
     y = bg->getCropY ();
-    __CATCH_INT__;
+    __CATCH__;
     return y;
 }
 
@@ -135,11 +138,11 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Background_jni_1getImage
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Background: getImage is called.\n";
-    Background* bg = (Background*)getNativePointer (env, thiz);
-    Image2D* img;
+    Background* bg  = (Background*)getNativePointer (env, thiz);
+    Image2D*    img = NULL;
     __TRY__;
     img = bg->getImage ();
-    __CATCH_JOBJECT__;
+    __CATCH__;
     return (img != NULL) ? (jobject)img->getExportedEntity() : (jobject)NULL;
 }
 
@@ -153,10 +156,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getImageModeX
 {
     cout << "Java-Background: getImageModeX is called.\n";
     Background* bg = (Background*)getNativePointer (env, thiz);
-    int mode;
+    int mode = 0;
     __TRY__;
     mode = bg->getImageModeX ();
-    __CATCH_INT__;
+    __CATCH__;
     return mode;
 }
 
@@ -170,10 +173,10 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Background_jni_1getImageModeY
 {
     cout << "Java-Background: getImageModeY is called.\n";
     Background* bg = (Background*)getNativePointer (env, thiz);
-    int mode;
+    int mode = 0;
     __TRY__;
     mode = bg->getImageModeY ();
-    __CATCH_INT__;
+    __CATCH__;
     return mode;
 }
 
@@ -187,10 +190,10 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Background_jni_1isColorClearEn
 {
     cout << "Java-Background: isColorClearEnabled is called.\n";
     Background* bg = (Background*)getNativePointer (env, thiz);
-    bool enabled;
+    bool enabled = false;
     __TRY__;
     enabled = bg->isColorClearEnabled ();
-    __CATCH_BOOL__;
+    __CATCH__;
     return enabled;
 }
 
@@ -204,10 +207,10 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Background_jni_1isDepthClearEn
 {
     cout << "Java-Background: isDethClearEnabled is called.\n";
     Background* bg = (Background*)getNativePointer (env, thiz);
-    bool enabled;
+    bool enabled = false;
     __TRY__;
     enabled = bg->isDepthClearEnabled ();
-    __CATCH_BOOL__;
+    __CATCH__;
     return enabled;
 }
 
@@ -223,7 +226,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1setColor
     Background* bg = (Background*)getNativePointer (env, thiz);
     __TRY__;
     bg->setColor (color);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -238,7 +241,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1setColorClearEnabl
     Background* bg = (Background*)getNativePointer (env, thiz);
     __TRY__;
     bg->setColorClearEnable (enable);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -253,7 +256,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1setCrop
     Background* bg = (Background*)getNativePointer (env, thiz);
     __TRY__;
     bg->setCrop (cropX, cropY, width, height);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -268,7 +271,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1setDepthClearEnabl
     Background* bg = (Background*)getNativePointer (env, thiz);
     __TRY__;
     bg->setDepthClearEnable (enable);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -280,11 +283,11 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1setImage
   (JNIEnv* env, jobject thiz, jobject image)
 {
     cout << "Java-Background: setImage is called.\n";
-    Background* bg = (Background*)getNativePointer (env, thiz);
-    Image2D*   img = (Image2D*)getNativePointer (env, image);
+    Background* bg  = (Background*)getNativePointer (env, thiz);
+    Image2D*    img = (Image2D*)getNativePointer (env, image);
     __TRY__;
     bg->setImage (img);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -299,7 +302,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1setImageMode
     Background* bg = (Background*)getNativePointer (env, thiz);
     __TRY__;
     bg->setImageMode (modeX, modeY);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -315,7 +318,7 @@ JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Background_jni_1print
     ostringstream oss;
     __TRY__;
     bg->print (cout);
-    __CATCH_JSTRING__;
+    __CATCH__;
     return env->NewStringUTF (oss.str().c_str());
 }
 

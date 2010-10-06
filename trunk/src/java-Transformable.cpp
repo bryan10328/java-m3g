@@ -16,10 +16,13 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1initialize
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Transformable: initiazlize is called.\n";
-    Transformable* trans;
+    Transformable* trans = NULL;
     __TRY__;
     trans = new Transformable ();
-    __CATCH_VOID__;
+    __CATCH__;
+    if (env->ExceptionOccurred ()) {
+        return;
+    }
     setNativePointer (env, thiz, trans);
     jobject entity = env->NewWeakGlobalRef (thiz);
     trans->setExportedEntity (entity);
@@ -38,7 +41,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1finalize
     env->DeleteWeakGlobalRef ((jobject)trans->getExportedEntity());
     __TRY__;
     delete trans;
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -54,7 +57,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1getCompositeTra
     Transform*     t     = (Transform*)getNativePointer (env, transform);
     __TRY__;
     trans->getCompositeTransform (t);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -70,7 +73,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1getOrientation
     float* angle_axis = env->GetFloatArrayElements (angleAxis, 0);
     __TRY__;
     trans->getOrientation (angle_axis);
-    __CATCH_VOID__;
+    __CATCH__;
     env->ReleaseFloatArrayElements (angleAxis, angle_axis, 0);
 }
 
@@ -87,7 +90,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1getScale
     float* scale = env->GetFloatArrayElements (xyz, 0);
     __TRY__;
     trans->getScale (scale);
-    __CATCH_VOID__;
+    __CATCH__;
     env->ReleaseFloatArrayElements (xyz, scale, 0);
 }
 
@@ -104,7 +107,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1getTransform
     Transform*     t     = (Transform*)getNativePointer (env, transform);
     __TRY__;
     trans->getTransform (t);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -120,7 +123,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1getTranslation
     float* translation = env->GetFloatArrayElements (xyz, 0);
     __TRY__;
     trans->getTranslation (translation);
-    __CATCH_VOID__;
+    __CATCH__;
     env->ReleaseFloatArrayElements (xyz, translation, 0);
 }
 
@@ -136,7 +139,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1postRotate
     Transformable* trans = (Transformable*)getNativePointer (env, thiz);
     __TRY__;
     trans->postRotate (angle, ax, ay, az);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -151,7 +154,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1preRotate
     Transformable* trans = (Transformable*)getNativePointer (env, thiz);
     __TRY__;
     trans->postRotate (angle, ax, ay, az);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -166,7 +169,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1scale
     Transformable* trans = (Transformable*)getNativePointer (env, thiz);
     __TRY__;
     trans->scale (sx, sy, sz);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -181,7 +184,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1setOrientation
     Transformable* trans = (Transformable*)getNativePointer (env, thiz);
     __TRY__;
     trans->setOrientation (angle, ax, ay, az);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -196,7 +199,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1setScale
     Transformable* trans = (Transformable*)getNativePointer (env, thiz);
     __TRY__;
     trans->setScale (sx, sy, sz);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -212,7 +215,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1setTransform
     Transform*     t     = (Transform*)getNativePointer (env, transform);
     __TRY__;
     trans->setTransform (*t);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -227,7 +230,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1setTranslation
     Transformable* trans = (Transformable*)getNativePointer (env, thiz);
     __TRY__;
     trans->setTranslation (tx, ty, tz);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -242,7 +245,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1translate
     Transformable* trans = (Transformable*)getNativePointer (env, thiz);
     __TRY__;
     trans->translate (tx, ty, tz);
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -258,7 +261,7 @@ JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Transformable_jni_1print
     ostringstream oss;
     __TRY__;
     trans->print (oss);
-    __CATCH_JSTRING__;
+    __CATCH__;
     return env->NewStringUTF (oss.str().c_str());
 }
 

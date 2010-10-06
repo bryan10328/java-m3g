@@ -17,8 +17,6 @@ public class Graphics3D extends java.lang.Object {
     static {
         System.loadLibrary ("javam3g");
     }
-    native private void    jni_initialize           ();
-    native private void    jni_finalize             ();
     native private int     jni_addLight             (Light light, Transform transform);
     native private void    jni_bindTarget           (java.lang.Object target);
     native private void    jni_bindTarget           (java.lang.Object target, boolean depthBufferEnable, int hints);

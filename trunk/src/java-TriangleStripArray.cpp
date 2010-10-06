@@ -16,13 +16,16 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1initialize
   (JNIEnv* env, jobject thiz, jintArray indices, jintArray stripLengths)
 {
     cout << "Java-TriangleStripArray: initilize1 is called.\n";
-    int* indcs = env->GetIntArrayElements (indices, 0);
-    int  length = env->GetArrayLength (stripLengths);
+    int* indcs         = env->GetIntArrayElements (indices, 0);
+    int  length        = env->GetArrayLength (stripLengths);
     int* strip_lengths = env->GetIntArrayElements (stripLengths, 0);
-    TriangleStripArray* tris;
+    TriangleStripArray* tris = NULL;
     __TRY__;
     tris = new TriangleStripArray (indcs, length, strip_lengths);
-    __CATCH_VOID__;
+    __CATCH__;
+    if (env->ExceptionOccurred ()) {
+        return;
+    }
     env->ReleaseIntArrayElements (indices, indcs, 0);
     env->ReleaseIntArrayElements (stripLengths, strip_lengths, 0);
     setNativePointer (env, thiz, tris);
@@ -39,12 +42,15 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1initialize
   (JNIEnv* env, jobject thiz, jint firstIndex, jintArray stripLengths)
 {
     cout << "Java-TriangleStripArray: initialize2 is called.\n";
-    int  length = env->GetArrayLength (stripLengths);
+    int  length        = env->GetArrayLength (stripLengths);
     int* strip_lengths = env->GetIntArrayElements (stripLengths, 0);
-    TriangleStripArray* tris;
+    TriangleStripArray* tris = NULL;
     __TRY__;
     tris = new TriangleStripArray (firstIndex, length, strip_lengths);
-    __CATCH_VOID__;
+    __CATCH__;
+    if (env->ExceptionOccurred ()) {
+        return;
+    }
     env->ReleaseIntArrayElements (stripLengths, strip_lengths, 0);
     setNativePointer (env, thiz, tris);
     jobject entity = env->NewWeakGlobalRef (thiz);
@@ -65,7 +71,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1finalize
     env->DeleteWeakGlobalRef ((jobject)tris->getExportedEntity());
     __TRY__;
     delete tris;
-    __CATCH_VOID__;
+    __CATCH__;
 }
 
 /*
@@ -81,7 +87,7 @@ JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1print
     ostringstream oss;
     __TRY__;
     tris->print (oss);
-    __CATCH_JSTRING__;
+    __CATCH__;
     return env->NewStringUTF (oss.str().c_str());
 }
 
