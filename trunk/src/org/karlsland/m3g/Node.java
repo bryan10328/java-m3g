@@ -28,7 +28,7 @@ public class Node extends Transformable {
     native private void    jni_setPickingEnable      (boolean enable);
     native private void    jni_setRenderingEnable    (boolean enable);
     native private void    jni_setScope              (int scope);
-    native private void    jni_print                 ();
+    native private String  jni_print                 ();
 
     private Node parent;
     private Node yRef;
@@ -107,8 +107,10 @@ public class Node extends Transformable {
         jni_setScope (scope);
     }
 
-    public void print () {
-        jni_print ();
+    @Override
+    public String toString () {
+        String str = jni_print ();
+        return str;
     }
 }
 

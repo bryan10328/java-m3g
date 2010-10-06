@@ -22,7 +22,7 @@ public class Object3D extends java.lang.Object {
     native private void             jni_removeAnimationTrack   (AnimationTrack animationTrack);
     native private void             jni_setUserID              (int userID);
     native private void             jni_setUserObject          (java.lang.Object userObject);
-    native private void             jni_print                  ();
+    native private String           jni_print                  ();
 
     private long                 nativePointer;
     private List<AnimationTrack> animationTracks;
@@ -101,8 +101,10 @@ public class Object3D extends java.lang.Object {
         jni_setUserObject (userObject);
     }
 
-    public void print () {
-        jni_print ();
+    @Override
+    public String toString () {
+        String str = jni_print ();
+        return str;
     }
 
 }

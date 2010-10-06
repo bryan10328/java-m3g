@@ -22,7 +22,7 @@ public class Appearance extends Object3D {
     native private void            jni_setMaterial        (Material material);
     native private void            jni_setPolygonMode     (PolygonMode polygonMode);
     native private void            jni_setTexture         (int index, Texture2D texture);
-    native private void            jni_print              ();
+    native private String          jni_print              ();
 
     private CompositingMode compositingMode;
     private Fog             fog;
@@ -102,8 +102,10 @@ public class Appearance extends Object3D {
         jni_setTexture (index, texture);
     }
 
-    public void print () {
-        jni_print ();
+    @Override
+    public String toString () {
+        String str = jni_print ();
+        return str;
     }
 
 

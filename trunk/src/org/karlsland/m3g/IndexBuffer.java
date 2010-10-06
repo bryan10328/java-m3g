@@ -6,11 +6,11 @@ public class IndexBuffer extends Object3D {
     static {
         System.loadLibrary ("javam3g");
     }
-    native private void jni_initialize    ();
-    native private void jni_finalize      ();
-    native private int  jni_getIndexCount ();
-    native private void jni_getIndices    (int[] indices);
-    native private void jni_print         ();
+    native private void   jni_initialize    ();
+    native private void   jni_finalize      ();
+    native private int    jni_getIndexCount ();
+    native private void   jni_getIndices    (int[] indices);
+    native private String jni_print         ();
 
     public IndexBuffer () {
     }
@@ -27,8 +27,10 @@ public class IndexBuffer extends Object3D {
         jni_getIndices (indices);
     }
 
-    public void print () {
-        jni_print ();
+    @Override
+    public String toString () {
+        String str = jni_print ();
+        return str;
     }
 
 

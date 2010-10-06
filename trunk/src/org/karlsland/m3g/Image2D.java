@@ -21,7 +21,7 @@ public class Image2D extends Object3D {
     native private int     jni_getWidth   ();
     native private boolean jni_isMutable  ();
     native private void    jni_set        (int x, int y, int width, int height, byte[] image);
-    native private void    jni_print      ();
+    native private String  jni_print      ();
     native private void    jni_writePng   (java.lang.String name);
 
     public Image2D (int format, int width, int height) {
@@ -69,8 +69,10 @@ public class Image2D extends Object3D {
         jni_set (x, y, width, height, image);
     }
 
-    public void print () {
-        jni_print ();
+    @Override
+    public String toString () {
+        String str = jni_print ();
+        return str;
     }
 
     public void writePng (java.lang.String name) {

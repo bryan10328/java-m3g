@@ -9,17 +9,17 @@ public class Camera extends Node {
     static {
         System.loadLibrary ("javam3g");
     }
-    native private void jni_initialize     ();
-    native private void jni_finalize       ();
-    native private int  jni_getProjection  (float[]   params);
-    native private int  jni_getProjection  (Transform transform);
-    native private void jni_lookAt         (float fromX, float fromY, float fromZ,
-                                            float toX  , float toY  , float toZ  ,
-                                            float upX  , float upY  , float upZ  );
-    native private void jni_setGeneric     (Transform transform);
-    native private void jni_setParallel    (float fovy, float aspectRatio, float near, float far);
-    native private void jni_setPerspective (float fovy, float aspectRatio, float near, float far);
-    native private void jni_print          ();
+    native private void   jni_initialize     ();
+    native private void   jni_finalize       ();
+    native private int    jni_getProjection  (float[]   params);
+    native private int    jni_getProjection  (Transform transform);
+    native private void   jni_lookAt         (float fromX, float fromY, float fromZ,
+                                              float toX  , float toY  , float toZ  ,
+                                              float upX  , float upY  , float upZ  );
+    native private void   jni_setGeneric     (Transform transform);
+    native private void   jni_setParallel    (float fovy, float aspectRatio, float near, float far);
+    native private void   jni_setPerspective (float fovy, float aspectRatio, float near, float far);
+    native private String jni_print          ();
 
     public Camera () {
         jni_initialize ();
@@ -57,8 +57,10 @@ public class Camera extends Node {
         jni_setPerspective (fovy, aspectRatio, near, far);
     }
 
-    public void print () {
-        jni_print ();
+    @Override
+    public String toString () {
+        String str = jni_print ();
+        return str;
     }
 
 }

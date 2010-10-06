@@ -8,7 +8,3 @@ using namespace std;
 // 従って前からデコードしていけばgetExportedEntity()は必ず0でないentityを返す事が保証されている。
 
 
-    // nothing to do
-    // nothing to do
-
-

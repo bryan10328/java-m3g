@@ -18,7 +18,7 @@ public class Material extends Object3D {
     native private void    jni_setColor                     (int     target, int ARGB);
     native private void    jni_setShininess                 (float   shininess);
     native private void    jni_setVertexColorTrackingEnable (boolean enable);
-    native private void    jni_print                        ();
+    native private String  jni_print                        ();
 
     public Material () {
         jni_initialize ();
@@ -55,8 +55,10 @@ public class Material extends Object3D {
         jni_setVertexColorTrackingEnable (enable);
     }
 
-    public void print () {
-        jni_print ();
+    @Override
+    public String toString () {
+        String str = jni_print ();
+        return str;
     }
 
 }

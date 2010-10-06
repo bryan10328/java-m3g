@@ -8,12 +8,12 @@ public class Loader extends java.lang.Object {
     static {
         System.loadLibrary ("javam3g");
     }
-    //native private void       jni_initialize ();
-    //native private void       jni_finalize ();
     native private static Object3D[] jni_load (byte[] data, int offset);
     native private static Object3D[] jni_load (java.lang.String name);
 
     private Loader () {
+        // コンストラクタは呼び出し禁止
+        // このクラスがインスタンス化されることはない.
     }
 
     public static Object3D[] load (byte[] data, int offset) {

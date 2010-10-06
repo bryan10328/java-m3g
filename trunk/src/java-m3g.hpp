@@ -106,9 +106,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationController_jni_1setWeight
 /*
  * Class:     org_karlsland_m3g_AnimationController
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationController_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_AnimationController_jni_1print
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus
@@ -199,9 +199,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Mesh_jni_1setAppearance
 /*
  * Class:     org_karlsland_m3g_Mesh
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Mesh_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Mesh_jni_1print
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus
@@ -308,9 +308,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1setController
 /*
  * Class:     org_karlsland_m3g_AnimationTrack
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1print
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus
@@ -393,9 +393,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1setWeights
 /*
  * Class:     org_karlsland_m3g_MorphingMesh
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1print
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus
@@ -524,9 +524,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Appearance_jni_1setTexture
 /*
  * Class:     org_karlsland_m3g_Appearance
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Appearance_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Appearance_jni_1print
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus
@@ -681,9 +681,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Node_jni_1setScope
 /*
  * Class:     org_karlsland_m3g_Node
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Node_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Node_jni_1print
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus
@@ -848,9 +848,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1setImageMode
 /*
  * Class:     org_karlsland_m3g_Background
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Background_jni_1print
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus
@@ -979,9 +979,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Object3D_jni_1setUserObject
 /*
  * Class:     org_karlsland_m3g_Object3D
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Object3D_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Object3D_jni_1print
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus
@@ -1078,9 +1078,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Camera_jni_1setPerspective
 /*
  * Class:     org_karlsland_m3g_Camera
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Camera_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Camera_jni_1print
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus
@@ -1223,9 +1223,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1setWinding
 /*
  * Class:     org_karlsland_m3g_PolygonMode
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1print
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus
@@ -1388,9 +1388,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1setDepthWrite
 /*
  * Class:     org_karlsland_m3g_CompositingMode
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1print
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus
@@ -1495,9 +1495,9 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getTextureT
 /*
  * Class:     org_karlsland_m3g_RayIntersection
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1print
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus
@@ -1606,9 +1606,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Fog_jni_1setMode
 /*
  * Class:     org_karlsland_m3g_Fog
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Fog_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Fog_jni_1print
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus
@@ -1691,9 +1691,9 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1getSkeleton
 /*
  * Class:     org_karlsland_m3g_SkinnedMesh
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1print
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus
@@ -1958,9 +1958,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1setViewport
 /*
  * Class:     org_karlsland_m3g_Graphics3D
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1print
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus
@@ -2083,9 +2083,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1setImage
 /*
  * Class:     org_karlsland_m3g_Sprite3D
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1print
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus
@@ -2176,9 +2176,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1removeChild
 /*
  * Class:     org_karlsland_m3g_Group
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Group_jni_1print
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus
@@ -2327,9 +2327,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Texture2D_jni_1setWrapping
 /*
  * Class:     org_karlsland_m3g_Texture2D
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Texture2D_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Texture2D_jni_1print
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus
@@ -2436,9 +2436,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1set
 /*
  * Class:     org_karlsland_m3g_Image2D
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Image2D_jni_1print
   (JNIEnv *, jobject);
 
 /*
@@ -2591,9 +2591,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1transpose
 /*
  * Class:     org_karlsland_m3g_Transform
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Transform_jni_1print
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus
@@ -2642,9 +2642,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1getIndices
 /*
  * Class:     org_karlsland_m3g_IndexBuffer
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1print
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus
@@ -2781,9 +2781,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1translate
 /*
  * Class:     org_karlsland_m3g_Transformable
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Transformable_jni_1print
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus
@@ -2926,9 +2926,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1setValidRang
 /*
  * Class:     org_karlsland_m3g_KeyframeSequence
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1print
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus
@@ -2969,9 +2969,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1finalize
 /*
  * Class:     org_karlsland_m3g_TriangleStripArray
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1print
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus
@@ -3134,9 +3134,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1setSpotExponent
 /*
  * Class:     org_karlsland_m3g_Light
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Light_jni_1print
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus
@@ -3241,9 +3241,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1set__II_3F
 /*
  * Class:     org_karlsland_m3g_VertexArray
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_VertexArray_jni_1print
   (JNIEnv *, jobject);
 
 /*
@@ -3399,9 +3399,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1setTexCoords
 /*
  * Class:     org_karlsland_m3g_VertexBuffer
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1print
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus
@@ -3490,9 +3490,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Material_jni_1setVertexColorTracki
 /*
  * Class:     org_karlsland_m3g_Material
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Material_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Material_jni_1print
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus
@@ -3567,9 +3567,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_World_jni_1setBackground
 /*
  * Class:     org_karlsland_m3g_World
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_World_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_World_jni_1print
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus

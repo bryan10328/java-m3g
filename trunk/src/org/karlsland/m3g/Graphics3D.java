@@ -47,21 +47,16 @@ public class Graphics3D extends java.lang.Object {
     native private void    jni_setDepthRange        (float   near  , float far);
     native private void    jni_setLight             (int     index , Light light, Transform transform);
     native private void    jni_setViewport          (int     x     , int   y    , int       width    , int height);
-    native private void    jni_print                ();
+    native private String  jni_print                ();
 
     private long        nativePointer;
     private Camera      activeCamera;
     private List<Light> lights;
     private java.lang.Object target;
 
-    // 注意: このコンストラクタはC++側から呼ばれる。
-    //       private宣言しているのでJava側からは呼べない。
     private Graphics3D () {
-        this.nativePointer = 0;
-        this.activeCamera  = null;
-        this.lights        = new ArrayList<Light> ();
-        this.target        = null;
-        System.out.println ("Java: Graphics3D initialized.");
+        // 呼び出し禁止
+        // getInstance()を使う.
     }
 
     public void finalize () {
@@ -204,8 +199,10 @@ public class Graphics3D extends java.lang.Object {
         jni_setViewport (x, y, width, height);
     }
 
-    public void print () {
-        jni_print ();
+    @Override
+    public String toString () {
+        String str = jni_print ();
+        return str;
     }
 
 }

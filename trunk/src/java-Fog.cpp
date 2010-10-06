@@ -1,5 +1,6 @@
 #include <jni.h>
 #include <iostream>
+#include <sstream>
 #include "java-m3g.hpp"
 #include "java-m3g-common.hpp"
 #include "m3g.hpp"
@@ -189,17 +190,20 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Fog_jni_1setMode
 /*
  * Class:     org_karlsland_m3g_Fog
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Fog_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Fog_jni_1print
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Fog: print is called.\n";
     Fog* fog = (Fog*)getNativePointer (env, thiz);
+    ostringstream oss;
     __TRY__;
-    fog->print (cout) << "\n";
-    __CATCH_VOID__;
+    fog->print (oss);
+    __CATCH_JSTRING__;
+    return env->NewStringUTF (oss.str().c_str());
 }
+
 
 void Java_new_Fog                 (JNIEnv* env, m3g::Object3D* obj)
 {

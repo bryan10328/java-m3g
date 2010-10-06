@@ -5,23 +5,23 @@ public class Transform extends java.lang.Object {
     static {
         System.loadLibrary ("javam3g");
     }
-    native private void jni_initialize     ();
-    native private void jni_initialize     (Transform transform);
-    native private void jni_finalize       ();
-    native private void jni_get            (float[] matrix);
-    native private void jni_invert         ();
-    native private void jni_postMultiply   (Transform transform);
-    native private void jni_postRotate     (float angle, float ax, float ay, float az);
-    native private void jni_postRotateQuat (float qx, float qy, float qz, float qw);
-    native private void jni_postScale      (float sx, float sy, float sz);
-    native private void jni_postTranslate  (float tx, float ty, float tz);
-    native private void jni_set            (float[] matrix);
-    native private void jni_set            (Transform transform);
-    native private void jni_setIdentity    ();
-    native private void jni_transform      (float[] vectors);
-    native private void jni_transform      (VertexArray in, float[] out, boolean W);
-    native private void jni_transpose      ();
-    native private void jni_print          ();
+    native private void   jni_initialize     ();
+    native private void   jni_initialize     (Transform transform);
+    native private void   jni_finalize       ();
+    native private void   jni_get            (float[] matrix);
+    native private void   jni_invert         ();
+    native private void   jni_postMultiply   (Transform transform);
+    native private void   jni_postRotate     (float angle, float ax, float ay, float az);
+    native private void   jni_postRotateQuat (float qx, float qy, float qz, float qw);
+    native private void   jni_postScale      (float sx, float sy, float sz);
+    native private void   jni_postTranslate  (float tx, float ty, float tz);
+    native private void   jni_set            (float[] matrix);
+    native private void   jni_set            (Transform transform);
+    native private void   jni_setIdentity    ();
+    native private void   jni_transform      (float[] vectors);
+    native private void   jni_transform      (VertexArray in, float[] out, boolean W);
+    native private void   jni_transpose      ();
+    native private String jni_print          ();
 
     protected long nativePointer;
 
@@ -92,7 +92,9 @@ public class Transform extends java.lang.Object {
         jni_transpose ();
     }
 
-    public void print () {
-        jni_print ();
+    @Override
+    public String toString () {
+        String str = jni_print ();
+        return str;
     }
 }

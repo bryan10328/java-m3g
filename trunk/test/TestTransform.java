@@ -83,10 +83,6 @@ public class TestTransform {
         Transform trans = new Transform ();
         trans.postRotate (45, 1, 1, 0);
         
-        System.out.println ("Hello");
-        trans.print ();
-        System.out.println ("Hello");
-
         float[] expected = {0.853553f,0.146447f,0.5f,0f, 0.146447f,0.853553f,-0.5f,0, -0.5f,0.5f,0.707107f,0, 0,0,0,1};
         float[] matrix   = {0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,999};
         trans.get (matrix);

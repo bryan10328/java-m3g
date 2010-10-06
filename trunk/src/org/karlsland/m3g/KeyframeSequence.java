@@ -13,21 +13,21 @@ public class KeyframeSequence extends Object3D {
     static {
         System.loadLibrary ("javam3g");
     }
-    native private void jni_initialize           (int numKeyframes, int numComponents, int interpolation);
-    native private void jni_finalize             ();
-    native private int  jni_getComponentCount    ();
-    native private int  jni_getDuration          ();
-    native private int  jni_getInterpolationType ();
-    native private int  jni_getKeyframe          (int index, float[] value);
-    native private int  jni_getKeyframeCount     ();
-    native private int  jni_getRepeatMode        ();
-    native private int  jni_getValidRangeFirst   ();
-    native private int  jni_getValidRangeLast    ();
-    native private void jni_setDuration          (int duration);
-    native private void jni_setKeyframe          (int index, int time, float[] value);
-    native private void jni_setRepeatMode        (int mode);
-    native private void jni_setValidRange        (int first, int last);
-    native private void jni_print                ();
+    native private void   jni_initialize           (int numKeyframes, int numComponents, int interpolation);
+    native private void   jni_finalize             ();
+    native private int    jni_getComponentCount    ();
+    native private int    jni_getDuration          ();
+    native private int    jni_getInterpolationType ();
+    native private int    jni_getKeyframe          (int index, float[] value);
+    native private int    jni_getKeyframeCount     ();
+    native private int    jni_getRepeatMode        ();
+    native private int    jni_getValidRangeFirst   ();
+    native private int    jni_getValidRangeLast    ();
+    native private void   jni_setDuration          (int duration);
+    native private void   jni_setKeyframe          (int index, int time, float[] value);
+    native private void   jni_setRepeatMode        (int mode);
+    native private void   jni_setValidRange        (int first, int last);
+    native private String jni_print                ();
 
     public KeyframeSequence (int numKeyframes, int numComponents, int interpolation) {
         jni_initialize (numKeyframes, numComponents, interpolation);
@@ -93,8 +93,10 @@ public class KeyframeSequence extends Object3D {
         jni_setValidRange (first, last);
     }
     
-    public void print () {
-        jni_print ();
+    @Override
+    public String toString () {
+        String str = jni_print ();
+        return str;
     }
 
 }

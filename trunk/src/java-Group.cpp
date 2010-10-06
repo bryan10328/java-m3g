@@ -1,5 +1,6 @@
 #include <jni.h>
 #include <iostream>
+#include <sstream>
 #include "java-m3g.hpp"
 #include "java-m3g-common.hpp"
 #include "m3g.hpp"
@@ -146,16 +147,18 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1removeChild
 /*
  * Class:     org_karlsland_m3g_Group
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Group_jni_1print
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Group: print is called.\n";
     Group* grp = (Group*)getNativePointer (env, thiz);
+    ostringstream oss;
     __TRY__;
-    grp->print (cout) << "\n";
-    __CATCH_VOID__;
+    grp->print (oss);
+    __CATCH_JSTRING__;
+    return env->NewStringUTF (oss.str().c_str());
 }
 
 

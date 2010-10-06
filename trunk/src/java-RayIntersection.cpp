@@ -1,5 +1,6 @@
 #include <jni.h>
 #include <iostream>
+#include <sstream>
 #include "java-m3g.hpp"
 #include "java-m3g-common.hpp"
 #include "m3g.hpp"
@@ -196,16 +197,18 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getTextureT
 /*
  * Class:     org_karlsland_m3g_RayIntersection
  * Method:    jni_print
- * Signature: ()V
+ * Signature: ()Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1print
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1print
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-RayIntersection: print is called.\n";
     RayIntersection* ri = (RayIntersection*)getNativePointer (env, thiz);
+    ostringstream oss;
     __TRY__;
-    ri->print (cout) << "\n";
-    __CATCH_VOID__;
+    ri->print (oss);
+    __CATCH_JSTRING__;
+    return env->NewStringUTF (oss.str().c_str());
 }
 
 

@@ -15,7 +15,7 @@ public class Mesh extends Node {
     native private int          jni_getSubmeshCount ();
     native private VertexBuffer jni_getVertexBuffer ();
     native private void         jni_setAppearance   (int index, Appearance appearance);
-    native private void         jni_print           ();
+    native private String       jni_print           ();
 
     protected VertexBuffer      vertices;
     protected List<IndexBuffer> submeshes;
@@ -70,8 +70,10 @@ public class Mesh extends Node {
         jni_setAppearance (index, appearance);
     }
 
-    public void print () {
-        jni_print ();
+    @Override
+    public String toString () {
+        String str = jni_print ();
+        return str;
     }
 
 }

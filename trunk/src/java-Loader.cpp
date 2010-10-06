@@ -1,5 +1,6 @@
 #include <jni.h>
 #include <iostream>
+#include <sstream>
 #include <typeinfo>
 #include "java-m3g.hpp"
 #include "java-m3g-common.hpp"

@@ -14,7 +14,7 @@ public class MorphingMesh extends Mesh {
     native private int          jni_getMorphTargetCount ();
     native private void         jni_getWeights          (float[] weights);
     native private void         jni_setWeights          (float[] weights);
-    native private void         jni_print               ();
+    native private String       jni_print               ();
 
     private List<VertexBuffer> morphTargets;
 
@@ -56,8 +56,10 @@ public class MorphingMesh extends Mesh {
         jni_setWeights (weigths);
     }
 
-    public void print () {
-        jni_print ();
+    @Override
+    public String toString () {
+        String str = jni_print ();
+        return str;
     }
 
 }

@@ -10,23 +10,23 @@ public class Light extends Node {
     static {
         System.loadLibrary ("javam3g");
     }
-    native private void  jni_initialize              ();
-    native private void  jni_finalize                ();
-    native private int   jni_getColor                ();
-    native private float jni_getConstantAttenuation  ();
-    native private float jni_getIntensity            ();
-    native private float jni_getLinearAttenuation    ();
-    native private int   jni_getMode                 ();
-    native private float jni_getQuadraticAttenuation ();
-    native private float jni_getSpotAngle            ();
-    native private float jni_getSpotExponent         ();
-    native private void  jni_setAttenuation          (float constant, float linear, float quadratic);
-    native private void  jni_setColor                (int   RGB);
-    native private void  jni_setIntensity            (float intensity);
-    native private void  jni_setMode                 (int   mode);
-    native private void  jni_setSpotAngle            (float angle);
-    native private void  jni_setSpotExponent         (float exponent);
-    native private void  jni_print                   ();
+    native private void   jni_initialize              ();
+    native private void   jni_finalize                ();
+    native private int    jni_getColor                ();
+    native private float  jni_getConstantAttenuation  ();
+    native private float  jni_getIntensity            ();
+    native private float  jni_getLinearAttenuation    ();
+    native private int    jni_getMode                 ();
+    native private float  jni_getQuadraticAttenuation ();
+    native private float  jni_getSpotAngle            ();
+    native private float  jni_getSpotExponent         ();
+    native private void   jni_setAttenuation          (float constant, float linear, float quadratic);
+    native private void   jni_setColor                (int   RGB);
+    native private void   jni_setIntensity            (float intensity);
+    native private void   jni_setMode                 (int   mode);
+    native private void   jni_setSpotAngle            (float angle);
+    native private void   jni_setSpotExponent         (float exponent);
+    native private String jni_print                   ();
 
     public Light () {
         jni_initialize ();
@@ -100,8 +100,10 @@ public class Light extends Node {
         jni_setSpotExponent (exponent);
     }
 
-    public void print () {
-        jni_print ();
+    @Override
+    public String toString () {
+        String str = jni_print ();
+        return str;
     }
 
 

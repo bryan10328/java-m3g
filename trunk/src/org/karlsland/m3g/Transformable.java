@@ -6,22 +6,22 @@ public class Transformable extends Object3D {
     static {
         System.loadLibrary ("javam3g");
     }
-    native private void jni_initialize            ();
-    native private void jni_finalize              ();
-    native private void jni_getCompositeTransform (Transform transform);
-    native private void jni_getOrientation        (float[]   angleAxis);
-    native private void jni_getScale              (float[]   xyz);
-    native private void jni_getTransform          (Transform transform);
-    native private void jni_getTranslation        (float[] xyz);
-    native private void jni_postRotate            (float angle, float ax, float ay, float az);
-    native private void jni_preRotate             (float angle, float ax, float ay, float az);
-    native private void jni_scale                 (float sx,    float sy, float sz);
-    native private void jni_setOrientation        (float angle, float ax, float ay, float az);
-    native private void jni_setScale              (float sx, float sy, float sz);
-    native private void jni_setTransform          (Transform transform);
-    native private void jni_setTranslation        (float tx, float ty, float tz);
-    native private void jni_translate             (float tx, float ty, float tz);
-    native private void jni_print                 ();
+    native private void   jni_initialize            ();
+    native private void   jni_finalize              ();
+    native private void   jni_getCompositeTransform (Transform transform);
+    native private void   jni_getOrientation        (float[]   angleAxis);
+    native private void   jni_getScale              (float[]   xyz);
+    native private void   jni_getTransform          (Transform transform);
+    native private void   jni_getTranslation        (float[] xyz);
+    native private void   jni_postRotate            (float angle, float ax, float ay, float az);
+    native private void   jni_preRotate             (float angle, float ax, float ay, float az);
+    native private void   jni_scale                 (float sx,    float sy, float sz);
+    native private void   jni_setOrientation        (float angle, float ax, float ay, float az);
+    native private void   jni_setScale              (float sx, float sy, float sz);
+    native private void   jni_setTransform          (Transform transform);
+    native private void   jni_setTranslation        (float tx, float ty, float tz);
+    native private void   jni_translate             (float tx, float ty, float tz);
+    native private String jni_print                 ();
 
 
     public Transformable () {
@@ -82,8 +82,10 @@ public class Transformable extends Object3D {
         jni_translate (tx, ty, tz);
     }
 
-    public void print () {
-        jni_print ();
+    @Override
+    public String toString () {
+        String str = jni_print ();
+        return str;
     }
 
 }
