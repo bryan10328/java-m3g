@@ -22,7 +22,28 @@ JNIEXPORT jobjectArray JNICALL Java_org_karlsland_m3g_Loader_jni_1load___3BI
   (JNIEnv* env, jclass clazz, jbyteArray data, jint offset)
 {
     cout << "Java-Loader: load1 is called.\n";
-    return (jobjectArray)NULL;
+    vector<Object3D*> objs;
+    int   data_size = env->GetArrayLength (data);
+    char* data_ptr  = (char*)env->GetByteArrayElements (data, 0);
+    cout << "Java-Loader: data_size = " << data_size << "\n";
+    cout << "Java-Loader: data_ptr  = " << data_ptr  << "\n";
+    cout << "Java-Loader: offset    = " << offset    << "\n";
+    __TRY__;
+    objs = Loader::load (data_size, data_ptr, offset);
+    __CATCH_JOBJECT_ARRAY__;
+    env->ReleaseByteArrayElements (data, (jbyte*)data_ptr, 0);
+
+    cout << "Java-Loader: create " << objs.size() << " Object3D array.\n";
+    int    size        = objs.size();
+    jclass obj3d_class = env->FindClass ("org/karlsland/m3g/Object3D");
+    cout << "obj3d_class = " << obj3d_class << "\n";
+    jobjectArray arry_obj = env->NewObjectArray (size, obj3d_class, NULL);
+    for (int i = 0; i < size; i++) {
+        env->SetObjectArrayElement (arry_obj, i, (jobject)objs[i]->getExportedEntity());
+    }
+    cout << "Java-Loader: created.\n";
+    
+    return arry_obj;
 }
 
 /*
