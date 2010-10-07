@@ -308,11 +308,17 @@ void Java_build_Node (JNIEnv* env, jobject node_obj, m3g::Node* node)
 
     Node* yRef = node->getAlignmentReference (Node::Y_AXIS);
     if (yRef) {
+        if (yRef->getExportedEntity() == 0) {
+            Java_new_JavaM3GObject (env, yRef);
+        }
         env->SetObjectField (node_obj, node_yRef, (jobject)yRef->getExportedEntity());
     }
 
     Node* zRef = node->getAlignmentReference (Node::Z_AXIS);
-    if (yRef) {
+    if (zRef) {
+        if (zRef->getExportedEntity() == 0) {
+            Java_new_JavaM3GObject (env, zRef);
+        }
         env->SetObjectField (node_obj, node_zRef, (jobject)zRef->getExportedEntity());
     }
 

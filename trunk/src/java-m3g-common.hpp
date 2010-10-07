@@ -34,7 +34,6 @@ jobject allocJavaObject (JNIEnv* env, const char* name, m3g::Object* obj)
     return entity;
 }
 
-
 #define __TRY__ try {
 #define __CATCH__ } \
         catch (const m3g::ArithmeticException&       e) { jclass clazz = env->FindClass("java/lang/ArithmaticException"            ); env->ThrowNew(clazz, e.what()); } \
@@ -49,6 +48,7 @@ jobject allocJavaObject (JNIEnv* env, const char* name, m3g::Object* obj)
         catch (const m3g::InternalException&         e) { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, e.what()); } \
         catch (...)                                     { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, "Unknown exception."); }
 
+void Java_new_JavaM3GObject (JNIEnv* env, m3g::Object3D* obj);
 
 void Java_build_AnimationController (JNIEnv* env, jobject controller_obj, m3g::AnimationController* controller);
 void Java_build_AnimationTrack      (JNIEnv* env, jobject track_obj     , m3g::AnimationTrack*      track);

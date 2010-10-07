@@ -152,11 +152,17 @@ void Java_build_AnimationTrack (JNIEnv* env, jobject track_obj, m3g::AnimationTr
 
     KeyframeSequence* key_seq = track->getKeyframeSequence ();
     if (key_seq) {
+        if (key_seq->getExportedEntity() == 0) {
+            Java_new_JavaM3GObject (env, key_seq);
+        }
         env->SetObjectField (track_obj, track_key_seq, (jobject)key_seq->getExportedEntity());
     }
 
     AnimationController* controller = track->getController ();
     if (controller) {
+        if (controller->getExportedEntity() == 0) {
+            Java_new_JavaM3GObject (env, controller);
+        }
         env->SetObjectField (track_obj, track_controller, (jobject)controller->getExportedEntity());
     }
 }

@@ -20,9 +20,26 @@ public class TestObject3D {
 
     @Test
     public void testUserObject () {
-        // 当分保留
+        Group grp1 = new Group ();
+        grp1.setUserID (100);
+        Group grp2 = new Group ();
+        grp2.setUserObject (grp1);
+
+        Group grp3 = (Group)(grp2.getUserObject());
+
+        assertEquals (100, grp3.getUserID());
     }
 
+    @Test
+    public void testDuplicate () {
+        Group grp1 = new Group ();
+        Group grp2 = new Group ();
+        grp1.addChild (grp2);
+        Group grp3 = (Group)grp1.duplicate ();
+
+        assertEquals  (1, grp3.getChildCount());
+        assertNotSame (grp2, grp3.getChild(0));
+    }
 
 
 

@@ -192,6 +192,9 @@ void Java_build_Group (JNIEnv* env, jobject grp_obj, m3g::Group* grp)
     for (int i = 0; i < grp->getChildCount(); i++) {
         Node* child = grp->getChild (i);
         if (child) {
+            if (child->getExportedEntity() == 0) {
+                Java_new_JavaM3GObject (env, child);
+            }
             env->CallObjectMethod (children_obj, children_add, (jobject)child->getExportedEntity());
         }
     }

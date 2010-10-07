@@ -206,6 +206,9 @@ void Java_build_SkinnedMesh (JNIEnv* env, jobject mesh_obj, m3g::SkinnedMesh* me
 
     Group* skeleton = mesh->getSkeleton ();
     if (skeleton) {
+        if (skeleton->getExportedEntity() == 0) {
+            Java_new_JavaM3GObject (env, skeleton);
+        }
         env->SetObjectField (mesh_obj, mesh_skeleton, (jobject)skeleton->getExportedEntity());
     }
 
