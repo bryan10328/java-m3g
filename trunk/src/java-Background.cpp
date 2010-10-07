@@ -317,7 +317,7 @@ JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Background_jni_1print
     Background* bg = (Background*)getNativePointer (env, thiz);
     ostringstream oss;
     __TRY__;
-    bg->print (cout);
+    bg->print (oss);
     __CATCH__;
     return env->NewStringUTF (oss.str().c_str());
 }

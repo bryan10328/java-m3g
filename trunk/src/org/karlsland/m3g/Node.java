@@ -54,7 +54,6 @@ public class Node extends Transformable {
         return target;
     }
 
-
     public float getAlphaFactor () {
         float alpha = jni_getAlphaFactor ();
         return alpha;
@@ -105,6 +104,10 @@ public class Node extends Transformable {
 
     public void setScope (int scope) {
         jni_setScope (scope);
+    }
+
+    public void setParent (Node node) {
+        parent = node;
     }
 
     @Override

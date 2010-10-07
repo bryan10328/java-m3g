@@ -1717,22 +1717,6 @@ extern "C" {
 #define org_karlsland_m3g_Graphics3D_TRUE_COLOR 8L
 /*
  * Class:     org_karlsland_m3g_Graphics3D
- * Method:    jni_initialize
- * Signature: ()V
- */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1initialize
-  (JNIEnv *, jobject);
-
-/*
- * Class:     org_karlsland_m3g_Graphics3D
- * Method:    jni_finalize
- * Signature: ()V
- */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1finalize
-  (JNIEnv *, jobject);
-
-/*
- * Class:     org_karlsland_m3g_Graphics3D
  * Method:    jni_addLight
  * Signature: (Lorg/karlsland/m3g/Light;Lorg/karlsland/m3g/Transform;)I
  */

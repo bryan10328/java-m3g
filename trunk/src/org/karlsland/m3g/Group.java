@@ -34,6 +34,7 @@ public class Group extends Node {
     }
 
     public void addChild (Node child) {
+        child.setParent (this);
         children.add (child);
         jni_addChild (child);
     }
