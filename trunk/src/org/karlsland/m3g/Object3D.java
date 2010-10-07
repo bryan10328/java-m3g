@@ -46,12 +46,12 @@ public class Object3D extends java.lang.Object {
         jni_addAnimationTrack (animationTrack);
     }
 
-    public int animate (int time) {
+    public final int animate (int time) {
         int valid = jni_animate (time);
         return valid;
     }
 
-    public Object3D duplicate () {
+    public final Object3D duplicate () {
         Object3D obj = jni_duplicate ();
         return obj;
     }

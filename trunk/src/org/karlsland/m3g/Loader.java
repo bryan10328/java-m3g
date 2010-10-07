@@ -16,12 +16,12 @@ public class Loader extends java.lang.Object {
         // このクラスがインスタンス化されることはない.
     }
 
-    public static Object3D[] load (byte[] data, int offset) {
+    public static Object3D[] load (byte[] data, int offset) throws java.io.IOException {
         Object3D[] objs = jni_load (data, offset);
         return objs;
     }
 
-    public static Object3D[] load (java.lang.String name) {
+    public static Object3D[] load (java.lang.String name) throws java.io.IOException {
         Object3D[] objs = jni_load (name);        
         return objs;
     }

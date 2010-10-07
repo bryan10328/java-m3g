@@ -40,7 +40,7 @@ public class Node extends Transformable {
     public void finalize () {
     }
 
-    public void align (Node reference) {
+    public final void align (Node reference) {
         jni_align (reference);
     }
 
