@@ -3,6 +3,7 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.GLCanvas;
 import org.karlsland.m3g.*;
+import java.io.*;
 
 public class M3GRenderer implements GLEventListener {
 
@@ -19,16 +20,21 @@ public class M3GRenderer implements GLEventListener {
         this.wld    = new World ();
         this.worldTime = 0;
         
+        Object3D[] objs = null;
+        try {
+            objs = Loader.load ("simple.m3g");
+        } catch (IOException e) {
+            System.out.println ("Can't load file.");
+            System.exit (0);
+        }
 
-        Object3D[] objs = Loader.load ("simple.m3g");
-        //Object3D[] objs = Loader.load ("test.m3g");
         
         for (int i = 0; i < objs.length; i++) {
-        if (objs[i] instanceof World) {
-            wld = (World)objs[i];
-            wld.print ();
-            break;
-        }
+            if (objs[i] instanceof World) {
+                wld = (World)objs[i];
+                System.out.println ("World = " + wld);
+                break;
+            }
         }
 
         Camera cam = wld.getActiveCamera ();

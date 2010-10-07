@@ -19,28 +19,24 @@ void Java_build_objects (JNIEnv* env, const std::vector<Object3D*>& objs);
  * Signature: ([BI)[Lorg/karlsland/m3g/Object3D;
  */
 JNIEXPORT jobjectArray JNICALL Java_org_karlsland_m3g_Loader_jni_1load___3BI
-  (JNIEnv* env, jclass clazz, jbyteArray data, jint offset)
+  (JNIEnv* env, jclass clazz, jbyteArray data_array, jint offset)
 {
     cout << "Java-Loader: load1 is called.\n";
     vector<Object3D*> objs;
-    int   data_size = env->GetArrayLength (data);
-    char* data_ptr  = (char*)env->GetByteArrayElements (data, 0);
-    cout << "Java-Loader: data_size = " << data_size << "\n";
-    cout << "Java-Loader: data_ptr  = " << data_ptr  << "\n";
-    cout << "Java-Loader: offset    = " << offset    << "\n";
+    int   length = getByteArrayLength  (env, data_array);
+    char* data   = getByteArrayPointer (env, data_array);
     __TRY__;
-    objs = Loader::load (data_size, data_ptr, offset);
+    objs = Loader::load (length, data, offset);
     __CATCH__;
     if (env->ExceptionOccurred ()) {
         return (jobjectArray)0;
     }
-    env->ReleaseByteArrayElements (data, (jbyte*)data_ptr, 0);
+    releaseByteArrayPointer (env, data_array, data);
 
     cout << "Java-Loader: create " << objs.size() << " Object3D array.\n";
-    int    size        = objs.size();
-    jclass obj3d_class = env->FindClass ("org/karlsland/m3g/Object3D");
-    cout << "obj3d_class = " << obj3d_class << "\n";
-    jobjectArray arry_obj = env->NewObjectArray (size, obj3d_class, NULL);
+    int          size        = objs.size();
+    jclass       obj3d_class = env->FindClass ("org/karlsland/m3g/Object3D");
+    jobjectArray arry_obj    = env->NewObjectArray (size, obj3d_class, NULL);
     for (int i = 0; i < size; i++) {
         env->SetObjectArrayElement (arry_obj, i, (jobject)objs[i]->getExportedEntity());
     }

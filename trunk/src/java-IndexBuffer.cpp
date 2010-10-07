@@ -67,15 +67,15 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1getIndexCount
  * Signature: ([I)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1getIndices
-  (JNIEnv* env, jobject thiz, jintArray indices)
+  (JNIEnv* env, jobject thiz, jintArray indices_array)
 {
     cout << "Java-IndexBuffer: getIndices is called.\n";
-    IndexBuffer* ibuf = (IndexBuffer*)getNativePointer (env, thiz);
-    int* indcs = env->GetIntArrayElements (indices, 0);
+    IndexBuffer* ibuf    = (IndexBuffer*)getNativePointer (env, thiz);
+    int*         indices = getIntArrayPointer (env, indices_array);
     __TRY__;
-    ibuf->getIndices (indcs);
+    ibuf->getIndices (indices);
     __CATCH__;
-    env->ReleaseIntArrayElements (indices, indcs, 0);
+    releaseIntArrayPointer (env, indices_array, indices);
 }
 
 /*

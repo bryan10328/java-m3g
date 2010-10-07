@@ -133,15 +133,15 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1getMorphTargetCo
  * Signature: ([F)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1getWeights
-  (JNIEnv* env, jobject thiz, jfloatArray weights)
+  (JNIEnv* env, jobject thiz, jfloatArray weights_array)
 {
     cout << "Java-MorhpingMesh: getWeights is called.\n";
-    MorphingMesh* mesh = (MorphingMesh*)getNativePointer (env, thiz);
-    float* ws = env->GetFloatArrayElements (weights, 0);
+    MorphingMesh* mesh    = (MorphingMesh*)getNativePointer (env, thiz);
+    float*        weights = getFloatArrayPointer (env, weights_array);
     __TRY__;
-    mesh->getWeights (ws);
+    mesh->getWeights (weights);
     __CATCH__;
-    env->ReleaseFloatArrayElements (weights, ws, 0);
+    releaseFloatArrayPointer (env, weights_array, weights);
 }
 
 /*
@@ -150,16 +150,16 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1getWeights
  * Signature: ([F)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1setWeights
-  (JNIEnv* env, jobject thiz, jfloatArray weights)
+  (JNIEnv* env, jobject thiz, jfloatArray weights_array)
 {
     cout << "Java-MorhpingMesh: setWeights is called.\n";
-    MorphingMesh* mesh = (MorphingMesh*)getNativePointer (env, thiz);
-    int    len = env->GetArrayLength (weights);
-    float* ws  = env->GetFloatArrayElements (weights, 0);
+    MorphingMesh* mesh    = (MorphingMesh*)getNativePointer (env, thiz);
+    int           len     = getFloatArrayLength (env, weights_array);
+    float*        weights = getFloatArrayPointer (env, weights_array);
     __TRY__;
-    mesh->setWeights (len, ws);
+    mesh->setWeights (len, weights);
     __CATCH__;
-    env->ReleaseFloatArrayElements (weights, ws, 0);
+    releaseFloatArrayPointer (env, weights_array, weights);
 }
 
 /*

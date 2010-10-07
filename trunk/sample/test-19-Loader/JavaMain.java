@@ -34,8 +34,6 @@ public class JavaMain {
                }
            });
 
-
-
        frame.setVisible(true);
     }
  

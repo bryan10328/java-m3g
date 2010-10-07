@@ -72,15 +72,15 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1finalize
  * Signature: ([F)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1get
-  (JNIEnv* env, jobject thiz, jfloatArray matrix)
+  (JNIEnv* env, jobject thiz, jfloatArray matrix_array)
 {
     cout << "Java-Transform: get is called.\n";
-    Transform* trans = (Transform*)getNativePointer (env, thiz);
-    float* mat = env->GetFloatArrayElements (matrix, 0);
+    Transform* trans  = (Transform*)getNativePointer (env, thiz);
+    float*     matrix = getFloatArrayPointer (env, matrix_array);
     __TRY__;
-    trans->get (mat);
+    trans->get (matrix);
     __CATCH__;
-    env->ReleaseFloatArrayElements (matrix, mat, 0);
+    releaseFloatArrayPointer (env, matrix_array, matrix);
 }
 
 /*
@@ -180,13 +180,13 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1postTranslate
  * Signature: ([F)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1set___3F
-  (JNIEnv* env, jobject thiz, jfloatArray matrix)
+  (JNIEnv* env, jobject thiz, jfloatArray matrix_array)
 {
     cout << "Java-Transform: set is called.\n";
-    Transform* trans = (Transform*)getNativePointer (env, thiz);
-    float* mat = env->GetFloatArrayElements (matrix, 0);
+    Transform* trans  = (Transform*)getNativePointer (env, thiz);
+    float*     matrix = getFloatArrayPointer (env, matrix_array);
     __TRY__;
-    trans->set (mat);
+    trans->set (matrix);
     __CATCH__;
 }
 
@@ -226,16 +226,16 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1setIdentity
  * Signature: ([F)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1transform___3F
-  (JNIEnv* env, jobject thiz, jfloatArray vectors)
+  (JNIEnv* env, jobject thiz, jfloatArray vectors_array)
 {
     cout << "Java-Transform: transform is called.\n";
-    Transform* trans = (Transform*)getNativePointer (env, thiz);
-    float* vec = env->GetFloatArrayElements (vectors, 0);
-    int    len = env->GetArrayLength (vectors);
+    Transform* trans   = (Transform*)getNativePointer (env, thiz);
+    float*     vectors = getFloatArrayPointer (env, vectors_array);
+    int        len     = getFloatArrayLength (env, vectors_array);
     __TRY__;
-    trans->transform (len, vec);
+    trans->transform (len, vectors);
     __CATCH__;
-    env->ReleaseFloatArrayElements (vectors, vec, 0);
+    releaseFloatArrayPointer (env, vectors_array, vectors);
 }
 
 /*
@@ -244,16 +244,16 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1transform___3F
  * Signature: (Lorg/karlsland/m3g/VertexArray;[FZ)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1transform__Lorg_karlsland_m3g_VertexArray_2_3FZ
-  (JNIEnv* env, jobject thiz, jobject in, jfloatArray out, jboolean w)
+  (JNIEnv* env, jobject thiz, jobject in, jfloatArray out_array, jboolean w)
 {
     cout << "Java-Transform: transform vertex-array is called.\n";
     Transform*   trans = (Transform*)getNativePointer (env, thiz);
     VertexArray* varry = (VertexArray*)getNativePointer (env, in);
-    float* ou = env->GetFloatArrayElements (out, 0);
+    float*       out   = getFloatArrayPointer (env, out_array);
     __TRY__;
-    trans->transform (varry, ou, w);
+    trans->transform (varry, out, w);
     __CATCH__;
-    env->ReleaseFloatArrayElements (out, ou, 0);
+    releaseFloatArrayPointer (env, out_array, out);
 }
 
 /*

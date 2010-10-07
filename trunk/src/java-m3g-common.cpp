@@ -7,9 +7,115 @@
 using namespace m3g;
 using namespace std;
 
-// 注意: M3Gの仕様では「使われる方」が必ずファイルの先頭に近い方に入っている。
-// 従って前からデコードしていけばgetExportedEntity()は必ず0でないentityを返す事が保証されている。
 
+
+void* getNativePointer (JNIEnv* env, jobject obj)
+{
+    if (obj == 0) {
+        return NULL;
+    }
+    jclass   clazz = env->GetObjectClass (obj);
+    jfieldID fid   = env->GetFieldID (clazz, "nativePointer", "J");
+    return (void*)env->GetLongField (obj, fid);
+}
+
+
+void setNativePointer (JNIEnv* env, jobject obj, void* pointer)
+{
+    jclass   clazz = env->GetObjectClass (obj);
+    jfieldID fid   = env->GetFieldID (clazz, "nativePointer", "J");
+    env->SetLongField (obj, fid, (long)pointer);
+}
+
+// 注意: Java側のオブジェクトのコンストラクタは呼ばれない
+jobject allocJavaObject (JNIEnv* env, const char* name, m3g::Object* obj)
+{
+    jclass  clazz  = env->FindClass (name);
+    jobject thiz   = env->AllocObject (clazz);
+    jobject entity = env->NewWeakGlobalRef (thiz);
+    obj->setExportedEntity (entity);
+    return entity;
+}
+
+int    getByteArrayLength       (JNIEnv* env, jbyteArray  array)
+{
+    return env->GetArrayLength (array);
+}
+
+int    getShortArrayLength      (JNIEnv* env, jshortArray array)
+{
+    return env->GetArrayLength (array);
+}
+
+int    getintArrayLength        (JNIEnv* env, jintArray   array)
+{
+    return env->GetArrayLength (array);
+}
+
+int    getFloatArrayLength      (JNIEnv* env, jfloatArray array)
+{
+    return env->GetArrayLength (array);
+}
+
+
+char* getByteArrayPointer (JNIEnv* env, jbyteArray array)
+{
+    char* pointer = NULL;
+    if (array) {
+        pointer = (char*)env->GetByteArrayElements (array, 0);
+    }
+    return pointer;
+}
+
+short* getShortArrayPointer (JNIEnv* env, jshortArray array)
+{
+    short* pointer = NULL;
+    if (array) {
+        pointer = env->GetShortArrayElements (array, 0);
+    }
+    return pointer;
+}
+int* getIntArrayPointer (JNIEnv* env, jintArray array)
+{
+    int* pointer = NULL;
+    if (array) {
+        pointer = env->GetIntArrayElements (array, 0);
+    }
+    return pointer;
+}
+float* getFloatArrayPointer (JNIEnv* env, jfloatArray array)
+{
+    float* pointer = NULL;
+    if (array) {
+        pointer = env->GetFloatArrayElements (array, 0);
+    }
+    return pointer;
+}
+
+void releaseByteArrayPointer (JNIEnv* env, jbyteArray array, char* pointer)
+{
+    if (array && pointer) {
+        env->ReleaseByteArrayElements (array, (jbyte*)pointer, 0);
+    }
+}
+void releaseShortArrayPointer (JNIEnv* env, jshortArray array, short* pointer)
+{
+    if (array && pointer) {
+        env->ReleaseShortArrayElements (array, pointer, 0);
+    }
+}
+void releaseIntArrayPointer (JNIEnv* env, jintArray array, int* pointer)
+{
+    if (array && pointer) {
+        env->ReleaseIntArrayElements (array, pointer, 0);
+    }
+}
+void releaseFloatArrayPointer (JNIEnv* env, jfloatArray array, float* pointer)
+{
+    if (array && pointer) {
+        env->ReleaseFloatArrayElements (array, pointer, 0);
+    }
+}
 
 
 /**

@@ -102,16 +102,16 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getInterpola
  * Signature: (I[F)I
  */
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1getKeyframe
-  (JNIEnv* env, jobject thiz, jint index, jfloatArray value)
+  (JNIEnv* env, jobject thiz, jint index, jfloatArray value_array)
 {
     cout << "Java-KeyframeSequence: getKeyframe is called.\n";
     KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, thiz);
-    float* v    = env->GetFloatArrayElements (value, 0);
+    float*            value   = getFloatArrayPointer (env, value_array);
     int    time = 0;
     __TRY__;
-    time = key_seq->getKeyframe (index, v);
+    time = key_seq->getKeyframe (index, value);
     __CATCH__;
-    env->ReleaseFloatArrayElements (value, v, 0);
+    releaseFloatArrayPointer (env, value_array, value);
     return time;
 }
 
@@ -204,15 +204,15 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1setDuration
  * Signature: (II[F)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1setKeyframe
-  (JNIEnv* env, jobject thiz, jint index, jint time, jfloatArray value)
+  (JNIEnv* env, jobject thiz, jint index, jint time, jfloatArray value_array)
 {
     cout << "Java-KeyframeSequence: setKeyframe is called.\n";
     KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, thiz);
-    float* v = env->GetFloatArrayElements (value, 0);
+    float*            value   = getFloatArrayPointer (env, value_array);
     __TRY__;
-    key_seq->setKeyframe (index, time, v);
+    key_seq->setKeyframe (index, time, value);
     __CATCH__;
-    env->ReleaseFloatArrayElements (value, v, 0);
+    releaseFloatArrayPointer (env, value_array, value);
 }
 
 

@@ -135,15 +135,15 @@ JNIEXPORT jfloat JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getNormalZ
  * Signature: ([F)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getRay
-  (JNIEnv* env, jobject thiz, jfloatArray ray)
+  (JNIEnv* env, jobject thiz, jfloatArray ray_array)
 {
     cout << "Java-RayIntersection: getRay is called.\n";
-    RayIntersection* ri = (RayIntersection*)getNativePointer (env, thiz);
-    float* r = env->GetFloatArrayElements (ray, 0);
+    RayIntersection* ri  = (RayIntersection*)getNativePointer (env, thiz);
+    float*           ray = getFloatArrayPointer (env, ray_array);
     __TRY__;
-    ri->getRay (r);
+    ri->getRay (ray);
     __CATCH__;
-    env->ReleaseFloatArrayElements (ray, r, 0);
+    releaseFloatArrayPointer (env, ray_array, ray);
 }
 
 /*

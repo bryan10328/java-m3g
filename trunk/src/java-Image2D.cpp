@@ -34,10 +34,10 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__III
  * Signature: (III[B)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__III_3B
-  (JNIEnv* env, jobject thiz, jint format, jint width, jint height, jbyteArray image)
+  (JNIEnv* env, jobject thiz, jint format, jint width, jint height, jbyteArray pixels_array)
 {
     cout << "Java-Image2D: initiazlize2 is called.\n";
-    char*    pixels = (char*)env->GetByteArrayElements (image, 0);
+    char*    pixels = getByteArrayPointer (env, pixels_array);
     Image2D* img    = NULL;
     __TRY__;
     img = new Image2D (format, width, height, pixels);
@@ -45,7 +45,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__III_3B
     if (env->ExceptionOccurred ()) {
         return;
     }
-    env->ReleaseByteArrayElements (image, (jbyte*)pixels, 0);
+    releaseByteArrayPointer (env, pixels_array, pixels);
     setNativePointer (env, thiz, img);
     jobject entity = env->NewWeakGlobalRef (thiz);
     img->setExportedEntity (entity);
@@ -57,20 +57,20 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__III_3B
  * Signature: (III[B[B)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__III_3B_3B
-  (JNIEnv* env, jobject thiz, jint format, jint width, jint height, jbyteArray image, jbyteArray palette)
+  (JNIEnv* env, jobject thiz, jint format, jint width, jint height, jbyteArray pixels_array, jbyteArray palette_array)
 {
     cout << "Java-Image2D: initiazlize3 is called.\n";
-    char*    pixels = (char*)env->GetByteArrayElements (image, 0);
-    char*    palte  = (char*)env->GetByteArrayElements (palette, 0);
-    Image2D* img    = NULL;
+    char*    pixels  = getByteArrayPointer (env, pixels_array);
+    char*    palette = getByteArrayPointer (env, palette_array);
+    Image2D* img     = NULL;
     __TRY__;
-    img = new Image2D (format, width, height, pixels, palte);
+    img = new Image2D (format, width, height, pixels, palette);
     __CATCH__;
     if (env->ExceptionOccurred ()) {
         return;
     }
-    env->ReleaseByteArrayElements (image, (jbyte*)pixels, 0);
-    env->ReleaseByteArrayElements (palette, (jbyte*)palte, 0);
+    releaseByteArrayPointer (env, pixels_array, pixels);
+    releaseByteArrayPointer (env, palette_array, palette);
     setNativePointer (env, thiz, img);
     jobject entity = env->NewWeakGlobalRef (thiz);
     img->setExportedEntity (entity);
@@ -182,15 +182,15 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Image2D_jni_1isMutable
  * Signature: (IIII[B)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1set
-  (JNIEnv* env, jobject thiz, jint x, jint y, jint width, jint height, jbyteArray image)
+  (JNIEnv* env, jobject thiz, jint x, jint y, jint width, jint height, jbyteArray pixels_array)
 {
     cout << "Java-Image2D: set is called.\n";
     Image2D* img    = (Image2D*)getNativePointer (env, thiz);
-    char*    pixels = (char*)env->GetByteArrayElements (image, 0);
+    char*    pixels = getByteArrayPointer (env, pixels_array);
     __TRY__;
     img->set (x, y, width, height, pixels);
     __CATCH__;
-    env->ReleaseByteArrayElements (image, (jbyte*)pixels, 0);
+    releaseByteArrayPointer (env, pixels_array, pixels);
 }
 
 /*

@@ -124,29 +124,19 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1getBoneTransform
  * Signature: (Lorg/karlsland/m3g/Node;[I[F)I
  */
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1getBoneVertices
-  (JNIEnv* env, jobject thiz, jobject bone, jintArray indices, jfloatArray weights)
+  (JNIEnv* env, jobject thiz, jobject bone_obj, jintArray indices_array, jfloatArray weights_array)
 {
     cout << "Java-SkinnedMesh: getBoneVertices is caleld.\n";
-    SkinnedMesh* mesh = (SkinnedMesh*)getNativePointer (env, thiz);
-    Node*        bon  = (Node*)getNativePointer (env, bone);
-    int*         indcs  = NULL;
-    float*       weighs = NULL;
-    if (indices) {
-        indcs = env->GetIntArrayElements (indices, 0);
-    }
-    if (weights) {
-        env->GetFloatArrayElements (weights, 0);
-    }
+    SkinnedMesh* mesh    = (SkinnedMesh*)getNativePointer (env, thiz);
+    Node*        bone    = (Node*)getNativePointer (env, bone_obj);
+    int*         indices = getIntArrayPointer (env, indices_array);
+    float*       weights = getFloatArrayPointer (env, weights_array);
     int num = 0;
     __TRY__;
-    num = mesh->getBoneVertices (bon, indcs, weighs);
+    num = mesh->getBoneVertices (bone, indices, weights);
     __CATCH__;
-    if (indices) {
-        env->ReleaseIntArrayElements (indices, indcs, 0);
-    }
-    if (weights) {
-        env->ReleaseFloatArrayElements (weights, weighs, 0);
-    }
+    releaseIntArrayPointer (env, indices_array, indices);
+    releaseFloatArrayPointer (env, weights_array, weights);
     return num;
 }
 

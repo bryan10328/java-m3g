@@ -4,51 +4,53 @@
 #include "m3g.hpp"
 
 
-static inline 
-void* getNativePointer (JNIEnv* env, jobject obj)
-{
-    if (obj == 0) {
-        return NULL;
-    }
-    jclass   clazz = env->GetObjectClass (obj);
-    jfieldID fid   = env->GetFieldID (clazz, "nativePointer", "J");
-    return (void*)env->GetLongField (obj, fid);
-}
+void*   getNativePointer (JNIEnv* env, jobject obj);
+void    setNativePointer (JNIEnv* env, jobject obj, void* pointer);
+jobject allocJavaObject  (JNIEnv* env, const char* name, m3g::Object* obj);
 
-static inline
-void setNativePointer (JNIEnv* env, jobject obj, void* pointer)
-{
-    jclass   clazz = env->GetObjectClass (obj);
-    jfieldID fid   = env->GetFieldID (clazz, "nativePointer", "J");
-    env->SetLongField (obj, fid, (long)pointer);
-}
 
-// 注意: Java側のオブジェクトのコンストラクタは呼ばれない
-static inline
-jobject allocJavaObject (JNIEnv* env, const char* name, m3g::Object* obj)
-{
-    jclass  clazz  = env->FindClass (name);
-    jobject thiz   = env->AllocObject (clazz);
-    jobject entity = env->NewWeakGlobalRef (thiz);
-    obj->setExportedEntity (entity);
-    return entity;
-}
+int    getByteArrayLength       (JNIEnv* env, jbyteArray  array);
+int    getShortArrayLength      (JNIEnv* env, jshortArray array);
+int    getintArrayLength        (JNIEnv* env, jintArray   array);
+int    getFloatArrayLength      (JNIEnv* env, jfloatArray array);
 
-#define __TRY__ try {
-#define __CATCH__ } \
-        catch (const m3g::ArithmeticException&       e) { jclass clazz = env->FindClass("java/lang/ArithmaticException"            ); env->ThrowNew(clazz, e.what()); } \
-        catch (const m3g::IllegalArgumentException&  e) { jclass clazz = env->FindClass("java/lang/IllegalArgumentException"       ); env->ThrowNew(clazz, e.what()); } \
-        catch (const m3g::IllegalStateException&     e) { jclass clazz = env->FindClass("java/lang/IllegalStateException"          ); env->ThrowNew(clazz, e.what()); } \
-        catch (const m3g::IndexOutOfBoundsException& e) { jclass clazz = env->FindClass("java/lang/IndexOutOfBoundsException"      ); env->ThrowNew(clazz, e.what()); } \
-        catch (const m3g::IOException&               e) { jclass clazz = env->FindClass("java/lang/IOException"                    ); env->ThrowNew(clazz, e.what()); } \
-        catch (const m3g::NullPointerException&      e) { jclass clazz = env->FindClass("java/lang/NullPointerException"           ); env->ThrowNew(clazz, e.what()); } \
-        catch (const m3g::SecurityException&         e) { jclass clazz = env->FindClass("java/lang/SecurityException"              ); env->ThrowNew(clazz, e.what()); } \
-        catch (const m3g::NotImplementedException&   e) { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, e.what()); } \
-        catch (const m3g::OpenGLException&           e) { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, e.what()); } \
-        catch (const m3g::InternalException&         e) { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, e.what()); } \
-        catch (...)                                     { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, "Unknown exception."); }
+char*  getByteArrayPointer      (JNIEnv* env, jbyteArray  array);
+short* getShortArrayPointer     (JNIEnv* env, jshortArray array);
+int*   getIntArrayPointer       (JNIEnv* env, jintArray   array);
+float* getFloatArrayPointer     (JNIEnv* env, jfloatArray array);
 
+void   releaseByteArrayPointer  (JNIEnv* env, jbyteArray  array, char*  pointer);
+void   releaseShortArrayPointer (JNIEnv* env, jshortArray array, short* pointer);
+void   releaseIntArrayPointer   (JNIEnv* env, jintArray   array, int*   pointer);
+void   releaseFloatArrayPointer (JNIEnv* env, jfloatArray array, float* pointer);
+
+// これだけjava-m3g-common.cppで定義
 void Java_new_JavaM3GObject (JNIEnv* env, m3g::Object3D* obj);
+
+// この下は個別にjava-XXX.cppで定義
+void Java_new_AnimationController (JNIEnv* env, m3g::Object3D* obj);
+void Java_new_AnimationTrack      (JNIEnv* env, m3g::Object3D* obj);
+void Java_new_Appearance          (JNIEnv* env, m3g::Object3D* obj);
+void Java_new_Background          (JNIEnv* env, m3g::Object3D* obj);
+void Java_new_Camera              (JNIEnv* env, m3g::Object3D* obj);
+void Java_new_CompositingMode     (JNIEnv* env, m3g::Object3D* obj);
+void Java_new_Fog                 (JNIEnv* env, m3g::Object3D* obj);
+void Java_new_Group               (JNIEnv* env, m3g::Object3D* obj);
+void Java_new_Image2D             (JNIEnv* env, m3g::Object3D* obj);
+void Java_new_KeyframeSequence    (JNIEnv* env, m3g::Object3D* obj);
+void Java_new_Light               (JNIEnv* env, m3g::Object3D* obj);
+void Java_new_Material            (JNIEnv* env, m3g::Object3D* obj);
+void Java_new_Mesh                (JNIEnv* env, m3g::Object3D* obj);
+void Java_new_MorphingMesh        (JNIEnv* env, m3g::Object3D* obj);
+void Java_new_Mesh                (JNIEnv* env, m3g::Object3D* obj);
+void Java_new_PolygonMode         (JNIEnv* env, m3g::Object3D* obj);
+void Java_new_SkinnedMesh         (JNIEnv* env, m3g::Object3D* obj);
+void Java_new_Sprite3D            (JNIEnv* env, m3g::Object3D* obj);
+void Java_new_Texture2D           (JNIEnv* env, m3g::Object3D* obj);
+void Java_new_TriangleStripArray  (JNIEnv* env, m3g::Object3D* obj);
+void Java_new_VertexArray         (JNIEnv* env, m3g::Object3D* obj);
+void Java_new_VertexBuffer        (JNIEnv* env, m3g::Object3D* obj);
+void Java_new_World               (JNIEnv* env, m3g::Object3D* obj);
 
 void Java_build_AnimationController (JNIEnv* env, jobject controller_obj, m3g::AnimationController* controller);
 void Java_build_AnimationTrack      (JNIEnv* env, jobject track_obj     , m3g::AnimationTrack*      track);
@@ -79,6 +81,21 @@ void Java_build_TriangleStripArray  (JNIEnv* env, jobject tris_obj      , m3g::T
 void Java_build_VertexArray         (JNIEnv* env, jobject varry_obj     , m3g::VertexArray*         varry);
 void Java_build_VertexBuffer        (JNIEnv* env, jobject vbuf_obj      , m3g::VertexBuffer*        vbuf);
 void Java_build_World               (JNIEnv* env, jobject wld_obj       , m3g::World*               wld);
+
+
+#define __TRY__ try {
+#define __CATCH__ } \
+        catch (const m3g::ArithmeticException&       e) { jclass clazz = env->FindClass("java/lang/ArithmaticException"            ); env->ThrowNew(clazz, e.what()); } \
+        catch (const m3g::IllegalArgumentException&  e) { jclass clazz = env->FindClass("java/lang/IllegalArgumentException"       ); env->ThrowNew(clazz, e.what()); } \
+        catch (const m3g::IllegalStateException&     e) { jclass clazz = env->FindClass("java/lang/IllegalStateException"          ); env->ThrowNew(clazz, e.what()); } \
+        catch (const m3g::IndexOutOfBoundsException& e) { jclass clazz = env->FindClass("java/lang/IndexOutOfBoundsException"      ); env->ThrowNew(clazz, e.what()); } \
+        catch (const m3g::IOException&               e) { jclass clazz = env->FindClass("java/lang/IOException"                    ); env->ThrowNew(clazz, e.what()); } \
+        catch (const m3g::NullPointerException&      e) { jclass clazz = env->FindClass("java/lang/NullPointerException"           ); env->ThrowNew(clazz, e.what()); } \
+        catch (const m3g::SecurityException&         e) { jclass clazz = env->FindClass("java/lang/SecurityException"              ); env->ThrowNew(clazz, e.what()); } \
+        catch (const m3g::NotImplementedException&   e) { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, e.what()); } \
+        catch (const m3g::OpenGLException&           e) { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, e.what()); } \
+        catch (const m3g::InternalException&         e) { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, e.what()); } \
+        catch (...)                                     { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, "Unknown exception."); }
 
 
 

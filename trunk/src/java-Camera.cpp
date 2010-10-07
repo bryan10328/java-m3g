@@ -50,16 +50,16 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Camera_jni_1finalize
  * Signature: ([F)I
  */
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Camera_jni_1getProjection___3F
-  (JNIEnv* env, jobject thiz, jfloatArray params)
+  (JNIEnv* env, jobject thiz, jfloatArray params_array)
 {
     cout << "Java-Camera: getProjection is called.\n";
-    Camera* cam  = (Camera*)getNativePointer (env, thiz);
-    float*  prms = env->GetFloatArrayElements (params, 0);
+    Camera* cam    = (Camera*)getNativePointer (env, thiz);
+    float*  params = getFloatArrayPointer (env, params_array);
     int type = 0;
     __TRY__;
-    type = cam->getProjection (prms);
+    type = cam->getProjection (params);
     __CATCH__;
-    env->ReleaseFloatArrayElements (params, prms, 0);
+    releaseFloatArrayPointer (env, params_array, params);
     return type;
 }
 
