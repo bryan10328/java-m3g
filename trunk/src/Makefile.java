@@ -13,7 +13,9 @@ org/karlsland/m3g/IndexBuffer.java          org/karlsland/m3g/Transformable.java
 org/karlsland/m3g/KeyframeSequence.java     org/karlsland/m3g/TriangleStripArray.java \
 org/karlsland/m3g/Light.java                org/karlsland/m3g/VertexArray.java      \
 org/karlsland/m3g/Loader.java               org/karlsland/m3g/VertexBuffer.java     \
-org/karlsland/m3g/Material.java             org/karlsland/m3g/World.java
+org/karlsland/m3g/Material.java             org/karlsland/m3g/World.java            \
+org/karlsland/m3g/OpenGLException.java      org/karlsland/m3g/NotImplementedException.java \
+org/karlsland/m3g/InternalException.java 
 PACKAGES = \
 org.karlsland.m3g.AnimationController  org.karlsland.m3g.Mesh             \
 org.karlsland.m3g.AnimationTrack       org.karlsland.m3g.MorphingMesh     \
@@ -29,7 +31,9 @@ org.karlsland.m3g.IndexBuffer          org.karlsland.m3g.Transformable      \
 org.karlsland.m3g.KeyframeSequence     org.karlsland.m3g.TriangleStripArray \
 org.karlsland.m3g.Light                org.karlsland.m3g.VertexArray      \
 org.karlsland.m3g.Loader               org.karlsland.m3g.VertexBuffer     \
-org.karlsland.m3g.Material             org.karlsland.m3g.World
+org.karlsland.m3g.Material             org.karlsland.m3g.World            \
+org.karlsland.m3g.OpenGLException      org.karlsland.m3g.NotImplementedException \
+org.karlsland.m3g.InternalException 
 CLASSES  = $(SRCS:.java=.class)
 TARGET = libm3g.so
 JAVAC = javac

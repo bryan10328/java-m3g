@@ -154,11 +154,14 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getInstance
   (JNIEnv* env, jclass clazz)
 {
     cout << "Java-Graphics3D: getInstance is called.\n";
-    Graphics3D* g3d = Graphics3D:: getInstance ();
-    if (g3d->getExportedEntity() == NULL) {
+    Graphics3D* g3d = NULL;
+    __TRY__;
+    g3d = Graphics3D:: getInstance ();
+    __CATCH__;
+    if (g3d && g3d->getExportedEntity() == NULL) {
         Java_new_Graphics3D (env, g3d);
     }
-    return (g3d != NULL) ? (jobject)g3d->getExportedEntity() : (jobject)NULL;
+    return (g3d != NULL) ? (jobject)g3d->getExportedEntity() : (jobject)0;
 }
 
 /*
@@ -506,7 +509,6 @@ void Java_new_Graphics3D               (JNIEnv* env, m3g::Graphics3D* g3d)
 
     setNativePointer (env, g3d_obj, g3d);
     g3d->setExportedEntity (g3d_entity);
-
 }
 
 

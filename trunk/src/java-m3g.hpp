@@ -3560,3 +3560,56 @@ JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_World_jni_1print
 }
 #endif
 #endif
+/* Header for class org_karlsland_m3g_OpenGLException */
+
+#ifndef _Included_org_karlsland_m3g_OpenGLException
+#define _Included_org_karlsland_m3g_OpenGLException
+#ifdef __cplusplus
+extern "C" {
+#endif
+#undef org_karlsland_m3g_OpenGLException_serialVersionUID
+#define org_karlsland_m3g_OpenGLException_serialVersionUID -3042686055658047285LL
+#undef org_karlsland_m3g_OpenGLException_serialVersionUID
+#define org_karlsland_m3g_OpenGLException_serialVersionUID -3387516993124229948LL
+#undef org_karlsland_m3g_OpenGLException_serialVersionUID
+#define org_karlsland_m3g_OpenGLException_serialVersionUID -7034897190745766939LL
+#ifdef __cplusplus
+}
+#endif
+#endif
+/* Header for class org_karlsland_m3g_NotImplementedException */
+
+#ifndef _Included_org_karlsland_m3g_NotImplementedException
+#define _Included_org_karlsland_m3g_NotImplementedException
+#ifdef __cplusplus
+extern "C" {
+#endif
+#undef org_karlsland_m3g_NotImplementedException_serialVersionUID
+#define org_karlsland_m3g_NotImplementedException_serialVersionUID -3042686055658047285LL
+#undef org_karlsland_m3g_NotImplementedException_serialVersionUID
+#define org_karlsland_m3g_NotImplementedException_serialVersionUID -3387516993124229948LL
+#undef org_karlsland_m3g_NotImplementedException_serialVersionUID
+#define org_karlsland_m3g_NotImplementedException_serialVersionUID -7034897190745766939LL
+#undef org_karlsland_m3g_NotImplementedException_serialVersionUID
+#define org_karlsland_m3g_NotImplementedException_serialVersionUID -1242599979055084673LL
+#ifdef __cplusplus
+}
+#endif
+#endif
+/* Header for class org_karlsland_m3g_InternalException */
+
+#ifndef _Included_org_karlsland_m3g_InternalException
+#define _Included_org_karlsland_m3g_InternalException
+#ifdef __cplusplus
+extern "C" {
+#endif
+#undef org_karlsland_m3g_InternalException_serialVersionUID
+#define org_karlsland_m3g_InternalException_serialVersionUID -3042686055658047285LL
+#undef org_karlsland_m3g_InternalException_serialVersionUID
+#define org_karlsland_m3g_InternalException_serialVersionUID -3387516993124229948LL
+#undef org_karlsland_m3g_InternalException_serialVersionUID
+#define org_karlsland_m3g_InternalException_serialVersionUID -7034897190745766939LL
+#ifdef __cplusplus
+}
+#endif
+#endif

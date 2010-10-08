@@ -82,6 +82,7 @@ void Java_build_VertexArray         (JNIEnv* env, jobject varry_obj     , m3g::V
 void Java_build_VertexBuffer        (JNIEnv* env, jobject vbuf_obj      , m3g::VertexBuffer*        vbuf);
 void Java_build_World               (JNIEnv* env, jobject wld_obj       , m3g::World*               wld);
 
+#include <cstdio>
 
 #define __TRY__ try {
 #define __CATCH__ } \
@@ -92,10 +93,10 @@ void Java_build_World               (JNIEnv* env, jobject wld_obj       , m3g::W
         catch (const m3g::IOException&               e) { jclass clazz = env->FindClass("java/lang/IOException"                    ); env->ThrowNew(clazz, e.what()); } \
         catch (const m3g::NullPointerException&      e) { jclass clazz = env->FindClass("java/lang/NullPointerException"           ); env->ThrowNew(clazz, e.what()); } \
         catch (const m3g::SecurityException&         e) { jclass clazz = env->FindClass("java/lang/SecurityException"              ); env->ThrowNew(clazz, e.what()); } \
-        catch (const m3g::NotImplementedException&   e) { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, e.what()); } \
-        catch (const m3g::OpenGLException&           e) { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, e.what()); } \
-        catch (const m3g::InternalException&         e) { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, e.what()); } \
-        catch (...)                                     { jclass clazz = env->FindClass("java/lang/UnsupportedOperationException"  ); env->ThrowNew(clazz, "Unknown exception."); }
+        catch (const m3g::NotImplementedException&   e) { jclass clazz = env->FindClass("org/karlsland/m3g/NotImplementedException"); env->ThrowNew(clazz, e.what()); } \
+        catch (const m3g::OpenGLException&           e) { jclass clazz = env->FindClass("org/karlsland/m3g/OpenGLException"        ); env->ThrowNew(clazz, e.what()); } \
+        catch (const m3g::InternalException&         e) { jclass clazz = env->FindClass("org/karlsland/m3g/InternalException"      ); env->ThrowNew(clazz, e.what()); } \
+        catch (...)                                     { jclass clazz = env->FindClass("java/lang/RuntimeException"               ); env->ThrowNew(clazz, "Unknown exception."); }
 
 
 
