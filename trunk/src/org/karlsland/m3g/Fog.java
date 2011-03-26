@@ -6,7 +6,8 @@ public class Fog extends Object3D {
     public final static int LINEAR      = 81;
 
     static {
-        System.loadLibrary ("javam3g");
+        System.loadLibrary ("m3g");
+        System.loadLibrary ("java-m3g");
     }
     native private void   jni_initialize      ();
     native private void   jni_finalize        ();

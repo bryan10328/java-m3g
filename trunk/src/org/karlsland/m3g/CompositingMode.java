@@ -9,7 +9,8 @@ public class CompositingMode extends Object3D {
     public final static int REPLACE     = 68;
 
     static {
-        System.loadLibrary ("javam3g");
+        System.loadLibrary ("m3g");
+        System.loadLibrary ("java-m3g");
     }
     native private void    jni_initialzie           ();
     native private void    jni_finalize             ();

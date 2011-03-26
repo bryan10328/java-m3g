@@ -5,7 +5,8 @@ import java.util.*;
 public class Mesh extends Node {
 
     static {
-        System.loadLibrary ("javam3g");
+        System.loadLibrary ("m3g");
+        System.loadLibrary ("java-m3g");
     }
     native private void         jni_initialize      (VertexBuffer vertices, IndexBuffer[] submeshes, Appearance[] appearances);
     native private void         jni_initialize      (VertexBuffer vertices, IndexBuffer submesh, Appearance appearance);

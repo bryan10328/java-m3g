@@ -3,7 +3,7 @@
 #include <sstream>
 #include "java-m3g.hpp"
 #include "java-m3g-common.hpp"
-#include "m3g.hpp"
+#include "m3g/m3g.hpp"
 using namespace std;
 using namespace m3g;
 
@@ -199,9 +199,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1set__Lorg_karlsland
   (JNIEnv* env, jobject thiz, jobject transform)
 {
     Transform* trans = (Transform*)getNativePointer (env, thiz);
-    Transform* target = (Transform*)getNativePointer (env, transform);
+    Transform* t     = (Transform*)getNativePointer (env, transform);
     __TRY__;
-    trans->set (*target);
+    trans->set (t);
     __CATCH__;
 }
 

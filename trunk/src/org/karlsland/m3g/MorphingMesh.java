@@ -5,7 +5,8 @@ import java.util.*;
 public class MorphingMesh extends Mesh {
 
     static {
-        System.loadLibrary ("javam3g");
+        System.loadLibrary ("m3g");
+        System.loadLibrary ("java-m3g");
     }
     native private void         jni_initialize          (VertexBuffer base, VertexBuffer[] targets, IndexBuffer[] submeshes, Appearance[] appearances);
     native private void         jni_initialize          (VertexBuffer base, VertexBuffer[] targets, IndexBuffer submesh, Appearance appearance);

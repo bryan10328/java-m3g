@@ -11,7 +11,8 @@ public class KeyframeSequence extends Object3D {
     public final static int STEP     = 180;
 
     static {
-        System.loadLibrary ("javam3g");
+        System.loadLibrary ("m3g");
+        System.loadLibrary ("java-m3g");
     }
     native private void   jni_initialize           (int numKeyframes, int numComponents, int interpolation);
     native private void   jni_finalize             ();

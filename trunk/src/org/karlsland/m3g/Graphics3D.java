@@ -15,7 +15,8 @@ public class Graphics3D extends java.lang.Object {
     public final static int TRUE_COLOR = 8;
 
     static {
-        System.loadLibrary ("javam3g");
+        System.loadLibrary ("m3g");
+        System.loadLibrary ("java-m3g");
     }
     native private int     jni_addLight             (Light light, Transform transform);
     native private void    jni_bindTarget           (java.lang.Object target);

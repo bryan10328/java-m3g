@@ -25,7 +25,8 @@ public class AnimationTrack extends Object3D {
     public final static int VISIBILITY     = 267;
 
     static {
-        System.loadLibrary ("javam3g");
+        System.loadLibrary ("m3g");
+        System.loadLibrary ("java-m3g");
     }
     native private void                jni_initialize          (KeyframeSequence keyframeSequence, int property);
     native private void                jni_finalize            ();

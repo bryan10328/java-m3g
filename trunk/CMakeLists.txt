@@ -38,9 +38,12 @@ endif (CMAKE_BUILD_TYPE STREQUAL "Release")
 # dependend libraries
 # ==================================
 # thre is no libraries
+find_package (JNI   REQUIRED)
 
-#set (JAVA_M3G_REQUIRED_LIBRARIES xxx)
-#set (JAVA_M3G_REQUIRED_INCLUDE_DIR xxx)
+set (JAVA_M3G_REQUIRED_LIBRARIES 
+           ${JNI_LIBRARIES})
+set (JAVA_M3G_REQUIRED_INCLUDE_DIR
+           ${JNI_INCLUDE_DIRS})
 
 
 # =============================

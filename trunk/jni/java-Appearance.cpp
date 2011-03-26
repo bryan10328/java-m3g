@@ -3,7 +3,7 @@
 #include <sstream>
 #include "java-m3g.hpp"
 #include "java-m3g-common.hpp"
-#include "m3g.hpp"
+#include "m3g/m3g.hpp"
 using namespace std;
 using namespace m3g;
 

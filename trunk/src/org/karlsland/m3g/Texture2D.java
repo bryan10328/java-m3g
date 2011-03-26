@@ -14,7 +14,8 @@ public class Texture2D extends Transformable {
     public final static int WRAP_REPEAT       = 241;
 
     static {
-        System.loadLibrary ("javam3g");
+        System.loadLibrary ("m3g");
+        System.loadLibrary ("java-m3g");
     }
     native private void    jni_initialize     (Image2D image);
     native private void    jni_finalize       ();

@@ -5,7 +5,8 @@ import java.util.*;
 public class VertexBuffer extends Object3D {
 
     static {
-        System.loadLibrary ("javam3g");
+        System.loadLibrary ("m3g");
+        System.loadLibrary ("java-m3g");
     }
     native private void        jni_initialize      ();
     native private void        jni_finalize        ();

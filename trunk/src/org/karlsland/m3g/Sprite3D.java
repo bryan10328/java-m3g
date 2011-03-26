@@ -4,7 +4,8 @@ package org.karlsland.m3g;
 public class Sprite3D extends Node {
 
     static {
-        System.loadLibrary ("javam3g");
+        System.loadLibrary ("m3g");
+        System.loadLibrary ("java-m3g");
     }
     native private void       jni_initialize    (boolean scaled, Image2D image, Appearance appearance);
     native private void       jni_finalize      ();

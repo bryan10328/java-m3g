@@ -3,46 +3,10 @@
 #include <sstream>
 #include "java-m3g.hpp"
 #include "java-m3g-common.hpp"
-#include "m3g.hpp"
+#include "m3g/m3g.hpp"
 using namespace std;
 using namespace m3g;
 
-/*
- * Class:     org_karlsland_m3g_IndexBuffer
- * Method:    jni_initialize
- * Signature: ()V
- */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1initialize
-  (JNIEnv* env, jobject thiz)
-{
-    cout << "Java-IndexBuffer: initialize is called.\n";
-    IndexBuffer* ibuf = NULL;
-    __TRY__;
-    ibuf = new IndexBuffer ();
-    __CATCH__;
-    if (env->ExceptionOccurred ()) {
-        return;
-    }
-    setNativePointer (env, thiz, ibuf);
-    jobject entity = env->NewWeakGlobalRef (thiz);
-    ibuf->setExportedEntity (entity);
-}
-
-/*
- * Class:     org_karlsland_m3g_IndexBuffer
- * Method:    jni_finalize
- * Signature: ()V
- */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1finalize
-  (JNIEnv* env, jobject thiz)
-{
-    cout << "Java-IndexBuffer: finalize is called.\n";
-    IndexBuffer* ibuf = (IndexBuffer*)getNativePointer (env, thiz);
-    env->DeleteWeakGlobalRef ((jobject)ibuf->getExportedEntity());
-    __TRY__;
-    delete ibuf;
-    __CATCH__;
-}
 
 /*
  * Class:     org_karlsland_m3g_IndexBuffer

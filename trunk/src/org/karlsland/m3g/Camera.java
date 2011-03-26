@@ -7,7 +7,8 @@ public class Camera extends Node {
     public final static int PERSPECTIVE = 50;
 
     static {
-        System.loadLibrary ("javam3g");
+        System.loadLibrary ("m3g");
+        System.loadLibrary ("java-m3g");
     }
     native private void   jni_initialize     ();
     native private void   jni_finalize       ();

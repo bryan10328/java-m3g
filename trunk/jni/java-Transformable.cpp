@@ -3,7 +3,7 @@
 #include <sstream>
 #include "java-m3g.hpp"
 #include "java-m3g-common.hpp"
-#include "m3g.hpp"
+#include "m3g/m3g.hpp"
 using namespace std;
 using namespace m3g;
 
@@ -214,7 +214,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1setTransform
     Transformable* trans = (Transformable*)getNativePointer (env, thiz);
     Transform*     t     = (Transform*)getNativePointer (env, transform);
     __TRY__;
-    trans->setTransform (*t);
+    trans->setTransform (t);
     __CATCH__;
 }
 

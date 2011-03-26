@@ -6,7 +6,8 @@ public class Loader extends java.lang.Object {
     protected long nativePointer;
 
     static {
-        System.loadLibrary ("javam3g");
+        System.loadLibrary ("m3g");
+        System.loadLibrary ("java-m3g");
     }
     native private static Object3D[] jni_load (byte[] data, int offset);
     native private static Object3D[] jni_load (java.lang.String name);

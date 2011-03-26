@@ -4,7 +4,7 @@
 #include "java-m3g.hpp"
 #include "java-m3g-common.hpp"
 #include "java-Graphics3D.hpp"
-#include "m3g.hpp"
+#include "m3g/m3g.hpp"
 using namespace std;
 using namespace m3g;
 
@@ -344,7 +344,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1render__Lorg_karls
     Node*       nod   = (Node*)getNativePointer (env, node);
     Transform*  trans = (Transform*)getNativePointer (env, transform);
     __TRY__;
-    g3d->render (nod, *trans);
+    g3d->render (nod, trans);
     __CATCH__;
 }
 
@@ -363,7 +363,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1render__Lorg_karls
     Appearance*   apps  = (Appearance*)getNativePointer (env, appearances);
     Transform*    trans = (Transform*)getNativePointer (env, transform);
     __TRY__;
-    g3d->render (vbuf, ibuf, apps, *trans);
+    g3d->render (vbuf, ibuf, apps, trans);
     __CATCH__;
 }
 
@@ -382,7 +382,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1render__Lorg_karls
     Appearance*   apps  = (Appearance*)getNativePointer (env, appearances);
     Transform*    trans = (Transform*)getNativePointer (env, transform);
     __TRY__;
-    g3d->render (vbuf, ibuf, apps, *trans, scope);
+    g3d->render (vbuf, ibuf, apps, trans, scope);
     __CATCH__;
 }
 

@@ -3,7 +3,7 @@
 #include <sstream>
 #include "java-m3g.hpp"
 #include "java-m3g-common.hpp"
-#include "m3g.hpp"
+#include "m3g/m3g.hpp"
 using namespace std;
 using namespace m3g;
 
@@ -111,7 +111,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Camera_jni_1setGeneric
     Camera*    cam   = (Camera*)getNativePointer (env, thiz);
     Transform* trans = (Transform*)getNativePointer (env, transform);
     __TRY__;
-    cam->setGeneric (*trans);
+    cam->setGeneric (trans);
     __CATCH__;
 }
 

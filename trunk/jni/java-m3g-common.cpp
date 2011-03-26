@@ -1,7 +1,7 @@
 #include <jni.h>
 #include <iostream>
 #include <typeinfo>
-#include "m3g.hpp"
+#include "m3g/m3g.hpp"
 #include "java-Loader.hpp"
 #include "java-m3g-common.hpp"
 using namespace m3g;

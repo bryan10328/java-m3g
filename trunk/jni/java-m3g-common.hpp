@@ -1,7 +1,7 @@
 #ifndef __JAVA_M3G_COMMON_HPP__
 #define __JAVA_M3G_COMMON_HPP__
 
-#include "m3g.hpp"
+#include "m3g/m3g.hpp"
 
 
 void*   getNativePointer (JNIEnv* env, jobject obj);

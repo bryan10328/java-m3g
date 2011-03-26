@@ -4,7 +4,8 @@ package org.karlsland.m3g;
 public class VertexArray extends Object3D {
 
     static {
-        System.loadLibrary ("javam3g");
+        System.loadLibrary ("m3g");
+        System.loadLibrary ("java-m3g");
     }
     native private void   jni_initialize        (int numVertice, int numComponents, int componentSize);
     native private void   jni_finalize          ();

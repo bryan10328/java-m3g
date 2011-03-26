@@ -35,7 +35,7 @@ target_link_libraries (java-m3g ${JAVA_M3G_REQUIRED_LIBRARIES})
 
 
 # ==============================
-# precompiled includes
+# precompiled include dirs
 # ==============================
 set (JAVA_M3G_PRECOMPILED_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/external/include)
 include_directories (${JAVA_M3G_PRECOMPILED_INCLUDE_DIR})

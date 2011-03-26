@@ -9,7 +9,8 @@ public class Image2D extends Object3D {
     public final static int RGBA            = 100;
 
     static {
-        System.loadLibrary ("javam3g");
+        System.loadLibrary ("m3g");
+        System.loadLibrary ("java-m3g");
     }
     native private void    jni_initialize (int format, int width, int height);
     native private void    jni_initialize (int format, int width, int height, byte[] iamge);

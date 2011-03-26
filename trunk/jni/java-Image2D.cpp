@@ -3,7 +3,7 @@
 #include <sstream>
 #include "java-m3g.hpp"
 #include "java-m3g-common.hpp"
-#include "m3g.hpp"
+#include "m3g/m3g.hpp"
 using namespace std;
 using namespace m3g;
 
@@ -64,7 +64,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__III_3B_3B
     char*    palette = getByteArrayPointer (env, palette_array);
     Image2D* img     = NULL;
     __TRY__;
-    img = new Image2D (format, width, height, pixels, palette);
+    img = new Image2D (format, width, height, (unsigned char*)pixels, palette);
     __CATCH__;
     if (env->ExceptionOccurred ()) {
         return;
