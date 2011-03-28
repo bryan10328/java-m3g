@@ -30,15 +30,41 @@ public class Object3D extends java.lang.Object {
     private java.lang.Object     userObject;
 
 
-    public Object3D () {
+    protected Object3D () {
         nativePointer   = 0;
         animationTracks = new ArrayList<AnimationTrack> ();
         userObject      = null;
+        if (this.getClass() == Object3D.class) {
+        	jni_initialize ();
+        }
+    }
+    
+    /**
+     * 明示的にC++側のイニシャライザーを呼びたい時に呼び出す。
+     * 通常はコンストラクタが自動で呼ぶので呼ぶ必要ない。
+     * ユニットテストで使用する。
+     */
+    protected void initialize () {
+    	jni_initialize ();
     }
 
-    public void finalize () {
+    /**
+     * 明示的にC++側のファイナライザーを呼びたい時に呼び出す。
+     * 通常はGCが自動で呼ぶので呼ぶ必要はない。
+     * ユニットテストで使用する。
+     */
+    @Override
+    protected void finalize () {
+   		jni_finalize ();
     }
 
+    /**
+     * C++オブジェクトのポインターを返す。デバッグ用。
+     * @return C++オブジェクトのポインター
+     */
+    public long getNativePointer () {
+    	return nativePointer;
+    }
 
     // 以下M3Gで定義された関数
 

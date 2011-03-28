@@ -189,6 +189,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Object3D_jni_1getReferences
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Object3D_jni_1getUserID
   (JNIEnv* env, jobject thiz)
 {
+
     cout << "Java-Object3D: getUserID is called.\n";
     Object3D* obj3d = (Object3D*)getNativePointer (env, thiz);
     int       id    = 0;
