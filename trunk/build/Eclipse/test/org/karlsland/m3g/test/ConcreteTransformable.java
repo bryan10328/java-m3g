@@ -1,20 +1,10 @@
-/**
- * 
- */
 package org.karlsland.m3g.test;
 
-import org.karlsland.m3g.Object3D;
+import org.karlsland.m3g.Transformable;
 
-/**
- * @author ueda
- *
- */
-public class ConcreteObject3D extends Object3D {
+public class ConcreteTransformable extends Transformable {
 
-	/**
-	 * 
-	 */
-	public ConcreteObject3D() {
+	public ConcreteTransformable() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -26,5 +16,4 @@ public class ConcreteObject3D extends Object3D {
 	protected void finalize () {
 		super.finalize();
 	}
-	
 }

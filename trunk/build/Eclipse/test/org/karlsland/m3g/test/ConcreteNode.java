@@ -3,18 +3,18 @@
  */
 package org.karlsland.m3g.test;
 
-import org.karlsland.m3g.Object3D;
+import org.karlsland.m3g.Node;
 
 /**
  * @author ueda
  *
  */
-public class ConcreteObject3D extends Object3D {
+public class ConcreteNode extends Node {
 
 	/**
 	 * 
 	 */
-	public ConcreteObject3D() {
+	public ConcreteNode() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -26,5 +26,4 @@ public class ConcreteObject3D extends Object3D {
 	protected void finalize () {
 		super.finalize();
 	}
-	
 }
