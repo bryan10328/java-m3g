@@ -30,6 +30,9 @@ public class Object3D extends java.lang.Object {
     private java.lang.Object     userObject;
 
 
+    /**
+     * コンストラクタ。抽象クラスなので直接は呼べない。
+     */
     protected Object3D () {
         nativePointer   = 0;
         animationTracks = new ArrayList<AnimationTrack> ();
@@ -69,8 +72,8 @@ public class Object3D extends java.lang.Object {
     // 以下M3Gで定義された関数
 
     public void addAnimationTrack (AnimationTrack animationTrack) {
-        animationTracks.add (animationTrack);
         jni_addAnimationTrack (animationTrack);
+        animationTracks.add (animationTrack);
     }
 
     public final int animate (int time) {

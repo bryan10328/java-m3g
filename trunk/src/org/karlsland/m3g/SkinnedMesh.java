@@ -20,24 +20,31 @@ public class SkinnedMesh extends Mesh {
     private Group         skeleton;
 
     public SkinnedMesh (VertexBuffer vertices, IndexBuffer[] submeshes, Appearance[] appearances, Group skeleton) {
-        super ();
-        this.vertices    = vertices;
-        this.submeshes   = Arrays.asList (submeshes);
-        this.appearances = Arrays.asList (appearances);
+        super (vertices, submeshes, appearances);
         this.skeleton    = skeleton;
-        jni_initialize (vertices, submeshes, appearances, skeleton);
+        if (this.getClass() == SkinnedMesh.class) {
+            jni_initialize (vertices, submeshes, appearances, skeleton);        	
+        }
     }
 
     public SkinnedMesh (VertexBuffer vertices, IndexBuffer submesh, Appearance appearance, Group skeleton) {
-        super ();
-        this.vertices    = vertices;
-        this.submeshes   = Arrays.asList (submesh);
-        this.appearances = Arrays.asList (appearance);
+        super (vertices, submesh, appearance);
         this.skeleton    = skeleton;
-        jni_initialize (vertices, submesh, appearance, skeleton);
+        if (this.getClass() == SkinnedMesh.class) {
+            jni_initialize (vertices, submesh, appearance, skeleton);        	
+        }
     }
 
-    public void finalize () {
+    protected void initialize (VertexBuffer vertices, IndexBuffer[] submeshes, Appearance[] appearances, Group skeleton) {
+    	jni_initialize (vertices, submeshes, appearances, skeleton);
+    }
+    
+    protected void initialize (VertexBuffer vertices, IndexBuffer submesh, Appearance appearance, Group skeleton) {
+    	jni_initialize (vertices, submesh, appearance, skeleton);
+    }
+
+    @Override
+    protected void finalize () {
         jni_finalize ();
     }
 

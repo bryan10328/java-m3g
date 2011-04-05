@@ -8,6 +8,10 @@ import org.karlsland.m3g.Transform;
 
 public class TestCamera {
 
+    static {
+        System.loadLibrary ("jni-opengl");
+    }
+    
 	@Test
 	public void testInitialize() {
         Camera cam = new Camera ();

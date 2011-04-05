@@ -1,5 +1,7 @@
 package org.karlsland.m3g;
 
+import org.karlsland.m3g.Transform;
+
 abstract
 public class Transformable extends Object3D {
     
@@ -26,9 +28,18 @@ public class Transformable extends Object3D {
 
 
     public Transformable () {
+    	if (this.getClass() == Transformable.class) {
+    		jni_initialize ();
+    	}
     }
 
-    public void finalize () {
+    protected void initialize () {
+    	jni_initialize ();
+    }
+    
+    @Override
+    protected void finalize () {
+    	jni_finalize ();
     }
     
     public void getCompositeTransform (Transform transform) {
@@ -43,8 +54,8 @@ public class Transformable extends Object3D {
         jni_getScale (xyz);
     }
 
-    public void getTransform (Transform transform) {
-        jni_getTransform (transform);
+    public void getTransform (Transform t) {
+        jni_getTransform (t);
     }
 
     public void getTranslation (float[] xyz) {

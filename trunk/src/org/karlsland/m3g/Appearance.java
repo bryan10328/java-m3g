@@ -32,15 +32,21 @@ public class Appearance extends Object3D {
     private List<Texture2D> textures;
 
     public Appearance () {
-        this.compositingMode = compositingMode;
-        this.fog             = fog;
-        this.material        = material;
-        this.polygonMode     = polygonMode;
+        this.compositingMode = null;
+        this.fog             = null;
+        this.material        = null;
+        this.polygonMode     = null;
         this.textures        = Arrays.asList (new Texture2D[]{null,null,null,null});
-        jni_initialize ();
+        if (this.getClass() == Appearance.class) {
+        	jni_initialize ();
+        }
     }
 
-    public void finalize () {
+    protected void initialize () {
+        jni_finalize ();
+    }
+
+    protected void finalize () {
         jni_finalize ();
     }
 

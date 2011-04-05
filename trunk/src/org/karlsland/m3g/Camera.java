@@ -23,10 +23,17 @@ public class Camera extends Node {
     native private String jni_print          ();
 
     public Camera () {
-        jni_initialize ();
+    	if (this.getClass() == Camera.class) {
+            jni_initialize ();  		
+    	}
     }
 
-    public void finalize () {
+    protected void initialize () {
+    	jni_initialize ();
+    }
+    
+    @Override
+    protected void finalize () {
         jni_finalize ();
     }
 

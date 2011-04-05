@@ -23,10 +23,17 @@ public class Fog extends Object3D {
     native private String jni_print           ();
 
     public Fog () {
-        jni_initialize ();
+    	if (this.getClass() == Fog.class) {
+            jni_initialize ();   		
+    	}
     }
 
-    public void finalize () {
+    protected void initialize () {
+        jni_initialize ();
+    }
+    
+    @Override
+    protected void finalize () {
         jni_finalize ();
     }
 

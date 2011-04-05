@@ -22,15 +22,17 @@ public class Group extends Node {
 
     public Group () {
         this.children = new ArrayList<Node>();
-        jni_initialize ();
+        if (this.getClass() == Group.class) {
+        	jni_initialize ();
+        }
     }
     
-    // C++側を呼び出さないダミーのコンストラクタ
-    protected Group (int dummy) {
-        this.children = new ArrayList<Node>();
+    protected void initialize () {
+    	jni_initialize ();
     }
 
-    public void finalize () {
+    @Override
+    protected void finalize () {
         jni_finalize ();
     }
 

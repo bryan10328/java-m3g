@@ -23,10 +23,16 @@ public class AnimationController extends Object3D {
 
 
      public AnimationController () {
-         jni_initialize ();
+    	 if (this.getClass() == AnimationController.class) {
+    		 jni_initialize ();
+    	 }
+     }
+     
+     protected void initialize () {
+    	 jni_initialize ();
      }
 
-     public void finalize () {
+     protected void finalize () {
          jni_finalize ();
      }
 

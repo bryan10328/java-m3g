@@ -35,11 +35,25 @@ public class Node extends Transformable {
     private Node yRef;
     private Node zRef;
 
-    public Node () {
+    protected Node () {
+    	this.parent = null;
+    	this.yRef   = null;
+    	this.zRef   = null;
+    	if (this.getClass() == Node.class) {
+    		jni_initialize ();
+    	}
     }
 
-    public void finalize () {
+    protected void initialize () {
+    	jni_initialize ();
     }
+    
+    @Override
+    protected void finalize () {
+    	jni_finalize ();
+    }
+    
+    
 
     public final void align (Node reference) {
         jni_align (reference);
@@ -106,9 +120,9 @@ public class Node extends Transformable {
     public void setScope (int scope) {
         jni_setScope (scope);
     }
-
-    public void setParent (Node node) {
-        parent = node;
+    
+    public void setParent (Node parent) {
+    	this.parent = parent;
     }
 
     @Override

@@ -22,10 +22,17 @@ public class Material extends Object3D {
     native private String  jni_print                        ();
 
     public Material () {
-        jni_initialize ();
+    	if (this.getClass() == Material.class) {
+            jni_initialize ();    		
+    	}
     }
 
-    public void finalize () {
+    protected void initiazlie () {
+    	jni_initialize ();
+    }
+    
+    @Override
+    protected void finalize () {
         jni_finalize ();
     }
 

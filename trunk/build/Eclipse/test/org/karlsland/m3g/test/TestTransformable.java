@@ -7,6 +7,10 @@ import org.karlsland.m3g.Transform;
 
 public class TestTransformable {
 
+    static {
+        System.loadLibrary ("jni-opengl");
+    }
+    
 	@Test
 	public void testInitialize() {
 		ConcreteTransformable trans = new ConcreteTransformable ();
@@ -48,15 +52,6 @@ public class TestTransformable {
 		System.gc();
 	}
 
-	@Test
-	public void testToString() {
-		ConcreteTransformable trans = new ConcreteTransformable ();
-		trans.initialize();
-
-		trans.toString();
-	}
-
-
 
 	@Test
 	public void testPostRotate() {
@@ -67,10 +62,10 @@ public class TestTransformable {
 		trans.postRotate     (45, 1,1,0);
 		trans.getOrientation (angleAxis);
 		
-		assertEquals (45         , angleAxis[0], 0.00001f);
-		assertEquals (0.70710678f, angleAxis[1], 0.00001f);
-		assertEquals (0.70710678f, angleAxis[2], 0.00001f);
-		assertEquals (0          , angleAxis[3], 0.00001f);
+		assertEquals (45         , angleAxis[0], 0.0001f);
+		assertEquals (0.70710678f, angleAxis[1], 0.0001f);
+		assertEquals (0.70710678f, angleAxis[2], 0.0001f);
+		assertEquals (0          , angleAxis[3], 0.0001f);
 	}
 
 	@Test
@@ -79,12 +74,12 @@ public class TestTransformable {
 		trans.initialize();
 
 		float[] angleAxis = new float[4];
-		trans.preRotate      (-90, 0,0,1);
+		trans.preRotate      (30, 0,0,1);
 		trans.getOrientation (angleAxis);
-		assertEquals (-90 , angleAxis[0], 0.00001f);
-		assertEquals (0   , angleAxis[1], 0.00001f);
-		assertEquals (0   , angleAxis[2], 0.00001f);
-		assertEquals (1   , angleAxis[3], 0.00001f);
+		assertEquals (30 , angleAxis[0], 0.0001f);
+		assertEquals (0   , angleAxis[1], 0.0001f);
+		assertEquals (0   , angleAxis[2], 0.0001f);
+		assertEquals (1   , angleAxis[3], 0.0001f);
 	}
 
 
@@ -96,10 +91,10 @@ public class TestTransformable {
 		float[] angleAxis = new float[4];
 		trans.setOrientation (45, 1,1,0);
 		trans.getOrientation (angleAxis);
-		assertEquals (45         , angleAxis[0], 0.00001f);
-		assertEquals (0.70710678f, angleAxis[1], 0.00001f);
-		assertEquals (0.70710678f, angleAxis[2], 0.00001f);
-		assertEquals (0          , angleAxis[3], 0.00001f);
+		assertEquals (45         , angleAxis[0], 0.0001f);
+		assertEquals (0.70710678f, angleAxis[1], 0.0001f);
+		assertEquals (0.70710678f, angleAxis[2], 0.0001f);
+		assertEquals (0          , angleAxis[3], 0.0001f);
 	}
 
 	@Test
@@ -228,5 +223,12 @@ public class TestTransformable {
 		assertArrayEquals(expected, matrix, 0.0001f);
 		
 	}
-	
+
+	@Test
+	public void testToString() {
+		ConcreteTransformable trans = new ConcreteTransformable ();
+		trans.initialize();
+
+		trans.toString();
+	}
 }

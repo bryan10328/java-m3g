@@ -27,10 +27,17 @@ public class Sprite3D extends Node {
     public Sprite3D (boolean scaled, Image2D image, Appearance appearance) {
         this.image      = image;
         this.appearance = appearance;
-        jni_initialize (scaled, image, appearance);
+        if (this.getClass() == Sprite3D.class) {
+            jni_initialize (scaled, image, appearance);        	
+        }
+    }
+    
+    protected void initialize (boolean scaled, Image2D image, Appearance appearance) {
+    	jni_initialize (scaled, image, appearance);
     }
 
-    public void finalize () {
+    @Override
+    protected void finalize () {
         jni_finalize ();
     }
 

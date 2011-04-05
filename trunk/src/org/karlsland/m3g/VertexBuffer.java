@@ -33,10 +33,18 @@ public class VertexBuffer extends Object3D {
         normals   = null;
         colors    = null;
         texCoords = Arrays.asList (new VertexArray[]{null,null,null,null});
-        jni_initialize ();
+        if (this.getClass() == VertexBuffer.class) {
+            jni_initialize ();        	
+        }
+    }
+    
+    protected void initialize () {
+    	jni_initialize ();
     }
 
-    public void finalize () {
+
+    @Override
+    protected void finalize () {
         jni_finalize ();
     }
 

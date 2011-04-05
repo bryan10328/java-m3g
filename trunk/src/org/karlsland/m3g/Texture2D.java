@@ -37,10 +37,16 @@ public class Texture2D extends Transformable {
 
     public Texture2D (Image2D image) {
         this.image = image;
-        jni_initialize (image);
+        if (this.getClass() == Texture2D.class) {
+            jni_initialize (image);        	
+        }
     }
 
-    public void finalize () {
+    protected void initialize (Image2D image) {
+    	jni_initialize (image);
+    }
+    
+    protected void finalize () {
         jni_finalize ();
     }
 

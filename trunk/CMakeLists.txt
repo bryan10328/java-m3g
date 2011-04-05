@@ -40,11 +40,10 @@ endif (CMAKE_BUILD_TYPE STREQUAL "Release")
 # ${JNI_LIBRARIES}=libawt.so,libjvmは必要ないのでリンクしない
 find_package (JNI   REQUIRED)
 
-
-#set (JAVA_M3G_REQUIRED_LIBRARIES 
-#           ${JNI_LIBRARIES})
 set (JAVA_M3G_REQUIRED_INCLUDE_DIR
            ${JNI_INCLUDE_DIRS})
+#set (JAVA_M3G_REQUIRED_LIBRARIES 
+#           ${JNI_LIBRARIES})
 
 
 # =============================

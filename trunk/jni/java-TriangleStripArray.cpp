@@ -31,6 +31,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1initialize
     setNativePointer (env, thiz, tris);
     jobject entity = env->NewWeakGlobalRef (thiz);
     tris->setExportedEntity (entity);
+    cout << "Java-TriangleStripArray: initilize1 is called out.\n";
 }
 
 /*
@@ -55,7 +56,6 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1initialize
     setNativePointer (env, thiz, tris);
     jobject entity = env->NewWeakGlobalRef (thiz);
     tris->setExportedEntity (entity);
-    
 }
 
 /*

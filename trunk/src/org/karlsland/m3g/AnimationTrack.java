@@ -41,11 +41,17 @@ public class AnimationTrack extends Object3D {
 
     public AnimationTrack (KeyframeSequence keyframeSequence, int property) {
         this.keyframeSequence    = keyframeSequence;
-        this.animationController = animationController;
-        jni_initialize (keyframeSequence, property);
+        this.animationController = null;
+        if (this.getClass() == AnimationTrack.class) {
+            jni_initialize (keyframeSequence, property);
+     	 }
     }
 
-    public void finalize () {
+    protected void initialize (KeyframeSequence keyframeSequence, int property) {
+    	jni_initialize (keyframeSequence, property);
+    }
+    
+    protected void finalize () {
         jni_finalize ();
     }
 

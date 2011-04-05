@@ -30,10 +30,17 @@ public class Light extends Node {
     native private String jni_print                   ();
 
     public Light () {
-        jni_initialize ();
+    	if (this.getClass() == Light.class) {
+    		jni_initialize ();
+    	}
     }
 
-    public void finalize () {
+    protected void initialize () {
+    	jni_initialize ();
+    }
+    
+    @Override
+    protected void finalize () {
         jni_finalize ();
     }
 

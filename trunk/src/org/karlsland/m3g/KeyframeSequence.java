@@ -31,10 +31,17 @@ public class KeyframeSequence extends Object3D {
     native private String jni_print                ();
 
     public KeyframeSequence (int numKeyframes, int numComponents, int interpolation) {
-        jni_initialize (numKeyframes, numComponents, interpolation);
+    	if (this.getClass() == KeyframeSequence.class) {
+    		jni_initialize (numKeyframes, numComponents, interpolation);
+    	}
     }
 
-    public void finalize () {
+    protected void initialize (int numKeyframes, int numComponents, int interpolation) {
+    	jni_initialize (numKeyframes, numComponents, interpolation);
+    }
+    
+    @Override
+    protected void finalize () {
         jni_finalize ();
     }
 

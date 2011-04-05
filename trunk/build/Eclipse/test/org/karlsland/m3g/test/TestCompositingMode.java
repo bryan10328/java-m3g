@@ -3,97 +3,99 @@ package org.karlsland.m3g.test;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import org.karlsland.m3g.CompositingMode;
 
 public class TestCompositingMode {
 
+    static {
+        System.loadLibrary ("jni-opengl");
+    }
+    
+	@Test
+	public void testInitialize() {
+		CompositingMode cmode = new CompositingMode();
+		
+		assertEquals (CompositingMode.REPLACE, cmode.getBlending());
+		assertEquals (0.f , cmode.getAlphaThreshold()   , 0.00001f);
+		assertEquals (0.f , cmode.getDepthOffsetFactor(), 0.00001f);
+		assertEquals (0.f , cmode.getDepthOffsetUnits() , 0.00001f);
+		assertEquals (true, cmode.isDepthTestEnabled());
+		assertEquals (true, cmode.isAlphaWriteEnabled());
+		assertEquals (true, cmode.isColorWriteEnabled());
+		assertEquals (true, cmode.isDepthWriteEnabled());
+	}
+
 	@Test
 	public void testFinalize() {
-		fail("まだ実装されていません");
+		@SuppressWarnings("unused")
+		CompositingMode cmode = new CompositingMode();
+		cmode = null;
+		System.gc();
 	}
-
-	@Test
-	public void testToString() {
-		fail("まだ実装されていません");
-	}
-
-	@Test
-	public void testCompositingMode() {
-		fail("まだ実装されていません");
-	}
-
-	@Test
-	public void testGetAlphaThreshold() {
-		fail("まだ実装されていません");
-	}
-
-	@Test
-	public void testGetBlending() {
-		fail("まだ実装されていません");
-	}
-
-	@Test
-	public void testGetDepthOffsetFactor() {
-		fail("まだ実装されていません");
-	}
-
-	@Test
-	public void testGetDepthOffsetUnits() {
-		fail("まだ実装されていません");
-	}
-
-	@Test
-	public void testIsAlphaWriteEnabled() {
-		fail("まだ実装されていません");
-	}
-
-	@Test
-	public void testIsColorWriteEnabled() {
-		fail("まだ実装されていません");
-	}
-
-	@Test
-	public void testIsDepthTestEnabled() {
-		fail("まだ実装されていません");
-	}
-
-	@Test
-	public void testIsDepthWriteEnabled() {
-		fail("まだ実装されていません");
-	}
-
+	
 	@Test
 	public void testSetAlphaThreshold() {
-		fail("まだ実装されていません");
+		CompositingMode cmode = new CompositingMode();
+		cmode.setAlphaThreshold(0.1f);
+		
+		assertEquals(0.1f, cmode.getAlphaThreshold(), 0.0001f);
 	}
 
 	@Test
 	public void testSetAlphaWriteEnable() {
-		fail("まだ実装されていません");
+		CompositingMode cmode = new CompositingMode();
+		cmode.setAlphaWriteEnable(false);
+		
+		assertEquals(false, cmode.isAlphaWriteEnabled());
 	}
 
 	@Test
 	public void testSetBlending() {
-		fail("まだ実装されていません");
+        CompositingMode cmode = new CompositingMode ();
+
+        cmode.setBlending (CompositingMode.MODULATE_X2);
+        assertEquals (CompositingMode.MODULATE_X2, cmode.getBlending());
 	}
 
 	@Test
 	public void testSetColorWriteEnable() {
-		fail("まだ実装されていません");
+        CompositingMode cmode = new CompositingMode ();
+        
+        cmode.setColorWriteEnable(false);
+        assertEquals(false, cmode.isColorWriteEnabled());
 	}
 
 	@Test
 	public void testSetDepthOffset() {
-		fail("まだ実装されていません");
+        CompositingMode cmode = new CompositingMode ();
+        
+        cmode.setDepthOffset       (0.1f, 0.2f);
+        cmode.setDepthTestEnable   (false);
+        assertEquals (0.1f , cmode.getDepthOffsetFactor(), 0.00001f);
+        assertEquals (0.2f , cmode.getDepthOffsetUnits() , 0.00001f);
 	}
 
 	@Test
 	public void testSetDepthTestEnable() {
-		fail("まだ実装されていません");
+        CompositingMode cmode = new CompositingMode ();
+
+        cmode.setDepthTestEnable   (false);
+        assertEquals (false, cmode.isDepthTestEnabled());
 	}
 
 	@Test
 	public void testSetDepthWriteEnable() {
-		fail("まだ実装されていません");
+        CompositingMode cmode = new CompositingMode ();
+
+        cmode.setDepthWriteEnable  (false);
+        assertEquals (false, cmode.isDepthWriteEnabled());
 	}
+
+	@Test
+	public void testToString() {
+        CompositingMode cmode = new CompositingMode ();
+        cmode.toString();
+	}
+
 
 }

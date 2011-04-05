@@ -12,7 +12,7 @@ public class CompositingMode extends Object3D {
         System.loadLibrary ("m3g");
         System.loadLibrary ("java-m3g");
     }
-    native private void    jni_initialzie           ();
+    native private void    jni_initialize           ();
     native private void    jni_finalize             ();
     native private float   jni_getAlphaThreshold    ();
     native private int     jni_getBlending          ();
@@ -32,10 +32,17 @@ public class CompositingMode extends Object3D {
     native private String  jni_print                ();
 
     public CompositingMode () {
-        jni_initialzie ();
+    	if (this.getClass() == CompositingMode.class) {
+            jni_initialize ();   		
+    	}
     }
 
-    public void finalize () {
+    protected void initialize () {
+    	jni_initialize ();
+    }
+    
+    @Override
+    protected void finalize () {
         jni_finalize ();
     }
 

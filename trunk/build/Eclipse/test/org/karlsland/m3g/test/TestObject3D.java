@@ -14,8 +14,6 @@ public class TestObject3D {
         System.loadLibrary ("jni-opengl");
     }
     
-
-
 	@Test
 	public void testInitialize() {
 		ConcreteObject3D obj = new ConcreteObject3D ();

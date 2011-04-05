@@ -244,11 +244,11 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1transform___3F
  * Signature: (Lorg/karlsland/m3g/VertexArray;[FZ)V
  */
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1transform__Lorg_karlsland_m3g_VertexArray_2_3FZ
-  (JNIEnv* env, jobject thiz, jobject in, jfloatArray out_array, jboolean w)
+  (JNIEnv* env, jobject thiz, jobject in_varry, jfloatArray out_array, jboolean w)
 {
     cout << "Java-Transform: transform vertex-array is called.\n";
     Transform*   trans = (Transform*)getNativePointer (env, thiz);
-    VertexArray* varry = (VertexArray*)getNativePointer (env, in);
+    VertexArray* varry = (VertexArray*)getNativePointer (env, in_varry);
     float*       out   = getFloatArrayPointer (env, out_array);
     __TRY__;
     trans->transform (varry, out, w);

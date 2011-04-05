@@ -27,22 +27,30 @@ public class Mesh extends Node {
         this.vertices    = vertices;
         this.submeshes   = Arrays.asList (submeshes);
         this.appearances = Arrays.asList (appearances);
-        jni_initialize (vertices, submeshes, appearances);
+        if (this.getClass() == Mesh.class) {
+            jni_initialize (vertices, submeshes, appearances);        	
+        }
     }
 
     public Mesh (VertexBuffer vertices, IndexBuffer submesh, Appearance appearance) {
         this.vertices    = vertices;
         this.submeshes   = Arrays.asList (submesh);
         this.appearances = Arrays.asList (appearance);
-        jni_initialize (vertices, submesh, appearance);
+        if (this.getClass() == Mesh.class) {
+            jni_initialize (vertices, submesh, appearance);        	
+        }
     }
 
-    // C++側を呼び出さないためのダミーのコンストラクタ.
-    // SkinnedMesh, MorphingMeshから呼ばれる。
-    protected Mesh () {
+    protected void initialize (VertexBuffer vertices, IndexBuffer[] submeshes, Appearance[] appearances) {
+    	jni_initialize (vertices, submeshes, appearances);
     }
 
-    public void finalize () {
+    protected void initialize (VertexBuffer vertices, IndexBuffer submeshes, Appearance appearances) {
+    	jni_initialize (vertices, submeshes, appearances);
+    }
+
+    @Override
+    protected void finalize () {
         jni_finalize ();
     }
 

@@ -37,12 +37,16 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Texture2D_jni_1initialize
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Texture2D_jni_1finalize
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-Texture2D: finalize is called.\n";
+    cout << "sizeof(Texture2D) = " << sizeof(Texture2D) << "\n";
+    cout << "Java-Texture2D: finalize is called. 1\n";
     Texture2D* tex = (Texture2D*)getNativePointer (env, thiz);
+    cout << "Java-Texture2D: tex = " << tex << "\n";
     env->DeleteWeakGlobalRef ((jobject)tex->getExportedEntity());
+    cout << "java-Texture2D: delete start\n";
     __TRY__;
     delete tex;
     __CATCH__;
+    cout << "java-Texture2D: delete end, == OK ==\n";
 }
 
 /*

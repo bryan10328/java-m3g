@@ -9,10 +9,10 @@ using namespace m3g;
 
 /*
  * Class:     org_karlsland_m3g_CompositingMode
- * Method:    jni_initialzie
+ * Method:    jni_initialize
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1initialzie
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1initialize
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-CompositingMode: initilize is called.\n";
@@ -38,6 +38,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1finalize
 {
     cout << "Java-CompositingMode: finalize is called.\n";
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
+    cout << "Java-CompositingMode: cmode = " << cmode << "\n";
     env->DeleteWeakGlobalRef ((jobject)cmode->getExportedEntity());
     __TRY__;
     delete cmode;

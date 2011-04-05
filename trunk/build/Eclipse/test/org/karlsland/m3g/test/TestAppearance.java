@@ -3,82 +3,106 @@ package org.karlsland.m3g.test;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import org.karlsland.m3g.Appearance;
+import org.karlsland.m3g.CompositingMode;
+import org.karlsland.m3g.Fog;
+import org.karlsland.m3g.Image2D;
+import org.karlsland.m3g.Material;
+import org.karlsland.m3g.PolygonMode;
+import org.karlsland.m3g.Texture2D;
 
 public class TestAppearance {
 
-	@Test
-	public void testFinalize() {
-		fail("まだ実装されていません");
-	}
-
-	@Test
-	public void testToString() {
-		fail("まだ実装されていません");
-	}
-
-	@Test
-	public void testAppearance() {
-		fail("まだ実装されていません");
-	}
-
-	@Test
-	public void testGetCompositingMode() {
-		fail("まだ実装されていません");
-	}
-
-	@Test
-	public void testGetFog() {
-		fail("まだ実装されていません");
-	}
-
-	@Test
-	public void testGetLayer() {
-		fail("まだ実装されていません");
-	}
-
-	@Test
-	public void testGetMaterial() {
-		fail("まだ実装されていません");
-	}
-
-	@Test
-	public void testGetPolygonMode() {
-		fail("まだ実装されていません");
-	}
-
-	@Test
-	public void testGetTexture() {
-		fail("まだ実装されていません");
-	}
-
+    static {
+        System.loadLibrary ("jni-opengl");
+    }
+    
 	@Test
 	public void testSetCompositingMode() {
-		fail("まだ実装されていません");
+		Appearance      app   = new Appearance();
+		CompositingMode cmode = new CompositingMode();
+
+		app.setCompositingMode(cmode);
+		
+		assertEquals(cmode, app.getCompositingMode());
 	}
+	
+	@Test
+	public void testInitialize() {
+		Appearance app = new Appearance();
+		
+		assertEquals (0   , app.getLayer());
+		assertEquals (null, app.getPolygonMode());
+		assertEquals (null, app.getCompositingMode());
+		assertEquals (null, app.getTexture(0));
+		assertEquals (null, app.getTexture(1));
+		assertEquals (null, app.getMaterial());
+		assertEquals (null, app.getFog());
+	}
+
+
+	@Test
+	public void testFinalize() {
+		@SuppressWarnings("unused")
+		Appearance app = new Appearance();
+		app = null;
+		System.gc();
+	}
+
 
 	@Test
 	public void testSetFog() {
-		fail("まだ実装されていません");
+		Appearance app = new Appearance();
+		Fog        fog = new Fog();
+		app.setFog(fog);
+		
+		assertEquals(fog, app.getFog());
 	}
 
 	@Test
 	public void testSetLayer() {
-		fail("まだ実装されていません");
+		Appearance app = new Appearance();
+		app.setLayer(10);
+		
+		assertEquals(10, app.getLayer());
 	}
 
 	@Test
 	public void testSetMaterial() {
-		fail("まだ実装されていません");
+		Appearance app = new Appearance();
+		Material   mat = new Material();
+		app.setMaterial(mat);
+		
+		assertEquals(mat, app.getMaterial());
 	}
 
 	@Test
 	public void testSetPolygonMode() {
-		fail("まだ実装されていません");
+		Appearance  app   = new Appearance();
+		PolygonMode pmode = new PolygonMode();
+		app.setPolygonMode(pmode);
+
+		assertEquals(pmode, app.getPolygonMode());
 	}
 
 	@Test
 	public void testSetTexture() {
-		fail("まだ実装されていません");
+		Appearance app = new Appearance();
+		Image2D    img   = new Image2D (Image2D.LUMINANCE, 64, 64);
+		Texture2D  tex0  = new Texture2D (img);
+		Texture2D  tex1  = new Texture2D (img);
+		app.setTexture(0, tex0);
+		app.setTexture(1, tex1);
+
+		assertEquals (tex0 , app.getTexture(0));
+		assertEquals (tex1 , app.getTexture(1));
 	}
+
+	@Test
+	public void testToString() {
+		Appearance app = new Appearance();
+		app.toString();
+	}
+
 
 }

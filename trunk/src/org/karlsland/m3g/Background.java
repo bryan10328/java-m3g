@@ -34,10 +34,17 @@ public class Background extends Object3D {
 
     public Background () {
         this.image = null;
-        jni_initialize ();
+        if (this.getClass() == Background.class) {
+        	jni_initialize ();
+        }
     }
 
-    public void finalize () {
+    protected void initialize () {
+    	jni_initialize ();
+    }
+    
+    @Override
+    protected void finalize () {
         jni_finalize ();
     }
 

@@ -29,15 +29,24 @@ public class Transform extends java.lang.Object {
 
     public Transform () {
         nativePointer = 0;
-        jni_initialize ();
+        if (this.getClass() == Transform.class) {
+            jni_initialize ();        	
+        }
     }
 
     public Transform (Transform transform) {
         nativePointer = 0;
-        jni_initialize (transform);
+        if (this.getClass() == Transform.class) {
+            jni_initialize (transform);        	
+        }
+    }
+    
+    protected void initialize () {
+    	jni_initialize ();
     }
 
-    public void finalize () {
+    @Override
+    protected void finalize () {
         jni_finalize ();
     }
 

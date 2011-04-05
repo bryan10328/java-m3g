@@ -2,10 +2,16 @@ package org.karlsland.m3g.test;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
+import org.karlsland.m3g.AnimationTrack;
+import org.karlsland.m3g.KeyframeSequence;
 import org.karlsland.m3g.Node;
 
 public class TestNode {
 
+    static {
+        System.loadLibrary ("jni-opengl");
+    }
+    
 	@Test
 	public void testInitialize() {
 		ConcreteNode node = new ConcreteNode();
@@ -85,16 +91,6 @@ public class TestNode {
 		assertEquals(0x12345678, node.getScope());
 	}
 
-	@Test
-	public void testSetParent() {
-		ConcreteNode node1 = new ConcreteNode();
-		ConcreteNode node2 = new ConcreteNode();
-		node1.initialize();
-		node2.initialize();
-		
-		node1.setParent(node2);
-		assertEquals(node1, node2.getParent());
-	}
 	
 	@Test
 	public void testToString() {
@@ -104,5 +100,16 @@ public class TestNode {
 		node.toString();
 	}
 
+	@Test
+	public void testAnimate() {
+		ConcreteNode node = new ConcreteNode();
+		node.initialize();
+		KeyframeSequence keyframeSequence = new KeyframeSequence (1, 1, KeyframeSequence.LINEAR);
+		AnimationTrack animationTrack = new AnimationTrack (keyframeSequence, AnimationTrack.ALPHA);
+		node.addAnimationTrack(animationTrack);	
+
+		assertEquals(1             , node.getAnimationTrackCount());
+		assertEquals(animationTrack, node.getAnimationTrack(0));
+	}
 
 }

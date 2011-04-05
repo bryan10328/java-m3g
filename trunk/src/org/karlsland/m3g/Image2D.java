@@ -26,23 +26,48 @@ public class Image2D extends Object3D {
     native private void    jni_writePng   (java.lang.String name);
 
     public Image2D (int format, int width, int height) {
-        jni_initialize (format, width, height);
+    	if (this.getClass() == Image2D.class) {
+            jni_initialize (format, width, height);    		
+    	}
     }
-
+    
     public Image2D (int format, int width, int height, byte[] image) {
+    	if (this.getClass() == Image2D.class) {
         jni_initialize (format, width, height, image);
+    	}
     }
 
     public Image2D (int format, int width, int height, byte[] image, byte[] palette) {
+    	if (this.getClass() == Image2D.class) {
         jni_initialize (format, width, height, image, palette);
+    	}
     }
 
     public Image2D (int format, java.lang.Object image) {
+    	if (this.getClass() == Image2D.class) {
         jni_initialize (format, image);
+    	}
     }
 
 
-    public void finalize () {
+    protected void initialize (int format, int width, int height) {
+    	jni_initialize (format, width, height);
+    }
+
+    protected void initialize (int format, int width, int height, byte[] image) {
+    	jni_initialize (format, width, height, image);
+    }
+
+    protected void initialize (int format, int width, int height, byte[] image, byte[] palette) {
+    	jni_initialize (format, width, height, image, palette);
+    }
+
+    protected void initialize (int format, java.lang.Object image) {
+    	jni_initialize (format, image);
+    }
+
+    @Override
+    protected void finalize () {
         jni_finalize ();
     }
 

@@ -22,10 +22,17 @@ public class VertexArray extends Object3D {
     native private void   jni_print_raw_data    ();
 
     public VertexArray (int numVertice, int numComponents, int componentSize) {
-        jni_initialize (numVertice, numComponents, componentSize);
+    	if (this.getClass() == VertexArray.class) {
+            jni_initialize (numVertice, numComponents, componentSize);    		
+    	}
     }
 
-    public void finalize () {
+    protected void initialize (int numVertice, int numComponents, int componentSize) {
+    	jni_initialize (numVertice, numComponents, componentSize);
+    }
+    
+    @Override
+    protected void finalize () {
         jni_finalize ();
     }
 

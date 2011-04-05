@@ -55,11 +55,7 @@ public class Graphics3D extends java.lang.Object {
 
     private Graphics3D () {
         // 呼び出し禁止
-        // getInstance()を使う.
-    }
-
-    public void finalize () {
-        // do nothing.
+       // getInstance()を使う.
     }
 
 

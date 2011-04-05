@@ -20,22 +20,32 @@ public class MorphingMesh extends Mesh {
     private List<VertexBuffer> morphTargets;
 
     public MorphingMesh (VertexBuffer base, VertexBuffer[] targets, IndexBuffer[] submeshes, Appearance[] appearances) {
-        this.vertices     = base;
+        super(base, submeshes, appearances);
         this.morphTargets = Arrays.asList (targets);
-        this.submeshes    = Arrays.asList (submeshes);
-        this.appearances  = Arrays.asList (appearances);
-        jni_initialize (base, targets, submeshes, appearances);
+        // base, submeshes, appearancesはMeshでセットされる
+        if (this.getClass() == MorphingMesh.class) {
+            jni_initialize (base, targets, submeshes, appearances);        	
+        }
     }
 
     public MorphingMesh (VertexBuffer base, VertexBuffer[] targets, IndexBuffer submesh, Appearance appearance) {
-        this.vertices     = base;
+        super(base, submesh, appearance);
         this.morphTargets = Arrays.asList (targets);
-        this.submeshes    = Arrays.asList (submesh);
-        this.appearances  = Arrays.asList (appearance);
-        jni_initialize (base, targets, submesh, appearance);
+        if (this.getClass() == MorphingMesh.class) {
+        	jni_initialize (base, targets, submesh, appearance);
+        }
     }
 
-    public void finalize () {
+    protected void initialize (VertexBuffer base, VertexBuffer[] targets, IndexBuffer[] submeshes, Appearance[] appearances) {
+    	jni_initialize (base, targets, submeshes, appearances);
+    }
+    
+    protected void initialize (VertexBuffer base, VertexBuffer[] targets, IndexBuffer submesh, Appearance appearance) {
+    	jni_initialize (base, targets, submesh, appearance);
+    }
+
+    @Override
+    protected void finalize () {
         jni_finalize ();
     }
 

@@ -13,10 +13,19 @@ public class IndexBuffer extends Object3D {
     native private void   jni_getIndices    (int[] indices);
     native private String jni_print         ();
 
-    public IndexBuffer () {
+    protected IndexBuffer () {
+    	if (this.getClass() == IndexBuffer.class) {
+    		jni_initialize ();
+    	}
+    }
+    
+    protected void initialize () {
+    	jni_initialize ();
     }
 
-    public void finalize () {
+    @Override
+    protected void finalize () {
+    	jni_finalize ();
     }
 
     public int getIndexCount () {

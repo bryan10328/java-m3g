@@ -1251,10 +1251,10 @@ extern "C" {
 #define org_karlsland_m3g_CompositingMode_REPLACE 68L
 /*
  * Class:     org_karlsland_m3g_CompositingMode
- * Method:    jni_initialzie
+ * Method:    jni_initialize
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1initialzie
+JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1initialize
   (JNIEnv *, jobject);
 
 /*

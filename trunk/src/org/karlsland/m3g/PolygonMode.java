@@ -31,10 +31,17 @@ public class PolygonMode extends Object3D {
     native private String  jni_print                          ();
 
     public PolygonMode () {
-        jni_initialize ();
+    	if (this.getClass() == PolygonMode.class) {
+            jni_initialize ();    		
+    	}
     }
 
-    public void finalize () {
+    protected void initialize () {
+    	jni_initialize ();
+    }
+    
+    @Override
+    protected void finalize () {
         jni_finalize ();
     }
 
