@@ -39,9 +39,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Material_jni_1finalize
     cout << "Java-Material: finalize is called.\n";
     Material* mat = (Material*)getNativePointer (env, thiz);
     env->DeleteWeakGlobalRef ((jobject)mat->getExportedEntity());
-    __TRY__;
-    delete mat;
-    __CATCH__;
+    addUsedObject (mat);
 }
 
 /*

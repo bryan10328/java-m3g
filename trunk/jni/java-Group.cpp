@@ -39,9 +39,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1finalize
     cout << "Java-Group: finalize is called.\n";
     Group* grp = (Group*)getNativePointer (env, thiz);
     env->DeleteWeakGlobalRef ((jobject)grp->getExportedEntity());
-    __TRY__;
-    delete grp;
-    __CATCH__;
+    addUsedObject (grp);
 }
 
 /*

@@ -80,9 +80,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1finalize
     cout << "Java-SkinnedMesh: finalize is caleld.\n";
     SkinnedMesh* mesh = (SkinnedMesh*)getNativePointer (env, thiz);
     env->DeleteWeakGlobalRef ((jobject)mesh->getExportedEntity());
-    __TRY__;
-    delete mesh;
-    __CATCH__;
+    addUsedObject (mesh);
 }
 
 /*

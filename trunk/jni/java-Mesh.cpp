@@ -76,9 +76,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Mesh_jni_1finalize
     cout << "Java-Mesh: finalize is called.\n";
     Mesh* mesh = (Mesh*)getNativePointer (env, thiz);
     env->DeleteWeakGlobalRef ((jobject)mesh->getExportedEntity());
-    __TRY__;
-    delete mesh;
-    __CATCH__;
+    addUsedObject (mesh);
 }
 
 /*

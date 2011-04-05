@@ -13,7 +13,6 @@ public class TestTransform {
         System.loadLibrary ("jni-opengl");
     }
     
-	@Ignore
 	@Test
 	public void testInitialize() {
 		Transform tra1     = new Transform();
@@ -27,7 +26,6 @@ public class TestTransform {
 		assertArrayEquals(expected, matrix, 0.0001f);
 	}
 
-	@Ignore
 	@Test
 	public void testFinalize() {
 		@SuppressWarnings("unused")

@@ -39,9 +39,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Fog_jni_1finalize
     cout << "Java-Fog: finalize is called.\n";
     Fog* fog = (Fog*)getNativePointer (env, thiz);
     env->DeleteWeakGlobalRef ((jobject)fog->getExportedEntity());
-    __TRY__;
-    delete fog;
-    __CATCH__;
+    addUsedObject (fog);
 }
 
 

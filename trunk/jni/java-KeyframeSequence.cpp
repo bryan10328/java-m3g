@@ -40,9 +40,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1finalize
     cout << "Java-KeyframeSequence: finalize is called.\n";
     KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, thiz);
     env->DeleteWeakGlobalRef ((jobject)key_seq->getExportedEntity());
-    __TRY__;
-    delete key_seq;
-    __CATCH__;
+    addUsedObject (key_seq);
 }
 
 /*

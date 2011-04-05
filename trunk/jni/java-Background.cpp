@@ -39,9 +39,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1finalize
     cout << "Java-Background: finalize is called.\n";
     Background* bg = (Background*)getNativePointer (env, thiz);
     env->DeleteWeakGlobalRef ((jobject)bg->getExportedEntity());
-    __TRY__;
-    delete bg;
-    __CATCH__;
+    addUsedObject (bg);
 }
 
 /*

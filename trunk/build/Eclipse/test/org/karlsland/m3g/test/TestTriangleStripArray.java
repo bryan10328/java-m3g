@@ -7,9 +7,9 @@ import org.karlsland.m3g.TriangleStripArray;
 
 public class TestTriangleStripArray {
 
-    //static {
-    //    System.loadLibrary ("jni-opengl");
-    //}
+    static {
+        System.loadLibrary ("jni-opengl");
+    }
     
 	@Test
 	public void testInitialize1() {

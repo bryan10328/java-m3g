@@ -38,15 +38,13 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Object3D_jni_1finalize
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Object3D: Object3D finalize is called.\n";
-    Object3D* obj3d      = (Object3D*)getNativePointer (env, thiz);
+    Object3D* obj3d       = (Object3D*)getNativePointer (env, thiz);
     void*     userObject = obj3d->getUserObject();
     if (userObject) {
         env->DeleteWeakGlobalRef ((jobject)userObject);
     }
     env->DeleteWeakGlobalRef ((jobject)obj3d->getExportedEntity());
-    __TRY__;
-    delete obj3d;
-    __CATCH__;
+    addUsedObject (obj3d);
 }
 
 /*

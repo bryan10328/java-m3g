@@ -40,9 +40,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1finalize
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
     cout << "Java-CompositingMode: cmode = " << cmode << "\n";
     env->DeleteWeakGlobalRef ((jobject)cmode->getExportedEntity());
-    __TRY__;
-    delete cmode;
-    __CATCH__;
+    addUsedObject (cmode);
 }
 
 /*

@@ -346,6 +346,12 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1render__Lorg_karls
     __TRY__;
     g3d->render (nod, trans);
     __CATCH__;
+    if (env->ExceptionOccurred ()) {
+        return;
+    }
+    __TRY__;
+    deleteUsedObjects ();
+    __CATCH__;
 }
 
 /*

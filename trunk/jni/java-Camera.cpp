@@ -39,9 +39,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Camera_jni_1finalize
     cout << "Java-Camera: finalize is called.\n";
     Camera* cam = (Camera*)getNativePointer (env, thiz);
     env->DeleteWeakGlobalRef ((jobject)cam->getExportedEntity());
-    __TRY__;
-    delete cam;
-    __CATCH__;
+    addUsedObject (cam);
 }
 
 /*

@@ -39,9 +39,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Node_jni_1finalize
     cout << "Java-Node: finalize is called.\n";
     Node* node = (Node*)getNativePointer (env, thiz);
     env->DeleteWeakGlobalRef ((jobject)node->getExportedEntity());
-    __TRY__;
-    delete node;
-    __CATCH__;
+    addUsedObject (node);
 }
 
 /*

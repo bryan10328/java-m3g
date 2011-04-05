@@ -39,9 +39,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1finalize
     cout << "Java-RayIntersection: finalize is called.\n";
     RayIntersection* ri = (RayIntersection*)getNativePointer (env, thiz);
     env->DeleteWeakGlobalRef ((jobject)ri->getExportedEntity());
-    __TRY__;
-    delete ri;
-    __CATCH__;
+    addUsedObject (ri);
 }
 
 /*

@@ -1,6 +1,6 @@
 #include <jni.h>
+#include <GL/glew.h>
 #include <GL/glut.h>
-#include <GL/gl.h>
 #include <cstdio>
 #include "jni-opengl.hpp"
 using namespace std;
@@ -19,8 +19,10 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved)
     glutInit            (&argc, (char**)argv);
     glutInitDisplayMode (GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE);
     glutCreateWindow    (argv[0]);
-
     printf ("GLUT is initialized.\n");
+
+    glewInit            ();
+    printf ("GLEW is initialized.\n");
 
     return JNI_VERSION_1_4;
 }

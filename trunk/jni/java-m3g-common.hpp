@@ -4,10 +4,12 @@
 #include "m3g/m3g.hpp"
 
 
+/**
+ * 共通お助け関数.
+ */
 void*   getNativePointer (JNIEnv* env, jobject obj);
 void    setNativePointer (JNIEnv* env, jobject obj, void* pointer);
 jobject allocJavaObject  (JNIEnv* env, const char* name, m3g::Object* obj);
-
 
 int    getByteArrayLength       (JNIEnv* env, jbyteArray  array);
 int    getShortArrayLength      (JNIEnv* env, jshortArray array);
@@ -26,6 +28,13 @@ void   releaseFloatArrayPointer (JNIEnv* env, jfloatArray array, float* pointer)
 
 // これだけjava-m3g-common.cppで定義
 void Java_new_JavaM3GObject (JNIEnv* env, m3g::Object3D* obj);
+
+/**
+ * オブジェクト削除系
+ */
+void addUsedObject (m3g::Object* obj);
+void deleteUsedObjects ();
+
 
 // この下は個別にjava-XXX.cppで定義
 void Java_new_AnimationController (JNIEnv* env, m3g::Object3D* obj);
@@ -82,6 +91,11 @@ void Java_build_VertexArray         (JNIEnv* env, jobject varry_obj     , m3g::V
 void Java_build_VertexBuffer        (JNIEnv* env, jobject vbuf_obj      , m3g::VertexBuffer*        vbuf);
 void Java_build_World               (JNIEnv* env, jobject wld_obj       , m3g::World*               wld);
 
+
+
+/**
+ * 共通使用例外マクロ.
+ */
 #include <cstdio>
 
 #define __TRY__ try {

@@ -41,9 +41,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1finalize
     cout << "Java-AnimationTrack: finalize is called.\n";
     AnimationTrack* anim_track = (AnimationTrack*)getNativePointer (env, thiz);
     env->DeleteWeakGlobalRef ((jobject)anim_track->getExportedEntity());
-    __TRY__;
-    delete anim_track;
-    __CATCH__;
+    addUsedObject (anim_track);
 }
 
 /*

@@ -88,9 +88,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1finalize
     cout << "Java-MorhpingMesh: finalize is called.\n";
     MorphingMesh* mesh = (MorphingMesh*)getNativePointer (env, thiz);
     env->DeleteWeakGlobalRef ((jobject)mesh->getExportedEntity());
-    __TRY__;
-    delete mesh;
-    __CATCH__;
+    addUsedObject (mesh);
 }
 
 /*

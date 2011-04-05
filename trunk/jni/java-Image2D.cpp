@@ -103,9 +103,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1finalize
     cout << "Java-Image2D: finalize is called.\n";
     Image2D* img = (Image2D*)getNativePointer (env, thiz);
     env->DeleteWeakGlobalRef ((jobject)img->getExportedEntity());
-    __TRY__;
-    delete img;
-    __CATCH__;
+    addUsedObject (img);
 }
 
 /*

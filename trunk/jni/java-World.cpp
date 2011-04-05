@@ -40,9 +40,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_World_jni_1finalize
     cout << "Java-World: finalize is called.\n";
     World* wld = (World*)getNativePointer (env, thiz);
     env->DeleteWeakGlobalRef ((jobject)wld->getExportedEntity());
-    __TRY__;
-    delete wld;
-    __CATCH__;
+    addUsedObject (wld);
 }
 
 /*

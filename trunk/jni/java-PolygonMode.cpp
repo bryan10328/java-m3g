@@ -39,9 +39,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1finalize
     cout << "Java-PolygonMode: finalize is called.\n";
     PolygonMode* pmode = (PolygonMode*)getNativePointer (env, thiz);
     env->DeleteWeakGlobalRef ((jobject)pmode->getExportedEntity());
-    __TRY__;
-    delete pmode;
-    __CATCH__;
+    addUsedObject (pmode);
 }
 
 /*

@@ -39,9 +39,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1finalize
     cout << "Java-Light: finalize is called.\n";
     Light* lgh = (Light*)getNativePointer (env, thiz);
     env->DeleteWeakGlobalRef ((jobject)lgh->getExportedEntity());
-    __TRY__;
-    delete lgh;
-    __CATCH__;
+    addUsedObject (lgh);
 }
 
 /*

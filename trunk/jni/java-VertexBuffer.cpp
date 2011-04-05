@@ -39,9 +39,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1finalize
     cout << "Java-VertexBuffer: finalize is called.\n";
     VertexBuffer* vbuf = (VertexBuffer*)getNativePointer (env, thiz);
     env->DeleteWeakGlobalRef ((jobject)vbuf->getExportedEntity());
-    __TRY__;
-    delete vbuf;
-    __CATCH__;
+    addUsedObject (vbuf);
 }
 
 /*

@@ -61,9 +61,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1finalize
     cout << "Java-Transform: finalize is called.\n";
     Transform* trans = (Transform*)getNativePointer (env, thiz);
     env->DeleteWeakGlobalRef ((jobject)trans->getExportedEntity());
-    __TRY__;
-    delete trans;
-    __CATCH__;
+    addUsedObject (trans);
 }
 
 /*

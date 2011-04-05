@@ -39,9 +39,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Appearance_jni_1finalize
     cout << "Java-Appearance: finalize is called.\n";
     Appearance* app = (Appearance*)getNativePointer (env, thiz);
     env->DeleteWeakGlobalRef ((jobject)app->getExportedEntity());
-    __TRY__;
-    delete app;
-    __CATCH__;
+    addUsedObject (app);
 }
 
 /*
