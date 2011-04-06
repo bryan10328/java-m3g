@@ -1,11 +1,19 @@
 package org.karlsland.m3g.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+import org.karlsland.m3g.AnimationTrack;
 import org.karlsland.m3g.Appearance;
+import org.karlsland.m3g.Group;
 import org.karlsland.m3g.Image2D;
+import org.karlsland.m3g.KeyframeSequence;
+import org.karlsland.m3g.Object3D;
+import org.karlsland.m3g.SkinnedMesh;
 import org.karlsland.m3g.Sprite3D;
+import org.karlsland.m3g.TriangleStripArray;
+import org.karlsland.m3g.VertexArray;
+import org.karlsland.m3g.VertexBuffer;
 
 public class TestSprite3D {
 
@@ -74,9 +82,6 @@ public class TestSprite3D {
 
         spr.setImage(img2);
         assertEquals (img2, spr.getImage());
-        
-        spr.setImage (null);
-        assertEquals (null, spr.getImage());
 	}
 
 
@@ -84,10 +89,32 @@ public class TestSprite3D {
 	public void testToString() {
         Image2D    img = new Image2D  (Image2D.RGB, 16, 32);
         Appearance app = new Appearance ();
-		Sprite3D   spr = new Sprite3D (true, img, app);
-       spr.toString();
+        Sprite3D   spr = new Sprite3D (true, img, app);
+        spr.toString();
 	}
 
+	@Test
+	public void testAddAnimationTrack () {
+		KeyframeSequence keySeq1 = new KeyframeSequence(2, 4, KeyframeSequence.LINEAR);
+		AnimationTrack   anim1   = new AnimationTrack(keySeq1, AnimationTrack.CROP);
+		Image2D  img = new Image2D(Image2D.RGB, 16, 16);
+		Sprite3D spr = new Sprite3D(false, img, null);
+	
+		spr.addAnimationTrack(anim1);
+		
+		assertEquals(1    , spr.getAnimationTrackCount());
+		assertEquals(anim1, spr.getAnimationTrack(0));
+	}
 
+	@Test
+	public void testGetReferences() {
+		Image2D  img = new Image2D(Image2D.RGB, 16, 16);
+		Sprite3D spr = new Sprite3D(false, img, null);
 
+		Object3D[] references = {null};
+	 	int n = spr.getReferences(references);
+
+	 	assertEquals(1       , n);
+	 	assertEquals(img, references[0]);
+	}
 }

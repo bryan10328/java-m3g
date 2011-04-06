@@ -3,6 +3,9 @@ package org.karlsland.m3g.test;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import org.karlsland.m3g.Image2D;
+import org.karlsland.m3g.Object3D;
+import org.karlsland.m3g.Texture2D;
 import org.karlsland.m3g.VertexArray;
 import org.karlsland.m3g.VertexBuffer;
 
@@ -91,5 +94,28 @@ public class TestVertexBuffer {
 		vbuf.toString();
 	}
 
+	@Test
+	public void testGetReferences() {
+		VertexBuffer vbuf       = new VertexBuffer ();
+		VertexArray  positions  = new VertexArray(4,3,4);
+		VertexArray  normals    = new VertexArray(4,3,2);
+		VertexArray  colors     = new VertexArray(4,3,1);
+		VertexArray  tex_coords = new VertexArray(4,3,4);
+		float   scale = 2;
+		float[] bias  = {3,4,5};
+		vbuf.setPositions(positions, scale, bias);
+		vbuf.setNormals(normals);
+		vbuf.setColors(colors);
+		vbuf.setTexCoords(0, tex_coords, scale, bias);
+
+		Object3D[] references = {null, null, null, null};
+	 	int n = vbuf.getReferences(references);
+
+	 	assertEquals(4  , n);
+	 	assertEquals(positions , references[0]);
+	 	assertEquals(normals   , references[1]);
+	 	assertEquals(colors    , references[2]);
+	 	assertEquals(tex_coords, references[3]);
+	}
 
 }

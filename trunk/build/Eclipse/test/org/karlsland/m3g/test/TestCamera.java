@@ -1,9 +1,12 @@
 package org.karlsland.m3g.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+import org.karlsland.m3g.AnimationTrack;
 import org.karlsland.m3g.Camera;
+import org.karlsland.m3g.KeyframeSequence;
 import org.karlsland.m3g.Transform;
 
 public class TestCamera {
@@ -111,6 +114,26 @@ public class TestCamera {
 	public void testToString() {
         Camera    cam      = new Camera ();
         cam.toString();
+	}
+
+	@Test
+	public void testAddAnimationTrack () {
+		KeyframeSequence keySeq1 = new KeyframeSequence(2, 1, KeyframeSequence.LINEAR);
+		AnimationTrack   anim1   = new AnimationTrack(keySeq1, AnimationTrack.FAR_DISTANCE);
+		KeyframeSequence keySeq2 = new KeyframeSequence(2, 1, KeyframeSequence.LINEAR);
+		AnimationTrack   anim2   = new AnimationTrack(keySeq2, AnimationTrack.FIELD_OF_VIEW);
+		KeyframeSequence keySeq3 = new KeyframeSequence(2, 1, KeyframeSequence.LINEAR);
+		AnimationTrack   anim3   = new AnimationTrack(keySeq3, AnimationTrack.NEAR_DISTANCE);
+		Camera cam = new Camera();
+	
+		cam.addAnimationTrack(anim1);
+		cam.addAnimationTrack(anim2);
+		cam.addAnimationTrack(anim3);
+		
+		assertEquals(3    , cam.getAnimationTrackCount());
+		assertEquals(anim1, cam.getAnimationTrack(0));
+		assertEquals(anim2, cam.getAnimationTrack(1));
+		assertEquals(anim3, cam.getAnimationTrack(2));
 	}
 
 

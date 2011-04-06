@@ -4,7 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.karlsland.m3g.Appearance;
+import org.karlsland.m3g.Group;
 import org.karlsland.m3g.Mesh;
+import org.karlsland.m3g.Object3D;
 import org.karlsland.m3g.TriangleStripArray;
 import org.karlsland.m3g.VertexBuffer;
 
@@ -82,6 +84,22 @@ public class TestMesh {
         
         mesh.setAppearance(0, null);
         assertEquals (null     , mesh.getAppearance(0));
+	}
+
+	@Test
+	public void testGetReferences() {
+        VertexBuffer       vertices = new VertexBuffer ();
+        TriangleStripArray tris     = new TriangleStripArray (0, new int[]{3});
+        Appearance         app      = new Appearance ();
+        Mesh               mesh     = new Mesh (vertices, tris, app);
+
+		Object3D[] references = {null, null, null};
+	 	int n = mesh.getReferences(references);
+
+	 	assertEquals(3       , n);
+	 	assertEquals(vertices, references[0]);
+	 	assertEquals(tris    , references[1]);
+	 	assertEquals(app     , references[2]);
 	}
 
 }

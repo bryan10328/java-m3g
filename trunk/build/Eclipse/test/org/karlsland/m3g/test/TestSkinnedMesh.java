@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.karlsland.m3g.Appearance;
 import org.karlsland.m3g.Group;
+import org.karlsland.m3g.MorphingMesh;
+import org.karlsland.m3g.Object3D;
 import org.karlsland.m3g.SkinnedMesh;
 import org.karlsland.m3g.Transform;
 import org.karlsland.m3g.TriangleStripArray;
@@ -233,6 +235,34 @@ public class TestSkinnedMesh {
 
 		SkinnedMesh mesh = new SkinnedMesh (vertices, trises, apps, skeleton);
 		mesh.toString();
+	}
+
+	@Test
+	public void testGetReferences() {
+		 VertexArray          positions = new VertexArray (4, 3, 2);
+		 VertexBuffer         vertices  = new VertexBuffer ();
+		 TriangleStripArray   tris0     = new TriangleStripArray (0, new int[]{3});
+		 TriangleStripArray   tris1     = new TriangleStripArray (0, new int[]{3});
+		 TriangleStripArray[] trises    = {tris0, tris1};
+		 Appearance           app0      = new Appearance ();
+		 Appearance           app1      = new Appearance ();
+		 Appearance[]         apps      = {app0, app1};
+		 Group                skeleton  = new Group ();
+		 float[]        positions_value = new float[]{0,0,0};
+		 vertices.setPositions (positions, 1, positions_value);
+
+		SkinnedMesh mesh = new SkinnedMesh (vertices, trises, apps, skeleton);
+
+		Object3D[] references = {null, null, null, null, null, null};
+	 	int n = mesh.getReferences(references);
+
+	 	assertEquals(6       , n);
+	 	assertEquals(vertices, references[0]);
+	 	assertEquals(tris0   , references[1]);
+	 	assertEquals(tris1   , references[2]);
+	 	assertEquals(app0    , references[3]);
+	 	assertEquals(app1    , references[4]);
+	 	assertEquals(skeleton, references[5]);
 	}
 
 

@@ -2,7 +2,7 @@ SRCS       = $(wildcard *.java)
 OBJS       = $(SRCS:.java=.class)
 TARGETS    = JavaMain
 JAVAC      = javac
-JAVACFLAGS = -classpath .:../../src:/usr/share/java/jogl.jar:/usr/share/java/gluegen-rt.jar
+JAVACFLAGS = -classpath .:../../bin/lib:../../src:/usr/share/java/jogl.jar:/usr/share/java/gluegen-rt.jar
 JAVA       = java
 JAVAFLAGS  = $(JAVACFLAGS)
 

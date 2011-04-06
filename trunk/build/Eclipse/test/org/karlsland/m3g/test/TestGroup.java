@@ -3,6 +3,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.karlsland.m3g.Group;
+import org.karlsland.m3g.Object3D;
 
 
 public class TestGroup {
@@ -59,5 +60,20 @@ public class TestGroup {
 		grp.toString();
 	}
 	
+	@Test
+	public void testGetReferences() {
+		Group grp   = new Group();
+		Group node1 = new Group();
+		Group node2 = new Group();
+		grp.addChild(node1);
+		grp.addChild(node2);
+
+		Object3D[] references = {null, null};  
+	 	int n = grp.getReferences(references);
+
+	 	assertEquals(2    , n);
+	 	assertEquals(node1, references[0]);
+	 	assertEquals(node2, references[1]);
+	}
 
 }

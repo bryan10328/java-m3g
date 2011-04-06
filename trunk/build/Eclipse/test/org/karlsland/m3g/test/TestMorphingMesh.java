@@ -3,8 +3,13 @@ package org.karlsland.m3g.test;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import org.karlsland.m3g.AnimationTrack;
 import org.karlsland.m3g.Appearance;
+import org.karlsland.m3g.KeyframeSequence;
+import org.karlsland.m3g.Material;
+import org.karlsland.m3g.Mesh;
 import org.karlsland.m3g.MorphingMesh;
+import org.karlsland.m3g.Object3D;
 import org.karlsland.m3g.TriangleStripArray;
 import org.karlsland.m3g.VertexArray;
 import org.karlsland.m3g.VertexBuffer;
@@ -141,6 +146,59 @@ public class TestMorphingMesh {
 		MorphingMesh mesh = new MorphingMesh (vertices, targets, tris, app);
 		mesh.toString();
 	}
+
+	@Test
+	public void testAddAnimationTrack () {
+		KeyframeSequence keySeq1 = new KeyframeSequence(2, 1, KeyframeSequence.LINEAR);
+		AnimationTrack   anim1   = new AnimationTrack(keySeq1, AnimationTrack.MORPH_WEIGHTS);
+        VertexArray        positions = new VertexArray (4, 3, 2);
+        VertexBuffer       vertices  = new VertexBuffer ();
+        VertexBuffer       target0   = new VertexBuffer ();
+        VertexBuffer       target1   = new VertexBuffer ();
+        VertexBuffer[]     targets   = new VertexBuffer[] {target0, target1};
+        TriangleStripArray tris      = new TriangleStripArray (0, new int[]{3});
+        Appearance         app       = new Appearance ();
+
+        vertices.setPositions (positions, 1, new float[]{0,0,0});
+        target0.setPositions  (positions, 1, new float[]{0,0,0});
+        target1.setPositions  (positions, 1, new float[]{0,0,0});
+
+		MorphingMesh mesh = new MorphingMesh (vertices, targets, tris, app);
+	
+		mesh.addAnimationTrack(anim1);
+		
+		assertEquals(1    , mesh.getAnimationTrackCount());
+		assertEquals(anim1, mesh.getAnimationTrack(0));
+	
+	}
+
+	@Test
+	public void testGetReferences() {
+        VertexArray        positions = new VertexArray (4, 3, 2);
+        VertexBuffer       vertices  = new VertexBuffer ();
+        VertexBuffer       target0   = new VertexBuffer ();
+        VertexBuffer       target1   = new VertexBuffer ();
+        VertexBuffer[]     targets   = new VertexBuffer[] {target0, target1};
+        TriangleStripArray tris      = new TriangleStripArray (0, new int[]{3});
+        Appearance         app       = new Appearance ();
+
+        vertices.setPositions (positions, 1, new float[]{0,0,0});
+        target0.setPositions  (positions, 1, new float[]{0,0,0});
+        target1.setPositions  (positions, 1, new float[]{0,0,0});
+
+		MorphingMesh mesh = new MorphingMesh (vertices, targets, tris, app);
+
+		Object3D[] references = {null, null, null, null, null, null};
+	 	int n = mesh.getReferences(references);
+
+	 	assertEquals(5       , n);
+	 	assertEquals(vertices, references[0]);
+	 	assertEquals(tris    , references[1]);
+	 	assertEquals(app     , references[2]);
+	 	assertEquals(target0 , references[3]);
+	 	assertEquals(target1 , references[4]);
+	}
+
 
 
 }

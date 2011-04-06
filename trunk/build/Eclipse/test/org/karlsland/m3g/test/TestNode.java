@@ -1,6 +1,7 @@
 package org.karlsland.m3g.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.karlsland.m3g.AnimationTrack;
 import org.karlsland.m3g.KeyframeSequence;
@@ -110,6 +111,27 @@ public class TestNode {
 
 		assertEquals(1             , node.getAnimationTrackCount());
 		assertEquals(animationTrack, node.getAnimationTrack(0));
+	}
+	
+	@Test
+	public void testAddAnimationTrack () {
+		KeyframeSequence keySeq1 = new KeyframeSequence(2, 1, KeyframeSequence.LINEAR);
+		AnimationTrack   anim1   = new AnimationTrack(keySeq1, AnimationTrack.ALPHA);
+		KeyframeSequence keySeq2 = new KeyframeSequence(2, 1, KeyframeSequence.LINEAR);
+		AnimationTrack   anim2   = new AnimationTrack(keySeq2, AnimationTrack.PICKABILITY);
+		KeyframeSequence keySeq3 = new KeyframeSequence(2, 1, KeyframeSequence.LINEAR);
+		AnimationTrack   anim3   = new AnimationTrack(keySeq3, AnimationTrack.VISIBILITY);
+		ConcreteNode node = new ConcreteNode();
+		node.initialize();
+	
+		node.addAnimationTrack(anim1);
+		node.addAnimationTrack(anim2);
+		node.addAnimationTrack(anim3);
+		
+		assertEquals(3    , node.getAnimationTrackCount());
+		assertEquals(anim1, node.getAnimationTrack(0));
+		assertEquals(anim2, node.getAnimationTrack(1));
+		assertEquals(anim3, node.getAnimationTrack(2));
 	}
 
 }

@@ -1,8 +1,8 @@
 package org.karlsland.m3g.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.fail;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.karlsland.m3g.Transform;
 import org.karlsland.m3g.VertexArray;
@@ -48,20 +48,21 @@ public class TestTransform {
 	}
 	
 	/**
-	 * w=1の時３コンポーネントのtransformが４コンポーネント分書き込んで
-	 * メモリを破壊している。
+	 * 覚え書き：結果を書き込むfloatの配列が頂点数ｘ４より小さい時
+	 * 仕様では例外を発生するべきだが、黙ってメモリ破壊している（多分落ちる）。
+	 * これはC++側のインターフェースに「長さ」が無いためであるが、
+	 * 不便なので将来的にインターフェースを変更しようかと思う。
 	 */
 	@Test
 	public void testTransform2() {
-		fail("３コンポーネントのtransfromがメモリ破壊を引き起こす。");
 		Transform   tra    = new Transform();
 		float[]     matrix = {1,1,1,1, 1,1,1,1, 1,1,1,1, 1,1,1,1};
 		tra.set(matrix);
 		VertexArray varry = new VertexArray(2,3,4);
 		float[] values = {1,2,3, 4,5,6}; 
 		varry.set(0, 2, values);
-		float[] expected = {100,200,300, 400,500,600};
-		float[] value    = new float[6];
+		float[] expected = {7,7,7,7,  16,16,16,16};
+		float[] value    = new float[8];
 		tra.transform(varry, value, true);
 		
 		assertArrayEquals(expected, value, 0.00001f);
@@ -203,4 +204,5 @@ public class TestTransform {
         tra.toString();
 	}
 
+	
 }

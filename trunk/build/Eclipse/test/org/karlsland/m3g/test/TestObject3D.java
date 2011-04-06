@@ -1,6 +1,7 @@
 package org.karlsland.m3g.test;
 
 import static org.junit.Assert.*;
+
 import org.junit.Test;
 import org.karlsland.m3g.AnimationTrack;
 import org.karlsland.m3g.KeyframeSequence;
@@ -34,8 +35,7 @@ public class TestObject3D {
 	
 	/**
 	 * Object3Dに設定できるアニメーションは存在しないので
-	 * 例外が発生することだけチェックしている。
-	 * アニメーションの機能はTestTransformableでチェックしている。
+	 * ここでは例外が発生することだけチェックしている。
 	 */
 	@Test (expected=IllegalArgumentException.class)
 	public void testAddAnimationTrack() {
@@ -46,21 +46,15 @@ public class TestObject3D {
 
 		// ここでillegalArgumentException例外
 		obj.addAnimationTrack(animationTrack);
+		
+		assertEquals(0    , obj.getAnimationTrackCount());
 	}
 
+	/**
+	 * 抽象クラスでdupliate()はできない。
+	 */
 	@Test
 	public void testDuplicate() {
-		ConcreteObject3D obj1 = new ConcreteObject3D ();
-		obj1.initialize();
-
-		int n = 200;
-		obj1.setUserID (100);
-		obj1.setUserObject (n);
-	
-		Object3D obj2 = obj1.duplicate();
-		assertEquals(0  , obj2.getAnimationTrackCount());
-		assertEquals(100, obj2.getUserID());
-		assertEquals(n  , obj2.getUserObject());
 	}
 
 	@Test

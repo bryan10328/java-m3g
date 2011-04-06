@@ -1,8 +1,11 @@
 package org.karlsland.m3g.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+import org.karlsland.m3g.AnimationTrack;
+import org.karlsland.m3g.KeyframeSequence;
 import org.karlsland.m3g.Transform;
 
 public class TestTransformable {
@@ -213,8 +216,6 @@ public class TestTransformable {
 		trans.getCompositeTransform(t);
 		t.get(matrix);
 		
-		System.out.println("T = " + t.toString());
-		
 		// 値は表示値そのものを使用した
 		float[] expected = {28.818f,32.4645f,36.1109f,39.7574f, 
 								21.182f,23.5355f,25.8891f,28.2426f, 
@@ -230,5 +231,27 @@ public class TestTransformable {
 		trans.initialize();
 
 		trans.toString();
+	}
+	
+	@Test
+	public void testAddAnimationTrack () {
+		KeyframeSequence keySeq1 = new KeyframeSequence(2, 3, KeyframeSequence.LINEAR);
+		AnimationTrack   anim1   = new AnimationTrack(keySeq1, AnimationTrack.SCALE);
+		KeyframeSequence keySeq2 = new KeyframeSequence(2, 4, KeyframeSequence.SLERP);
+		AnimationTrack   anim2   = new AnimationTrack(keySeq2, AnimationTrack.ORIENTATION);
+		KeyframeSequence keySeq3 = new KeyframeSequence(2, 3, KeyframeSequence.LINEAR);
+		AnimationTrack   anim3   = new AnimationTrack(keySeq3, AnimationTrack.TRANSLATION);
+		ConcreteTransformable trans = new ConcreteTransformable();
+		trans.initialize();
+	
+		trans.addAnimationTrack(anim1);
+		trans.addAnimationTrack(anim2);
+		trans.addAnimationTrack(anim3);
+		
+		assertEquals(3    , trans.getAnimationTrackCount());
+		assertEquals(anim1, trans.getAnimationTrack(0));
+		assertEquals(anim2, trans.getAnimationTrack(1));
+		assertEquals(anim3, trans.getAnimationTrack(2));
+
 	}
 }

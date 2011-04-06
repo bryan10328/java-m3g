@@ -1,9 +1,11 @@
 package org.karlsland.m3g.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+import org.karlsland.m3g.AnimationTrack;
 import org.karlsland.m3g.Fog;
+import org.karlsland.m3g.KeyframeSequence;
 
 public class TestFog {
 
@@ -65,5 +67,29 @@ public class TestFog {
 		fog.toString();
 	}
 
+	@Test
+	public void testAddAnimationTrack () {
+		KeyframeSequence keySeq1 = new KeyframeSequence(2, 3, KeyframeSequence.LINEAR);
+		AnimationTrack   anim1   = new AnimationTrack(keySeq1, AnimationTrack.COLOR);
+		KeyframeSequence keySeq2 = new KeyframeSequence(2, 1, KeyframeSequence.LINEAR);
+		AnimationTrack   anim2   = new AnimationTrack(keySeq2, AnimationTrack.DENSITY);
+		KeyframeSequence keySeq3 = new KeyframeSequence(2, 1, KeyframeSequence.LINEAR);
+		AnimationTrack   anim3   = new AnimationTrack(keySeq3, AnimationTrack.NEAR_DISTANCE);
+		KeyframeSequence keySeq4 = new KeyframeSequence(2, 1, KeyframeSequence.LINEAR);
+		AnimationTrack   anim4   = new AnimationTrack(keySeq4, AnimationTrack.FAR_DISTANCE);
+		Fog fog = new Fog();
+	
+		fog.addAnimationTrack(anim1);
+		fog.addAnimationTrack(anim2);
+		fog.addAnimationTrack(anim3);
+		fog.addAnimationTrack(anim4);
+		
+		assertEquals(4    , fog.getAnimationTrackCount());
+		assertEquals(anim1, fog.getAnimationTrack(0));
+		assertEquals(anim2, fog.getAnimationTrack(1));
+		assertEquals(anim3, fog.getAnimationTrack(2));
+		assertEquals(anim4, fog.getAnimationTrack(3));
+
+	}
 
 }

@@ -38,7 +38,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Object3D_jni_1finalize
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Object3D: Object3D finalize is called.\n";
-    Object3D* obj3d       = (Object3D*)getNativePointer (env, thiz);
+    Object3D* obj3d      = (Object3D*)getNativePointer (env, thiz);
     void*     userObject = obj3d->getUserObject();
     if (userObject) {
         env->DeleteWeakGlobalRef ((jobject)userObject);
@@ -94,10 +94,13 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Object3D_jni_1duplicate
     __TRY__;
     dup = obj3d->duplicate ();
     __CATCH__;
+    cout << "Java-Object3D: dup1 = " << dup << "\n";
     if (dup && dup->getExportedEntity() == 0) {
-        cout << "Java-Object3D: crate duplicated Java Object3D.\n";
+        cout << "Java-Object3D: create duplicated Java Object3D.\n";
         Java_new_JavaM3GObject (env, dup);
+        cout << "Java-Object3D: dup2 = " << dup << "\n";
     }
+    cout << "Java-Object3D: entity = " << dup->getExportedEntity() << "\n";
     return (dup != NULL) ? (jobject)dup->getExportedEntity() : (jobject)0;
 }
 
@@ -171,7 +174,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Object3D_jni_1getReferences
     if (env->ExceptionOccurred ()) {
         return 0;
     }
-    for (int i = 0; i < len; i++) {
+    for (int i = 0; i < count; i++) {
         jobject o = (refs[i] != NULL) ? (jobject)refs[i]->getExportedEntity() : (jobject)0;
         env->SetObjectArrayElement (references, i, o);
     }

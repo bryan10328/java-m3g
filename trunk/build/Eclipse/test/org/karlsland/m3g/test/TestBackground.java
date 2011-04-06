@@ -1,10 +1,13 @@
 package org.karlsland.m3g.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+import org.karlsland.m3g.AnimationTrack;
 import org.karlsland.m3g.Background;
 import org.karlsland.m3g.Image2D;
+import org.karlsland.m3g.KeyframeSequence;
+import org.karlsland.m3g.Object3D;
 
 public class TestBackground {
 
@@ -80,6 +83,7 @@ public class TestBackground {
 	@Test
 	public void testSetImageMode() {
 		Background bg  = new Background();
+		bg.setImageMode(Background.REPEAT, Background.REPEAT);
 		
 		assertEquals (Background.REPEAT, bg.getImageModeX());
 		assertEquals (Background.REPEAT, bg.getImageModeY());
@@ -89,6 +93,39 @@ public class TestBackground {
 	public void testToString() {
 		Background bg = new Background();
 		bg.toString();
+	}
+
+	@Test
+	public void testAddAnimationTrack () {
+		KeyframeSequence keySeq1 = new KeyframeSequence(2, 1, KeyframeSequence.LINEAR);
+		AnimationTrack   anim1   = new AnimationTrack(keySeq1, AnimationTrack.ALPHA);
+		KeyframeSequence keySeq2 = new KeyframeSequence(2, 3, KeyframeSequence.LINEAR);
+		AnimationTrack   anim2   = new AnimationTrack(keySeq2, AnimationTrack.COLOR);
+		KeyframeSequence keySeq3 = new KeyframeSequence(2, 4, KeyframeSequence.LINEAR);
+		AnimationTrack   anim3   = new AnimationTrack(keySeq3, AnimationTrack.CROP);
+		Background bg = new Background();
+	
+		bg.addAnimationTrack(anim1);
+		bg.addAnimationTrack(anim2);
+		bg.addAnimationTrack(anim3);
+		
+		assertEquals(3    , bg.getAnimationTrackCount());
+		assertEquals(anim1, bg.getAnimationTrack(0));
+		assertEquals(anim2, bg.getAnimationTrack(1));
+		assertEquals(anim3, bg.getAnimationTrack(2));
+	}
+	
+	@Test
+	public void testGetReferences() {
+		Image2D    img = new Image2D (Image2D.RGB, 16, 16);
+		Background bg  = new Background();
+		bg.setImage(img);
+
+		Object3D[]          references = {null};  
+	 	int n = bg.getReferences(references);
+
+	 	assertEquals(1  , n);
+	 	assertEquals(img, references[0]);
 	}
 
 }

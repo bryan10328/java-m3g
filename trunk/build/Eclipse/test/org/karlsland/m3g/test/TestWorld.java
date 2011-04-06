@@ -5,6 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.karlsland.m3g.Background;
 import org.karlsland.m3g.Camera;
+import org.karlsland.m3g.Object3D;
+import org.karlsland.m3g.VertexArray;
+import org.karlsland.m3g.VertexBuffer;
 import org.karlsland.m3g.World;
 
 public class TestWorld {
@@ -54,6 +57,21 @@ public class TestWorld {
 		wld = null;
 		System.gc();
 	}
+	
+	@Test
+	public void testGetReferences() {
+		World      wld = new World();
+		Background bg  = new Background();
+		Camera     cam = new Camera();
+		wld.setActiveCamera(cam);
+		wld.setBackground(bg);
 
+		Object3D[] references = {null, null};
+	 	int n = wld.getReferences(references);
+
+	 	assertEquals(2  , n);
+	 	assertEquals(bg , references[0]);
+	 	assertEquals(cam, references[1]);
+	}
 
 }

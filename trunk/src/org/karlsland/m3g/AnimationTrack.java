@@ -22,7 +22,7 @@ public class AnimationTrack extends Object3D {
     public final static int SPOT_ANGLE     = 273;
     public final static int SPOT_EXPONENT  = 274;
     public final static int TRANSLATION    = 275;
-    public final static int VISIBILITY     = 267;
+    public final static int VISIBILITY     = 276;
 
     static {
         System.loadLibrary ("m3g");

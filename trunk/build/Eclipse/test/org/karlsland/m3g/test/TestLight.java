@@ -1,8 +1,10 @@
 package org.karlsland.m3g.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+import org.karlsland.m3g.AnimationTrack;
+import org.karlsland.m3g.KeyframeSequence;
 import org.karlsland.m3g.Light;
 
 public class TestLight {
@@ -88,5 +90,28 @@ public class TestLight {
 		lgh.toString();
 	}
 
+	@Test
+	public void testAddAnimationTrack () {
+		KeyframeSequence keySeq1 = new KeyframeSequence(2, 3, KeyframeSequence.LINEAR);
+		AnimationTrack   anim1   = new AnimationTrack(keySeq1, AnimationTrack.COLOR);
+		KeyframeSequence keySeq2 = new KeyframeSequence(2, 1, KeyframeSequence.LINEAR);
+		AnimationTrack   anim2   = new AnimationTrack(keySeq2, AnimationTrack.INTENSITY);
+		KeyframeSequence keySeq3 = new KeyframeSequence(2, 1, KeyframeSequence.LINEAR);
+		AnimationTrack   anim3   = new AnimationTrack(keySeq3, AnimationTrack.SPOT_ANGLE);
+		KeyframeSequence keySeq4 = new KeyframeSequence(2, 1, KeyframeSequence.LINEAR);
+		AnimationTrack   anim4   = new AnimationTrack(keySeq4, AnimationTrack.SPOT_EXPONENT);
+		Light lgh = new Light();
+	
+		lgh.addAnimationTrack(anim1);
+		lgh.addAnimationTrack(anim2);
+		lgh.addAnimationTrack(anim3);
+		lgh.addAnimationTrack(anim4);
+		
+		assertEquals(4    , lgh.getAnimationTrackCount());
+		assertEquals(anim1, lgh.getAnimationTrack(0));
+		assertEquals(anim2, lgh.getAnimationTrack(1));
+		assertEquals(anim3, lgh.getAnimationTrack(2));
+		assertEquals(anim4, lgh.getAnimationTrack(3));
+	}
 
 }

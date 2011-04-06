@@ -1,9 +1,12 @@
 package org.karlsland.m3g.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+import org.karlsland.m3g.AnimationTrack;
 import org.karlsland.m3g.Image2D;
+import org.karlsland.m3g.KeyframeSequence;
+import org.karlsland.m3g.Object3D;
 import org.karlsland.m3g.Texture2D;
 
 public class TestTexture2D {
@@ -90,6 +93,29 @@ public class TestTexture2D {
 		tex.toString();
 	}
 
+	@Test
+	public void testAddAnimationTrack () {
+		KeyframeSequence keySeq1 = new KeyframeSequence(2, 3, KeyframeSequence.LINEAR);
+		AnimationTrack   anim1   = new AnimationTrack(keySeq1, AnimationTrack.COLOR);
+		Image2D   img = new Image2D(Image2D.RGB, 16, 16);
+		Texture2D tex = new Texture2D(img);
+	
+		tex.addAnimationTrack(anim1);
+		
+		assertEquals(1    , tex.getAnimationTrackCount());
+		assertEquals(anim1, tex.getAnimationTrack(0));
+	}
+	
+	@Test
+	public void testGetReferences() {
+		Image2D   img = new Image2D(Image2D.RGB, 16, 16);
+		Texture2D tex = new Texture2D(img);
 
+		Object3D[] references = {null};
+	 	int n = tex.getReferences(references);
+
+	 	assertEquals(1  , n);
+	 	assertEquals(img, references[0]);
+	}
 
 }
