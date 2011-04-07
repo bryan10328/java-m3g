@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<workingSetManager>
-<workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1302076601156_3" label="サンプル" name="サンプル">
-<item elementID="=sample-01-simple" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-</workingSet>
-<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1300846169945_0" label="ウィンドウ・ワーキング・セット" name="Aggregate for window 1300846169943"/>
-<mruList name="サンプル"/>
-</workingSetManager>

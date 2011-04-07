@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="型の名前を &apos;org.karlsland.sample.GLRenderer&apos; から &apos;M3GRenderer&apos; に変更します&#x0A;- オリジナル・プロジェクト : &apos;sample-02-texture&apos;&#x0A;- オリジナル要素: &apos;org.karlsland.sample.GLRenderer&apos;&#x0A;- 名前変更済み要素: &apos;org.karlsland.sample.M3GRenderer&apos;&#x0A;- リファクタリングされた要素の参照を更新&#x0A;- コメントおよびストリング内のテキスト・オカレンスの更新" description="型名 &apos;GLRenderer&apos; を変更します" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;org.karlsland.sample{GLRenderer.java[GLRenderer" matchStrategy="1" name="M3GRenderer" qualified="false" references="true" similarDeclarations="false" stamp="1302164733778" textual="false" version="1.0"/>
-</session>
