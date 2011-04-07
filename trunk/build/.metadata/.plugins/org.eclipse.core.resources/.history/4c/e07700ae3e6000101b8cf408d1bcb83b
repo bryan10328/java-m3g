@@ -1,0 +1,28 @@
+package org.karlsland.jogl;
+
+public class MainActivity {
+
+	 static   JFrame     frame;
+	 static   GLCanvas   canvas;
+	 static   GLRenderer renderer;
+	 
+	  static public JavaMain () {
+	      frame    = new JFrame ();
+	      canvas   = new GLCanvas ();
+	      renderer = new GLRenderer ();
+	      canvas.addGLEventListener(renderer);
+	      frame.add(canvas);
+	      frame.setSize(300, 300);
+	      frame.addWindowListener(new WindowAdapter() {
+	              public void windowClosing(WindowEvent e) {
+	                  System.exit(0);
+	              }
+	          });
+	     frame.addKeyListener(new KeyAdapter() {
+	              public void keyPressed(KeyEvent e) {
+	                  renderer.keybord (e.getKeyChar());
+	              }
+	          });
+	      frame.setVisible(true);
+	   }
+}

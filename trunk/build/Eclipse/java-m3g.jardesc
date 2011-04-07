@@ -11,9 +11,10 @@
         </sealing>
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
-        <javaElement handleIdentifier="=Eclipse/src"/>
         <file path="/Eclipse/.classpath"/>
-        <folder path="/Eclipse/src.org"/>
+        <javaElement handleIdentifier="=Eclipse/src&lt;org.karlsland.m3g"/>
+        <javaElement handleIdentifier="=Eclipse/src&lt;org.karlsland"/>
         <file path="/Eclipse/.project"/>
+        <javaElement handleIdentifier="=Eclipse/src&lt;org"/>
     </selectedElements>
 </jardesc>

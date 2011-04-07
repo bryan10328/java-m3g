@@ -1,0 +1,14 @@
+package org.karlsland.m3g.test;
+
+import org.junit.Test;
+
+/**
+ * IndexBufferは単独では機能できないクラスであり、
+ * TriangleStripArrayクラスを通して使用する。
+ * 従ってここでのテストはない。
+ */
+public class TestIndexBuffer {
+
+	// nothing to do.
+	
+}

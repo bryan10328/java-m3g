@@ -1,0 +1,7 @@
+package org.karlsland.m3g.test;
+
+import org.karlsland.m3g.Node;
+
+public class ConcreteNode extends Node {
+
+}

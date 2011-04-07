@@ -1,0 +1,45 @@
+package org.karlsland.m3g.test;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+import org.karlsland.m3g.TriangleStripArray;
+
+public class TestTriangleStripArray {
+
+
+	@Test
+	public void testTriangleStripArrayIntArrayIntArray() {
+	    int[] indices      = {2,4,6,8,10,12,14,16,18,20};
+	    int[] stripLengths = {4,3,3};
+	    TriangleStripArray tris = new TriangleStripArray(indices, stripLengths);
+
+	    assertEquals (12, tris.getIndexCount());
+
+	    int[] expected     = {2,4,6, 4,6,8, 10,12,14, 16,18,20};
+	    indices            = new int[12];
+	    
+	    int n = tris.getIndices (indices);  
+	    assertEquals(12, n);
+	    assertArrayEquals(expected, indices);
+	}
+
+	@Test
+	public void testTriangleStripArrayIntIntArray() {
+		fail("まだ実装されていません");
+	}
+
+	/**
+	 * 本来はIndexBufferの関数だが、ここでテストする。
+	 */
+	@Test
+	public void testGetIndices() {
+		
+	}
+	
+	@Test
+	public void testToString() {
+		fail("まだ実装されていません");
+	}
+
+}

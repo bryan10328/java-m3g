@@ -1,0 +1,8 @@
+INDEX VERSION 1.126+/work/workspace.java-m3g/build/.metadata/.plugins/org.eclipse.jdt.core
+184176067.index
+3779518527.index
+2727030491.index
+1149742036.index
+1435894021.index
+1065068586.index
+2867887566.index
