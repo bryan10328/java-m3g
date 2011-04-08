@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jardesc>
+    <jar path="Eclipse/bin/java-m3g.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/Eclipse/java-m3g.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="true" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+        <file path="/Eclipse/.classpath"/>
+        <javaElement handleIdentifier="=Eclipse/src&lt;org.karlsland.m3g"/>
+        <javaElement handleIdentifier="=Eclipse/src&lt;org.karlsland"/>
+        <file path="/Eclipse/.project"/>
+        <javaElement handleIdentifier="=Eclipse/src&lt;org"/>
+    </selectedElements>
+</jardesc>
