@@ -20,7 +20,7 @@ public class TestLoader {
 	public void testLoadPng() {
         Object3D[] objs;
 		try {
-			objs = Loader.load ("simple.png");
+			objs = Loader.load ("res/simple.png");
 			assertEquals(1, objs.length);
 			assertEquals(Image2D.class, objs[0].getClass());
 		} catch (IOException e) {
@@ -32,7 +32,7 @@ public class TestLoader {
 	public void testLoadJpg() {
         Object3D[] objs;
 		try {
-			objs = Loader.load ("simple.jpg");
+			objs = Loader.load ("res/simple.jpg");
 			assertEquals(1, objs.length);
 			assertEquals(Image2D.class, objs[0].getClass());
 		} catch (IOException e) {
@@ -44,7 +44,7 @@ public class TestLoader {
 	public void testLoadM3G1() {
         Object3D[] objs;
 		try {
-			objs = Loader.load ("simple.m3g");
+			objs = Loader.load ("res/simple.m3g");
 			assertEquals(12, objs.length);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -55,14 +55,14 @@ public class TestLoader {
 	public void testLoadM3G2() {
         Object3D[] objs;
 		try {
-			FileInputStream fin  = new FileInputStream ("simple.m3g");
+			FileInputStream fin  = new FileInputStream ("res/simple.m3g");
 			int size = 0;
 			byte[] data = null;
 			size = fin.available ();
 			data = new byte[size];
 			fin.read (data);
 			fin.close ();
-			objs = Loader.load ("simple.m3g");
+			objs = Loader.load (data, 0);
 			assertEquals(12, objs.length);
 		} catch (IOException e) {
 			e.printStackTrace();
