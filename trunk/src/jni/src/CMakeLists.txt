@@ -40,7 +40,7 @@ message (STATUS "JAVA_M3G_PRECOMPILED_INCLUDE_DIR = ${JAVA_M3G_PRECOMPILED_INCLU
 # ==============================
 # precompiled libraries
 # ==============================
-set (M3G_LIBRARY   ${CMAKE_CURRENT_SOURCE_DIR}/external/lib/libm3g.so)
+set (M3G_LIBRARY   ${CMAKE_CURRENT_SOURCE_DIR}/external/lib/linux/libm3g.so)
 set (JAVA_M3G_PRECOMPILED_LIBRARIES  ${M3G_LIBRARY})
 
 target_link_libraries (java-m3g ${JAVA_M3G_PRECOMPILED_LIBRARIES})
@@ -49,9 +49,9 @@ message (STATUS "JAVA_M3G_PRECOMPILED_LIBRARIES = ${JAVA_M3G_PRECOMPILED_LIBRARI
 # ==============================
 # installer
 # ==============================
-install (TARGETS java-m3g LIBRARY DESTINATION lib)
-install (FILES ${JAVA_M3G_PRECOMPILED_LIBRARIES} DESTINATION lib)
-install (FILES ${JAVA_M3G_REQUIRED_LIBRARIES} DESTINATION lib)
+install (TARGETS java-m3g LIBRARY DESTINATION                lib/linux)
+install (FILES ${JAVA_M3G_PRECOMPILED_LIBRARIES} DESTINATION lib/linux)
+install (FILES ${JAVA_M3G_REQUIRED_LIBRARIES} DESTINATION    lib/linux)
 
 
 message (STATUS "PRE = ${JAVA_M3G_PRECOMPILED_LIBRARIES}")

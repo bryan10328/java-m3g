@@ -167,6 +167,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1setColors
   (JNIEnv* env, jobject vbuf_obj, jobject colors_obj)
 {
     cout << "Java-VertexBuffer: setColors is called.\n";
+
     VertexBuffer* vbuf   = (VertexBuffer*)getNativePointer (env, vbuf_obj);
     VertexArray*  colors = (VertexArray*)getNativePointer (env, colors_obj);
     __TRY__;
@@ -187,6 +188,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1setColors
     }
     vbuf->setColors (colors);
     __CATCH__;
+
 }
 
 /*
