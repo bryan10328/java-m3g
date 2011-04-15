@@ -12,6 +12,8 @@ import org.karlsland.m3g.TriangleStripArray;
 import org.karlsland.m3g.VertexArray;
 import org.karlsland.m3g.VertexBuffer;
 import org.karlsland.m3g.World;
+import org.karlsland.m3g.Log;
+
 
 public class M3GRenderer implements GLEventListener {
 
@@ -22,19 +24,18 @@ public class M3GRenderer implements GLEventListener {
 	@Override
 	public void display(GLAutoDrawable arg0) {
 		// TODO Auto-generated method stub
-	       g3d.render (wld);
+//	       g3d.render (wld);
 
 	}
 
 	@Override
 	public void displayChanged(GLAutoDrawable arg0, boolean arg1, boolean arg2) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void init(GLAutoDrawable arg0) {
-			g3d = Graphics3D.getInstance();
+			//g3d = Graphics3D.getInstance();
 		    wld = new World();
 			
 			  	VertexArray positions         = new VertexArray (4, 3, 2);
@@ -60,21 +61,23 @@ public class M3GRenderer implements GLEventListener {
 			    Mesh mesh = new Mesh (vertices, tris, app);
 			  
 			    Camera cam = new Camera();
+			    System.out.println("cam = " + Log.getErrorString());
 			    cam.translate (0,0,5);
 
 			    wld.addChild (cam);
 			    wld.setActiveCamera (cam);
 			    wld.addChild (mesh);
+			    System.out.println("cam = " + Log.getErrorString());
 
 	}
 
 	@Override
 	public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
 		// TODO Auto-generated method stub
-        g3d.setViewport (x, y, width, height);
-        Camera cam = wld.getActiveCamera ();
-        cam.setPerspective (45, width/(float)height, 0.1f, 100.f);
-  
+//        g3d.setViewport (x, y, width, height);
+//        Camera cam = wld.getActiveCamera ();
+//        cam.setPerspective (45, width/(float)height, 0.1f, 100.f);
+//  
 	}
 
     public void keyboard (char key) {

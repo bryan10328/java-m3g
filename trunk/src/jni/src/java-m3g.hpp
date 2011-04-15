@@ -3613,3 +3613,21 @@ extern "C" {
 }
 #endif
 #endif
+/* Header for class org_karlsland_m3g_Log */
+#ifndef _Included_org_karlsland_m3g_Log
+#define _Included_org_karlsland_m3g_Log
+#ifdef __cplusplus
+extern "C" {
+#endif
+/*
+ * Class:     org_karlsland_m3g_Log
+ * Method:    jni_getErrorString
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Log_jni_1getErrorString
+  (JNIEnv *, jclass);
+
+#ifdef __cplusplus
+}
+#endif
+#endif

@@ -26,6 +26,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Camera_jni_1initialize
     setNativePointer (env, thiz, cam);
     jobject entity = env->NewWeakGlobalRef (thiz);
     cam->setExportedEntity (entity);
+
+    //setErrorString ("cam = %p", cam);
+    setErrorString ("cam(entity): cam = %p, e(origin) = %p, global entity = %ld, jobject=%p", cam, entity, cam->getExportedEntity(), (jobject)cam->getExportedEntity());
 }
 
 /*

@@ -25,7 +25,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_World_jni_1initialize
         return;
     }
     setNativePointer (env, thiz, wld);
-    jobject entity = env->NewWeakGlobalRef (thiz);
+    jobject entity = env->WeakNewGlobalRef (thiz);
     wld->setExportedEntity (entity);
 }
 
@@ -57,6 +57,8 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_World_jni_1getActiveCamera
     __TRY__;
     cam = wld->getActiveCamera ();
     __CATCH__;
+    //setErrorString ("wld.cam = %p", cam);
+    setErrorString ("wld.cam(entity), cam = %p, entity = %ld, jobject = %p", cam, cam->getExportedEntity(), (jobject)cam->getExportedEntity());
     return (cam != NULL) ? (jobject)cam->getExportedEntity() : (jobject)NULL;
 }
 

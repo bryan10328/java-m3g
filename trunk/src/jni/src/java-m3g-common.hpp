@@ -35,6 +35,13 @@ void Java_new_JavaM3GObject (JNIEnv* env, m3g::Object3D* obj);
 void addUsedObject (m3g::Object* obj);
 void deleteUsedObjects ();
 
+/**
+ * デバッグ用(通常用途では使用しないように)
+ */
+void        setErrorString (const char* format, ...);
+const char* getErrorString ();
+
+
 
 // この下は個別にjava-XXX.cppで定義
 void Java_new_AnimationController (JNIEnv* env, m3g::Object3D* obj);
