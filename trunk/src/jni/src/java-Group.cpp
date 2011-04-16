@@ -24,7 +24,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1initialize
         return;
     }
     setNativePointer (env, thiz, grp);
-    jobject entity = env->NewWeakGlobalRef (thiz);
+    jobject entity = env->NewGlobalRef (thiz);
     grp->setExportedEntity (entity);
 }
 
@@ -38,7 +38,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1finalize
 {
     cout << "Java-Group: finalize is called.\n";
     Group* grp = (Group*)getNativePointer (env, thiz);
-    env->DeleteWeakGlobalRef ((jobject)grp->getExportedEntity());
+    env->DeleteGlobalRef ((jobject)grp->getExportedEntity());
     addUsedObject (grp);
 }
 

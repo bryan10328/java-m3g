@@ -24,7 +24,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1initialize__
         return;
     }
     setNativePointer (env, thiz, tra);
-    jobject entity = env->NewWeakGlobalRef (thiz);
+    jobject entity = env->NewGlobalRef (thiz);
     tra->setExportedEntity (entity);
 }
 
@@ -46,7 +46,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1initialize__Lorg_ka
         return;
     }
     setNativePointer (env, thiz, tra);
-    jobject entity = env->NewWeakGlobalRef (thiz);
+    jobject entity = env->NewGlobalRef (thiz);
     tra->setExportedEntity (entity);
 }
 
@@ -60,7 +60,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1finalize
 {
     cout << "Java-Transform: finalize is called.\n";
     Transform* trans = (Transform*)getNativePointer (env, thiz);
-    env->DeleteWeakGlobalRef ((jobject)trans->getExportedEntity());
+    env->DeleteGlobalRef ((jobject)trans->getExportedEntity());
     addUsedObject (trans);
 }
 

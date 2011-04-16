@@ -1,5 +1,6 @@
 package org.karlsland.m3g;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class MorphingMesh extends Mesh {

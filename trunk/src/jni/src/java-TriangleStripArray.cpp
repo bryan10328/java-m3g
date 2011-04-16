@@ -29,7 +29,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1initialize
     env->ReleaseIntArrayElements (indices, indcs, 0);
     env->ReleaseIntArrayElements (stripLengths, strip_lengths, 0);
     setNativePointer (env, thiz, tris);
-    jobject entity = env->NewWeakGlobalRef (thiz);
+    jobject entity = env->NewGlobalRef (thiz);
     tris->setExportedEntity (entity);
     cout << "Java-TriangleStripArray: initilize1 is called out.\n";
 }
@@ -54,7 +54,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1initialize
     }
     env->ReleaseIntArrayElements (stripLengths, strip_lengths, 0);
     setNativePointer (env, thiz, tris);
-    jobject entity = env->NewWeakGlobalRef (thiz);
+    jobject entity = env->NewGlobalRef (thiz);
     tris->setExportedEntity (entity);
 }
 
@@ -68,7 +68,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1finalize
 {
     cout << "Java-TriangleStripArray: finalize is called.\n";
     TriangleStripArray* tris = (TriangleStripArray*)getNativePointer (env, thiz);
-    env->DeleteWeakGlobalRef ((jobject)tris->getExportedEntity());
+    env->DeleteGlobalRef ((jobject)tris->getExportedEntity());
     addUsedObject (tris);
 }
 

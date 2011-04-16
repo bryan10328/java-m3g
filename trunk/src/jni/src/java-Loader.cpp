@@ -45,6 +45,8 @@ JNIEXPORT jobjectArray JNICALL Java_org_karlsland_m3g_Loader_jni_1load___3BI
     return arry_obj;
 }
 
+
+#include <android/log.h>
 /*
  * Class:     org_karlsland_m3g_Loader
  * Method:    jni_load
@@ -54,31 +56,40 @@ JNIEXPORT jobjectArray JNICALL Java_org_karlsland_m3g_Loader_jni_1load__Ljava_la
   (JNIEnv* env, jclass clazz, jstring fileName)
 {
     cout << "Java-Loader: load2 is called.\n";
+    __android_log_print (ANDROID_LOG_INFO,"NDK","start");
     const char* file_name = env->GetStringUTFChars (fileName, 0);
     cout << "Java-Loader: open file-name = " << file_name << "\n";
+    __android_log_print (ANDROID_LOG_INFO,"NDK","file_name=%s", file_name);
+
     vector<Object3D*> objs;
     __TRY__;
     objs = Loader::load (file_name);
     __CATCH__;
     if (env->ExceptionOccurred ()) {
+        __android_log_print (ANDROID_LOG_INFO,"NDK","exception!!");
         return (jobjectArray)0;
     }
     env->ReleaseStringUTFChars (fileName, file_name);
     cout << "Java-Loader: opened\n";
+        __android_log_print (ANDROID_LOG_INFO,"NDK","opend success.");
 
     cout << "Java-Loader: start of build java objects.\n";
+    __android_log_print (ANDROID_LOG_INFO,"NDK","start of build objects.");
     Java_build_objects (env, objs);
     cout << "Java-Loader: end of build java objects.\n";
+    __android_log_print (ANDROID_LOG_INFO,"NDK","end of build objects.");
     
     cout << "Java-Loader: create " << objs.size() << " Object3D array.\n";
-    int    size  = objs.size();
-    jclass obj3d_class = env->FindClass ("org/karlsland/m3g/Object3D");
-    cout << "obj3d_class = " << obj3d_class << "\n";
-    jobjectArray arry_obj = env->NewObjectArray (size, obj3d_class, NULL);
+    __android_log_print (ANDROID_LOG_INFO,"NDK","size=%d.", objs.size());
+    int          size        = objs.size();
+    jclass       obj3d_class = env->FindClass ("org/karlsland/m3g/Object3D");
+    jobjectArray arry_obj    = env->NewObjectArray (size, obj3d_class, NULL);
+
     for (int i = 0; i < size; i++) {
         env->SetObjectArrayElement (arry_obj, i, (jobject)objs[i]->getExportedEntity());
     }
     cout << "Java-Loader: created.\n";
+    __android_log_print (ANDROID_LOG_INFO,"NDK","created.");
 
     //jclass obj3d_class = env->FindClass ("org/karlsland/m3g/Object3D");
     //jobjectArray arry_obj = env->NewObjectArray (0, obj3d_class, NULL);
@@ -92,7 +103,9 @@ JNIEXPORT jobjectArray JNICALL Java_org_karlsland_m3g_Loader_jni_1load__Ljava_la
 
 void Java_build_objects (JNIEnv* env, const std::vector<Object3D*>& objs)
 {
+    __android_log_print (ANDROID_LOG_INFO, "NDK", "Java_build_objects, size=%d", objs.size());
     for (int i = 0; i < (int)objs.size(); i++) {
+        __android_log_print (ANDROID_LOG_INFO, "NDK", "i=%d, name=%s", i, typeid(*objs[i]).name());
         if (typeid(*objs[i]) == typeid(AnimationController))
             Java_new_AnimationController (env, objs[i]);
         else if (typeid(*objs[i]) == typeid(AnimationTrack))

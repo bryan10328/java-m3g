@@ -1,6 +1,5 @@
 package org.karlsland.m3g;
 
-import org.karlsland.m3g.Transform;
 
 abstract
 public class Transformable extends Object3D {

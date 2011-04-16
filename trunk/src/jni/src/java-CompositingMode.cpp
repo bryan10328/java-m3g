@@ -24,7 +24,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1initialize
         return;
     }
     setNativePointer (env, thiz, cmode);
-    jobject entity = env->NewWeakGlobalRef (thiz);
+    jobject entity = env->NewGlobalRef (thiz);
     cmode->setExportedEntity (entity);
 }
 
@@ -39,7 +39,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1finalize
     cout << "Java-CompositingMode: finalize is called.\n";
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
     cout << "Java-CompositingMode: cmode = " << cmode << "\n";
-    env->DeleteWeakGlobalRef ((jobject)cmode->getExportedEntity());
+    env->DeleteGlobalRef ((jobject)cmode->getExportedEntity());
     addUsedObject (cmode);
 }
 

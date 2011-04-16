@@ -1,3 +1,4 @@
+
 package org.karlsland.m3g.sample;
 
 import javax.media.opengl.GLAutoDrawable;

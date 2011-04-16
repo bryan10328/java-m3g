@@ -24,7 +24,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__III
         return;
     }
     setNativePointer (env, thiz, img);
-    jobject entity = env->NewWeakGlobalRef (thiz);
+    jobject entity = env->NewGlobalRef (thiz);
     img->setExportedEntity (entity);
 }
 
@@ -47,7 +47,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__III_3B
     }
     releaseByteArrayPointer (env, pixels_array, pixels);
     setNativePointer (env, thiz, img);
-    jobject entity = env->NewWeakGlobalRef (thiz);
+    jobject entity = env->NewGlobalRef (thiz);
     img->setExportedEntity (entity);
 }
 
@@ -72,7 +72,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__III_3B_3B
     releaseByteArrayPointer (env, pixels_array, pixels);
     releaseByteArrayPointer (env, palette_array, palette);
     setNativePointer (env, thiz, img);
-    jobject entity = env->NewWeakGlobalRef (thiz);
+    jobject entity = env->NewGlobalRef (thiz);
     img->setExportedEntity (entity);
 }
 
@@ -102,7 +102,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1finalize
 {
     cout << "Java-Image2D: finalize is called.\n";
     Image2D* img = (Image2D*)getNativePointer (env, thiz);
-    env->DeleteWeakGlobalRef ((jobject)img->getExportedEntity());
+    env->DeleteGlobalRef ((jobject)img->getExportedEntity());
     addUsedObject (img);
 }
 

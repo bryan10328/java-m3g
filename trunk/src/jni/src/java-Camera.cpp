@@ -24,7 +24,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Camera_jni_1initialize
         return;
     }
     setNativePointer (env, thiz, cam);
-    jobject entity = env->NewWeakGlobalRef (thiz);
+    jobject entity = env->NewGlobalRef (thiz);
     cam->setExportedEntity (entity);
 
     //setErrorString ("cam = %p", cam);
@@ -41,7 +41,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Camera_jni_1finalize
 {
     cout << "Java-Camera: finalize is called.\n";
     Camera* cam = (Camera*)getNativePointer (env, thiz);
-    env->DeleteWeakGlobalRef ((jobject)cam->getExportedEntity());
+    env->DeleteGlobalRef ((jobject)cam->getExportedEntity());
     addUsedObject (cam);
 }
 

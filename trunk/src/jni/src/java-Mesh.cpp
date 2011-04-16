@@ -37,7 +37,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Mesh_jni_1initialize__Lorg_karlsla
     delete[] ibufs;
     delete[] apps;
     setNativePointer (env, thiz, mesh);
-    jobject entity = env->NewWeakGlobalRef (thiz);
+    jobject entity = env->NewGlobalRef (thiz);
     mesh->setExportedEntity (entity);
 }
 
@@ -61,7 +61,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Mesh_jni_1initialize__Lorg_karlsla
         return;
     }
     setNativePointer (env, thiz, mesh);
-    jobject entity = env->NewWeakGlobalRef (thiz);
+    jobject entity = env->NewGlobalRef (thiz);
     mesh->setExportedEntity (entity);
 }
 
@@ -75,7 +75,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Mesh_jni_1finalize
 {
     cout << "Java-Mesh: finalize is called.\n";
     Mesh* mesh = (Mesh*)getNativePointer (env, thiz);
-    env->DeleteWeakGlobalRef ((jobject)mesh->getExportedEntity());
+    env->DeleteGlobalRef ((jobject)mesh->getExportedEntity());
     addUsedObject (mesh);
 }
 

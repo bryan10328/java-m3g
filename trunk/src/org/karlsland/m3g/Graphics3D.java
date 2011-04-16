@@ -1,5 +1,5 @@
 package org.karlsland.m3g;
-import java.util.*;
+import java.util.List;
 
 /**
  * Graphics3Dクラス.

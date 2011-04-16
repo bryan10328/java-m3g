@@ -32,7 +32,7 @@ jobject allocJavaObject (JNIEnv* env, const char* name, m3g::Object* obj)
 {
     jclass  clazz  = env->FindClass (name);
     jobject thiz   = env->AllocObject (clazz);
-    jobject entity = env->NewWeakGlobalRef (thiz);
+    jobject entity = env->NewGlobalRef (thiz);
     obj->setExportedEntity (entity);
     return entity;
 }

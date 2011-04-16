@@ -24,7 +24,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1initialize
         return;
     }
     setNativePointer (env, thiz, vbuf);
-    jobject entity = env->NewWeakGlobalRef (thiz);
+    jobject entity = env->NewGlobalRef (thiz);
     vbuf->setExportedEntity (entity);
 }
 
@@ -38,7 +38,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexBuffer_jni_1finalize
 {
     cout << "Java-VertexBuffer: finalize is called.\n";
     VertexBuffer* vbuf = (VertexBuffer*)getNativePointer (env, thiz);
-    env->DeleteWeakGlobalRef ((jobject)vbuf->getExportedEntity());
+    env->DeleteGlobalRef ((jobject)vbuf->getExportedEntity());
     addUsedObject (vbuf);
 }
 

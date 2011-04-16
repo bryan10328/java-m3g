@@ -25,7 +25,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_World_jni_1initialize
         return;
     }
     setNativePointer (env, thiz, wld);
-    jobject entity = env->WeakNewGlobalRef (thiz);
+    jobject entity = env->NewGlobalRef (thiz);
     wld->setExportedEntity (entity);
 }
 
@@ -39,7 +39,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_World_jni_1finalize
 {
     cout << "Java-World: finalize is called.\n";
     World* wld = (World*)getNativePointer (env, thiz);
-    env->DeleteWeakGlobalRef ((jobject)wld->getExportedEntity());
+    env->DeleteGlobalRef ((jobject)wld->getExportedEntity());
     addUsedObject (wld);
 }
 

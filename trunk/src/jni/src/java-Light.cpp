@@ -24,7 +24,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1initialize
         return;
     }
     setNativePointer (env, thiz, lgh);
-    jobject entity = env->NewWeakGlobalRef (thiz);
+    jobject entity = env->NewGlobalRef (thiz);
     lgh->setExportedEntity (entity);
 }
 
@@ -38,7 +38,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1finalize
 {
     cout << "Java-Light: finalize is called.\n";
     Light* lgh = (Light*)getNativePointer (env, thiz);
-    env->DeleteWeakGlobalRef ((jobject)lgh->getExportedEntity());
+    env->DeleteGlobalRef ((jobject)lgh->getExportedEntity());
     addUsedObject (lgh);
 }
 

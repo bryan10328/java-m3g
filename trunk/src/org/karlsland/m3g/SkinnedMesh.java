@@ -1,5 +1,4 @@
 package org.karlsland.m3g;
-import java.util.*;
 
 
 public class SkinnedMesh extends Mesh {

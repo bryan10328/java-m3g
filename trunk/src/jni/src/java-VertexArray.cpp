@@ -25,7 +25,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1initialize
         return;
     }
     setNativePointer (env, thiz, varry);
-    jobject entity = env->NewWeakGlobalRef (thiz);
+    jobject entity = env->NewGlobalRef (thiz);
     varry->setExportedEntity (entity);
 }
 
@@ -39,7 +39,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1finalize
 {
     cout << "Java-VertexArray: finalize is called.\n";
     VertexArray* varry = (VertexArray*)getNativePointer (env, thiz);
-    env->DeleteWeakGlobalRef ((jobject)varry->getExportedEntity());
+    env->DeleteGlobalRef ((jobject)varry->getExportedEntity());
     addUsedObject (varry);
 }
 
