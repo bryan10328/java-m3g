@@ -25,9 +25,7 @@ public class M3GRenderer implements GLEventListener {
     
 	@Override
 	public void display(GLAutoDrawable arg0) {
-		// TODO Auto-generated method stub
 	       g3d.render (wld);
-
 	}
 
 	@Override

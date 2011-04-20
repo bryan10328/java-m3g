@@ -12,7 +12,7 @@ import org.karlsland.m3g.TriangleStripArray;
 import org.karlsland.m3g.VertexArray;
 import org.karlsland.m3g.VertexBuffer;
 import org.karlsland.m3g.World;
-import org.karlsland.m3g.Log;
+
 
 
 public class M3GRenderer implements GLEventListener {
@@ -23,7 +23,6 @@ public class M3GRenderer implements GLEventListener {
     
 	@Override
 	public void display(GLAutoDrawable arg0) {
-		// TODO Auto-generated method stub
       g3d.render (wld);
 	}
 
@@ -60,7 +59,6 @@ public class M3GRenderer implements GLEventListener {
 			    Mesh mesh = new Mesh (vertices, tris, app);
 			  
 			    Camera cam = new Camera();
-			    System.out.println("cam = " + Log.getErrorString());
 			    cam.translate (0,0,5);
 
 			    wld.addChild (cam);
