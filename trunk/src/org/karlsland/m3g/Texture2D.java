@@ -13,10 +13,6 @@ public class Texture2D extends Transformable {
     public final static int WRAP_CLAMP        = 240;
     public final static int WRAP_REPEAT       = 241;
 
-    static {
-        System.loadLibrary ("m3g");
-        System.loadLibrary ("java-m3g");
-    }
     native private void    jni_initialize     (Image2D image);
     native private void    jni_finalize       ();
     native private int     jni_getBlendColor  ();
@@ -37,15 +33,9 @@ public class Texture2D extends Transformable {
 
     public Texture2D (Image2D image) {
         this.image = image;
-        if (this.getClass() == Texture2D.class) {
-            jni_initialize (image);        	
-        }
+    	jni_initialize(image);
     }
 
-    protected void initialize (Image2D image) {
-    	jni_initialize (image);
-    }
-    
     protected void finalize () {
         jni_finalize ();
     }

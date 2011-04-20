@@ -10,10 +10,6 @@ public class PolygonMode extends Object3D {
     public final static int WINDING_CCW  = 168;
     public final static int WINDING_CW   = 169;
 
-    static {
-        System.loadLibrary ("m3g");
-        System.loadLibrary ("java-m3g");
-    }
     native private void    jni_initialize ();
     native private void    jni_finalize   ();
     native private int     jni_getCulling ();
@@ -31,15 +27,9 @@ public class PolygonMode extends Object3D {
     native private String  jni_print                          ();
 
     public PolygonMode () {
-    	if (this.getClass() == PolygonMode.class) {
-            jni_initialize ();    		
-    	}
-    }
-
-    protected void initialize () {
     	jni_initialize ();
     }
-    
+
     @Override
     protected void finalize () {
         jni_finalize ();

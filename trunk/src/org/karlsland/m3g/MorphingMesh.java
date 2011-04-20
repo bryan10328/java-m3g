@@ -5,10 +5,6 @@ import java.util.List;
 
 public class MorphingMesh extends Mesh {
 
-    static {
-        System.loadLibrary ("m3g");
-        System.loadLibrary ("java-m3g");
-    }
     native private void         jni_initialize          (VertexBuffer base, VertexBuffer[] targets, IndexBuffer[] submeshes, Appearance[] appearances);
     native private void         jni_initialize          (VertexBuffer base, VertexBuffer[] targets, IndexBuffer submesh, Appearance appearance);
     native private void         jni_finalize            ();
@@ -21,28 +17,15 @@ public class MorphingMesh extends Mesh {
     private List<VertexBuffer> morphTargets;
 
     public MorphingMesh (VertexBuffer base, VertexBuffer[] targets, IndexBuffer[] submeshes, Appearance[] appearances) {
-        super(base, submeshes, appearances);
+    	super(base, submeshes, appearances);
         this.morphTargets = Arrays.asList (targets);
-        // base, submeshes, appearancesはMeshでセットされる
-        if (this.getClass() == MorphingMesh.class) {
-            jni_initialize (base, targets, submeshes, appearances);        	
-        }
+       jni_initialize(base, targets, submeshes, appearances);        	
     }
 
     public MorphingMesh (VertexBuffer base, VertexBuffer[] targets, IndexBuffer submesh, Appearance appearance) {
-        super(base, submesh, appearance);
-        this.morphTargets = Arrays.asList (targets);
-        if (this.getClass() == MorphingMesh.class) {
-        	jni_initialize (base, targets, submesh, appearance);
-        }
-    }
-
-    protected void initialize (VertexBuffer base, VertexBuffer[] targets, IndexBuffer[] submeshes, Appearance[] appearances) {
-    	jni_initialize (base, targets, submeshes, appearances);
-    }
-    
-    protected void initialize (VertexBuffer base, VertexBuffer[] targets, IndexBuffer submesh, Appearance appearance) {
-    	jni_initialize (base, targets, submesh, appearance);
+       super(base, submesh, appearance);
+       this.morphTargets = Arrays.asList (targets);
+       jni_initialize(base, targets, submesh, appearance);        	
     }
 
     @Override

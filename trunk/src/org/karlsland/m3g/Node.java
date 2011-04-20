@@ -9,10 +9,6 @@ public class Node extends Transformable {
     public final static int Y_AXIS = 147;
     public final static int Z_AXIS = 148;
 
-    static {
-        System.loadLibrary ("m3g");
-        System.loadLibrary ("java-m3g");
-    }
     native private void    jni_initialize            ();
     native private void    jni_finalize              ();
     native private void    jni_align                 (Node reference);
@@ -39,15 +35,12 @@ public class Node extends Transformable {
     	this.parent = null;
     	this.yRef   = null;
     	this.zRef   = null;
-    	if (this.getClass() == Node.class) {
-    		jni_initialize ();
-    	}
     }
 
     protected void initialize () {
     	jni_initialize ();
     }
-    
+
     @Override
     protected void finalize () {
     	jni_finalize ();

@@ -6,10 +6,6 @@ import java.util.List;
 
 public class Appearance extends Object3D {
 
-    static {
-        System.loadLibrary ("m3g");
-        System.loadLibrary ("java-m3g");
-    }
     native private void            jni_initialize         ();
     native private void            jni_finalize           ();
     native private CompositingMode jni_getCompositingMode ();
@@ -38,14 +34,9 @@ public class Appearance extends Object3D {
         this.material        = null;
         this.polygonMode     = null;
         this.textures        = Arrays.asList (new Texture2D[]{null,null,null,null});
-        if (this.getClass() == Appearance.class) {
-        	jni_initialize ();
-        }
+        jni_initialize ();
     }
 
-    protected void initialize () {
-        jni_finalize ();
-    }
 
     protected void finalize () {
         jni_finalize ();

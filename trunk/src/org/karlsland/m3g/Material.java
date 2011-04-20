@@ -7,10 +7,6 @@ public class Material extends Object3D {
     public final static int EMISSIVE = 4096;
     public final static int SPECULAR = 8192;
 
-    static {
-        System.loadLibrary ("m3g");
-        System.loadLibrary ("java-m3g");
-    }
     native private void    jni_initialize                   ();
     native private void    jni_finalize                     ();
     native private int     jni_getColor                     (int     target);
@@ -22,15 +18,9 @@ public class Material extends Object3D {
     native private String  jni_print                        ();
 
     public Material () {
-    	if (this.getClass() == Material.class) {
-            jni_initialize ();    		
-    	}
-    }
-
-    protected void initiazlie () {
     	jni_initialize ();
     }
-    
+
     @Override
     protected void finalize () {
         jni_finalize ();

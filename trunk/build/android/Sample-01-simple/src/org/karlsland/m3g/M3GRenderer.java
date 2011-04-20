@@ -1,7 +1,5 @@
 package org.karlsland.m3g;
 
-import java.io.IOException;
-
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
@@ -20,7 +18,7 @@ public class M3GRenderer implements Renderer {
 		if (frame++ % 100 == 0) {
 			Log.println(Log.INFO, "M3GRenderer", "onDrawFrame, i="+frame);
 		}
-       g3d.render (wld);
+//       g3d.render (wld);
 	}
 	
 	
@@ -28,10 +26,10 @@ public class M3GRenderer implements Renderer {
 	@Override
 	public void onSurfaceChanged(GL10 gl, int width, int height) {
 		Log.println(Log.INFO, "M3GRenderer", "onSurfaceChanged");
-        g3d.setViewport (0, 0, width, height);
-        Camera cam = wld.getActiveCamera ();
-		String s = cam.getClass().getName();
-       cam.setPerspective (45, width/(float)height, 0.1f, 100.f);
+//        g3d.setViewport (0, 0, width, height);
+//        Camera cam = wld.getActiveCamera ();
+//		String s = cam.getClass().getName();
+//       cam.setPerspective (45, width/(float)height, 0.1f, 100.f);
 	}
 
 	@Override
@@ -65,9 +63,12 @@ public class M3GRenderer implements Renderer {
 		    Camera cam = new Camera();
 		    cam.translate (0,0,5);
 
+		    Log.i("AAA", "cam="+cam);
+		    Log.i("AAA", "wld="+wld);
 		    wld.addChild (cam);
-		    wld.setActiveCamera (cam);
-		    wld.addChild (mesh);
+		    Log.i("AAA", "wld="+wld);
+//		    wld.setActiveCamera (cam);
+//		    wld.addChild (mesh);
 	}
 
 }

@@ -5,10 +5,6 @@ import java.util.List;
 
 public class Mesh extends Node {
 
-    static {
-        System.loadLibrary ("m3g");
-        System.loadLibrary ("java-m3g");
-    }
     native private void         jni_initialize      (VertexBuffer vertices, IndexBuffer[] submeshes, Appearance[] appearances);
     native private void         jni_initialize      (VertexBuffer vertices, IndexBuffer submesh, Appearance appearance);
     native private void         jni_finalize        ();
@@ -28,26 +24,18 @@ public class Mesh extends Node {
         this.vertices    = vertices;
         this.submeshes   = Arrays.asList (submeshes);
         this.appearances = Arrays.asList (appearances);
-        if (this.getClass() == Mesh.class) {
-            jni_initialize (vertices, submeshes, appearances);        	
-        }
+    	 if (this.getClass() == Mesh.class) {
+    		 jni_initialize(vertices, submeshes, appearances);
+       }
     }
 
     public Mesh (VertexBuffer vertices, IndexBuffer submesh, Appearance appearance) {
         this.vertices    = vertices;
         this.submeshes   = Arrays.asList (submesh);
         this.appearances = Arrays.asList (appearance);
-        if (this.getClass() == Mesh.class) {
+    	if (this.getClass() == Mesh.class) {
             jni_initialize (vertices, submesh, appearance);        	
         }
-    }
-
-    protected void initialize (VertexBuffer vertices, IndexBuffer[] submeshes, Appearance[] appearances) {
-    	jni_initialize (vertices, submeshes, appearances);
-    }
-
-    protected void initialize (VertexBuffer vertices, IndexBuffer submeshes, Appearance appearances) {
-    	jni_initialize (vertices, submeshes, appearances);
     }
 
     @Override

@@ -3,10 +3,6 @@ package org.karlsland.m3g;
 
 public class VertexArray extends Object3D {
 
-    static {
-        System.loadLibrary ("m3g");
-        System.loadLibrary ("java-m3g");
-    }
     native private void   jni_initialize        (int numVertice, int numComponents, int componentSize);
     native private void   jni_finalize          ();
     native private void   jni_get               (int firstVertex, int numVertices, byte[]  values);
@@ -22,15 +18,9 @@ public class VertexArray extends Object3D {
     native private void   jni_print_raw_data    ();
 
     public VertexArray (int numVertice, int numComponents, int componentSize) {
-    	if (this.getClass() == VertexArray.class) {
-            jni_initialize (numVertice, numComponents, componentSize);    		
-    	}
+       jni_initialize (numVertice, numComponents, componentSize);    		
     }
 
-    protected void initialize (int numVertice, int numComponents, int componentSize) {
-    	jni_initialize (numVertice, numComponents, componentSize);
-    }
-    
     @Override
     protected void finalize () {
         jni_finalize ();

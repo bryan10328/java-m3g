@@ -7,10 +7,6 @@ public class Light extends Node {
     public final static int OMNI        = 130;
     public final static int SPOT        = 131;
 
-    static {
-        System.loadLibrary ("m3g");
-        System.loadLibrary ("java-m3g");
-    }
     native private void   jni_initialize              ();
     native private void   jni_finalize                ();
     native private int    jni_getColor                ();
@@ -30,15 +26,9 @@ public class Light extends Node {
     native private String jni_print                   ();
 
     public Light () {
-    	if (this.getClass() == Light.class) {
-    		jni_initialize ();
-    	}
-    }
-
-    protected void initialize () {
     	jni_initialize ();
     }
-    
+
     @Override
     protected void finalize () {
         jni_finalize ();

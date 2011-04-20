@@ -4,10 +4,6 @@ package org.karlsland.m3g;
 abstract
 public class Transformable extends Object3D {
     
-    static {
-        System.loadLibrary ("m3g");
-        System.loadLibrary ("java-m3g");
-    }
     native private void   jni_initialize            ();
     native private void   jni_finalize              ();
     native private void   jni_getCompositeTransform (Transform transform);
@@ -27,15 +23,12 @@ public class Transformable extends Object3D {
 
 
     public Transformable () {
-    	if (this.getClass() == Transformable.class) {
-    		jni_initialize ();
-    	}
     }
 
     protected void initialize () {
     	jni_initialize ();
     }
-    
+
     @Override
     protected void finalize () {
     	jni_finalize ();

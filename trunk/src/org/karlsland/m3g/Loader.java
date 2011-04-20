@@ -1,20 +1,15 @@
 package org.karlsland.m3g;
 
 
-public class Loader extends java.lang.Object {
+public class Loader extends Object {
     
-    protected long nativePointer;
-
-    static {
-        System.loadLibrary ("m3g");
-        System.loadLibrary ("java-m3g");
-    }
     native private static Object3D[] jni_load (byte[] data, int offset);
     native private static Object3D[] jni_load (java.lang.String name);
 
+    /**
+     * コンストラクタは呼び出し禁止。このクラスがインスタンス化されることは決してない.
+     */
     private Loader () {
-        // コンストラクタは呼び出し禁止
-        // このクラスがインスタンス化されることはない.
     }
 
     public static Object3D[] load (byte[] data, int offset) throws java.io.IOException {

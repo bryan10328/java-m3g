@@ -24,10 +24,6 @@ public class AnimationTrack extends Object3D {
     public final static int TRANSLATION    = 275;
     public final static int VISIBILITY     = 276;
 
-    static {
-        System.loadLibrary ("m3g");
-        System.loadLibrary ("java-m3g");
-    }
     native private void                jni_initialize          (KeyframeSequence keyframeSequence, int property);
     native private void                jni_finalize            ();
     native private AnimationController jni_getController       ();
@@ -42,15 +38,9 @@ public class AnimationTrack extends Object3D {
     public AnimationTrack (KeyframeSequence keyframeSequence, int property) {
         this.keyframeSequence    = keyframeSequence;
         this.animationController = null;
-        if (this.getClass() == AnimationTrack.class) {
-            jni_initialize (keyframeSequence, property);
-     	 }
+        jni_initialize(keyframeSequence, property);
     }
 
-    protected void initialize (KeyframeSequence keyframeSequence, int property) {
-    	jni_initialize (keyframeSequence, property);
-    }
-    
     protected void finalize () {
         jni_finalize ();
     }

@@ -4,12 +4,8 @@ import java.util.List;
 
 
 abstract 
-public class Object3D extends java.lang.Object {
+public class Object3D extends Object {
 
-    static {
-        System.loadLibrary ("m3g");
-        System.loadLibrary ("java-m3g");
-    }
     native private void             jni_initialize             ();
     native private void             jni_finalize               ();
     native private void             jni_addAnimationTrack      (AnimationTrack animationTrack);
@@ -26,7 +22,6 @@ public class Object3D extends java.lang.Object {
     native private void             jni_setUserObject          (java.lang.Object userObject);
     native private String           jni_print                  ();
 
-    private long                 nativePointer;
     private List<AnimationTrack> animationTracks;
     private java.lang.Object     userObject;
 
@@ -34,26 +29,23 @@ public class Object3D extends java.lang.Object {
     /**
      * コンストラクタ。抽象クラスなので直接は呼べない。
      */
-    protected Object3D () {
-        nativePointer   = 0;
+    protected Object3D() {
         animationTracks = new ArrayList<AnimationTrack> ();
         userObject      = null;
-        if (this.getClass() == Object3D.class) {
-        	jni_initialize ();
-        }
     }
     
     /**
-     * 明示的にC++側のイニシャライザーを呼びたい時に呼び出す。
-     * 通常はコンストラクタが自動で呼ぶので呼ぶ必要ない。
+     * 明示的に初期化を行ないたい時に呼び出す。
+     * 通常はコンストラクタが自動で呼ぶので必要ない。
      * ユニットテストで使用する。
      */
     protected void initialize () {
-    	jni_initialize ();
+    	jni_initialize();
     }
 
+
     /**
-     * 明示的にC++側のファイナライザーを呼びたい時に呼び出す。
+     * 明示的にC++側の終了処理を呼びたい時に呼び出す。
      * 通常はGCが自動で呼ぶので呼ぶ必要はない。
      * ユニットテストで使用する。
      */
@@ -62,13 +54,6 @@ public class Object3D extends java.lang.Object {
    		jni_finalize ();
     }
 
-    /**
-     * C++オブジェクトのポインターを返す。デバッグ用。
-     * @return C++オブジェクトのポインター
-     */
-    public long getNativePointer () {
-    	return nativePointer;
-    }
 
     // 以下M3Gで定義された関数
 

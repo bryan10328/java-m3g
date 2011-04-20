@@ -26,9 +26,10 @@
         <javaElement handleIdentifier="=Java-M3G/src&lt;org.karlsland.m3g{AnimationTrack.java"/>
         <javaElement handleIdentifier="=Java-M3G/src&lt;org.karlsland.m3g{Sprite3D.java"/>
         <javaElement handleIdentifier="=Java-M3G/src&lt;org.karlsland.m3g{Object3D.java"/>
+        <javaElement handleIdentifier="=Java-M3G/src&lt;org.karlsland.m3g{Object.java"/>
         <javaElement handleIdentifier="=Java-M3G/src&lt;org.karlsland.m3g{Transform.java"/>
-        <javaElement handleIdentifier="=Java-M3G/src&lt;org.karlsland.m3g{Transformable.java"/>
         <javaElement handleIdentifier="=Java-M3G/src&lt;org.karlsland.m3g{Mesh.java"/>
+        <javaElement handleIdentifier="=Java-M3G/src&lt;org.karlsland.m3g{Transformable.java"/>
         <javaElement handleIdentifier="=Java-M3G/src&lt;org.karlsland.m3g{Texture2D.java"/>
         <javaElement handleIdentifier="=Java-M3G/src&lt;org.karlsland.m3g{Material.java"/>
         <javaElement handleIdentifier="=Java-M3G/src&lt;org.karlsland.m3g{VertexArray.java"/>

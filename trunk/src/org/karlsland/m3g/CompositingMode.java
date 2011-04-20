@@ -8,10 +8,6 @@ public class CompositingMode extends Object3D {
     public final static int MODULATE_X2 = 67;
     public final static int REPLACE     = 68;
 
-    static {
-        System.loadLibrary ("m3g");
-        System.loadLibrary ("java-m3g");
-    }
     native private void    jni_initialize           ();
     native private void    jni_finalize             ();
     native private float   jni_getAlphaThreshold    ();
@@ -32,15 +28,9 @@ public class CompositingMode extends Object3D {
     native private String  jni_print                ();
 
     public CompositingMode () {
-    	if (this.getClass() == CompositingMode.class) {
-            jni_initialize ();   		
-    	}
-    }
-
-    protected void initialize () {
     	jni_initialize ();
     }
-    
+
     @Override
     protected void finalize () {
         jni_finalize ();

@@ -5,10 +5,6 @@ public class Fog extends Object3D {
     public final static int EXPONENTIAL = 80;
     public final static int LINEAR      = 81;
 
-    static {
-        System.loadLibrary ("m3g");
-        System.loadLibrary ("java-m3g");
-    }
     native private void   jni_initialize      ();
     native private void   jni_finalize        ();
     native private int    jni_getColor        ();
@@ -23,15 +19,9 @@ public class Fog extends Object3D {
     native private String jni_print           ();
 
     public Fog () {
-    	if (this.getClass() == Fog.class) {
-            jni_initialize ();   		
-    	}
-    }
-
-    protected void initialize () {
         jni_initialize ();
     }
-    
+
     @Override
     protected void finalize () {
         jni_finalize ();

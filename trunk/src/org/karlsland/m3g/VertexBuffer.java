@@ -5,10 +5,6 @@ import java.util.List;
 
 public class VertexBuffer extends Object3D {
 
-    static {
-        System.loadLibrary ("m3g");
-        System.loadLibrary ("java-m3g");
-    }
     native private void        jni_initialize      ();
     native private void        jni_finalize        ();
     native private VertexArray jni_getColors       ();
@@ -24,9 +20,9 @@ public class VertexBuffer extends Object3D {
     native private void        jni_setTexCoords    (int index, VertexArray texCoords, float scale, float[] bias);
     native private String      jni_print           ();
 
-    private VertexArray positions;
-    private VertexArray normals;
-    private VertexArray colors;
+    private VertexArray       positions;
+    private VertexArray       normals;
+    private VertexArray       colors;
     private List<VertexArray> texCoords;
 
     public VertexBuffer () {
@@ -34,16 +30,9 @@ public class VertexBuffer extends Object3D {
         normals   = null;
         colors    = null;
         texCoords = Arrays.asList (new VertexArray[]{null,null,null,null});
-        if (this.getClass() == VertexBuffer.class) {
-            jni_initialize ();        	
-        }
+       jni_initialize();        	
     }
     
-    protected void initialize () {
-    	jni_initialize ();
-    }
-
-
     @Override
     protected void finalize () {
         jni_finalize ();

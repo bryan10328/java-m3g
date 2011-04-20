@@ -2,13 +2,8 @@ package org.karlsland.m3g;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Group extends Node {
 
-    static {
-        System.loadLibrary ("m3g");
-        System.loadLibrary ("java-m3g");
-    }
     native private void    jni_initialize    ();
     native private void    jni_finalize      ();
     native private void    jni_addChild      (Node child);
@@ -22,16 +17,12 @@ public class Group extends Node {
     private List<Node> children;
 
     public Group () {
-        this.children = new ArrayList<Node>();
+ 	   this.children = new ArrayList<Node>();
         if (this.getClass() == Group.class) {
         	jni_initialize ();
         }
     }
     
-    protected void initialize () {
-    	jni_initialize ();
-    }
-
     @Override
     protected void finalize () {
         jni_finalize ();

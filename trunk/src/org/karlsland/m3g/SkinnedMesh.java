@@ -3,10 +3,6 @@ package org.karlsland.m3g;
 
 public class SkinnedMesh extends Mesh {
 
-    static {
-        System.loadLibrary ("m3g");
-        System.loadLibrary ("java-m3g");
-    }
     native private void   jni_initialize       (VertexBuffer vertices, IndexBuffer[] submeshes, Appearance[] appearances, Group skeleton);
     native private void   jni_initialize       (VertexBuffer vertices, IndexBuffer submesh, Appearance appearance, Group skeleton);
     native private void   jni_finalize         ();
@@ -21,25 +17,13 @@ public class SkinnedMesh extends Mesh {
     public SkinnedMesh (VertexBuffer vertices, IndexBuffer[] submeshes, Appearance[] appearances, Group skeleton) {
         super (vertices, submeshes, appearances);
         this.skeleton    = skeleton;
-        if (this.getClass() == SkinnedMesh.class) {
-            jni_initialize (vertices, submeshes, appearances, skeleton);        	
-        }
+        jni_initialize (vertices, submeshes, appearances, skeleton);        	
     }
 
     public SkinnedMesh (VertexBuffer vertices, IndexBuffer submesh, Appearance appearance, Group skeleton) {
         super (vertices, submesh, appearance);
         this.skeleton    = skeleton;
-        if (this.getClass() == SkinnedMesh.class) {
-            jni_initialize (vertices, submesh, appearance, skeleton);        	
-        }
-    }
-
-    protected void initialize (VertexBuffer vertices, IndexBuffer[] submeshes, Appearance[] appearances, Group skeleton) {
-    	jni_initialize (vertices, submeshes, appearances, skeleton);
-    }
-    
-    protected void initialize (VertexBuffer vertices, IndexBuffer submesh, Appearance appearance, Group skeleton) {
-    	jni_initialize (vertices, submesh, appearance, skeleton);
+        jni_initialize (vertices, submesh, appearance, skeleton);        	
     }
 
     @Override

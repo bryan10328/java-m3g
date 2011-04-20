@@ -1,11 +1,7 @@
 package org.karlsland.m3g;
 
-public class Transform extends java.lang.Object {
+public class Transform extends Object {
 
-    static {
-        System.loadLibrary ("m3g");
-        System.loadLibrary ("java-m3g");
-    }
     native private void   jni_initialize     ();
     native private void   jni_initialize     (Transform transform);
     native private void   jni_finalize       ();
@@ -24,27 +20,14 @@ public class Transform extends java.lang.Object {
     native private void   jni_transpose      ();
     native private String jni_print          ();
 
-    protected long nativePointer;
-
-
     public Transform () {
-        nativePointer = 0;
-        if (this.getClass() == Transform.class) {
-            jni_initialize ();        	
-        }
+    	jni_initialize();
     }
 
     public Transform (Transform transform) {
-        nativePointer = 0;
-        if (this.getClass() == Transform.class) {
-            jni_initialize (transform);        	
-        }
+    	jni_initialize(transform);
     }
     
-    protected void initialize () {
-    	jni_initialize ();
-    }
-
     @Override
     protected void finalize () {
         jni_finalize ();

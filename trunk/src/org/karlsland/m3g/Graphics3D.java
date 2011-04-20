@@ -7,17 +7,13 @@ import java.util.List;
  *       - immediateモードは実装していない。将来的にも実装しない。
  *       - 現状ではchildrenを持つ必要が無い.
  */
-public class Graphics3D extends java.lang.Object {
+public class Graphics3D extends Object {
     
     public final static int ANTIALIAS  = 2;
     public final static int DITHER     = 4;
     public final static int OVERWRITE  = 16;
     public final static int TRUE_COLOR = 8;
 
-    static {
-        System.loadLibrary ("m3g");
-        System.loadLibrary ("java-m3g");
-    }
     native private int     jni_addLight             (Light light, Transform transform);
     native private void    jni_bindTarget           (java.lang.Object target);
     native private void    jni_bindTarget           (java.lang.Object target, boolean depthBufferEnable, int hints);
@@ -48,14 +44,14 @@ public class Graphics3D extends java.lang.Object {
     native private void    jni_setViewport          (int     x     , int   y    , int       width    , int height);
     native private String  jni_print                ();
 
-    private long        nativePointer;
-    private Camera      activeCamera;
-    private List<Light> lights;
+    private Camera           activeCamera;
+    private List<Light>      lights;
     private java.lang.Object target;
 
+    /**
+     * 呼び出し禁止。インスタンス化はgetInstance()で行う。
+     */
     private Graphics3D () {
-        // 呼び出し禁止
-       // getInstance()を使う.
     }
 
 

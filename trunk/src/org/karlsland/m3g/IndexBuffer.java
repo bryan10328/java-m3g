@@ -3,10 +3,6 @@ package org.karlsland.m3g;
 abstract
 public class IndexBuffer extends Object3D {
     
-    static {
-        System.loadLibrary ("m3g");
-        System.loadLibrary ("java-m3g");
-    }
     native private void   jni_initialize    ();
     native private void   jni_finalize      ();
     native private int    jni_getIndexCount ();
@@ -14,15 +10,8 @@ public class IndexBuffer extends Object3D {
     native private String jni_print         ();
 
     protected IndexBuffer () {
-    	if (this.getClass() == IndexBuffer.class) {
-    		jni_initialize ();
-    	}
     }
     
-    protected void initialize () {
-    	jni_initialize ();
-    }
-
     @Override
     protected void finalize () {
     	jni_finalize ();

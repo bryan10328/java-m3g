@@ -6,10 +6,6 @@ public class Camera extends Node {
     public final static int PARALLEL    = 49;
     public final static int PERSPECTIVE = 50;
 
-    static {
-        System.loadLibrary ("m3g");
-        System.loadLibrary ("java-m3g");
-    }
     native private void   jni_initialize     ();
     native private void   jni_finalize       ();
     native private int    jni_getProjection  (float[]   params);
@@ -23,15 +19,9 @@ public class Camera extends Node {
     native private String jni_print          ();
 
     public Camera () {
-    	if (this.getClass() == Camera.class) {
-            jni_initialize ();  		
-    	}
-    }
-
-    protected void initialize () {
     	jni_initialize ();
     }
-    
+
     @Override
     protected void finalize () {
         jni_finalize ();

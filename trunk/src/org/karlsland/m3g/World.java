@@ -2,10 +2,6 @@ package org.karlsland.m3g;
 
 public class World extends Group {
     
-    static {
-        System.loadLibrary ("m3g");
-        System.loadLibrary ("java-m3g");
-    }
     native private void       jni_initialize      ();
     native private void       jni_finalize        ();
     native private Camera     jni_getActiveCamera ();
@@ -20,15 +16,10 @@ public class World extends Group {
     public World () {
         activeCamera = null;
         background   = null;
-        if (this.getClass() == World.class) {
-            jni_initialize ();        	
-        }
-    }
-
-    protected void initialize () {
     	jni_initialize ();
     }
-    
+
+
     @Override
     protected void finalize () {
         jni_finalize ();

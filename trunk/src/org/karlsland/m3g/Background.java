@@ -6,10 +6,6 @@ public class Background extends Object3D {
     public final static int BORDER = 32;
     public final static int REPEAT = 33;
 
-    static {
-        System.loadLibrary ("m3g");
-        System.loadLibrary ("java-m3g");
-    }
     native private void    jni_initialize          ();
     native private void    jni_finalize            ();
     native private int     jni_getColor            ();
@@ -34,16 +30,10 @@ public class Background extends Object3D {
 
     public Background () {
         this.image = null;
-        if (this.getClass() == Background.class) {
-        	jni_initialize ();
-        }
-    }
-
-    protected void initialize () {
     	jni_initialize ();
-    }
-    
-    @Override
+   }
+
+     @Override
     protected void finalize () {
         jni_finalize ();
     }

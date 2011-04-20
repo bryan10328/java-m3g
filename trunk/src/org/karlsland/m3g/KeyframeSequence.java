@@ -10,10 +10,6 @@ public class KeyframeSequence extends Object3D {
     public final static int SQUAD    = 179;
     public final static int STEP     = 180;
 
-    static {
-        System.loadLibrary ("m3g");
-        System.loadLibrary ("java-m3g");
-    }
     native private void   jni_initialize           (int numKeyframes, int numComponents, int interpolation);
     native private void   jni_finalize             ();
     native private int    jni_getComponentCount    ();
@@ -31,15 +27,9 @@ public class KeyframeSequence extends Object3D {
     native private String jni_print                ();
 
     public KeyframeSequence (int numKeyframes, int numComponents, int interpolation) {
-    	if (this.getClass() == KeyframeSequence.class) {
-    		jni_initialize (numKeyframes, numComponents, interpolation);
-    	}
-    }
-
-    protected void initialize (int numKeyframes, int numComponents, int interpolation) {
     	jni_initialize (numKeyframes, numComponents, interpolation);
     }
-    
+
     @Override
     protected void finalize () {
         jni_finalize ();

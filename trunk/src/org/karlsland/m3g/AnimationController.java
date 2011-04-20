@@ -3,10 +3,6 @@ package org.karlsland.m3g;
 
 public class AnimationController extends Object3D {
 
-    static {
-        System.loadLibrary ("m3g");
-        System.loadLibrary ("java-m3g");
-    }
     native private void   jni_initialize                ();
     native private void   jni_finalize                  ();
     native private int    jni_getActiveIntervalEnd      ();
@@ -23,15 +19,9 @@ public class AnimationController extends Object3D {
 
 
      public AnimationController () {
-    	 if (this.getClass() == AnimationController.class) {
-    		 jni_initialize ();
-    	 }
-     }
-     
-     protected void initialize () {
     	 jni_initialize ();
      }
-
+     
      protected void finalize () {
          jni_finalize ();
      }

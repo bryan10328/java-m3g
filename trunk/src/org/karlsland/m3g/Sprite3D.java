@@ -3,10 +3,6 @@ package org.karlsland.m3g;
 
 public class Sprite3D extends Node {
 
-    static {
-        System.loadLibrary ("m3g");
-        System.loadLibrary ("java-m3g");
-    }
     native private void       jni_initialize    (boolean scaled, Image2D image, Appearance appearance);
     native private void       jni_finalize      ();
     native private Appearance jni_getAppearance ();
@@ -27,15 +23,9 @@ public class Sprite3D extends Node {
     public Sprite3D (boolean scaled, Image2D image, Appearance appearance) {
         this.image      = image;
         this.appearance = appearance;
-        if (this.getClass() == Sprite3D.class) {
-            jni_initialize (scaled, image, appearance);        	
-        }
-    }
+      jni_initialize (scaled, image, appearance);        	
+     }
     
-    protected void initialize (boolean scaled, Image2D image, Appearance appearance) {
-    	jni_initialize (scaled, image, appearance);
-    }
-
     @Override
     protected void finalize () {
         jni_finalize ();

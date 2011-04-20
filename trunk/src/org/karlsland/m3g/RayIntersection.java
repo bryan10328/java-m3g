@@ -1,10 +1,7 @@
 package org.karlsland.m3g;
 
-public class RayIntersection extends java.lang.Object {
+public class RayIntersection extends Object {
 
-    static {
-        System.loadLibrary ("java-m3g");
-    }
     native private void   jni_initialize      ();
     native private void   jni_finalize        ();
     native private float  jni_getDistance     ();
@@ -18,19 +15,10 @@ public class RayIntersection extends java.lang.Object {
     native private float  jni_getTextureT     (int index);
     native private String jni_print           ();
 
-    protected long nativePointer;
-
     public RayIntersection () {
-        nativePointer = 0;
-        if (this.getClass() == RayIntersection.class) {
-            jni_initialize ();        	
-        }
-    }
-
-    protected void initiazlie () {
     	jni_initialize ();
     }
-    
+
     @Override
     public void finalize () {
         jni_finalize ();
