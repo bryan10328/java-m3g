@@ -98,6 +98,8 @@ void Java_new_TriangleStripArray  (JNIEnv* env, m3g::Object3D* obj)
     Java_build_Object3D           (env, tris_obj, tris);
     Java_build_IndexBuffer        (env, tris_obj, tris);
     Java_build_TriangleStripArray (env, tris_obj, tris);
+
+    env->DeleteLocalRef (tris_obj);
 }
 
 

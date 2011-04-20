@@ -163,6 +163,8 @@ void Java_new_Material            (JNIEnv* env, m3g::Object3D* obj)
 
     Java_build_Object3D (env, mat_obj, mat);
     Java_build_Material (env, mat_obj, mat);
+
+    env->DeleteLocalRef (mat_obj);
 }
 
 void Java_build_Material (JNIEnv* env, jobject mat_obj, m3g::Material* mat)

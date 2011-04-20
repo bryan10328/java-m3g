@@ -238,6 +238,8 @@ void Java_new_VertexArray         (JNIEnv* env, m3g::Object3D* obj)
 
     Java_build_Object3D    (env, varry_obj, varry);
     Java_build_VertexArray (env, varry_obj, varry);
+
+    env->DeleteLocalRef (varry_obj);
 }
 
 

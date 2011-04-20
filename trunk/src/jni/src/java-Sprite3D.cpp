@@ -237,6 +237,8 @@ void Java_new_Sprite3D            (JNIEnv* env, m3g::Object3D* obj)
 
     Java_build_Object3D (env, spr_obj, spr);
     Java_build_Sprite3D (env, spr_obj, spr);
+
+    env->DeleteLocalRef (spr_obj);
 }
 
 void Java_build_Sprite3D (JNIEnv* env, jobject spr_obj, m3g::Sprite3D* spr)

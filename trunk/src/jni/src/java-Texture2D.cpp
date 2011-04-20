@@ -264,6 +264,7 @@ void Java_new_Texture2D           (JNIEnv* env, m3g::Object3D* obj)
     Java_build_Object3D  (env, tex_obj, tex);
     Java_build_Texture2D (env, tex_obj, tex);
 
+    env->DeleteLocalRef (tex_obj);
 }
 
 void Java_build_Texture2D (JNIEnv* env, jobject tex_obj, m3g::Texture2D* tex)

@@ -281,42 +281,29 @@ JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Object3D_jni_1print
     return env->NewStringUTF (oss.str().c_str());
 }
 
-#include <android/log.h>
-
 void Java_build_Object3D (JNIEnv* env, jobject obj3d_obj, m3g::Object3D* obj3d)
 {
-    __android_log_print (ANDROID_LOG_INFO, "NDK", "start of Java_build_Object3D");
     jclass   obj3d_class         = env->GetObjectClass (obj3d_obj);
     jfieldID obj3d_nativePointer = env->GetFieldID     (obj3d_class, "nativePointer", "J");
     jfieldID obj3d_tracks        = env->GetFieldID     (obj3d_class, "animationTracks", "Ljava/util/List;");
     jfieldID obj3d_userObject    = env->GetFieldID     (obj3d_class, "userObject", "Ljava/lang/Object;");
-    __android_log_print (ANDROID_LOG_INFO, "NDK", "1.");
+
+    jclass    tracks_class = env->FindClass   ("java/util/ArrayList");
+    jmethodID tracks_init  = env->GetMethodID (tracks_class, "<init>", "()V");
+    jmethodID tracks_add   = env->GetMethodID (tracks_class, "add", "(Ljava/lang/Object;)Z");
+    jobject   tracks_obj   = env->NewObject   (tracks_class, tracks_init);
 
     env->SetLongField   (obj3d_obj, obj3d_nativePointer, (long)obj3d);
     env->SetObjectField (obj3d_obj, obj3d_userObject, (jobject)obj3d->getUserObject());
-    __android_log_print (ANDROID_LOG_INFO, "NDK", "2.");
 
-    jclass    tracks_class = env->FindClass   ("java/util/ArrayList");
-    __android_log_print (ANDROID_LOG_INFO, "NDK", "2-1. tracks_class=%p", tracks_class);
-    jmethodID tracks_init  = env->GetMethodID (tracks_class, "<init>", "()V");
-    __android_log_print (ANDROID_LOG_INFO, "NDK", "2-2., tracks_init=%p", tracks_init);
-    jmethodID tracks_add   = env->GetMethodID (tracks_class, "add", "(Ljava/lang/Object;)Z");
-    __android_log_print (ANDROID_LOG_INFO, "NDK", "2-3., tracks_add=%p", tracks_add);
-    jobject   tracks_obj   = env->NewObject   (tracks_class, tracks_init);
-    __android_log_print (ANDROID_LOG_INFO, "NDK", "2-4., tracks_obj=%p", tracks_obj);
-
-    __android_log_print (ANDROID_LOG_INFO, "NDK", "3.");
     for (int i = 0; i < (int)obj3d->getAnimationTrackCount(); i++) {
         AnimationTrack* track = obj3d->getAnimationTrack (i);
         if (track) {
             env->CallObjectMethod (tracks_obj, tracks_add, (jobject)track->getExportedEntity());
         }
     }
-    __android_log_print (ANDROID_LOG_INFO, "NDK", "4.");
-
     env->SetObjectField (obj3d_obj, obj3d_tracks, tracks_obj);
-
-    __android_log_print (ANDROID_LOG_INFO, "NDK", "end of Java_build_Object3D");
+    env->DeleteLocalRef (tracks_obj);
 }
 
 

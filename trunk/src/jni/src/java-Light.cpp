@@ -295,6 +295,8 @@ void Java_new_Light               (JNIEnv* env, m3g::Object3D* obj)
     Java_build_Transformable (env, lgh_obj, lgh);
     Java_build_Node          (env, lgh_obj, lgh);
     Java_build_Light         (env, lgh_obj, lgh);
+
+    env->DeleteLocalRef (lgh_obj);
 }
 
 void Java_build_Light (JNIEnv* env, jobject lgh_obj, m3g::Light* lgh)

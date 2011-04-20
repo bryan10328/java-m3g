@@ -214,6 +214,8 @@ void Java_new_Fog                 (JNIEnv* env, m3g::Object3D* obj)
 
     Java_build_Object3D (env, fog_obj, fog);
     Java_build_Fog      (env, fog_obj, fog);
+
+    env->DeleteLocalRef (fog_obj);
 }
 
 void Java_build_Fog (JNIEnv* env, jobject fog_obj, m3g::Fog* fog)

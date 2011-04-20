@@ -234,6 +234,8 @@ void Java_new_Image2D             (JNIEnv* env, m3g::Object3D* obj)
 
     Java_build_Object3D (env, img_obj, img);
     Java_build_Image2D  (env, img_obj, img);
+
+    env->DeleteLocalRef (img_obj);
 }
 
 

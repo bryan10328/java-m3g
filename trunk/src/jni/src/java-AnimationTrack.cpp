@@ -129,32 +129,26 @@ JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1print
     return env->NewStringUTF (oss.str().c_str());
 }
 
-#include <android/log.h>
-
 void Java_new_AnimationTrack      (JNIEnv* env, m3g::Object3D* obj)
 {
-    __android_log_print (ANDROID_LOG_INFO, "NDK", "start of Java_new_AnimationTrack");
     cout << "Java-Loader: build java AnimationTrack.\n";
     AnimationTrack* track     = dynamic_cast<AnimationTrack*>(obj);
     jobject         track_obj = allocJavaObject (env, "org/karlsland/m3g/AnimationTrack", track);
 
-    __android_log_print (ANDROID_LOG_INFO, "NDK", "before build.");
     Java_build_Object3D       (env, track_obj, track);
-    __android_log_print (ANDROID_LOG_INFO, "NDK", "mid build.");
     Java_build_AnimationTrack (env, track_obj, track);
-    __android_log_print (ANDROID_LOG_INFO, "NDK", "after build.");
+
+    env->DeleteLocalRef (track_obj);
 }
 
 
 
 void Java_build_AnimationTrack (JNIEnv* env, jobject track_obj, m3g::AnimationTrack* track)
 {
-    __android_log_print (ANDROID_LOG_INFO, "NDK", "start of Java_build_AnimationTrack");
     jclass   track_class      = env->GetObjectClass (track_obj);
     jfieldID track_key_seq    = env->GetFieldID     (track_class, "keyframeSequence", "Lorg/karlsland/m3g/KeyframeSequence;");
     jfieldID track_controller = env->GetFieldID     (track_class, "animationController", "Lorg/karlsland/m3g/AnimationController;");
 
-    __android_log_print (ANDROID_LOG_INFO, "NDK", "1.");
     KeyframeSequence* key_seq = track->getKeyframeSequence ();
     if (key_seq) {
         if (key_seq->getExportedEntity() == 0) {
@@ -162,7 +156,6 @@ void Java_build_AnimationTrack (JNIEnv* env, jobject track_obj, m3g::AnimationTr
         }
         env->SetObjectField (track_obj, track_key_seq, (jobject)key_seq->getExportedEntity());
     }
-    __android_log_print (ANDROID_LOG_INFO, "NDK", "2.");
 
     AnimationController* controller = track->getController ();
     if (controller) {
@@ -171,6 +164,4 @@ void Java_build_AnimationTrack (JNIEnv* env, jobject track_obj, m3g::AnimationTr
         }
         env->SetObjectField (track_obj, track_controller, (jobject)controller->getExportedEntity());
     }
-    __android_log_print (ANDROID_LOG_INFO, "NDK", "3.");
-    __android_log_print (ANDROID_LOG_INFO, "NDK", "end of Java_build_AnimationTrack");
 }

@@ -58,7 +58,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_World_jni_1getActiveCamera
     cam = wld->getActiveCamera ();
     __CATCH__;
     //setErrorString ("wld.cam = %p", cam);
-    setErrorString ("wld.cam(entity), cam = %p, entity = %ld, jobject = %p", cam, cam->getExportedEntity(), (jobject)cam->getExportedEntity());
+    //setErrorString ("wld.cam(entity), cam = %p, entity = %ld, jobject = %p", cam, cam->getExportedEntity(), (jobject)cam->getExportedEntity());
     return (cam != NULL) ? (jobject)cam->getExportedEntity() : (jobject)NULL;
 }
 
@@ -139,6 +139,8 @@ void Java_new_World               (JNIEnv* env, m3g::Object3D* obj)
     Java_build_Node          (env, wld_obj, wld);
     Java_build_Group         (env, wld_obj, wld);
     Java_build_World         (env, wld_obj, wld);
+
+    env->DeleteLocalRef (wld_obj);
 }
 
 

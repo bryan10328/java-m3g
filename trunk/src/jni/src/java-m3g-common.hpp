@@ -9,7 +9,16 @@
  */
 void*   getNativePointer (JNIEnv* env, jobject obj);
 void    setNativePointer (JNIEnv* env, jobject obj, void* pointer);
-jobject allocJavaObject  (JNIEnv* env, const char* name, m3g::Object* obj);
+
+/**
+ * @param[in] env    JNIEnv構造体
+ * @param[in] class  作成するクラス名("org/karlsland/m3g/Camera"など)
+ * @param[in] obj    対になるC++のオブジェクト.
+ * @return 作成したJavaオブジェクトの「ローカル参照」
+ * 注意1: Java側のオブジェクトのコンストラクタは呼ばれない
+ * 注意2: グローバル参照が作成されセットされる。
+ */
+jobject allocJavaObject  (JNIEnv* env, const char* class_name, m3g::Object* obj);
 
 int    getByteArrayLength       (JNIEnv* env, jbyteArray  array);
 int    getShortArrayLength      (JNIEnv* env, jshortArray array);

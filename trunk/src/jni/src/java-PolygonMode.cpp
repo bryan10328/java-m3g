@@ -260,6 +260,8 @@ void Java_new_PolygonMode         (JNIEnv* env, m3g::Object3D* obj)
 
     Java_build_Object3D    (env, pmode_obj, pmode);
     Java_build_PolygonMode (env, pmode_obj, pmode);
+
+    env->DeleteLocalRef (pmode_obj);
 }
 
 void Java_build_PolygonMode (JNIEnv* env, jobject pmode_obj, m3g::PolygonMode* pmode)

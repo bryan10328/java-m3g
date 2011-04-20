@@ -269,6 +269,8 @@ void Java_new_KeyframeSequence    (JNIEnv* env, m3g::Object3D* obj)
 
     Java_build_Object3D         (env, key_seq_obj, key_seq);
     Java_build_KeyframeSequence (env, key_seq_obj, key_seq);
+
+    env->DeleteLocalRef (key_seq_obj);
 }
 
 

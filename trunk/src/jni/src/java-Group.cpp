@@ -173,6 +173,8 @@ void Java_new_Group               (JNIEnv* env, m3g::Object3D* obj)
     Java_build_Transformable (env, grp_obj, grp);
     Java_build_Node          (env, grp_obj, grp);
     Java_build_Group         (env, grp_obj, grp);
+
+    env->DeleteLocalRef (grp_obj);
 }
 
 
@@ -198,5 +200,5 @@ void Java_build_Group (JNIEnv* env, jobject grp_obj, m3g::Group* grp)
     }
 
     env->SetObjectField (grp_obj, grp_children, children_obj);
-
+    env->DeleteLocalRef (children_obj);
 }

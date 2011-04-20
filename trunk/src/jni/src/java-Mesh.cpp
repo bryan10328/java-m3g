@@ -191,6 +191,8 @@ void Java_new_Mesh                (JNIEnv* env, m3g::Object3D* obj)
     Java_build_Transformable (env, mesh_obj, mesh);
     Java_build_Node          (env, mesh_obj, mesh);
     Java_build_Mesh          (env, mesh_obj, mesh);
+
+    env->DeleteLocalRef (mesh_obj);
 }
 
 void Java_build_Mesh (JNIEnv* env, jobject mesh_obj, m3g::Mesh* mesh)
@@ -220,6 +222,7 @@ void Java_build_Mesh (JNIEnv* env, jobject mesh_obj, m3g::Mesh* mesh)
         }
     }
     env->SetObjectField (mesh_obj, mesh_submeshes, submeshes_obj);
+    env->DeleteLocalRef (submeshes_obj);
 
     jclass    appearances_class = env->FindClass   ("java/util/ArrayList");
     jmethodID appearances_init  = env->GetMethodID (appearances_class, "<init>", "()V");
@@ -234,5 +237,5 @@ void Java_build_Mesh (JNIEnv* env, jobject mesh_obj, m3g::Mesh* mesh)
         }
     }
     env->SetObjectField (mesh_obj, mesh_appearances, appearances_obj);
-
+    env->DeleteLocalRef (appearances_obj);
 }

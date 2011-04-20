@@ -329,6 +329,8 @@ void Java_new_Background          (JNIEnv* env, m3g::Object3D* obj)
 
     Java_build_Object3D   (env, bg_obj, bg);
     Java_build_Background (env, bg_obj, bg);
+
+    env->DeleteLocalRef (bg_obj);
 }
 
 

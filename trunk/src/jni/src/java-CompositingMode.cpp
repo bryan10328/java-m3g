@@ -311,6 +311,8 @@ void Java_new_CompositingMode     (JNIEnv* env, m3g::Object3D* obj)
 
     Java_build_Object3D        (env, cmode_obj, cmode);
     Java_build_CompositingMode (env, cmode_obj, cmode);
+
+    env->DeleteLocalRef (cmode_obj);
 }
 
 

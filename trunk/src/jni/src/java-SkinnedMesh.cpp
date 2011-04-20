@@ -183,7 +183,9 @@ void Java_new_SkinnedMesh         (JNIEnv* env, m3g::Object3D* obj)
     Java_build_Transformable (env, mesh_obj, mesh);
     Java_build_Node          (env, mesh_obj, mesh);
     Java_build_Mesh          (env, mesh_obj, mesh);
-    Java_build_SkinnedMesh  (env, mesh_obj, mesh);
+    Java_build_SkinnedMesh   (env, mesh_obj, mesh);
+
+    env->DeleteLocalRef (mesh_obj);
 }
 
 

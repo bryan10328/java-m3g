@@ -16,13 +16,13 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1initialize__Lorg
   (JNIEnv* env, jobject thiz, jobject base, jobjectArray targets, jobjectArray submeshes, jobjectArray appearances)
 {
     cout << "Java-MorhpingMesh: initilize1 is called.\n";
-    VertexBuffer* vbuf = (VertexBuffer*)getNativePointer (env, base);
-    int tars_len = env->GetArrayLength (targets);
-    VertexBuffer** tars = new VertexBuffer* [tars_len];
+    VertexBuffer*  vbuf     = (VertexBuffer*)getNativePointer (env, base);
+    int            tars_len = env->GetArrayLength (targets);
+    VertexBuffer** tars     = new VertexBuffer* [tars_len];
     for (int i = 0; i < tars_len; i++) {
         tars[i] = (VertexBuffer*)getNativePointer (env, env->GetObjectArrayElement(targets, i));
     }
-    int len = env->GetArrayLength (submeshes);
+    int           len   = env->GetArrayLength (submeshes);
     IndexBuffer** ibufs = new IndexBuffer* [len];
     for (int i = 0; i < len; i++) {
         ibufs[i] = (IndexBuffer*)getNativePointer (env, env->GetObjectArrayElement(submeshes, i));
@@ -188,6 +188,8 @@ void Java_new_MorphingMesh        (JNIEnv* env, m3g::Object3D* obj)
     Java_build_Node          (env, mesh_obj, mesh);
     Java_build_Mesh          (env, mesh_obj, mesh);
     Java_build_MorphingMesh  (env, mesh_obj, mesh);
+
+    env->DeleteLocalRef (mesh_obj);
 }
 
 
@@ -214,4 +216,5 @@ void Java_build_MorphingMesh (JNIEnv* env, jobject mesh_obj, m3g::MorphingMesh* 
     }
 
     env->SetObjectField (mesh_obj, mesh_targets, targets_obj);
+    env->DeleteLocalRef (targets_obj);
 }

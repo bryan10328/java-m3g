@@ -176,6 +176,8 @@ void Java_new_Camera              (JNIEnv* env, m3g::Object3D* obj)
     Java_build_Transformable (env, cam_obj, cam);
     Java_build_Node          (env, cam_obj, cam);
     Java_build_Camera        (env, cam_obj, cam);
+
+    env->DeleteLocalRef (cam_obj);
 }
 
 void Java_build_Camera (JNIEnv* env, jobject cam_obj, m3g::Camera* cam)
