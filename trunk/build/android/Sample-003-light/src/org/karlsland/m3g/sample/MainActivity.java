@@ -1,21 +1,17 @@
 package org.karlsland.m3g.sample;
 
 import android.app.Activity;
+import android.opengl.GLSurfaceView;
 import android.os.Bundle;
-import android.widget.TextView;
 
 public class MainActivity extends Activity {
-    /** Called when the activity is first created. */
-	TextView view;
-	//GLSurfaceView view2;
+	GLSurfaceView view;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    	view = new TextView(this);
-    	view.setText("Hello World, 8");
-        //view2 = new GLSurfaceView(this);
-        //view2.setRenderer(new M3GRenderer());
+        view = new GLSurfaceView(this);
+        view.setRenderer(new M3GRenderer());
         setContentView(view);
     }
 }
