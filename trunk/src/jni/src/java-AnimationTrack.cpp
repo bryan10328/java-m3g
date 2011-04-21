@@ -164,4 +164,6 @@ void Java_build_AnimationTrack (JNIEnv* env, jobject track_obj, m3g::AnimationTr
         }
         env->SetObjectField (track_obj, track_controller, (jobject)controller->getExportedEntity());
     }
+
+    env->DeleteLocalRef (track_class);
 }

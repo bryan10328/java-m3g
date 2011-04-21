@@ -257,4 +257,5 @@ void Java_build_Sprite3D (JNIEnv* env, jobject spr_obj, m3g::Sprite3D* spr)
         env->SetObjectField (spr_obj, spr_image, (jobject)img->getExportedEntity());
     }
 
+    env->DeleteLocalRef (spr_class);
 }

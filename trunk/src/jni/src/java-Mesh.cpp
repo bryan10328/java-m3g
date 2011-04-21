@@ -222,7 +222,6 @@ void Java_build_Mesh (JNIEnv* env, jobject mesh_obj, m3g::Mesh* mesh)
         }
     }
     env->SetObjectField (mesh_obj, mesh_submeshes, submeshes_obj);
-    env->DeleteLocalRef (submeshes_obj);
 
     jclass    appearances_class = env->FindClass   ("java/util/ArrayList");
     jmethodID appearances_init  = env->GetMethodID (appearances_class, "<init>", "()V");
@@ -237,5 +236,10 @@ void Java_build_Mesh (JNIEnv* env, jobject mesh_obj, m3g::Mesh* mesh)
         }
     }
     env->SetObjectField (mesh_obj, mesh_appearances, appearances_obj);
+
+    env->DeleteLocalRef (mesh_class);
+    env->DeleteLocalRef (submeshes_class);
+    env->DeleteLocalRef (submeshes_obj);
+    env->DeleteLocalRef (appearances_class);
     env->DeleteLocalRef (appearances_obj);
 }

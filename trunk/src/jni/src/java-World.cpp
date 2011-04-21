@@ -160,4 +160,6 @@ void Java_build_World (JNIEnv* env, jobject wld_obj, m3g::World* wld)
         env->SetObjectField (wld_obj, wld_background, (jobject)bg->getExportedEntity());
     }
 
+    env->DeleteLocalRef (wld_class);
 }
+

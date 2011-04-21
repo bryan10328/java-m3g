@@ -315,6 +315,8 @@ void Java_build_Appearance (JNIEnv* env, jobject app_obj, m3g::Appearance* app)
         env->SetObjectField (app_obj, app_fog, (jobject)fog->getExportedEntity());
     }
 
+    env->DeleteLocalRef (app_class);
+    env->DeleteLocalRef (textures_class);
     env->DeleteLocalRef (textures_obj);
 }
 

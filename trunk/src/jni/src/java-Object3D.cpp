@@ -303,6 +303,9 @@ void Java_build_Object3D (JNIEnv* env, jobject obj3d_obj, m3g::Object3D* obj3d)
         }
     }
     env->SetObjectField (obj3d_obj, obj3d_tracks, tracks_obj);
+
+    env->DeleteLocalRef (obj3d_class);
+    env->DeleteLocalRef (tracks_class);
     env->DeleteLocalRef (tracks_obj);
 }
 

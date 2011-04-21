@@ -198,7 +198,9 @@ void Java_build_Group (JNIEnv* env, jobject grp_obj, m3g::Group* grp)
             env->CallObjectMethod (children_obj, children_add, (jobject)child->getExportedEntity());
         }
     }
-
     env->SetObjectField (grp_obj, grp_children, children_obj);
+
+    env->DeleteLocalRef (grp_class);
+    env->DeleteLocalRef (children_class);
     env->DeleteLocalRef (children_obj);
 }

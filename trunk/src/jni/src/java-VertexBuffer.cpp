@@ -323,7 +323,9 @@ void Java_build_VertexBuffer (JNIEnv* env, jobject vbuf_obj, m3g::VertexBuffer* 
             env->CallObjectMethod (tex_coords_obj, tex_coords_add, (jobject)0);
         }
     }
-
     env->SetObjectField (vbuf_obj, vbuf_tex_coords, tex_coords_obj);
+
+    env->DeleteLocalRef (vbuf_class);
+    env->DeleteLocalRef (tex_coords_class);
     env->DeleteLocalRef (tex_coords_obj);
 }

@@ -511,10 +511,13 @@ void Java_new_Graphics3D               (JNIEnv* env, m3g::Graphics3D* g3d)
 
     jclass   g3d_class         = env->FindClass ("org/karlsland/m3g/Graphics3D");
     jobject  g3d_obj           = env->AllocObject (g3d_class);
-    jobject  g3d_entity        = env->NewGlobalRef (g3d_obj);
 
+    jobject  g3d_entity        = env->NewGlobalRef (g3d_obj);
     setNativePointer (env, g3d_obj, g3d);
     g3d->setExportedEntity (g3d_entity);
+
+    env->DeleteLocalRef (g3d_class);
+    env->DeleteLocalRef (g3d_obj);
 }
 
 

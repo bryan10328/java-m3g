@@ -344,5 +344,6 @@ void Java_build_Background (JNIEnv* env, jobject bg_obj, m3g::Background* bg)
         env->SetObjectField (bg_obj, bg_image, (jobject)img->getExportedEntity());
     }
 
+    env->DeleteLocalRef (bg_class);
 }
 

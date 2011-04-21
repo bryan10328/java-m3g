@@ -277,5 +277,5 @@ void Java_build_Texture2D (JNIEnv* env, jobject tex_obj, m3g::Texture2D* tex)
         env->SetObjectField (tex_obj, tex_image, (jobject)tex->getExportedEntity());
     }
 
-
+    env->DeleteLocalRef (tex_class);
 }

@@ -214,7 +214,9 @@ void Java_build_MorphingMesh (JNIEnv* env, jobject mesh_obj, m3g::MorphingMesh* 
             env->CallObjectMethod (targets_obj, targets_add, (jobject)0);
         }
     }
-
     env->SetObjectField (mesh_obj, mesh_targets, targets_obj);
+
+    env->DeleteLocalRef (mesh_class);
+    env->DeleteLocalRef (targets_class);
     env->DeleteLocalRef (targets_obj);
 }

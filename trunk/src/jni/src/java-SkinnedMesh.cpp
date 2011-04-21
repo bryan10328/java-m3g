@@ -202,5 +202,5 @@ void Java_build_SkinnedMesh (JNIEnv* env, jobject mesh_obj, m3g::SkinnedMesh* me
         env->SetObjectField (mesh_obj, mesh_skeleton, (jobject)skeleton->getExportedEntity());
     }
 
-
+    env->DeleteLocalRef (mesh_class);
 }

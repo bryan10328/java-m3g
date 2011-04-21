@@ -292,6 +292,9 @@ JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Node_jni_1print
 }
 
 
+
+// 注意:このほかにNode* duplicatedを持っているが
+// Rubyでしか使わないハックなので無視する
 void Java_build_Node (JNIEnv* env, jobject node_obj, m3g::Node* node)
 {
     jclass   node_class  = env->GetObjectClass (node_obj);
@@ -320,6 +323,5 @@ void Java_build_Node (JNIEnv* env, jobject node_obj, m3g::Node* node)
         env->SetObjectField (node_obj, node_zRef, (jobject)zRef->getExportedEntity());
     }
 
-    // 注意:このほかにNode* duplicatedを持っているが
-    // Rubyでしか使わないハックなので無視する
+    env->DeleteLocalRef (node_class);
 }

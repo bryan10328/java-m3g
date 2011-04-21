@@ -14,9 +14,11 @@ void* getNativePointer (JNIEnv* env, jobject obj)
     if (obj == 0) {
         return NULL;
     }
-    jclass   clazz = env->GetObjectClass (obj);
-    jfieldID fid   = env->GetFieldID (clazz, "nativePointer", "J");
-    return (void*)env->GetLongField (obj, fid);
+    jclass   clazz   = env->GetObjectClass (obj);
+    jfieldID fid     = env->GetFieldID (clazz, "nativePointer", "J");
+    void*    pointer = (void*)env->GetLongField (obj, fid);
+    env->DeleteLocalRef (clazz);
+    return pointer;
 }
 
 
@@ -25,6 +27,7 @@ void setNativePointer (JNIEnv* env, jobject obj, void* pointer)
     jclass   clazz = env->GetObjectClass (obj);
     jfieldID fid   = env->GetFieldID (clazz, "nativePointer", "J");
     env->SetLongField (obj, fid, (long)pointer);
+    env->DeleteLocalRef (clazz);
 }
 
 
@@ -32,9 +35,12 @@ jobject allocJavaObject (JNIEnv* env, const char* class_name, m3g::Object* obj)
 {
     jclass  clazz  = env->FindClass (class_name);
     jobject thiz   = env->AllocObject (clazz);
+
     setNativePointer (env, thiz, obj);
     jobject entity = env->NewGlobalRef (thiz);
     obj->setExportedEntity (entity);
+
+    env->DeleteLocalRef (clazz);
     return thiz;
 }
 
