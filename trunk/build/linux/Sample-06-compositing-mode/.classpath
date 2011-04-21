@@ -12,10 +12,6 @@
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="/usr/bin/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Java-M3G/bin/java-m3g.jar">
-		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Java-M3G/bin"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/Java-M3G"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
