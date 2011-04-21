@@ -1,7 +1,17 @@
-package org.karlsland.m3g;
+package org.karlsland.m3g.sample;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
+
+import org.karlsland.m3g.Appearance;
+import org.karlsland.m3g.Camera;
+import org.karlsland.m3g.Graphics3D;
+import org.karlsland.m3g.Material;
+import org.karlsland.m3g.Mesh;
+import org.karlsland.m3g.TriangleStripArray;
+import org.karlsland.m3g.VertexArray;
+import org.karlsland.m3g.VertexBuffer;
+import org.karlsland.m3g.World;
 
 import android.opengl.GLSurfaceView.Renderer;
 import android.util.Log;
@@ -25,7 +35,6 @@ public class M3GRenderer implements Renderer {
 		Log.println(Log.INFO, "M3GRenderer", "onSurfaceChanged");
 		g3d.setViewport(0, 0, width, height);
 		Camera cam = wld.getActiveCamera();
-		String s = cam.getClass().getName();
 		cam.setPerspective(45, width / (float) height, 0.1f, 100.f);
 	}
 

@@ -1,4 +1,4 @@
-package org.karlsland.m3g;
+package org.karlsland.m3g.sample;
 
 import android.app.Activity;
 import android.opengl.GLSurfaceView;
@@ -14,7 +14,7 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     	view = new TextView(this);
-    	view.setText("Hello World, 7");
+    	view.setText("Hello World, 8");
         view2 = new GLSurfaceView(this);
         view2.setRenderer(new M3GRenderer());
         setContentView(view2);
