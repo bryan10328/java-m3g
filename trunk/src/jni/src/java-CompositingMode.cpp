@@ -23,9 +23,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1initialize
     if (env->ExceptionOccurred ()) {
         return;
     }
-    setNativePointer (env, thiz, cmode);
-    jobject entity = env->NewGlobalRef (thiz);
-    cmode->setExportedEntity (entity);
+    setNativePointer  (env, thiz, cmode);
+    bindJavaReference (env, thiz, cmode);
 }
 
 /*
@@ -38,8 +37,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_CompositingMode_jni_1finalize
 {
     cout << "Java-CompositingMode: finalize is called.\n";
     CompositingMode* cmode = (CompositingMode*)getNativePointer (env, thiz);
-    cout << "Java-CompositingMode: cmode = " << cmode << "\n";
-    env->DeleteGlobalRef ((jobject)cmode->getExportedEntity());
+    releaseJavaReference (env, cmode);
     addUsedObject (cmode);
 }
 
@@ -307,7 +305,9 @@ void Java_new_CompositingMode     (JNIEnv* env, m3g::Object3D* obj)
 {
     cout << "Java-Loader: build java CompositingMode.\n";
     CompositingMode* cmode     = dynamic_cast<CompositingMode*>(obj);
-    jobject          cmode_obj = allocJavaObject (env, "org/karlsland/m3g/CompositingMode", cmode);
+    jobject          cmode_obj = allocJavaObject (env, "org/karlsland/m3g/CompositingMode");
+    setNativePointer  (env, cmode_obj, cmode);
+    bindJavaReference (env, cmode_obj, cmode);
 
     Java_build_Object3D        (env, cmode_obj, cmode);
     Java_build_CompositingMode (env, cmode_obj, cmode);

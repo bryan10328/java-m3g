@@ -24,9 +24,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1initialize
     if (env->ExceptionOccurred ()) {
         return;
     }
-    setNativePointer (env, thiz, varry);
-    jobject entity = env->NewGlobalRef (thiz);
-    varry->setExportedEntity (entity);
+    setNativePointer  (env, thiz, varry);
+    bindJavaReference (env, thiz, varry);
 }
 
 /*
@@ -39,7 +38,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1finalize
 {
     cout << "Java-VertexArray: finalize is called.\n";
     VertexArray* varry = (VertexArray*)getNativePointer (env, thiz);
-    env->DeleteGlobalRef ((jobject)varry->getExportedEntity());
+    releaseJavaReference (env, varry);
     addUsedObject (varry);
 }
 
@@ -234,7 +233,9 @@ void Java_new_VertexArray         (JNIEnv* env, m3g::Object3D* obj)
 {
     cout << "Java-Loader: build java VertexArray.\n";
     VertexArray* varry     = dynamic_cast<VertexArray*>(obj);
-    jobject      varry_obj = allocJavaObject (env, "org/karlsland/m3g/VertexArray", varry);
+    jobject      varry_obj = allocJavaObject (env, "org/karlsland/m3g/VertexArray");
+    setNativePointer  (env, varry_obj, varry);
+    bindJavaReference (env, varry_obj, varry);
 
     Java_build_Object3D    (env, varry_obj, varry);
     Java_build_VertexArray (env, varry_obj, varry);

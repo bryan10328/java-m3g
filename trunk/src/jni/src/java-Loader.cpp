@@ -78,7 +78,7 @@ JNIEXPORT jobjectArray JNICALL Java_org_karlsland_m3g_Loader_jni_1load__Ljava_la
     jobjectArray arry_obj    = env->NewObjectArray (size, obj3d_class, NULL);
 
     for (int i = 0; i < size; i++) {
-        env->SetObjectArrayElement (arry_obj, i, (jobject)objs[i]->getExportedEntity());
+        env->SetObjectArrayElement (arry_obj, i, getJavaReference(env, objs[i]));
     }
     cout << "Java-Loader: created.\n";
 
@@ -86,13 +86,9 @@ JNIEXPORT jobjectArray JNICALL Java_org_karlsland_m3g_Loader_jni_1load__Ljava_la
 }
 
 
-#include <android/log.h>
-
-
 void Java_build_objects (JNIEnv* env, const std::vector<Object3D*>& objs)
 {
     for (int i = 0; i < (int)objs.size(); i++) {
-        __android_log_print (ANDROID_LOG_INFO, "M3G", "i = %d, %s", i, typeid(*objs[i]).name());
         if (typeid(*objs[i]) == typeid(AnimationController))
             Java_new_AnimationController (env, objs[i]);
         else if (typeid(*objs[i]) == typeid(AnimationTrack))

@@ -23,9 +23,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1initialize
     if (env->ExceptionOccurred ()) {
         return;
     }
-    setNativePointer (env, thiz, ri);
-    jobject entity = env->NewGlobalRef (thiz);
-    ri->setExportedEntity (entity);
+    setNativePointer  (env, thiz, ri);
+    bindJavaReference (env, thiz, ri);
 }
 
 /*
@@ -38,7 +37,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1finalize
 {
     cout << "Java-RayIntersection: finalize is called.\n";
     RayIntersection* ri = (RayIntersection*)getNativePointer (env, thiz);
-    env->DeleteGlobalRef ((jobject)ri->getExportedEntity());
+    releaseJavaReference (env, ri);
     addUsedObject (ri);
 }
 
@@ -73,7 +72,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_RayIntersection_jni_1getInterse
     __TRY__;
     node = ri->getIntersected ();
     __CATCH__;
-    return (node != NULL) ? (jobject)node->getExportedEntity() : (jobject)NULL;
+    return getJavaReference (env, node);
 }
 
 /*

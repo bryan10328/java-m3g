@@ -23,9 +23,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__III
     if (env->ExceptionOccurred ()) {
         return;
     }
-    setNativePointer (env, thiz, img);
-    jobject entity = env->NewGlobalRef (thiz);
-    img->setExportedEntity (entity);
+    setNativePointer  (env, thiz, img);
+    bindJavaReference (env, thiz, img);
 }
 
 /*
@@ -46,9 +45,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__III_3B
         return;
     }
     releaseByteArrayPointer (env, pixels_array, pixels);
-    setNativePointer (env, thiz, img);
-    jobject entity = env->NewGlobalRef (thiz);
-    img->setExportedEntity (entity);
+    setNativePointer  (env, thiz, img);
+    bindJavaReference (env, thiz, img);
 }
 
 /*
@@ -71,9 +69,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__III_3B_3B
     }
     releaseByteArrayPointer (env, pixels_array, pixels);
     releaseByteArrayPointer (env, palette_array, palette);
-    setNativePointer (env, thiz, img);
-    jobject entity = env->NewGlobalRef (thiz);
-    img->setExportedEntity (entity);
+    setNativePointer  (env, thiz, img);
+    bindJavaReference (env, thiz, img);
 }
 
 /*
@@ -102,7 +99,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1finalize
 {
     cout << "Java-Image2D: finalize is called.\n";
     Image2D* img = (Image2D*)getNativePointer (env, thiz);
-    env->DeleteGlobalRef ((jobject)img->getExportedEntity());
+    releaseJavaReference (env, img);
     addUsedObject (img);
 }
 
@@ -149,8 +146,8 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Image2D_jni_1getWidth
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Image2D: getWidth is called.\n";
-    Image2D* img = (Image2D*)getNativePointer (env, thiz);
-    int width = 0;
+    Image2D* img   = (Image2D*)getNativePointer (env, thiz);
+    int      width = 0;
     __TRY__;
     width = img->getWidth ();
     __CATCH__;
@@ -167,7 +164,7 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Image2D_jni_1isMutable
 {
     cout << "Java-Image2D: isMutable is called.\n";
     Image2D* img = (Image2D*)getNativePointer (env, thiz);
-    bool mut = false;
+    bool     mut = false;
     __TRY__;
     mut = img->isMutable ();
     __CATCH__;
@@ -230,7 +227,9 @@ void Java_new_Image2D             (JNIEnv* env, m3g::Object3D* obj)
 {
     cout << "Java-Loader: build java Image2D.\n";
     Image2D* img     = dynamic_cast<Image2D*>(obj);
-    jobject  img_obj = allocJavaObject (env, "org/karlsland/m3g/Image2D", img);
+    jobject  img_obj = allocJavaObject (env, "org/karlsland/m3g/Image2D");
+    setNativePointer  (env, img_obj, img);
+    bindJavaReference (env, img_obj, img);
 
     Java_build_Object3D (env, img_obj, img);
     Java_build_Image2D  (env, img_obj, img);

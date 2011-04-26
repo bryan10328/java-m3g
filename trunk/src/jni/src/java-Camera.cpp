@@ -23,12 +23,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Camera_jni_1initialize
     if (env->ExceptionOccurred ()) {
         return;
     }
-    setNativePointer (env, thiz, cam);
-    jobject entity = env->NewGlobalRef (thiz);
-    cam->setExportedEntity (entity);
-
-    //setErrorString ("cam = %p", cam);
-    setErrorString ("cam(entity): cam = %p, e(origin) = %p, global entity = %ld, jobject=%p", cam, entity, cam->getExportedEntity(), (jobject)cam->getExportedEntity());
+    setNativePointer  (env, thiz, cam);
+    bindJavaReference (env, thiz, cam);
 }
 
 /*
@@ -41,7 +37,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Camera_jni_1finalize
 {
     cout << "Java-Camera: finalize is called.\n";
     Camera* cam = (Camera*)getNativePointer (env, thiz);
-    env->DeleteGlobalRef ((jobject)cam->getExportedEntity());
+    releaseJavaReference (env, cam);
     addUsedObject (cam);
 }
 
@@ -170,7 +166,9 @@ void Java_new_Camera              (JNIEnv* env, m3g::Object3D* obj)
 {
     cout << "Java-Loader: build java Camera.\n";
     Camera* cam     = dynamic_cast<Camera*>(obj);
-    jobject cam_obj = allocJavaObject (env, "org/karlsland/m3g/Camera", cam);
+    jobject cam_obj = allocJavaObject (env, "org/karlsland/m3g/Camera");
+    setNativePointer  (env, cam_obj, cam);
+    bindJavaReference (env, cam_obj, cam);
 
     Java_build_Object3D      (env, cam_obj, cam);
     Java_build_Transformable (env, cam_obj, cam);

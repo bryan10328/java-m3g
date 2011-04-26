@@ -42,9 +42,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1initialize__Lorg
     delete[] tars;
     delete[] ibufs;
     delete[] apps;
-    setNativePointer (env, thiz, mesh);
-    jobject entity = env->NewGlobalRef (thiz);
-    mesh->setExportedEntity (entity);
+    setNativePointer  (env, thiz, mesh);
+    bindJavaReference (env, thiz, mesh);
 }
 
 /*
@@ -56,8 +55,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1initialize__Lorg
   (JNIEnv* env, jobject thiz, jobject base, jobjectArray targets, jobject submesh, jobject appearance)
 {
     cout << "Java-MorhpingMesh: initialize2 is called.\n";
-    VertexBuffer* vbuf = (VertexBuffer*)getNativePointer (env, base);
-    int len = env->GetArrayLength (targets);
+    VertexBuffer*  vbuf = (VertexBuffer*)getNativePointer (env, base);
+    int            len  = env->GetArrayLength (targets);
     VertexBuffer** tars = new VertexBuffer* [len];
     for (int i = 0; i < len; i++) {
         tars[i] = (VertexBuffer*)getNativePointer (env, env->GetObjectArrayElement(targets, i));
@@ -72,9 +71,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1initialize__Lorg
         return;
     }
     delete[] tars;
-    setNativePointer (env, thiz, mesh);
-    jobject entity = env->NewGlobalRef (thiz);
-    mesh->setExportedEntity (entity);
+    setNativePointer  (env, thiz, mesh);
+    bindJavaReference (env, thiz, mesh);
 }
 
 /*
@@ -87,7 +85,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1finalize
 {
     cout << "Java-MorhpingMesh: finalize is called.\n";
     MorphingMesh* mesh = (MorphingMesh*)getNativePointer (env, thiz);
-    env->DeleteWeakGlobalRef ((jobject)mesh->getExportedEntity());
+    releaseJavaReference (env, mesh);
     addUsedObject (mesh);
 }
 
@@ -105,7 +103,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1getMorphTarge
     __TRY__;
     target = mesh->getMorphTarget (index);
     __CATCH__;
-    return (target != NULL) ? (jobject)target->getExportedEntity() : (jobject)NULL;
+    return getJavaReference (env, target);
 }
 
 /*
@@ -181,7 +179,9 @@ void Java_new_MorphingMesh        (JNIEnv* env, m3g::Object3D* obj)
 {
     cout << "Java-Loader: build java MorphingMesh.\n";
     MorphingMesh* mesh         = dynamic_cast<MorphingMesh*>(obj);
-    jobject       mesh_obj     = allocJavaObject (env, "org/karlsland/m3g/MorphingMesh", mesh);
+    jobject       mesh_obj     = allocJavaObject (env, "org/karlsland/m3g/MorphingMesh");
+    setNativePointer  (env, mesh_obj, mesh);
+    bindJavaReference (env, mesh_obj, mesh);
 
     Java_build_Object3D      (env, mesh_obj, mesh);
     Java_build_Transformable (env, mesh_obj, mesh);
@@ -195,21 +195,25 @@ void Java_new_MorphingMesh        (JNIEnv* env, m3g::Object3D* obj)
 
 void Java_build_MorphingMesh (JNIEnv* env, jobject mesh_obj, m3g::MorphingMesh* mesh)
 {
-    jclass        mesh_class   = env->GetObjectClass (mesh_obj);
-    jfieldID      mesh_targets = env->GetFieldID (mesh_class, "morphTargets", "Ljava/util/List;");
-
-
-    int count = mesh->getMorphTargetCount ();
-
+    jclass    mesh_class    = env->GetObjectClass (mesh_obj);
+    jfieldID  mesh_targets  = env->GetFieldID  (mesh_class, "morphTargets", "Ljava/util/List;");
     jclass    targets_class = env->FindClass   ("java/util/ArrayList");
     jmethodID targets_init  = env->GetMethodID (targets_class, "<init>", "()V");
     jmethodID targets_add   = env->GetMethodID (targets_class, "add", "(Ljava/lang/Object;)Z");
     jobject   targets_obj   = env->NewObject   (targets_class, targets_init);
     
+    int count = 0;
+    __TRY__;
+    count = mesh->getMorphTargetCount ();
+    __CATCH__;
+
     for (int i = 0; i < count; i++) {
-        VertexBuffer* target = mesh->getMorphTarget (i);
+        VertexBuffer* target = NULL;
+        __TRY__;
+        target = mesh->getMorphTarget (i);
+        __CATCH__;
         if (target) {
-            env->CallObjectMethod (targets_obj, targets_add, (jobject)target->getExportedEntity());
+            env->CallObjectMethod (targets_obj, targets_add, getJavaReference(env, target));
         } else {
             env->CallObjectMethod (targets_obj, targets_add, (jobject)0);
         }

@@ -26,9 +26,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1initialize
     if (env->ExceptionOccurred ()) {
         return;
     }
-    setNativePointer (env, thiz, spr);
-    jobject entity = env->NewGlobalRef (thiz);
-    spr->setExportedEntity (entity);
+    setNativePointer  (env, thiz, spr);
+    bindJavaReference (env, thiz, spr);
 }
 
 /*
@@ -41,7 +40,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1finalize
 {
     cout << "Java-Sprite3D: finalize is called.\n";
     Sprite3D* spr = (Sprite3D*)getNativePointer (env, thiz);
-    env->DeleteGlobalRef ((jobject)spr->getExportedEntity());
+    releaseJavaReference (env, spr);
     addUsedObject (spr);
 }
 
@@ -54,12 +53,12 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getAppearance
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Sprite3D: getAppearance is called.\n";
-    Sprite3D* spr = (Sprite3D*)getNativePointer (env, thiz);
+    Sprite3D*   spr = (Sprite3D*)getNativePointer (env, thiz);
     Appearance* app = NULL;
     __TRY__;
     app = spr->getAppearance ();
     __CATCH__;
-    return (app != NULL) ? (jobject)app->getExportedEntity() : (jobject)NULL;
+    return getJavaReference (env, app);
 }
 
 /*
@@ -144,7 +143,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getImage
     __TRY__;
     img = spr->getImage ();
     __CATCH__;
-    return (img != NULL) ? (jobject)img->getExportedEntity() : (jobject)NULL;
+    return getJavaReference (env, img);
 }
 
 /*
@@ -173,7 +172,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1setAppearance
   (JNIEnv* env, jobject thiz, jobject appearance)
 {
     cout << "Java-Sprite3D: setAppearance is called.\n";
-    Sprite3D*   spr = (Sprite3D*)getNativePointer (env, thiz);
+    Sprite3D*   spr = (Sprite3D*)  getNativePointer (env, thiz);
     Appearance* app = (Appearance*)getNativePointer (env, appearance);
     __TRY__;
     spr->setAppearance (app);
@@ -205,7 +204,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1setImage
 {
     cout << "Java-Sprite3D: setImage is called.\n";
     Sprite3D* spr = (Sprite3D*)getNativePointer (env, thiz);
-    Image2D*  img = (Image2D*)getNativePointer (env, image);
+    Image2D*  img = (Image2D*) getNativePointer (env, image);
     __TRY__;
     spr->setImage (img);
     __CATCH__;
@@ -233,7 +232,9 @@ void Java_new_Sprite3D            (JNIEnv* env, m3g::Object3D* obj)
 {
     cout << "Java-Loader: build java Sprite3D.\n";
     Sprite3D* spr     = dynamic_cast<Sprite3D*>(obj);
-    jobject   spr_obj = allocJavaObject     (env, "org/karlsland/m3g/Sprite3D", spr);
+    jobject   spr_obj = allocJavaObject (env, "org/karlsland/m3g/Sprite3D");
+    setNativePointer  (env, spr_obj, spr);
+    bindJavaReference (env, spr_obj, spr);
 
     Java_build_Object3D (env, spr_obj, spr);
     Java_build_Sprite3D (env, spr_obj, spr);
@@ -249,12 +250,12 @@ void Java_build_Sprite3D (JNIEnv* env, jobject spr_obj, m3g::Sprite3D* spr)
 
     Appearance* app = spr->getAppearance ();
     if (app) {
-        env->SetObjectField (spr_obj, spr_appearance, (jobject)app->getExportedEntity());
+        env->SetObjectField (spr_obj, spr_appearance, getJavaReference(env, app));
     }
 
     Image2D* img = spr->getImage ();
     if (img) {
-        env->SetObjectField (spr_obj, spr_image, (jobject)img->getExportedEntity());
+        env->SetObjectField (spr_obj, spr_image, getJavaReference(env, app));
     }
 
     env->DeleteLocalRef (spr_class);

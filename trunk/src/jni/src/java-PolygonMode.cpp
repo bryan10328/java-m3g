@@ -23,9 +23,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1initialize
     if (env->ExceptionOccurred ()) {
         return;
     }
-    setNativePointer (env, thiz, pmode);
-    jobject entity = env->NewGlobalRef (thiz);
-    pmode->setExportedEntity (entity);
+    setNativePointer  (env, thiz, pmode);
+    bindJavaReference (env, thiz, pmode);
 }
 
 /*
@@ -38,7 +37,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_PolygonMode_jni_1finalize
 {
     cout << "Java-PolygonMode: finalize is called.\n";
     PolygonMode* pmode = (PolygonMode*)getNativePointer (env, thiz);
-    env->DeleteGlobalRef ((jobject)pmode->getExportedEntity());
+    releaseJavaReference (env, pmode);
     addUsedObject (pmode);
 }
 
@@ -256,7 +255,9 @@ void Java_new_PolygonMode         (JNIEnv* env, m3g::Object3D* obj)
 {
     cout << "Java-Loader: build java PolygonMode.\n";
     PolygonMode* pmode     = dynamic_cast<PolygonMode*>(obj);
-    jobject      pmode_obj = allocJavaObject (env, "org/karlsland/m3g/PolygonMode", pmode);
+    jobject      pmode_obj = allocJavaObject (env, "org/karlsland/m3g/PolygonMode");
+    setNativePointer  (env, pmode_obj, pmode);
+    bindJavaReference (env, pmode_obj, pmode);
 
     Java_build_Object3D    (env, pmode_obj, pmode);
     Java_build_PolygonMode (env, pmode_obj, pmode);

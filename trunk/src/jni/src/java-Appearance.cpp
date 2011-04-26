@@ -23,9 +23,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Appearance_jni_1initialize
     if (env->ExceptionOccurred ()) {
         return;
     }
-    setNativePointer (env, thiz, app);
-    jobject entity = env->NewGlobalRef (thiz);
-    app->setExportedEntity (entity);
+    setNativePointer  (env, thiz, app);
+    bindJavaReference (env, thiz, app);
 }
 
 /*
@@ -38,7 +37,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Appearance_jni_1finalize
 {
     cout << "Java-Appearance: finalize is called.\n";
     Appearance* app = (Appearance*)getNativePointer (env, thiz);
-    env->DeleteGlobalRef ((jobject)app->getExportedEntity());
+    releaseJavaReference (env, app);
     addUsedObject (app);
 }
 
@@ -56,7 +55,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Appearance_jni_1getCompositingM
     __TRY__;
     cmode = app->getCompositingMode ();
     __CATCH__;
-    return (cmode != NULL) ? (jobject)cmode->getExportedEntity() : (jobject)NULL;
+    return getJavaReference (env, cmode);
 }
 
 /*
@@ -73,7 +72,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Appearance_jni_1getFog
     __TRY__;
     fog = app->getFog ();
     __CATCH__;
-    return (fog != NULL) ? (jobject)fog->getExportedEntity() : (jobject)NULL;
+    return getJavaReference (env, fog);
 }
 
 /*
@@ -107,7 +106,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Appearance_jni_1getMaterial
     __TRY__;
     mat = app->getMaterial ();
     __CATCH__;
-    return (mat != NULL) ? (jobject)mat->getExportedEntity() : (jobject)NULL;
+    return getJavaReference (env, mat);
 }
 
 /*
@@ -124,7 +123,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Appearance_jni_1getPolygonMode
     __TRY__;
     pmode = app->getPolygonMode ();
     __CATCH__;
-    return (pmode != NULL) ? (jobject)pmode->getExportedEntity() : (jobject)NULL;
+    return getJavaReference (env, pmode);
 }
 
 /*
@@ -141,7 +140,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Appearance_jni_1getTexture
     __TRY__;
     tex = app->getTexture (index);
     __CATCH__;
-    return (tex != NULL) ? (jobject)tex->getExportedEntity() : (jobject)NULL;
+    return getJavaReference (env, tex);
 }
 
 
@@ -249,7 +248,7 @@ JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Appearance_jni_1print
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Appearance: print is called.\n";
-    Appearance* app = (Appearance*)getNativePointer (env, thiz);
+    Appearance*   app = (Appearance*)getNativePointer (env, thiz);
     ostringstream oss;
     __TRY__;
     app->print (oss);
@@ -261,7 +260,9 @@ void Java_new_Appearance          (JNIEnv* env, m3g::Object3D* obj)
 {
     cout << "Java-Loader: build java Appearance.\n";
     Appearance* app     = dynamic_cast<Appearance*>(obj);
-    jobject     app_obj = allocJavaObject (env, "org/karlsland/m3g/Appearance", app);
+    jobject     app_obj = allocJavaObject (env, "org/karlsland/m3g/Appearance");
+    setNativePointer  (env, app_obj, app);
+    bindJavaReference (env, app_obj, app);
 
     Java_build_Object3D   (env, app_obj, app);
     Java_build_Appearance (env, app_obj, app);
@@ -282,17 +283,17 @@ void Java_build_Appearance (JNIEnv* env, jobject app_obj, m3g::Appearance* app)
 
     PolygonMode* pmode = app->getPolygonMode ();
     if (pmode) {
-        env->SetObjectField (app_obj, app_polygonMode, (jobject)pmode->getExportedEntity());
+        env->SetObjectField (app_obj, app_polygonMode, getJavaReference(env, pmode));
     }
 
     CompositingMode* cmode = app->getCompositingMode ();
     if (cmode) {
-        env->SetObjectField (app_obj, app_compositingMode, (jobject)cmode->getExportedEntity());
+        env->SetObjectField (app_obj, app_compositingMode, getJavaReference(env, cmode));
     }
 
     Material* mat = app->getMaterial ();
     if (mat) {
-        env->SetObjectField (app_obj, app_material, (jobject)mat->getExportedEntity());
+        env->SetObjectField (app_obj, app_material, getJavaReference(env, mat));
     }
 
     jclass    textures_class = env->FindClass   ("java/util/ArrayList");
@@ -303,7 +304,7 @@ void Java_build_Appearance (JNIEnv* env, jobject app_obj, m3g::Appearance* app)
     for (int i = 0; i < MAX_TEXTURE_UNITS; i++) {
         Texture2D* tex = app->getTexture (i);
         if (tex) {
-            env->CallObjectMethod (textures_obj, textures_add, (jobject)tex->getExportedEntity());
+            env->CallObjectMethod (textures_obj, textures_add, getJavaReference(env, tex));
         } else {
             env->CallObjectMethod (textures_obj, textures_add, (jobject)0);
         }
@@ -312,7 +313,7 @@ void Java_build_Appearance (JNIEnv* env, jobject app_obj, m3g::Appearance* app)
 
     Fog* fog = app->getFog ();
     if (fog) {
-        env->SetObjectField (app_obj, app_fog, (jobject)fog->getExportedEntity());
+        env->SetObjectField (app_obj, app_fog, getJavaReference(env, fog));
     }
 
     env->DeleteLocalRef (app_class);

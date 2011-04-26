@@ -24,9 +24,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1initialize
     if (env->ExceptionOccurred ()) {
         return;
     }
-    setNativePointer (env, thiz, anim_track);
-    jobject entity = env->NewGlobalRef (thiz);
-    anim_track->setExportedEntity (entity);
+    setNativePointer  (env, thiz, anim_track);
+    bindJavaReference (env, thiz, anim_track);
 }
 
 
@@ -40,7 +39,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1finalize
 {
     cout << "Java-AnimationTrack: finalize is called.\n";
     AnimationTrack* anim_track = (AnimationTrack*)getNativePointer (env, thiz);
-    env->DeleteGlobalRef ((jobject)anim_track->getExportedEntity());
+    releaseJavaReference (env, anim_track);
     addUsedObject (anim_track);
 }
 
@@ -54,11 +53,11 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1getControll
 {
     cout << "Java-AnimationTrack: getController is called.\n";
     AnimationTrack*      anim_track = (AnimationTrack*)getNativePointer (env, thiz);
-    AnimationController* anim_cntr  = NULL;
+    AnimationController* anim_ctrl  = NULL;
     __TRY__;
-    anim_cntr = anim_track->getController ();
+    anim_ctrl = anim_track->getController ();
     __CATCH__;
-    return (anim_cntr != NULL) ? (jobject)anim_cntr->getExportedEntity() : (jobject)NULL;
+    return getJavaReference (env, anim_ctrl);
 }
 
 /*
@@ -75,7 +74,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1getKeyframe
     __TRY__;
     key_seq = anim_track->getKeyframeSequence ();
     __CATCH__;
-    return (key_seq != NULL) ? (jobject)key_seq->getExportedEntity() : (jobject)NULL;
+    return getJavaReference (env, key_seq);
 }
 
 
@@ -105,7 +104,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1setController
   (JNIEnv* env, jobject thiz, jobject animationController)
 {
     cout << "Java-AnimationTrack: setController is called.\n";
-    AnimationTrack*      anim_track = (AnimationTrack*)getNativePointer (env, thiz);
+    AnimationTrack*      anim_track = (AnimationTrack*)     getNativePointer (env, thiz);
     AnimationController* anim_cntr  = (AnimationController*)getNativePointer (env, animationController);
     __TRY__;
     anim_track->setController (anim_cntr);
@@ -122,7 +121,7 @@ JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_AnimationTrack_jni_1print
 {
     cout << "Java-AnimationTrack: print is called.\n";
     AnimationTrack* anim_track = (AnimationTrack*)getNativePointer (env, thiz);
-    ostringstream oss;
+    ostringstream   oss;
     __TRY__;
     anim_track->print (oss);
     __CATCH__;
@@ -133,7 +132,9 @@ void Java_new_AnimationTrack      (JNIEnv* env, m3g::Object3D* obj)
 {
     cout << "Java-Loader: build java AnimationTrack.\n";
     AnimationTrack* track     = dynamic_cast<AnimationTrack*>(obj);
-    jobject         track_obj = allocJavaObject (env, "org/karlsland/m3g/AnimationTrack", track);
+    jobject         track_obj = allocJavaObject (env, "org/karlsland/m3g/AnimationTrack");
+    setNativePointer  (env, track_obj, track);
+    bindJavaReference (env, track_obj, track);
 
     Java_build_Object3D       (env, track_obj, track);
     Java_build_AnimationTrack (env, track_obj, track);
@@ -154,7 +155,7 @@ void Java_build_AnimationTrack (JNIEnv* env, jobject track_obj, m3g::AnimationTr
         if (key_seq->getExportedEntity() == 0) {
             Java_new_JavaM3GObject (env, key_seq);
         }
-        env->SetObjectField (track_obj, track_key_seq, (jobject)key_seq->getExportedEntity());
+        env->SetObjectField (track_obj, track_key_seq, getJavaReference(env, key_seq));
     }
 
     AnimationController* controller = track->getController ();
@@ -162,7 +163,7 @@ void Java_build_AnimationTrack (JNIEnv* env, jobject track_obj, m3g::AnimationTr
         if (controller->getExportedEntity() == 0) {
             Java_new_JavaM3GObject (env, controller);
         }
-        env->SetObjectField (track_obj, track_controller, (jobject)controller->getExportedEntity());
+        env->SetObjectField (track_obj, track_controller, getJavaReference(env, controller));
     }
 
     env->DeleteLocalRef (track_class);

@@ -19,8 +19,8 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1addLight
 {
     cout << "Java-Graphics3D: addLight is called.\n";
     Graphics3D* g3d   = (Graphics3D*)getNativePointer (env, thiz);
-    Light*      lgh   = (Light*)getNativePointer (env, light);
-    Transform*  trans = (Transform*)getNativePointer (env, transform);
+    Light*      lgh   = (Light*)     getNativePointer (env, light);
+    Transform*  trans = (Transform*) getNativePointer (env, transform);
     int index = 0;
     __TRY__;
     index = g3d->addLight (lgh, *trans);
@@ -38,7 +38,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1bindTarget__Ljava_
 {
     cout << "Java-Graphics3D: bindTarget is called.\n";
     Graphics3D* g3d = (Graphics3D*)getNativePointer (env, thiz);
-    void*       tar = (void*)getNativePointer (env, target);
+    void*       tar = (void*)      getNativePointer (env, target);
     __TRY__;
     g3d->bindTarget (tar);
     __CATCH__;
@@ -54,7 +54,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1bindTarget__Ljava_
 {
     cout << "Java-Graphics3D: bindTarget is called.\n";
     Graphics3D* g3d = (Graphics3D*)getNativePointer (env, thiz);
-    void*       tar = (void*)getNativePointer (env, target);
+    void*       tar = (void*)      getNativePointer (env, target);
     __TRY__;
     g3d->bindTarget (tar, depthBufferEnable, hints);
     __CATCH__;
@@ -70,7 +70,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1clear
 {
     cout << "Java-Graphics3D: clear is called.\n";
     Graphics3D* g3d = (Graphics3D*)getNativePointer (env, thiz);
-    Background* bg = (Background*)getNativePointer (env, background);
+    Background* bg  = (Background*)getNativePointer (env, background);
     __TRY__;
     g3d->clear (bg);
     __CATCH__;
@@ -86,12 +86,12 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getCamera
 {
     cout << "Java-Graphics3D: getCamera is called.\n";
     Graphics3D* g3d   = (Graphics3D*)getNativePointer (env, thiz);
-    Transform*  trans = (Transform*)getNativePointer (env, transform);
+    Transform*  trans = (Transform*) getNativePointer (env, transform);
     Camera*     cam   = NULL;
     __TRY__;
     cam = g3d->getCamera (trans);
     __CATCH__;
-    return (cam != NULL) ? (jobject)cam->getExportedEntity() : (jobject)NULL;
+    return getJavaReference (env, cam);
 }
 
 /*
@@ -161,7 +161,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getInstance
     if (g3d && g3d->getExportedEntity() == NULL) {
         Java_new_Graphics3D (env, g3d);
     }
-    return (g3d != NULL) ? (jobject)g3d->getExportedEntity() : (jobject)0;
+    return getJavaReference (env, g3d);
 }
 
 /*
@@ -179,7 +179,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1getLight
     __TRY__;
     lgh = g3d->getLight (index, trans);
     __CATCH__;
-    return (lgh != NULL) ? (jobject)lgh->getExportedEntity() : (jobject)NULL;
+    return getJavaReference (env, lgh);
 }
 
 /*
@@ -341,8 +341,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1render__Lorg_karls
 {
     cout << "Java-Graphics3D: render1 is called.\n";
     Graphics3D* g3d   = (Graphics3D*)getNativePointer (env, thiz);
-    Node*       nod   = (Node*)getNativePointer (env, node);
-    Transform*  trans = (Transform*)getNativePointer (env, transform);
+    Node*       nod   = (Node*)      getNativePointer (env, node);
+    Transform*  trans = (Transform*) getNativePointer (env, transform);
     __TRY__;
     g3d->render (nod, trans);
     __CATCH__;
@@ -363,11 +363,11 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1render__Lorg_karls
   (JNIEnv* env, jobject thiz, jobject vertices, jobject triangles, jobject appearances, jobject transform)
 {
     cout << "Java-Graphics3D: render2 is called.\n";
-    Graphics3D*   g3d   = (Graphics3D*)getNativePointer (env, thiz);    
+    Graphics3D*   g3d   = (Graphics3D*)  getNativePointer (env, thiz);    
     VertexBuffer* vbuf  = (VertexBuffer*)getNativePointer (env, vertices);
-    IndexBuffer*  ibuf  = (IndexBuffer*)getNativePointer (env, triangles);
-    Appearance*   apps  = (Appearance*)getNativePointer (env, appearances);
-    Transform*    trans = (Transform*)getNativePointer (env, transform);
+    IndexBuffer*  ibuf  = (IndexBuffer*) getNativePointer (env, triangles);
+    Appearance*   apps  = (Appearance*)  getNativePointer (env, appearances);
+    Transform*    trans = (Transform*)   getNativePointer (env, transform);
     __TRY__;
     g3d->render (vbuf, ibuf, apps, trans);
     __CATCH__;
@@ -382,11 +382,11 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1render__Lorg_karls
   (JNIEnv* env, jobject thiz, jobject vertices, jobject triangles, jobject appearances, jobject transform, jint scope)
 {
     cout << "Java-Graphics3D: render3 is called.\n";
-    Graphics3D*   g3d   = (Graphics3D*)getNativePointer (env, thiz);    
+    Graphics3D*   g3d   = (Graphics3D*)  getNativePointer (env, thiz);
     VertexBuffer* vbuf  = (VertexBuffer*)getNativePointer (env, vertices);
-    IndexBuffer*  ibuf  = (IndexBuffer*)getNativePointer (env, triangles);
-    Appearance*   apps  = (Appearance*)getNativePointer (env, appearances);
-    Transform*    trans = (Transform*)getNativePointer (env, transform);
+    IndexBuffer*  ibuf  = (IndexBuffer*) getNativePointer (env, triangles);
+    Appearance*   apps  = (Appearance*)  getNativePointer (env, appearances);
+    Transform*    trans = (Transform*)   getNativePointer (env, transform);
     __TRY__;
     g3d->render (vbuf, ibuf, apps, trans, scope);
     __CATCH__;
@@ -402,7 +402,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1render__Lorg_karls
 {
     cout << "Java-Graphics3D: render4(world) is called.\n";
     Graphics3D* g3d = (Graphics3D*)getNativePointer (env, thiz);
-    World*      wld = (World*)getNativePointer (env, world);
+    World*      wld = (World*)     getNativePointer (env, world);
     __TRY__;
     g3d->render (wld);
     __CATCH__;
@@ -433,8 +433,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1setCamera
 {
     cout << "Java-Graphics3D: setCamera is called.\n";
     Graphics3D* g3d   = (Graphics3D*)getNativePointer (env, thiz);
-    Camera*     cam   = (Camera*)getNativePointer (env, camera);
-    Transform*  trans = (Transform*)getNativePointer (env, transform);
+    Camera*     cam   = (Camera*)    getNativePointer (env, camera);
+    Transform*  trans = (Transform*) getNativePointer (env, transform);
     __TRY__;
     g3d->setCamera (cam, *trans);
     __CATCH__;
@@ -465,8 +465,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1setLight
 {
     cout << "Java-Graphics3D: setLight is called.\n";
     Graphics3D* g3d   = (Graphics3D*)getNativePointer (env, thiz);
-    Light*      lgh   = (Light*)getNativePointer (env, light);
-    Transform*  trans = (Transform*)getNativePointer (env, transform);
+    Light*      lgh   = (Light*)     getNativePointer (env, light);
+    Transform*  trans = (Transform*) getNativePointer (env, transform);
     __TRY__;
     g3d->setLight (index, lgh, *trans);
     __CATCH__;
@@ -496,7 +496,7 @@ JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1print
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Graphics3D: print is called.\n";
-    Graphics3D* g3d = (Graphics3D*)getNativePointer (env, thiz);
+    Graphics3D*   g3d = (Graphics3D*)getNativePointer (env, thiz);
     ostringstream oss;
     __TRY__;
     g3d->print (oss);
@@ -505,18 +505,15 @@ JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Graphics3D_jni_1print
 }
 
 
-void Java_new_Graphics3D               (JNIEnv* env, m3g::Graphics3D* g3d)
+void Java_new_Graphics3D (JNIEnv* env, m3g::Graphics3D* g3d)
 {
     cout << "Java-Graphics3D: new java Graphics3D.\n";
+    jobject  g3d_obj = allocJavaObject (env, "org/karlsland/m3g/Graphics3D");
+    setNativePointer  (env, g3d_obj, g3d);
 
-    jclass   g3d_class         = env->FindClass ("org/karlsland/m3g/Graphics3D");
-    jobject  g3d_obj           = env->AllocObject (g3d_class);
+    jobject entity = env->NewGlobalRef (g3d_obj);
+    g3d->setExportedEntity (entity);
 
-    jobject  g3d_entity        = env->NewGlobalRef (g3d_obj);
-    setNativePointer (env, g3d_obj, g3d);
-    g3d->setExportedEntity (g3d_entity);
-
-    env->DeleteLocalRef (g3d_class);
     env->DeleteLocalRef (g3d_obj);
 }
 

@@ -23,9 +23,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1initialize
     if (env->ExceptionOccurred ()) {
         return;
     }
-    setNativePointer (env, thiz, lgh);
-    jobject entity = env->NewGlobalRef (thiz);
-    lgh->setExportedEntity (entity);
+    setNativePointer  (env, thiz, lgh);
+    bindJavaReference (env, thiz, lgh);
 }
 
 /*
@@ -38,7 +37,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Light_jni_1finalize
 {
     cout << "Java-Light: finalize is called.\n";
     Light* lgh = (Light*)getNativePointer (env, thiz);
-    env->DeleteGlobalRef ((jobject)lgh->getExportedEntity());
+    releaseJavaReference (env, lgh);
     addUsedObject (lgh);
 }
 
@@ -289,7 +288,9 @@ void Java_new_Light               (JNIEnv* env, m3g::Object3D* obj)
 {
     cout << "Java-Loader: build java Light.\n";
     Light*  lgh     = dynamic_cast<Light*>(obj);
-    jobject lgh_obj = allocJavaObject (env, "org/karlsland/m3g/Light", lgh);
+    jobject lgh_obj = allocJavaObject (env, "org/karlsland/m3g/Light");
+    setNativePointer  (env, lgh_obj, lgh);
+    bindJavaReference (env, lgh_obj, lgh);
 
     Java_build_Object3D      (env, lgh_obj, lgh);
     Java_build_Transformable (env, lgh_obj, lgh);

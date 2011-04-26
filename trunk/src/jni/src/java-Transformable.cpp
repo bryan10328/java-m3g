@@ -23,9 +23,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1initialize
     if (env->ExceptionOccurred ()) {
         return;
     }
-    setNativePointer (env, thiz, trans);
-    jobject entity = env->NewGlobalRef (thiz);
-    trans->setExportedEntity (entity);
+    setNativePointer  (env, thiz, trans);
+    bindJavaReference (env, thiz, trans);
 }
 
 /*
@@ -38,7 +37,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1finalize
 {
     cout << "Java-Transformable: finalize is called.\n";
     Transformable* trans = (Transformable*)getNativePointer (env, thiz);
-    env->DeleteGlobalRef ((jobject)trans->getExportedEntity());
+    releaseJavaReference (env, trans);
     addUsedObject (trans);
 }
 
@@ -52,7 +51,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1getCompositeTra
 {
     cout << "Java-Transformable: getCompositingTransform is called.\n";
     Transformable* trans = (Transformable*)getNativePointer (env, thiz);
-    Transform*     t     = (Transform*)getNativePointer (env, transform);
+    Transform*     t     = (Transform*)    getNativePointer (env, transform);
     __TRY__;
     trans->getCompositeTransform (t);
     __CATCH__;
@@ -102,7 +101,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1getTransform
 {
     cout << "Java-Transformable: getTransform is called.\n";
     Transformable* trans = (Transformable*)getNativePointer (env, thiz);
-    Transform*     t     = (Transform*)getNativePointer (env, transform);
+    Transform*     t     = (Transform*)    getNativePointer (env, transform);
     __TRY__;
     trans->getTransform (t);
     __CATCH__;
@@ -210,7 +209,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transformable_jni_1setTransform
 {
     cout << "Java-Transformable: setTransform is called.\n";
     Transformable* trans = (Transformable*)getNativePointer (env, thiz);
-    Transform*     t     = (Transform*)getNativePointer (env, transform);
+    Transform*     t     = (Transform*)    getNativePointer (env, transform);
     __TRY__;
     trans->setTransform (t);
     __CATCH__;

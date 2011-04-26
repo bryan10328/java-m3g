@@ -23,9 +23,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1initialize
     if (env->ExceptionOccurred ()) {
         return;
     }
-    setNativePointer (env, thiz, grp);
-    jobject entity = env->NewGlobalRef (thiz);
-    grp->setExportedEntity (entity);
+    setNativePointer  (env, thiz, grp);
+    bindJavaReference (env, thiz, grp);
 }
 
 /*
@@ -38,7 +37,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1finalize
 {
     cout << "Java-Group: finalize is called.\n";
     Group* grp = (Group*)getNativePointer (env, thiz);
-    env->DeleteGlobalRef ((jobject)grp->getExportedEntity());
+    releaseJavaReference (env, grp);
     addUsedObject (grp);
 }
 
@@ -51,7 +50,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1addChild
   (JNIEnv* env, jobject thiz, jobject child)
 {
     cout << "Java-Group: addChild is called.\n";
-    Group* grp = (Group*)getNativePointer (env, thiz);
+    Group* grp  = (Group*)getNativePointer (env, thiz);
     Node*  node = (Node*)getNativePointer (env, child);
     __TRY__;
     grp->addChild (node);
@@ -72,7 +71,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Group_jni_1getChild
     __TRY__;
     node = grp->getChild (index);
     __CATCH__;
-    return (node != NULL) ? (jobject)node->getExportedEntity() : (jobject)NULL;
+    return getJavaReference (env, node);
 }
 
 /*
@@ -139,7 +138,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1removeChild
 {
     cout << "Java-Group: removeChild is called.\n";
     Group* grp  = (Group*)getNativePointer (env, thiz);
-    Node*  node = (Node*)getNativePointer (env, child);
+    Node*  node = (Node*) getNativePointer (env, child);
     __TRY__;
     grp->removeChild (node);
     __CATCH__;
@@ -167,7 +166,9 @@ void Java_new_Group               (JNIEnv* env, m3g::Object3D* obj)
 {
     cout << "Java-Loader: build java Group.\n";
     Group*   grp     = dynamic_cast<Group*>(obj);
-    jobject  grp_obj = allocJavaObject (env, "org/karlsland/m3g/Group", grp);
+    jobject  grp_obj = allocJavaObject (env, "org/karlsland/m3g/Group");
+    setNativePointer  (env, grp_obj, grp);
+    bindJavaReference (env, grp_obj, grp);
 
     Java_build_Object3D      (env, grp_obj, grp);
     Java_build_Transformable (env, grp_obj, grp);
@@ -180,10 +181,8 @@ void Java_new_Group               (JNIEnv* env, m3g::Object3D* obj)
 
 void Java_build_Group (JNIEnv* env, jobject grp_obj, m3g::Group* grp)
 {
-    jclass   grp_class    = env->GetObjectClass (grp_obj);
-    jfieldID grp_children = env->GetFieldID     (grp_class, "children", "Ljava/util/List;");
-
-
+    jclass    grp_class      = env->GetObjectClass (grp_obj);
+    jfieldID  grp_children   = env->GetFieldID     (grp_class, "children", "Ljava/util/List;");
     jclass    children_class = env->FindClass   ("java/util/ArrayList");
     jmethodID children_init  = env->GetMethodID (children_class, "<init>", "()V");
     jmethodID children_add   = env->GetMethodID (children_class, "add", "(Ljava/lang/Object;)Z");
@@ -195,7 +194,7 @@ void Java_build_Group (JNIEnv* env, jobject grp_obj, m3g::Group* grp)
             if (child->getExportedEntity() == 0) {
                 Java_new_JavaM3GObject (env, child);
             }
-            env->CallObjectMethod (children_obj, children_add, (jobject)child->getExportedEntity());
+            env->CallObjectMethod (children_obj, children_add, getJavaReference(env, child));
         }
     }
     env->SetObjectField (grp_obj, grp_children, children_obj);

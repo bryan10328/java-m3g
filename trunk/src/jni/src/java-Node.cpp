@@ -23,9 +23,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Node_jni_1initialize
     if (env->ExceptionOccurred ()) {
         return;
     }
-    setNativePointer (env, thiz, node);
-    jobject entity = env->NewGlobalRef (thiz);
-    node->setExportedEntity (entity);
+    setNativePointer  (env, thiz, node);
+    bindJavaReference (env, thiz, node);
 }
 
 /*
@@ -38,7 +37,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Node_jni_1finalize
 {
     cout << "Java-Node: finalize is called.\n";
     Node* node = (Node*)getNativePointer (env, thiz);
-    env->DeleteGlobalRef ((jobject)node->getExportedEntity());
+    releaseJavaReference (env, node);
     addUsedObject (node);
 }
 
@@ -73,7 +72,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Node_jni_1getAlignmentReference
     __TRY__;
     ref = node->getAlignmentReference (axis);
     __CATCH__;
-    return (ref != NULL) ? (jobject)ref->getExportedEntity() : (jobject)NULL;
+    return getJavaReference (env, ref);
 }
 
 /*
@@ -119,12 +118,12 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Node_jni_1getParent
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Node: getParent is called.\n";
-    Node* node = (Node*)getNativePointer (env, thiz);
+    Node* node   = (Node*)getNativePointer (env, thiz);
     Node* parent = NULL;
     __TRY__;
     parent = node->getParent ();
     __CATCH__;
-    return (parent != NULL) ? (jobject)parent->getExportedEntity() : (jobject)NULL;
+    return getJavaReference (env, parent);
 }
 
 /*
@@ -136,8 +135,8 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Node_jni_1getScope
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Node: getScope is called.\n";
-    Node* node = (Node*)getNativePointer (env, thiz);
-    int scope = 0;
+    Node* node  = (Node*)getNativePointer (env, thiz);
+    int   scope = 0;
     __TRY__;
     scope = node->getScope ();
     __CATCH__;
@@ -172,7 +171,7 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Node_jni_1isPickingEnabled
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-Node: isPickingEnable is called.\n";
-    Node* node = (Node*)getNativePointer (env, thiz);
+    Node* node   = (Node*)getNativePointer (env, thiz);
     bool  enable = false;
     __TRY__;
     enable = node->isPickingEnabled ();
@@ -304,7 +303,7 @@ void Java_build_Node (JNIEnv* env, jobject node_obj, m3g::Node* node)
 
     Node* parent = node->getParent ();
     if (parent) {
-        env->SetObjectField (node_obj, node_parent, (jobject)parent->getExportedEntity());
+        env->SetObjectField (node_obj, node_parent, getJavaReference(env, parent));
     }
 
     Node* yRef = node->getAlignmentReference (Node::Y_AXIS);
@@ -312,7 +311,7 @@ void Java_build_Node (JNIEnv* env, jobject node_obj, m3g::Node* node)
         if (yRef->getExportedEntity() == 0) {
             Java_new_JavaM3GObject (env, yRef);
         }
-        env->SetObjectField (node_obj, node_yRef, (jobject)yRef->getExportedEntity());
+        env->SetObjectField (node_obj, node_yRef, getJavaReference(env, yRef));
     }
 
     Node* zRef = node->getAlignmentReference (Node::Z_AXIS);
@@ -320,7 +319,7 @@ void Java_build_Node (JNIEnv* env, jobject node_obj, m3g::Node* node)
         if (zRef->getExportedEntity() == 0) {
             Java_new_JavaM3GObject (env, zRef);
         }
-        env->SetObjectField (node_obj, node_zRef, (jobject)zRef->getExportedEntity());
+        env->SetObjectField (node_obj, node_zRef, getJavaReference(env, zRef));
     }
 
     env->DeleteLocalRef (node_class);

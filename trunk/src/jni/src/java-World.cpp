@@ -24,9 +24,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_World_jni_1initialize
     if (env->ExceptionOccurred ()) {
         return;
     }
-    setNativePointer (env, thiz, wld);
-    jobject entity = env->NewGlobalRef (thiz);
-    wld->setExportedEntity (entity);
+    setNativePointer  (env, thiz, wld);
+    bindJavaReference (env, thiz, wld);
 }
 
 /*
@@ -39,7 +38,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_World_jni_1finalize
 {
     cout << "Java-World: finalize is called.\n";
     World* wld = (World*)getNativePointer (env, thiz);
-    env->DeleteGlobalRef ((jobject)wld->getExportedEntity());
+    releaseJavaReference (env, wld);
     addUsedObject (wld);
 }
 
@@ -57,9 +56,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_World_jni_1getActiveCamera
     __TRY__;
     cam = wld->getActiveCamera ();
     __CATCH__;
-    //setErrorString ("wld.cam = %p", cam);
-    //setErrorString ("wld.cam(entity), cam = %p, entity = %ld, jobject = %p", cam, cam->getExportedEntity(), (jobject)cam->getExportedEntity());
-    return (cam != NULL) ? (jobject)cam->getExportedEntity() : (jobject)NULL;
+    return getJavaReference (env, cam);
 }
 
 /*
@@ -76,7 +73,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_World_jni_1getBackground
     __TRY__;
     bg = wld->getBackground ();
     __CATCH__;
-    return (bg != NULL) ? (jobject)bg->getExportedEntity() : (jobject)NULL;
+    return getJavaReference (env, bg);
 }
 
 /*
@@ -88,7 +85,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_World_jni_1setActiveCamera
   (JNIEnv* env, jobject thiz, jobject camera)
 {
     cout << "Java-World: setActiveCamera is called.\n";
-    World*  wld = (World*)getNativePointer (env, thiz);
+    World*  wld = (World*) getNativePointer (env, thiz);
     Camera* cam = (Camera*)getNativePointer (env, camera);
     __TRY__;
     wld->setActiveCamera (cam);
@@ -104,7 +101,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_World_jni_1setBackground
   (JNIEnv* env, jobject thiz, jobject background)
 {
     cout << "Java-World: setBackground is called.\n";
-    World*      wld = (World*)getNativePointer (env, thiz);
+    World*      wld = (World*)     getNativePointer (env, thiz);
     Background* bg  = (Background*)getNativePointer (env, background);
     __TRY__;
     wld->setBackground (bg);
@@ -128,11 +125,13 @@ JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_World_jni_1print
     return env->NewStringUTF (oss.str().c_str());
 }
 
-void Java_new_World               (JNIEnv* env, m3g::Object3D* obj)
+void Java_new_World (JNIEnv* env, m3g::Object3D* obj)
 {
     cout << "Java-Loader: build java World.\n";
     World*  wld     = dynamic_cast<World*>(obj);
-    jobject wld_obj = allocJavaObject (env, "org/karlsland/m3g/World", wld);
+    jobject wld_obj = allocJavaObject (env, "org/karlsland/m3g/World");
+    setNativePointer  (env, wld_obj, wld);
+    bindJavaReference (env, wld_obj, wld);
 
     Java_build_Object3D      (env, wld_obj, wld);
     Java_build_Transformable (env, wld_obj, wld);
@@ -152,12 +151,12 @@ void Java_build_World (JNIEnv* env, jobject wld_obj, m3g::World* wld)
 
     Camera* cam = wld->getActiveCamera ();
     if (cam) {
-        env->SetObjectField (wld_obj, wld_active_camera, (jobject)cam->getExportedEntity());
+        env->SetObjectField (wld_obj, wld_active_camera, getJavaReference(env, cam));
     }
 
     Background* bg = wld->getBackground ();
     if (bg) {
-        env->SetObjectField (wld_obj, wld_background, (jobject)bg->getExportedEntity());
+        env->SetObjectField (wld_obj, wld_background, getJavaReference(env, bg));
     }
 
     env->DeleteLocalRef (wld_class);

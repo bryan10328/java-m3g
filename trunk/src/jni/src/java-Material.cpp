@@ -23,9 +23,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Material_jni_1initialize
     if (env->ExceptionOccurred ()) {
         return;
     }
-    setNativePointer (env, thiz, mat);
-    jobject entity = env->NewGlobalRef (thiz);
-    mat->setExportedEntity (entity);
+    setNativePointer  (env, thiz, mat);
+    bindJavaReference (env, thiz, mat);
 }
 
 /*
@@ -38,7 +37,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Material_jni_1finalize
 {
     cout << "Java-Material: finalize is called.\n";
     Material* mat = (Material*)getNativePointer (env, thiz);
-    env->DeleteGlobalRef ((jobject)mat->getExportedEntity());
+    releaseJavaReference (env, mat);
     addUsedObject (mat);
 }
 
@@ -159,7 +158,9 @@ void Java_new_Material            (JNIEnv* env, m3g::Object3D* obj)
 {
     cout << "Java-Loader: build java Material.\n";
     Material* mat     = dynamic_cast<Material*>(obj);
-    jobject   mat_obj = allocJavaObject (env, "org/karlsland/m3g/Material", mat);
+    jobject   mat_obj = allocJavaObject (env, "org/karlsland/m3g/Material");
+    setNativePointer  (env, mat_obj, mat);
+    bindJavaReference (env, mat_obj, mat);
 
     Java_build_Object3D (env, mat_obj, mat);
     Java_build_Material (env, mat_obj, mat);

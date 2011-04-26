@@ -24,9 +24,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Texture2D_jni_1initialize
     if (env->ExceptionOccurred ()) {
         return;
     }
-    setNativePointer (env, thiz, tex);
-    jobject entity = env->NewGlobalRef (thiz);
-    tex->setExportedEntity (entity);
+    setNativePointer  (env, thiz, tex);
+    bindJavaReference (env, thiz, tex);
 }
 
 /*
@@ -39,7 +38,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Texture2D_jni_1finalize
 {
     cout << "Java-Texture2D: finalize is called. 1\n";
     Texture2D* tex = (Texture2D*)getNativePointer (env, thiz);
-    env->DeleteGlobalRef ((jobject)tex->getExportedEntity());
+    releaseJavaReference (env, tex);
     addUsedObject (tex);
 }
 
@@ -70,7 +69,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Texture2D_jni_1getBlending
 {
     cout << "Java-Texture2D: getBlending is called.\n";
     Texture2D* tex = (Texture2D*)getNativePointer (env, thiz);
-    int blending;
+    int blending = 0;
     __TRY__;
     blending = tex->getBlending ();
     __CATCH__;
@@ -91,7 +90,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Texture2D_jni_1getImage
     __TRY__;
     img = tex->getImage ();
     __CATCH__;
-    return (img != NULL) ? (jobject)img->getExportedEntity() : (jobject)0;
+    return getJavaReference (env, img);
 }
 
 /*
@@ -217,7 +216,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Texture2D_jni_1setImage
 {
     cout << "Java-Texture2D: setImage is called.\n";
     Texture2D* tex = (Texture2D*)getNativePointer (env, thiz);
-    Image2D*   img = (Image2D*)getNativePointer (env, image);
+    Image2D*   img = (Image2D*)  getNativePointer (env, image);
     __TRY__;
     tex->setImage (img);
     __CATCH__;
@@ -259,7 +258,9 @@ void Java_new_Texture2D           (JNIEnv* env, m3g::Object3D* obj)
 {
     cout << "Java-Loader: build java Texture2D.\n";
     Texture2D* tex       = dynamic_cast<Texture2D*>(obj);
-    jobject    tex_obj   = allocJavaObject     (env, "org/karlsland/m3g/Texture2D", tex);
+    jobject    tex_obj   = allocJavaObject     (env, "org/karlsland/m3g/Texture2D");
+    setNativePointer  (env, tex_obj, tex);
+    bindJavaReference (env, tex_obj, tex);
 
     Java_build_Object3D  (env, tex_obj, tex);
     Java_build_Texture2D (env, tex_obj, tex);
@@ -274,7 +275,7 @@ void Java_build_Texture2D (JNIEnv* env, jobject tex_obj, m3g::Texture2D* tex)
 
     Image2D* img = tex->getImage ();
     if (img) {
-        env->SetObjectField (tex_obj, tex_image, (jobject)tex->getExportedEntity());
+        env->SetObjectField (tex_obj, tex_image, getJavaReference(env, tex));
     }
 
     env->DeleteLocalRef (tex_class);

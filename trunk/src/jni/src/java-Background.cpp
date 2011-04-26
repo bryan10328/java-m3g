@@ -23,9 +23,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1initialize
     if (env->ExceptionOccurred ()) {
         return;
     }
-    setNativePointer (env, thiz, bg);
-    jobject entity = env->NewGlobalRef (thiz);
-    bg->setExportedEntity (entity);
+    setNativePointer  (env, thiz, bg);
+    bindJavaReference (env, thiz, bg);
 }
 
 /*
@@ -38,7 +37,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Background_jni_1finalize
 {
     cout << "Java-Background: finalize is called.\n";
     Background* bg = (Background*)getNativePointer (env, thiz);
-    env->DeleteGlobalRef ((jobject)bg->getExportedEntity());
+    releaseJavaReference (env, bg);
     addUsedObject (bg);
 }
 
@@ -141,7 +140,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Background_jni_1getImage
     __TRY__;
     img = bg->getImage ();
     __CATCH__;
-    return (img != NULL) ? (jobject)img->getExportedEntity() : (jobject)NULL;
+    return getJavaReference (env, img);
 }
 
 /*
@@ -325,8 +324,10 @@ void Java_new_Background          (JNIEnv* env, m3g::Object3D* obj)
 {
     cout << "Java-Loader: build java Background.\n";
     Background* bg     = dynamic_cast<Background*>(obj);
-    jobject     bg_obj = allocJavaObject (env, "org/karlsland/m3g/Background", bg);
-
+    jobject     bg_obj = allocJavaObject (env, "org/karlsland/m3g/Background");
+    setNativePointer  (env, bg_obj, bg);
+    bindJavaReference (env, bg_obj, bg);
+    
     Java_build_Object3D   (env, bg_obj, bg);
     Java_build_Background (env, bg_obj, bg);
 
@@ -341,7 +342,7 @@ void Java_build_Background (JNIEnv* env, jobject bg_obj, m3g::Background* bg)
 
     Image2D* img = bg->getImage ();
     if (img) {
-        env->SetObjectField (bg_obj, bg_image, (jobject)img->getExportedEntity());
+        env->SetObjectField (bg_obj, bg_image, getJavaReference(env, img));
     }
 
     env->DeleteLocalRef (bg_class);

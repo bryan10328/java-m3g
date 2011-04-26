@@ -30,16 +30,33 @@ void setNativePointer (JNIEnv* env, jobject obj, void* pointer)
     env->DeleteLocalRef (clazz);
 }
 
+jobject getJavaReference (JNIEnv* env, m3g::Object* obj)
+{
+    if (obj == NULL) {
+        return 0;
+    }
+    jobject entity = (jobject)obj->getExportedEntity();
+    return env->NewLocalRef(entity);
+}
 
-jobject allocJavaObject (JNIEnv* env, const char* class_name, m3g::Object* obj)
+void bindJavaReference (JNIEnv* env, jobject thiz, m3g::Object* obj)
+{
+    jobject entity = env->NewWeakGlobalRef (thiz);
+    obj->setExportedEntity (entity);
+}
+
+void releaseJavaReference (JNIEnv* env, m3g::Object* obj)
+{
+    jobject entity = (jobject)obj->getExportedEntity();
+    env->DeleteWeakGlobalRef (entity);
+} 
+
+
+
+jobject allocJavaObject (JNIEnv* env, const char* class_name)
 {
     jclass  clazz  = env->FindClass (class_name);
     jobject thiz   = env->AllocObject (clazz);
-
-    setNativePointer (env, thiz, obj);
-    jobject entity = env->NewGlobalRef (thiz);
-    obj->setExportedEntity (entity);
-
     env->DeleteLocalRef (clazz);
     return thiz;
 }
@@ -82,6 +99,7 @@ short* getShortArrayPointer (JNIEnv* env, jshortArray array)
     }
     return pointer;
 }
+
 int* getIntArrayPointer (JNIEnv* env, jintArray array)
 {
     int* pointer = NULL;
@@ -90,6 +108,7 @@ int* getIntArrayPointer (JNIEnv* env, jintArray array)
     }
     return pointer;
 }
+
 float* getFloatArrayPointer (JNIEnv* env, jfloatArray array)
 {
     float* pointer = NULL;
@@ -111,12 +130,14 @@ void releaseShortArrayPointer (JNIEnv* env, jshortArray array, short* pointer)
         env->ReleaseShortArrayElements (array, pointer, 0);
     }
 }
+
 void releaseIntArrayPointer (JNIEnv* env, jintArray array, int* pointer)
 {
     if (array && pointer) {
         env->ReleaseIntArrayElements (array, pointer, 0);
     }
 }
+
 void releaseFloatArrayPointer (JNIEnv* env, jfloatArray array, float* pointer)
 {
     if (array && pointer) {

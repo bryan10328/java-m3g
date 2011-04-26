@@ -16,16 +16,15 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationController_jni_1initializ
   (JNIEnv* env, jobject thiz)
 {
     cout << "Java-AnimationController: initiazlize is called.\n";
-    AnimationController* controller = NULL;
+    AnimationController* ctrl = NULL;
     __TRY__;
-    controller = new AnimationController();
+    ctrl = new AnimationController();
     __CATCH__;
     if (env->ExceptionOccurred ()) {
         return;
     }
-    setNativePointer (env, thiz, controller);
-    jobject entity = env->NewGlobalRef (thiz);
-    controller->setExportedEntity (entity);
+    setNativePointer  (env, thiz, ctrl);
+    bindJavaReference (env, thiz, ctrl);
 }
 
 /*
@@ -38,7 +37,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_AnimationController_jni_1finalize
 {
     cout << "Java-AnimationController: finalize is called.\n";
     AnimationController* ctrl = (AnimationController*)getNativePointer(env, thiz);
-    env->DeleteGlobalRef ((jobject)ctrl->getExportedEntity());
+    releaseJavaReference (env, ctrl);
     addUsedObject (ctrl);
 }
 
@@ -228,8 +227,10 @@ void Java_new_AnimationController (JNIEnv* env, m3g::Object3D* obj)
 {
     cout << "Java-Loader: build java AnimationController.\n";
     AnimationController* ctrl     = dynamic_cast<AnimationController*>(obj);
-    jobject              ctrl_obj = allocJavaObject (env, "org/karlsland/m3g/AnimationController", ctrl);
-    
+    jobject              ctrl_obj = allocJavaObject (env, "org/karlsland/m3g/AnimationController");
+    setNativePointer  (env, ctrl_obj, ctrl);
+    bindJavaReference (env, ctrl_obj, ctrl);
+
     Java_build_Object3D            (env, ctrl_obj, ctrl);
     Java_build_AnimationController (env, ctrl_obj, ctrl);
 

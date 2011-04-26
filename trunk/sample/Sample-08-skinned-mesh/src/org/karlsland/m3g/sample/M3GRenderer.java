@@ -108,11 +108,12 @@ public class M3GRenderer implements GLEventListener {
         cam.setPerspective (45, width/(float)height, 0.1f, 100.f);
     }
  
-    public void display(GLAutoDrawable drawable) {
-        // 描画処理
-        wld.animate (worldTime);
-        g3d.render (wld);
-    }
+	public void display(GLAutoDrawable drawable) {
+		// 描画処理
+		wld.animate(worldTime);
+		g3d.render(wld);
+	}
+	
  
     public void displayChanged(GLAutoDrawable drawable,
                                boolean modeChanged,

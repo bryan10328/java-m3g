@@ -23,9 +23,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1initialize__
     if (env->ExceptionOccurred ()) {
         return;
     }
-    setNativePointer (env, thiz, tra);
-    jobject entity = env->NewGlobalRef (thiz);
-    tra->setExportedEntity (entity);
+    setNativePointer  (env, thiz, tra);
+    bindJavaReference (env, thiz, tra);
 }
 
 /*
@@ -45,9 +44,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1initialize__Lorg_ka
     if (env->ExceptionOccurred ()) {
         return;
     }
-    setNativePointer (env, thiz, tra);
-    jobject entity = env->NewGlobalRef (thiz);
-    tra->setExportedEntity (entity);
+    setNativePointer  (env, thiz, tra);
+    bindJavaReference (env, thiz, tra);
 }
 
 /*
@@ -60,7 +58,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1finalize
 {
     cout << "Java-Transform: finalize is called.\n";
     Transform* trans = (Transform*)getNativePointer (env, thiz);
-    env->DeleteGlobalRef ((jobject)trans->getExportedEntity());
+    releaseJavaReference (env, trans);
     addUsedObject (trans);
 }
 
@@ -228,8 +226,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1transform___3F
 {
     cout << "Java-Transform: transform is called.\n";
     Transform* trans   = (Transform*)getNativePointer (env, thiz);
+    int        len     = getFloatArrayLength  (env, vectors_array);
     float*     vectors = getFloatArrayPointer (env, vectors_array);
-    int        len     = getFloatArrayLength (env, vectors_array);
     __TRY__;
     trans->transform (len, vectors);
     __CATCH__;
@@ -245,7 +243,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Transform_jni_1transform__Lorg_kar
   (JNIEnv* env, jobject thiz, jobject in_varry, jfloatArray out_array, jboolean w)
 {
     cout << "Java-Transform: transform vertex-array is called.\n";
-    Transform*   trans = (Transform*)getNativePointer (env, thiz);
+    Transform*   trans = (Transform*)  getNativePointer (env, thiz);
     VertexArray* varry = (VertexArray*)getNativePointer (env, in_varry);
     float*       out   = getFloatArrayPointer (env, out_array);
     __TRY__;

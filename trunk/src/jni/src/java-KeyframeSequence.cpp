@@ -24,9 +24,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1initialize
     if (env->ExceptionOccurred ()) {
         return;
     }
-    setNativePointer (env, thiz, key_seq);
-    jobject entity = env->NewGlobalRef (thiz);
-    key_seq->setExportedEntity (entity);
+    setNativePointer  (env, thiz, key_seq);
+    bindJavaReference (env, thiz, key_seq);
 }
 
 /*
@@ -39,7 +38,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_KeyframeSequence_jni_1finalize
 {
     cout << "Java-KeyframeSequence: finalize is called.\n";
     KeyframeSequence* key_seq = (KeyframeSequence*)getNativePointer (env, thiz);
-    env->DeleteGlobalRef ((jobject)key_seq->getExportedEntity());
+    releaseJavaReference (env, key_seq);
     addUsedObject (key_seq);
 }
 
@@ -265,7 +264,9 @@ void Java_new_KeyframeSequence    (JNIEnv* env, m3g::Object3D* obj)
 {
     cout << "Java-Loader: build java KeyframeSequence.\n";
     KeyframeSequence* key_seq     = dynamic_cast<KeyframeSequence*>(obj);
-    jobject           key_seq_obj = allocJavaObject (env, "org/karlsland/m3g/KeyframeSequence", key_seq);
+    jobject           key_seq_obj = allocJavaObject (env, "org/karlsland/m3g/KeyframeSequence");
+    setNativePointer  (env, key_seq_obj, key_seq);
+    bindJavaReference (env, key_seq_obj, key_seq);
 
     Java_build_Object3D         (env, key_seq_obj, key_seq);
     Java_build_KeyframeSequence (env, key_seq_obj, key_seq);

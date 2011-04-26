@@ -110,7 +110,7 @@ public class M3GRenderer implements GLEventListener {
         wld.animate (worldTime);
         g3d.render (wld);
     }
- 
+   
     public void displayChanged(GLAutoDrawable drawable,
                                boolean modeChanged,
                                boolean deviceChanged) {
@@ -118,8 +118,7 @@ public class M3GRenderer implements GLEventListener {
     }
 
     public void update (char key) {
-
-        drawer.setAutoSwapBufferMode (true);
+        //drawer.setAutoSwapBufferMode (true);
         System.out.println (key+"のキーが押されたよ。");
         if (key == 'q') {
             System.exit (0);

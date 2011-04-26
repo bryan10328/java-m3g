@@ -16,31 +16,30 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1initialize__Lorg_
   (JNIEnv* env, jobject thiz, jobject vertices, jobjectArray submeshes, jobjectArray appearances, jobject skeleton)
 {
     cout << "Java-SkinnedMesh: initialize1 is caleld.\n";
-    VertexBuffer* vbuf = (VertexBuffer*)getNativePointer (env, vertices);
-    int len = env->GetArrayLength (submeshes);
-    IndexBuffer** ibufs = new IndexBuffer* [len];
-    for (int i = 0; i < len; i++) {
+    VertexBuffer* vbuf     = (VertexBuffer*)getNativePointer (env, vertices);
+    Group*        skel     = (Group*)       getNativePointer (env, skeleton);
+    int           ibuf_len = env->GetArrayLength (submeshes);
+    int           app_len  = env->GetArrayLength (appearances);
+    IndexBuffer** ibufs    = new IndexBuffer* [ibuf_len];
+    Appearance**  apps     = new Appearance* [app_len];
+    for (int i = 0; i < ibuf_len; i++) {
         ibufs[i] = (IndexBuffer*)getNativePointer (env, env->GetObjectArrayElement(submeshes, i));
     }
-    len = env->GetArrayLength (appearances);
-    Appearance** apps = new Appearance* [len];
-    for (int i = 0; i < len; i++) {
+    for (int i = 0; i < app_len; i++) {
         apps[i] = (Appearance*)getNativePointer (env, env->GetObjectArrayElement(appearances, i));
     }
-    Group* skel = (Group*)getNativePointer (env, skeleton);
 
     SkinnedMesh* mesh = NULL;
     __TRY__;
-    mesh = new SkinnedMesh (vbuf, len, ibufs, apps, skel);
+    mesh = new SkinnedMesh (vbuf, ibuf_len, ibufs, apps, skel);
     __CATCH__;
     if (env->ExceptionOccurred ()) {
         return;
     }
     delete[] ibufs;
     delete[] apps;
-    setNativePointer (env, thiz, mesh);
-    jobject entity = env->NewGlobalRef (thiz);
-    mesh->setExportedEntity (entity);
+    setNativePointer  (env, thiz, mesh);
+    bindJavaReference (env, thiz, mesh);
 }
 
 /*
@@ -53,9 +52,9 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1initialize__Lorg_
 {
     cout << "Java-SkinnedMesh: initialize2 is caleld.\n";
     VertexBuffer* vbuf = (VertexBuffer*)getNativePointer (env, vertices);
-    IndexBuffer*  ibuf = (IndexBuffer*)getNativePointer (env, submesh);
-    Appearance*   app  = (Appearance*)getNativePointer (env, appearance);
-    Group*        skel = (Group*)getNativePointer (env, skeleton);
+    IndexBuffer*  ibuf = (IndexBuffer*) getNativePointer (env, submesh);
+    Appearance*   app  = (Appearance*)  getNativePointer (env, appearance);
+    Group*        skel = (Group*)       getNativePointer (env, skeleton);
     SkinnedMesh*  mesh = NULL;
     __TRY__;
     mesh = new SkinnedMesh (vbuf, ibuf, app, skel);
@@ -63,9 +62,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1initialize__Lorg_
     if (env->ExceptionOccurred ()) {
         return;
     }
-    setNativePointer (env, thiz, mesh);
-    jobject entity = env->NewGlobalRef (thiz);
-    mesh->setExportedEntity (entity);
+    setNativePointer  (env, thiz, mesh);
+    bindJavaReference (env, thiz, mesh);
 }
 
 
@@ -79,7 +77,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1finalize
 {
     cout << "Java-SkinnedMesh: finalize is caleld.\n";
     SkinnedMesh* mesh = (SkinnedMesh*)getNativePointer (env, thiz);
-    env->DeleteGlobalRef ((jobject)mesh->getExportedEntity());
+    releaseJavaReference (env, mesh);
     addUsedObject (mesh);
 }
 
@@ -93,7 +91,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1addTransform
 {
     cout << "Java-SkinnedMesh: daddTransform is caleld.\n";
     SkinnedMesh* mesh = (SkinnedMesh*)getNativePointer (env, thiz);
-    Group*       bon  = (Group*)getNativePointer (env, bone);
+    Group*       bon  = (Group*)      getNativePointer (env, bone);
     __TRY__;
     mesh->addTransform (bon, weight, firstVertex, numVertices);
     __CATCH__;
@@ -109,8 +107,8 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1getBoneTransform
 {
     cout << "Java-SkinnedMesh: getBoneTransform is caleld.\n";
     SkinnedMesh* mesh  = (SkinnedMesh*)getNativePointer (env, thiz);
-    Node*        bon   = (Node*)getNativePointer (env, bone);
-    Transform*   trans = (Transform*)getNativePointer (env, transform);
+    Node*        bon   = (Node*)       getNativePointer (env, bone);
+    Transform*   trans = (Transform*)  getNativePointer (env, transform);
     __TRY__;
     mesh->getBoneTransform (bon, trans);
     __CATCH__;
@@ -126,14 +124,14 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1getBoneVertices
 {
     cout << "Java-SkinnedMesh: getBoneVertices is caleld.\n";
     SkinnedMesh* mesh    = (SkinnedMesh*)getNativePointer (env, thiz);
-    Node*        bone    = (Node*)getNativePointer (env, bone_obj);
-    int*         indices = getIntArrayPointer (env, indices_array);
+    Node*        bone    = (Node*)       getNativePointer (env, bone_obj);
+    int*         indices = getIntArrayPointer   (env, indices_array);
     float*       weights = getFloatArrayPointer (env, weights_array);
     int num = 0;
     __TRY__;
     num = mesh->getBoneVertices (bone, indices, weights);
     __CATCH__;
-    releaseIntArrayPointer (env, indices_array, indices);
+    releaseIntArrayPointer   (env, indices_array, indices);
     releaseFloatArrayPointer (env, weights_array, weights);
     return num;
 }
@@ -152,7 +150,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1getSkeleton
     __TRY__;
     skeleton = mesh->getSkeleton ();
     __CATCH__;
-    return (skeleton != NULL) ? (jobject)skeleton->getExportedEntity() : (jobject)NULL;
+    return getJavaReference (env, skeleton);
 }
 
 /*
@@ -177,7 +175,9 @@ void Java_new_SkinnedMesh         (JNIEnv* env, m3g::Object3D* obj)
 {
     cout << "Java-Loader: build java SkinnedMesh.\n";
     SkinnedMesh* mesh          = dynamic_cast<SkinnedMesh*>(obj);
-    jobject      mesh_obj      = allocJavaObject (env, "org/karlsland/m3g/SkinnedMesh", mesh);
+    jobject      mesh_obj      = allocJavaObject (env, "org/karlsland/m3g/SkinnedMesh");
+    setNativePointer  (env, mesh_obj, mesh);
+    bindJavaReference (env, mesh_obj, mesh);
 
     Java_build_Object3D      (env, mesh_obj, mesh);
     Java_build_Transformable (env, mesh_obj, mesh);
@@ -199,7 +199,7 @@ void Java_build_SkinnedMesh (JNIEnv* env, jobject mesh_obj, m3g::SkinnedMesh* me
         if (skeleton->getExportedEntity() == 0) {
             Java_new_JavaM3GObject (env, skeleton);
         }
-        env->SetObjectField (mesh_obj, mesh_skeleton, (jobject)skeleton->getExportedEntity());
+        env->SetObjectField (mesh_obj, mesh_skeleton, getJavaReference(env, skeleton));
     }
 
     env->DeleteLocalRef (mesh_class);
