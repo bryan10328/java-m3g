@@ -23,7 +23,7 @@ public class Sprite3D extends Node {
     public Sprite3D (boolean scaled, Image2D image, Appearance appearance) {
         this.image      = image;
         this.appearance = appearance;
-      jni_initialize (scaled, image, appearance);        	
+        jni_initialize (scaled, image, appearance);        	
      }
     
     @Override
@@ -32,43 +32,36 @@ public class Sprite3D extends Node {
     }
 
     public Appearance getAppearance () {
-        Appearance app = jni_getAppearance ();
-        return app;
+        return jni_getAppearance ();
     }
 
     public int getCropHeight () {
-        int height = jni_getCropHeight ();
-        return height;
+        return jni_getCropHeight ();
     }
 
     public int getCropWidth () {
-        int width = jni_getCropWidth ();
-        return width;
+        return jni_getCropWidth ();
     }
 
     public int getCropX () {
-        int x = jni_getCropX ();
-        return x;
+        return jni_getCropX ();
     }
 
     public int getCropY () {
-        int y = jni_getCropY ();
-        return y;
+        return jni_getCropY ();
     }
     
     public Image2D getImage () {
-        Image2D img = jni_getImage ();
-        return img;
+        return jni_getImage ();
     }
 
     public boolean isScaled () {
-        boolean scaled = jni_isScaled ();
-        return scaled;
+        return jni_isScaled ();
     }
 
     public void setAppearance (Appearance appearance) {
-        this.appearance = appearance;
         jni_setAppearance (appearance);
+        this.appearance = appearance;
     }
 
     public void setCrop (int cropX, int cropY, int width, int height) {
@@ -76,13 +69,12 @@ public class Sprite3D extends Node {
     }
 
     public void setImage (Image2D image) {
-        this.image = image;
         jni_setImage (image);
+        this.image = image;
     }
 
     public String toString () {
-        String str = jni_print ();
-        return str;
+        return jni_print ();
     }
 
 }

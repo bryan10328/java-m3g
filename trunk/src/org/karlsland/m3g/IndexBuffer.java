@@ -3,7 +3,6 @@ package org.karlsland.m3g;
 abstract
 public class IndexBuffer extends Object3D {
     
-    native private void   jni_initialize    ();
     native private void   jni_finalize      ();
     native private int    jni_getIndexCount ();
     native private void   jni_getIndices    (int[] indices);
@@ -18,8 +17,7 @@ public class IndexBuffer extends Object3D {
     }
 
     public int getIndexCount () {
-        int count = jni_getIndexCount ();
-        return count;
+        return jni_getIndexCount ();
     }
 
     public void getIndices (int[] indices) {
@@ -28,8 +26,7 @@ public class IndexBuffer extends Object3D {
 
     @Override
     public String toString () {
-        String str = jni_print ();
-        return str;
+        return jni_print ();
     }
 
 

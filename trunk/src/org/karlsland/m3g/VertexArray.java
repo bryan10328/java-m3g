@@ -39,18 +39,15 @@ public class VertexArray extends Object3D {
     }
 
     public int getComponentCount () {
-        int count = jni_getComponentCount ();
-        return count;
+        return jni_getComponentCount ();
     }
 
     public int getComponentType () {
-        int type = jni_getComponentType ();
-        return type;
+        return jni_getComponentType ();
     }
 
     public int getVertexCount () {
-        int count = jni_getVertexCount ();
-        return count;
+        return jni_getVertexCount ();
     }
 
     public void set (int firstVertex, int numVertices, byte[] values) {
@@ -67,8 +64,7 @@ public class VertexArray extends Object3D {
 
     @Override
     public String toString () {
-        String str = jni_print ();
-        return str;
+        return jni_print ();
     }
 
     public void print_raw_data () {

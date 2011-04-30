@@ -28,28 +28,23 @@ public class Fog extends Object3D {
     }
 
     public int getColor () {
-        int color = jni_getColor ();
-        return color;
+        return jni_getColor ();
     }
 
     public float getDensity () {
-        float density = jni_getDensity ();
-        return density;
+        return jni_getDensity ();
     }
 
     public float getFarDistance () {
-        float far = jni_getFarDistance ();
-        return far;
+        return jni_getFarDistance ();
     }
 
     public int getMode () {
-        int mode = jni_getMode ();
-        return mode;
+        return jni_getMode ();
     }
 
     public float getNearDistance () {
-        float near = jni_getNearDistance ();
-        return near;
+        return jni_getNearDistance ();
     }
 
     public void setColor (int RGB) {
@@ -70,8 +65,7 @@ public class Fog extends Object3D {
 
     @Override
     public String toString () {
-        String str = jni_print ();
-        return str;
+        return jni_print ();
     }
 
 

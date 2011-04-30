@@ -25,28 +25,23 @@ public class RayIntersection extends Object {
     }
 
     public float getDistance () {
-        float dist = jni_getDistance ();
-        return dist;
+        return jni_getDistance ();
     }
 
     public Node getIntersected () {
-        Node intersected = jni_getIntersected ();
-        return intersected;
+        return jni_getIntersected ();
     }
 
     public float getNormalX () {
-        float x = jni_getNormalX ();
-        return x;
+        return jni_getNormalX ();
     }
 
     public float getNormalY () {
-        float y = jni_getNormalY ();
-        return y;
+        return jni_getNormalY ();
     }
 
     public float getNormalZ () {
-        float z = jni_getNormalZ ();
-        return z;
+        return jni_getNormalZ ();
     }
 
     public void getRay (float[] ray) {
@@ -54,24 +49,20 @@ public class RayIntersection extends Object {
     }
 
     public int getSubmeshIndex () {
-        int index = jni_getSubmeshIndex ();
-        return index;
+        return jni_getSubmeshIndex ();
     }
 
     public float getTextureS (int index) {
-        float s = jni_getTextureS (index);
-        return s;
+        return jni_getTextureS (index);
     }
 
     public float getTextureT (int index) {
-        float t = jni_getTextureT (index);
-        return t;
+        return jni_getTextureT (index);
     }
 
     @Override
     public String toString () {
-        String str = jni_print ();
-        return str;
+        return jni_print ();
     }
 
 

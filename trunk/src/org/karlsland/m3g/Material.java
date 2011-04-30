@@ -27,18 +27,15 @@ public class Material extends Object3D {
     }
 
     public int getColor (int target) {
-        int color = jni_getColor (target);
-        return color;
+        return jni_getColor (target);
     }
 
     public float getShininess () {
-        float shininess = jni_getShininess ();
-        return shininess;
+        return jni_getShininess ();
     }
 
     public boolean isVertexColorTrackingEnabled () {
-        boolean enalbed = jni_isVertexColorTrackingEnabled ();
-        return enalbed;
+        return jni_isVertexColorTrackingEnabled ();
     }
 
     public void setColor (int target, int ARGB) {
@@ -55,8 +52,7 @@ public class Material extends Object3D {
 
     @Override
     public String toString () {
-        String str = jni_print ();
-        return str;
+        return jni_print ();
     }
 
 }

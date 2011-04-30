@@ -57,109 +57,149 @@ public class Graphics3D extends Object {
 
     // 以下M3Gで定義された関数
 
+    /**
+     * イミーディエイトモードは実装されていない。
+     */
     public int addLight (Light light, Transform transform) {
-        this.lights.add (light);
         int index = jni_addLight (light, transform);
+        this.lights.add (light);
         return index;
     }
 
+    /**
+     * イミーディエイトモードは実装されていない。
+     */
     public void bindTarget (java.lang.Object target) {
-        this.target = target;
         jni_bindTarget (target);
-    }
-
-    public void bindTarget (java.lang.Object target, boolean depthBuffer, int hints) {
         this.target = target;
-        jni_bindTarget (target, depthBuffer, hints);
     }
 
+    /**
+     * ターゲットのバインド/リリースは実装されていない。
+     */
+    public void bindTarget (java.lang.Object target, boolean depthBuffer, int hints) {
+        jni_bindTarget (target, depthBuffer, hints);
+        this.target = target;
+    }
+
+    /**
+     * イミーディエイトモードは実装されていない。
+     */
     public void clear (Background background) {
         jni_clear (background);
     }
 
+    /**
+     * イミーディエイトモードは実装されていない。
+     */
     public Camera getCamera (Transform transform) {
-        Camera camera = jni_getCamera (transform);
-        return camera;
+        return jni_getCamera (transform);
     }
 
+    /**
+     * イミーディエイトモードは実装されていない。
+     */
     public float getDepthRangeFar () {
-        float far = jni_getDepthRangeFar ();
-        return far;
+        return jni_getDepthRangeFar ();
     }
 
+    /**
+     * イミーディエイトモードは実装されていない。
+     */
     public float getDepthRangeNear () {
-        float near = jni_getDepthRangeNear ();
-        return near;
+        return jni_getDepthRangeNear ();
     }
 
     public int getHints () {
-        int hints = jni_getHints ();
-        return hints;
+        return  jni_getHints ();
     }
 
     public static Graphics3D getInstance () {
-        Graphics3D g3d = jni_getInstance ();
-        return g3d;
+        return jni_getInstance ();
     }
 
+    /**
+     * イミーディエイトモードは実装されていない。
+     */
     public Light getLight (int index, Transform transform) {
-        Light light = jni_getLight (index, transform);
-        return light;
+        return jni_getLight (index, transform);
     }
 
+    /**
+     * イミーディエイトモードは実装されていない。
+     */
     public int getLightCount () {
-        int count = jni_getLightCount ();
-        return count;
+        return jni_getLightCount ();
     }
 
     public static java.util.Hashtable getProperties () {
-        java.util.Hashtable hashTable = jni_getProperties ();
-        return hashTable;
+        return jni_getProperties ();
     }
 
+    /**
+     * ターゲットのバインド/リリースは実装されていない。
+     */
     public java.lang.Object getTarget () {
-        java.lang.Object target = jni_getTarget ();
-        return target;
+        return jni_getTarget ();
     }
 
+    /**
+     * イミーディエイトモードは実装されていない。
+     */
     public int getViewportHeight () {
-        int height = jni_getViewportHeight ();
-        return height;
+        return jni_getViewportHeight ();
     }
 
+    /**
+     * イミーディエイトモードは実装されていない。
+     */
     public int getViewportWidth () {
-        int width = jni_getViewportWidth ();
-        return width;
+        return jni_getViewportWidth ();
     }
 
+    /**
+     * イミーディエイトモードは実装されていない。
+     */
     public int getViewportX () {
-        int x = jni_getViewportX ();
-        return x;
+        return jni_getViewportX ();
     }
 
+    /**
+     * イミーディエイトモードは実装されていない。
+     */
     public int getViewportY () {
-        int y = jni_getViewportY ();
-        return y;
+        return jni_getViewportY ();
     }
 
     public boolean isDepthBufferEnabled () {
-        boolean enabled = jni_isDepthBufferEnabled ();
-        return enabled;
+        return jni_isDepthBufferEnabled ();
     }
 
+    /**
+     * ターゲットのバインド/リリースは実装されていない。
+     */
     public void releaseTarget () {
-        this.target = null;
         jni_releaseTarget ();
-    }
+        this.target = null;
+     }
 
+    /**
+     * イミーディエイトモードは実装されていない。
+     */
     public void render (Node node, Transform transform) {
         jni_render (node, transform);
     }
 
+    /**
+     * イミーディエイトモードは実装されていない。
+     */
     public void render (VertexBuffer vertices, IndexBuffer triangles, Appearance appearance, Transform transform) {
         jni_render (vertices, triangles, appearance, transform);
     }
 
+    /**
+     * イミーディエイトモードは実装されていない。
+     */
     public void render (VertexBuffer vertices, IndexBuffer triangles, Appearance appearance, Transform transform, int scope) {
         jni_render (vertices, triangles, appearance, transform, scope);
     }
@@ -168,20 +208,33 @@ public class Graphics3D extends Object {
         jni_render (world);
     }
 
+    /**
+     * イミーディエイトモードは実装されていない。
+     */
     public void resetLights () {
-        this.lights.clear ();
         jni_resetLights ();
-    }
+        this.lights.clear ();
+        }
 
+    /**
+     * イミーディエイトモードは実装されていない。
+     */
     public void setCamera (Camera camera, Transform transform) {
-        this.activeCamera = camera;
-        jni_setCamera (camera, transform);
-    }
 
+        jni_setCamera (camera, transform);
+        this.activeCamera = camera;
+        }
+
+    /**
+     * イミーディエイトモードは実装されていない。
+     */
     public void setDepthRange (float near, float far) {
         jni_setDepthRange (near, far);
     }
 
+    /**
+     * イミーディエイトモードは実装されていない。
+     */
     public void setLight (int index, Light light, Transform transform) {
         jni_setLight (index, light, transform);
     }
@@ -192,8 +245,7 @@ public class Graphics3D extends Object {
 
     @Override
     public String toString () {
-        String str = jni_print ();
-        return str;
+        return jni_print ();
     }
 
 }

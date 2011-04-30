@@ -18,7 +18,7 @@ public class MorphingMesh extends Mesh {
 
     public MorphingMesh (VertexBuffer base, VertexBuffer[] targets, IndexBuffer[] submeshes, Appearance[] appearances) {
     	super(base, submeshes, appearances);
-        this.morphTargets = Arrays.asList (targets);
+       this.morphTargets = Arrays.asList (targets);
        jni_initialize(base, targets, submeshes, appearances);        	
     }
 
@@ -34,13 +34,11 @@ public class MorphingMesh extends Mesh {
     }
 
     public IndexBuffer getMorphTarget (int index) {
-        IndexBuffer ibuf = jni_getMorphTarget (index);
-        return ibuf;
+        return jni_getMorphTarget (index);
     }
 
     public int getMorphTargetCount () {
-        int count = jni_getMorphTargetCount ();
-        return count;
+        return jni_getMorphTargetCount ();
     }
 
     public void getWeights (float[] weights) {
@@ -53,8 +51,7 @@ public class MorphingMesh extends Mesh {
 
     @Override
     public String toString () {
-        String str = jni_print ();
-        return str;
+        return jni_print ();
     }
 
 }

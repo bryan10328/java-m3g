@@ -17,10 +17,10 @@ public class Group extends Node {
     private List<Node> children;
 
     public Group () {
- 	   this.children = new ArrayList<Node>();
-        if (this.getClass() == Group.class) {
+       if (this.getClass() == Group.class) {
         	jni_initialize ();
         }
+  	   this.children = new ArrayList<Node>();
     }
     
     @Override
@@ -29,40 +29,35 @@ public class Group extends Node {
     }
 
     public void addChild (Node child) {
-        child.setParent (this);
-        children.add (child);
         jni_addChild (child);
+        children.add (child);
+        child.setParent (this);
     }
 
     public Node getChild (int index) {
-        Node node = jni_getChild (index);
-        return node;
+        return jni_getChild (index);
     }
 
     public int getChildCount () {
-        int count = jni_getChildCount ();
-        return count;
+        return jni_getChildCount ();
     }
 
     public boolean pick (int scope, float x, float y, Camera camera, RayIntersection ri) {
-        boolean picked = jni_pick (scope, x, y, camera, ri);
-        return picked;
+        return jni_pick (scope, x, y, camera, ri);
     }
 
     public boolean pick (int scope, float ox, float oy, float oz, float dx, float dy, float dz, RayIntersection ri) {
-        boolean picked = jni_pick (scope, ox, oy, oz, dx, dy, dz, ri);
-        return picked;
+        return jni_pick (scope, ox, oy, oz, dx, dy, dz, ri);
     }
 
     public void removeChild (Node child) {
-        children.remove (child);
         jni_removeChild (child);
+        children.remove (child);
     }
 
     @Override
     public String toString () {
-        String str = jni_print ();
-        return str;
+        return jni_print ();
     }
 
 }

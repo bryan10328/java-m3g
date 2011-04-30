@@ -63,64 +63,55 @@ public class Object3D extends Object {
     }
 
     public final int animate (int time) {
-        int valid = jni_animate (time);
-        return valid;
+        return jni_animate (time);
     }
 
     public final Object3D duplicate () {
-        Object3D obj = jni_duplicate ();
-        return obj;
+        return jni_duplicate ();
     }
 
     public Object3D find (int userID) {
-        Object3D obj = jni_find (userID);
-        return obj;
+        return jni_find (userID);
     }
 
     public AnimationTrack getAnimationTrack (int index) {
-        AnimationTrack track = jni_getAnimationTrack (index);
-        return track;
+        return  jni_getAnimationTrack (index);
     }
 
     public int getAnimationTrackCount () {
-        int count = jni_getAnimationTrackCount ();
-        return count;
+        return jni_getAnimationTrackCount ();
     }
 
 
     public int getReferences (Object3D[] references) {
-        int num = jni_getReferences (references);
-        return num;
+        return jni_getReferences (references);
     }
 
     public int getUserID () {
-        int id = jni_getUserID ();
-        return id;
+        return jni_getUserID ();
     }
 
     public java.lang.Object getUserObject () {
-        java.lang.Object obj = jni_getUserObject ();
-        return obj;
+        return jni_getUserObject ();
     }
 
     public void removeAnimationTrack (AnimationTrack animationTrack) {
-        animationTracks.remove (animationTrack);
         jni_removeAnimationTrack (animationTrack);
-    }
+        animationTracks.remove (animationTrack);
+        }
 
     public void setUserID (int userID) {
         jni_setUserID (userID);
     }
 
     public void setUserObject (java.lang.Object userObject) {
-        this.userObject = userObject;
         jni_setUserObject (userObject);
+        this.userObject = userObject;
     }
 
     @Override
     public String toString () {
-        String str = jni_print ();
-        return str;
+        return jni_print ();
     }
 
 }

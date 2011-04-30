@@ -34,13 +34,11 @@ public class Camera extends Node {
     }
 
     public int getProjection (float[] params) {
-        int type = jni_getProjection (params);
-        return type;
+        return jni_getProjection (params);
     }
 
     public int getProjection (Transform transform) {
-        int type = jni_getProjection (transform);
-        return type;
+        return jni_getProjection (transform);
     }
 
     public void setGeneric (Transform transform) {
@@ -57,8 +55,7 @@ public class Camera extends Node {
 
     @Override
     public String toString () {
-        String str = jni_print ();
-        return str;
+        return jni_print ();
     }
 
 }

@@ -40,19 +40,16 @@ public class SkinnedMesh extends Mesh {
     }
 
     public int getBoneVertices (Node bone, int[] indices, float[] weights) {
-        int num = jni_getBoneVertices (bone, indices, weights);
-        return num;
+        return jni_getBoneVertices (bone, indices, weights);
     }
 
     public Group getSkeleton () {
-        Group skeleton = jni_getSkeleton ();
-        return skeleton;
+        return jni_getSkeleton ();
     }
 
     @Override
     public String toString () {
-        String str = jni_print ();
-        return str;
+        return jni_print ();
     }
 
 }

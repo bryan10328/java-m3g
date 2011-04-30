@@ -35,43 +35,35 @@ public class Light extends Node {
     }
 
     public int getColor () {
-        int color = jni_getColor ();
-        return color;
+        return jni_getColor ();
     }
 
     public float getConstantAttenuation () {
-        float cons = jni_getConstantAttenuation ();
-        return cons;
+        return jni_getConstantAttenuation ();
     }
 
     public float getIntensity () {
-        float intensity = jni_getIntensity ();
-        return intensity;
+        return jni_getIntensity ();
     }
 
     public float getLinearAttenuation () {
-        float linear = jni_getLinearAttenuation ();
-        return linear;
+        return jni_getLinearAttenuation ();
     }
 
     public int getMode () {
-        int mode = jni_getMode ();
-        return mode;
+        return jni_getMode ();
     }
 
     public float getQuadraticAttenuation () {
-        float quad = jni_getQuadraticAttenuation ();
-        return quad;
+        return jni_getQuadraticAttenuation ();
     }
 
     public float getSpotAngle () {
-        float angle = jni_getSpotAngle ();
-        return angle;
+        return jni_getSpotAngle ();
     }
 
     public float getSpotExponent () {
-        float expo = jni_getSpotExponent ();
-        return expo;
+        return jni_getSpotExponent ();
     }
 
     public void setAttenuation (float constant, float linear, float quadratic) {
@@ -100,8 +92,7 @@ public class Light extends Node {
 
     @Override
     public String toString () {
-        String str = jni_print ();
-        return str;
+        return jni_print ();
     }
 
 

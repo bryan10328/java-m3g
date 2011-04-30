@@ -46,56 +46,46 @@ public class Node extends Transformable {
     	jni_finalize ();
     }
     
-    
-
     public final void align (Node reference) {
         jni_align (reference);
     }
 
     public Node getAlignmentReference (int axis) {
-        Node node = jni_getAlignmentReference (axis);
-        return node;
+        return jni_getAlignmentReference (axis);
     }
 
     public int getAlignmentTarget (int axis) {
-        int target = jni_getAlignmentTarget (axis);
-        return target;
+        return jni_getAlignmentTarget (axis);
     }
 
     public float getAlphaFactor () {
-        float alpha = jni_getAlphaFactor ();
-        return alpha;
+        return jni_getAlphaFactor ();
     }
 
     public Node getParent() {
-        Node node = jni_getParent ();
-        return node;
+        return jni_getParent ();
     }
 
     public int getScope () {
-        int scope = jni_getScope ();
-        return scope;
+        return jni_getScope ();
     }
 
     public boolean getTransformTo (Node target, Transform transform) {
-        boolean enable = jni_getTransformTo (target, transform);
-        return enable;
+        return jni_getTransformTo (target, transform);
     }
 
     public boolean isPickingEnabled () {
-        boolean enable = jni_isPickingEnabled ();
-        return enable;
+        return jni_isPickingEnabled ();
     }
 
     public boolean isRenderingEnabled () {
-        boolean enable = jni_isRenderingEnabled ();
-        return enable;
+        return jni_isRenderingEnabled ();
     }
 
     public void setAlignment (Node zRef, int zTarget, Node yRef, int yTarget) {
+        jni_setAlignment (zRef, zTarget, yRef, yTarget);
         this.zRef = zRef;
         this.yRef = yRef;
-        jni_setAlignment (zRef, zTarget, yRef, yTarget);
     }
 
     public void setAlphaFactor (float alphaFactor) {
@@ -120,8 +110,7 @@ public class Node extends Transformable {
 
     @Override
     public String toString () {
-        String str = jni_print ();
-        return str;
+        return jni_print ();
     }
 }
 

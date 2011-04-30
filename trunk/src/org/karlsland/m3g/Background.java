@@ -29,63 +29,53 @@ public class Background extends Object3D {
     private Image2D image;
 
     public Background () {
-        this.image = null;
+       this.image = null;
     	jni_initialize ();
    }
 
-     @Override
+    @Override
     protected void finalize () {
         jni_finalize ();
     }
 
     public int getColor () {
-        int color = jni_getColor ();
-        return color;
+        return jni_getColor ();
     }
 
     public int getCropHeight () {
-        int height = jni_getCropHeight ();
-        return height;
+        return jni_getCropHeight ();
     }
 
     public int getCropWidth () {
-        int width = jni_getCropWidth ();
-        return width;
+        return jni_getCropWidth ();
     }
 
     public int getCropX () {
-        int x = jni_getCropX ();
-        return x;
+        return jni_getCropX ();
     }
 
     public int getCropY () {
-        int y = jni_getCropY ();
-        return y;
+        return jni_getCropY ();
     }
 
     public Image2D getImage () {
-        Image2D img = jni_getImage ();
-        return img;
+        return jni_getImage ();
     }
 
     public int getImageModeX () {
-        int mode = jni_getImageModeX ();
-        return mode;
+        return jni_getImageModeX ();
     }
 
     public int getImageModeY () {
-        int mode = jni_getImageModeY ();
-        return mode;
+        return jni_getImageModeY ();
     }
 
     public boolean isColorClearEnabled () {
-        boolean enabled = jni_isColorClearEnabled ();
-        return enabled;
+        return jni_isColorClearEnabled ();
     }
 
     public boolean isDepthClearEnabled () {
-        boolean enabled = jni_isDepthClearEnabled ();
-        return enabled;
+        return jni_isDepthClearEnabled ();
     }
 
     public void setColor (int ARGB) {
@@ -105,8 +95,8 @@ public class Background extends Object3D {
     }
 
     public void setImage (Image2D image) {
-        this.image = image;
         jni_setImage (image);
+        this.image = image;
     }
 
     public void setImageMode (int modeX, int modeY) {
@@ -115,8 +105,7 @@ public class Background extends Object3D {
 
     @Override
     public String toString () {
-        String str = jni_print ();
-        return str;
+        return jni_print ();
     }
 
 }

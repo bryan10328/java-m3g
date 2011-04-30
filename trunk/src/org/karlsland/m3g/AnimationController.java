@@ -22,38 +22,33 @@ public class AnimationController extends Object3D {
     	 jni_initialize ();
      }
      
+     @Override
      protected void finalize () {
          jni_finalize ();
      }
 
     public int getActiveIntervalEnd () {
-        int end = jni_getActiveIntervalEnd();
-        return end;
+        return jni_getActiveIntervalEnd();
     }
 
     public int getActiveIntervalStart () {
-        int start = jni_getActiveIntervalStart();
-        return start;
+        return jni_getActiveIntervalStart();
     }
 
     public float getPosition (float worldTime) {
-        float time = jni_getPosition (worldTime);
-        return time;
+        return jni_getPosition (worldTime);
     }
 
     public int getRefWorldTime () {
-        int time = jni_getRefWorldTime ();
-        return time;
+        return jni_getRefWorldTime ();
     }
 
     public float getSpeed () {
-        float speed = jni_getSpeed ();
-        return speed;
+        return jni_getSpeed ();
     }
 
     public float getWeight () {
-        float weight = jni_getWeight ();
-        return weight;
+        return jni_getWeight ();
     }
 
     public void setActiveInterval (int start, int end) {
@@ -74,8 +69,7 @@ public class AnimationController extends Object3D {
 
     @Override     
     public String toString () {
-        String str = jni_print ();
-        return str;
+        return jni_print ();
     }
    
 }

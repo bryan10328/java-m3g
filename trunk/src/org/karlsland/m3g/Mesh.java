@@ -21,18 +21,18 @@ public class Mesh extends Node {
 
 
     public Mesh (VertexBuffer vertices, IndexBuffer[] submeshes, Appearance[] appearances) {
-        this.vertices    = vertices;
-        this.submeshes   = Arrays.asList (submeshes);
-        this.appearances = Arrays.asList (appearances);
-    	 if (this.getClass() == Mesh.class) {
-    		 jni_initialize(vertices, submeshes, appearances);
+    	this.vertices    = vertices;
+       this.submeshes   = Arrays.asList (submeshes);
+       this.appearances = Arrays.asList (appearances);
+       if (this.getClass() == Mesh.class) {
+    	   jni_initialize(vertices, submeshes, appearances);
        }
     }
 
     public Mesh (VertexBuffer vertices, IndexBuffer submesh, Appearance appearance) {
-        this.vertices    = vertices;
-        this.submeshes   = Arrays.asList (submesh);
-        this.appearances = Arrays.asList (appearance);
+       this.vertices    = vertices;
+       this.submeshes   = Arrays.asList (submesh);
+       this.appearances = Arrays.asList (appearance);
     	if (this.getClass() == Mesh.class) {
             jni_initialize (vertices, submesh, appearance);        	
         }
@@ -44,34 +44,29 @@ public class Mesh extends Node {
     }
 
     public Appearance getAppearance (int index) {
-        Appearance app = jni_getAppearance (index);
-        return app;
+        return jni_getAppearance (index);
     }
 
     public IndexBuffer getIndexBuffer (int index) {
-        IndexBuffer ibuf = jni_getIndexBuffer (index);
-        return ibuf;
+        return jni_getIndexBuffer (index);
     }
 
     public int getSubmeshCount () {
-        int count = jni_getSubmeshCount ();
-        return count;
+        return jni_getSubmeshCount ();
     }
 
     public VertexBuffer getVertexBuffer () {
-        VertexBuffer vbuf = jni_getVertexBuffer ();
-        return vbuf;
+        return jni_getVertexBuffer ();
     }
     
     public void setAppearance (int index, Appearance appearance) {
-        this.appearances.set (index, appearance);
         jni_setAppearance (index, appearance);
-    }
+        this.appearances.set (index, appearance);
+     }
 
     @Override
     public String toString () {
-        String str = jni_print ();
-        return str;
+        return  jni_print ();
     }
 
 }

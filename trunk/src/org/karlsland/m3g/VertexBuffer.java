@@ -29,8 +29,8 @@ public class VertexBuffer extends Object3D {
         positions = null;
         normals   = null;
         colors    = null;
-        texCoords = Arrays.asList (new VertexArray[]{null,null,null,null});
-       jni_initialize();        	
+        texCoords = Arrays.asList (new VertexArray[]{null,null});
+        jni_initialize();        	
     }
     
     @Override
@@ -39,38 +39,32 @@ public class VertexBuffer extends Object3D {
     }
 
     public VertexArray getColors () {
-        VertexArray varry = jni_getColors ();
-        return varry;
+        return jni_getColors ();
     }
 
     public int getDefaultColor () {
-        int color = jni_getDefaultColor ();
-        return color;
+        return jni_getDefaultColor ();
     }
 
     public VertexArray getNormals () {
-        VertexArray normals = jni_getNormals ();
-        return normals;
+        return jni_getNormals ();
     }
 
     public VertexArray getPositions (float[] scaleBias) {
-        VertexArray positions = jni_getPositions (scaleBias);
-        return positions;
+        return jni_getPositions (scaleBias);
     }
 
     public VertexArray getTexCoords (int index, float[] scaleBias) {
-        VertexArray texCoords = jni_getTexCoords (index, scaleBias);
-        return texCoords;
+        return jni_getTexCoords (index, scaleBias);
     }
 
     public int getVertexCount () {
-        int count = jni_getVertexCount ();
-        return count;
+        return jni_getVertexCount ();
     }
 
     public void setColors (VertexArray colors) {
-        this.colors = colors;
         jni_setColors (colors);
+        this.colors = colors;
     }
 
     public void setDefaultColor (int ARGB) {
@@ -78,24 +72,23 @@ public class VertexBuffer extends Object3D {
     }
 
     public void setNormals (VertexArray normals) {
-        this.normals = normals;
         jni_setNormals (normals);
+        this.normals = normals;
     }
 
     public void setPositions (VertexArray positions, float scale, float[] bias) {
-        this.positions = positions;
         jni_setPositions (positions, scale, bias);
+        this.positions = positions;
     }
 
     public void setTexCoords (int index, VertexArray texCoords, float scale, float[] bias) {
-        this.texCoords.set (index, texCoords);
         jni_setTexCoords (index, texCoords, scale, bias);
+        this.texCoords.set (index, texCoords);
     }
 
     @Override
     public String toString () {
-        String str = jni_print ();
-        return str;
+        return jni_print ();
     }
 
 }

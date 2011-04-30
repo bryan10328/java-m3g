@@ -88,8 +88,7 @@ public class Transformable extends Object3D {
 
     @Override
     public String toString () {
-        String str = jni_print ();
-        return str;
+        return  jni_print ();
     }
 
 }

@@ -32,8 +32,8 @@ public class Texture2D extends Transformable {
     private Image2D image;
 
     public Texture2D (Image2D image) {
-        this.image = image;
     	jni_initialize(image);
+    	this.image = image;
     }
 
     protected void finalize () {
@@ -41,39 +41,32 @@ public class Texture2D extends Transformable {
     }
 
     public int getBlendColor () {
-        int color = jni_getBlendColor ();
-        return color;
+        return jni_getBlendColor ();
     }
 
     public int getBlending () {
-        int mode = jni_getBlending ();
-        return mode;
+        return jni_getBlending ();
     }
 
 
     public Image2D getImage () {
-        Image2D img = jni_getImage ();
-        return img;
+        return jni_getImage ();
     }
 
     public int getImageFilter () {
-        int filter = jni_getImageFilter ();
-        return filter;
+        return jni_getImageFilter ();
     }
 
     public int getLevelFilter () {
-        int filter = jni_getLevelFilter ();
-        return filter;
+        return jni_getLevelFilter ();
     }
 
     public int getWrappingS () {
-        int wrapping = jni_getWrappingS ();
-        return wrapping;
+        return jni_getWrappingS ();
     }
 
     public int getWrappingT () {
-        int wrapping = jni_getWrappingT ();
-        return wrapping;
+        return jni_getWrappingT ();
     }
 
     public void setBlendColor (int RGB) {
@@ -98,8 +91,7 @@ public class Texture2D extends Transformable {
 
     @Override
     public String toString () {
-        String str = jni_print ();
-        return str;
+        return jni_print ();
     }
     
 }

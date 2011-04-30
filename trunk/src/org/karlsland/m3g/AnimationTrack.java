@@ -38,37 +38,34 @@ public class AnimationTrack extends Object3D {
     public AnimationTrack (KeyframeSequence keyframeSequence, int property) {
         this.keyframeSequence    = keyframeSequence;
         this.animationController = null;
-        jni_initialize(keyframeSequence, property);
+        jni_initialize (keyframeSequence, property);
     }
 
+    @Override
     protected void finalize () {
         jni_finalize ();
     }
 
     public AnimationController getController () {
-        AnimationController controller = jni_getController ();
-        return controller;
+        return jni_getController ();
     }
     
     public KeyframeSequence getKeyframeSequence () {
-        KeyframeSequence keyframe_sequence = jni_getKeyframeSequence ();
-        return keyframe_sequence;
+        return jni_getKeyframeSequence ();
     }
 
     public int getTargetProperty () {
-        int target = jni_getTargetProperty ();
-        return target;
+        return jni_getTargetProperty ();
     }
 
     public void setController (AnimationController controller) {
-        this.animationController = controller;
         jni_setController (controller);
+        this.animationController = controller;
     }
 
     @Override
     public String toString () {
-        String str = jni_print ();
-        return str;
+        return jni_print ();
     }
 
 }

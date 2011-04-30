@@ -13,13 +13,11 @@ public class Loader extends Object {
     }
 
     public static Object3D[] load (byte[] data, int offset) throws java.io.IOException {
-        Object3D[] objs = jni_load (data, offset);
-        return objs;
+        return jni_load (data, offset);
     }
 
-    public static Object3D[] load (java.lang.String name) throws java.io.IOException {
-        Object3D[] objs = jni_load (name);        
-        return objs;
+    public static Object3D[] load (java.lang.String name) throws java.io.IOException { 
+        return jni_load (name);
     }
 
 }

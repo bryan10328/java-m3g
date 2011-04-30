@@ -36,43 +36,35 @@ public class KeyframeSequence extends Object3D {
     }
 
     public int getComponentCount () {
-        int count = jni_getComponentCount ();
-        return count;
+        return jni_getComponentCount ();
     }
 
     public int getDuration () {
-        int duration = jni_getDuration ();
-        return duration;
+        return jni_getDuration ();
     }
 
     public int getInterpolationType () {
-        int type = jni_getInterpolationType ();
-        return type;
+        return jni_getInterpolationType ();
     }
 
     public int getKeyframe (int index, float[] value) {
-        int time = jni_getKeyframe (index, value);
-        return time;
+        return jni_getKeyframe (index, value);
     }
 
     public int getKeyframeCount () {
-        int count = jni_getKeyframeCount ();
-        return count;
+        return jni_getKeyframeCount ();
     }
 
     public int getRepeatMode () {
-        int mode = jni_getRepeatMode ();
-        return mode;
+        return jni_getRepeatMode ();
     }
 
     public int getValidRangeFirst () {
-        int first = jni_getValidRangeFirst ();
-        return first;
+        return jni_getValidRangeFirst ();
     }
 
     public int getValidRangeLast () {
-        int last = jni_getValidRangeLast ();
-        return last;
+        return jni_getValidRangeLast ();
     }
 
     public void setDuration (int duration) {
@@ -93,8 +85,7 @@ public class KeyframeSequence extends Object3D {
     
     @Override
     public String toString () {
-        String str = jni_print ();
-        return str;
+        return jni_print ();
     }
 
 }

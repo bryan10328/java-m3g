@@ -37,29 +37,25 @@ public class Image2D extends Object3D {
     	jni_initialize(format, image);
     }
 
-     @Override
+    @Override
     protected void finalize () {
         jni_finalize ();
     }
 
     public int getFormat () {
-        int format = jni_getFormat ();
-        return format;
+        return jni_getFormat ();
     }
 
     public int getHeight () {
-        int height = jni_getHeight ();
-        return height;
+        return jni_getHeight ();
     }
 
     public int getWidth () {
-        int width = jni_getWidth ();
-        return width;
+        return jni_getWidth ();
     }
 
     public boolean isMutable () {
-        boolean mutable = jni_isMutable ();
-        return mutable;
+        return jni_isMutable ();
     }
 
     public void set (int x, int y, int width, int height, byte[] image) {
@@ -68,8 +64,7 @@ public class Image2D extends Object3D {
 
     @Override
     public String toString () {
-        String str = jni_print ();
-        return str;
+        return jni_print ();
     }
 
     public void writePng (java.lang.String name) {

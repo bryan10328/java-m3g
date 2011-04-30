@@ -33,78 +33,71 @@ public class Appearance extends Object3D {
         this.fog             = null;
         this.material        = null;
         this.polygonMode     = null;
-        this.textures        = Arrays.asList (new Texture2D[]{null,null,null,null});
+        this.textures        = Arrays.asList (new Texture2D[]{null,null});
         jni_initialize ();
     }
 
-
+    @Override
     protected void finalize () {
         jni_finalize ();
     }
 
     public CompositingMode getCompositingMode () {
-        CompositingMode cmode = jni_getCompositingMode ();
-        return cmode;
+        return jni_getCompositingMode ();
     }
 
     public Fog getFog () {
-        Fog fog = jni_getFog ();
-        return fog;
+        return jni_getFog ();
     }
 
     public int getLayer () {
-        int layer = jni_getLayer ();
-        return layer;
+        return jni_getLayer ();
     }
 
     public Material getMaterial () {
-        Material mat = jni_getMaterial ();
-        return mat;
+        return jni_getMaterial ();
     }
 
     public PolygonMode getPolygonMode () {
-        PolygonMode pmode = jni_getPolygonMode ();
-        return pmode;
+        return jni_getPolygonMode ();
     }
 
     public Texture2D getTexture (int index) {
-        Texture2D tex = jni_getTexture (index);
-        return tex;
+        return jni_getTexture (index);
     }
 
     public void setCompositingMode (CompositingMode compositingMode) {
-        this.compositingMode = compositingMode;
         jni_setCompositingMode (compositingMode);
+        this.compositingMode = compositingMode;
     }
 
-    public void setFog (Fog fog) {
-        this.fog = fog;
-        jni_setFog (fog);
+    public void setFog (Fog fg) {
+        jni_setFog (fg);
+        this.fog = fg;
     }
 
     public void setLayer (int layer) {
         jni_setLayer (layer);
     }
 
-    public void setMaterial (Material material) {
-        this.material = material;
-        jni_setMaterial (material);
+    public void setMaterial (Material mat) {
+        jni_setMaterial (mat);
+        this.material = mat;
     }
 
-    public void setPolygonMode (PolygonMode polygonMode) {
-        this.polygonMode = polygonMode;
-        jni_setPolygonMode (polygonMode);
+    public void setPolygonMode (PolygonMode polyMode) {
+        jni_setPolygonMode (polyMode);
+        this.polygonMode = polyMode;
     }
 
     public void setTexture (int index, Texture2D texture) {
-        this.textures.set(index, texture);
         jni_setTexture (index, texture);
+        this.textures.set(index, texture);
     }
 
     @Override
     public String toString () {
-        String str = jni_print ();
-        return str;
+        return jni_print ();
     }
 
 

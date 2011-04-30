@@ -14,6 +14,7 @@ public class Object {
     
     /**
      * C++オブジェクトのポインターを返す。デバッグ用。
+     * セットはC++側から直接フィールドに代入する（というふうに作ってしまったので...)。
      * @return C++オブジェクトのポインター
      */
     public long getNativePointer () {

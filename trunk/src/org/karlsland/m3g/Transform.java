@@ -87,7 +87,6 @@ public class Transform extends Object {
 
     @Override
     public String toString () {
-        String str = jni_print ();
-        return str;
+        return jni_print ();
     }
 }

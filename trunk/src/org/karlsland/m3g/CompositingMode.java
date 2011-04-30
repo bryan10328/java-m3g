@@ -37,43 +37,35 @@ public class CompositingMode extends Object3D {
     }
 
     public float getAlphaThreshold () {
-        float th = jni_getAlphaThreshold ();
-        return th;
+        return jni_getAlphaThreshold ();
     }
 
     public int getBlending () {
-        int mode = jni_getBlending ();
-        return mode;
+        return jni_getBlending ();
     }
 
     public float getDepthOffsetFactor () {
-        float f = jni_getDepthOffsetFactor ();
-        return f;
+        return jni_getDepthOffsetFactor ();
     }
 
     public float getDepthOffsetUnits () {
-        float u = jni_getDepthOffsetUnits ();
-        return u;
+        return jni_getDepthOffsetUnits ();
     }
 
     public boolean isAlphaWriteEnabled () {
-        boolean enabled = jni_isAlphaWriteEnable ();
-        return enabled;
+        return jni_isAlphaWriteEnable ();
     }
 
     public boolean isColorWriteEnabled () {
-        boolean enabled = jni_isColorWriteEnable ();
-        return enabled;
+        return jni_isColorWriteEnable ();
     }
 
     public boolean isDepthTestEnabled () {
-        boolean enabled = jni_isDepthTestEnabled ();
-        return enabled;
+        return jni_isDepthTestEnabled ();
     }
 
     public boolean isDepthWriteEnabled () {
-        boolean enabled = jni_isDepthWriteEnabled ();
-        return enabled;
+        return jni_isDepthWriteEnabled ();
     }
 
     public void setAlphaThreshold (float threshold) {
@@ -105,8 +97,7 @@ public class CompositingMode extends Object3D {
     }
 
     public String toString () {
-        String str = jni_print ();
-        return str;
+        return jni_print ();
     }
 
 

@@ -36,33 +36,27 @@ public class PolygonMode extends Object3D {
     }
 
     public int getCulling () {
-        int culling = jni_getCulling ();
-        return culling;
+        return jni_getCulling ();
     }
 
     public int getShading () {
-        int shading = jni_getShading ();
-        return shading;
+        return jni_getShading ();
     }
 
     public int getWinding () {
-        int winding = jni_getWinding ();
-        return winding;
+        return jni_getWinding ();
     }
 
     public boolean isLocalCameraLightingEnabled () {
-        boolean enabled = jni_isLocalCameraLightingEnabled ();
-        return enabled;
+        return jni_isLocalCameraLightingEnabled ();
     }
 
     public boolean isPerspectiveCorrectionEnabled () {
-        boolean enabled = jni_isPerspectiveCorrectionEnabled ();
-        return enabled;
+        return jni_isPerspectiveCorrectionEnabled ();
     }
 
     public boolean isTwoSidedLightingEnabled () {
-        boolean enabled = jni_isTwoSidedLightingEnabled ();
-        return enabled;
+        return jni_isTwoSidedLightingEnabled ();
     }
 
     public void setCulling (int mode) {
@@ -91,8 +85,7 @@ public class PolygonMode extends Object3D {
 
     @Override
     public String toString () {
-        String str = jni_print ();
-        return str;
+        return jni_print ();
     }
 
 }

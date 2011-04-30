@@ -1,14 +1,12 @@
 package org.karlsland.m3g.sample;
 
-import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import javax.swing.*;
-import javax.media.opengl.GLAutoDrawable;
-import javax.media.opengl.GLEventListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.media.opengl.GLCanvas;
+import javax.swing.JFrame;
 
 
 

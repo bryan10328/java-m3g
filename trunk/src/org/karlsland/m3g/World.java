@@ -26,29 +26,26 @@ public class World extends Group {
     }
 
     public Camera getActiveCamera () {
-        Camera cam = jni_getActiveCamera ();
-        return cam;
+        return jni_getActiveCamera ();
     }
 
     public Background getBackground () {
-        Background bg = jni_getBackground ();
-        return bg;
+        return jni_getBackground ();
     }
 
     public void setActiveCamera (Camera camera) {
-        this.activeCamera = camera;
         jni_setActiveCamera (camera);
+        this.activeCamera = camera;
     }
 
     public void setBackground (Background background) {
-        this.background = background;
         jni_setBackground (background);
+        this.background = background;
     }
 
     @Override
     public String toString () {
-        String str = jni_print ();
-        return str;
+        return jni_print ();
     }
 
 
