@@ -46,6 +46,7 @@ public class World extends Group {
     @Override
     public String toString () {
         return jni_print ();
+        
     }
 
 
