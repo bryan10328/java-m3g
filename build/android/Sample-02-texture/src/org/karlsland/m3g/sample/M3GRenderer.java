@@ -25,7 +25,6 @@ public class M3GRenderer implements Renderer {
 	private World      wld;
 	private int        frame;
 
-	@Override
 	public void onDrawFrame(GL10 gl) {
 		if (frame++ % 100 == 0) {
 			Log.println(Log.INFO, "M3GRenderer", "onDrawFrame, i=" + frame);
@@ -33,7 +32,7 @@ public class M3GRenderer implements Renderer {
 		g3d.render(wld);
 	}
 
-	@Override
+
 	public void onSurfaceChanged(GL10 gl, int width, int height) {
 		Log.println(Log.INFO, "M3GRenderer", "onSurfaceChanged");
 		g3d.setViewport(0, 0, width, height);
@@ -41,7 +40,7 @@ public class M3GRenderer implements Renderer {
 		cam.setPerspective(45, width / (float) height, 0.1f, 100.f);
 	}
 
-	@Override
+
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 		Log.println(Log.INFO, "M3GRenderer", "onSurfaceCreated");
 		g3d = Graphics3D.getInstance();
