@@ -11,8 +11,8 @@ import android.opengl.GLSurfaceView.Renderer;
 
 public class GLRenderer implements Renderer {
 	private int vbo[];
-	                
-	@Override
+	          
+
 	public void onDrawFrame(GL10 gl10) {
 		GL11 gl = (GL11)gl10;
 		// TODO Auto-generated method stub
@@ -31,7 +31,7 @@ public class GLRenderer implements Renderer {
 
 	}
 
-	@Override
+
 	public void onSurfaceChanged(GL10 gl10, int width, int height) {
 		GL11 gl = (GL11)gl10;
 		// TODO Auto-generated method stub
@@ -42,7 +42,7 @@ public class GLRenderer implements Renderer {
 
 	}
 
-	@Override
+
 	public void onSurfaceCreated(GL10 gl10, EGLConfig config) {
 		GL11 gl = (GL11)gl10;
 		// TODO Auto-generated method stub
