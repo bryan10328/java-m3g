@@ -1,0 +1,16 @@
+
+
+
+-------------------------------------------
+libjava-m3g.so
+-------------------------------------------
+  
+  libjava-m3g.so is a native library for using Desktop-M3G from Java.
+  You need to compile this first.
+
+   -  See READE.linux   (for Linux)
+   -  See READE.android  (for Android)
+
+
+
+

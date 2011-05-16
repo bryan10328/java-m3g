@@ -22,21 +22,21 @@ public class M3GRenderer implements Renderer {
     private World          wld;
     private int            worldTime;
     
-	@Override
+
 	public void onDrawFrame(GL10 gl) {
 		worldTime += 10;
         wld.animate (worldTime);
         g3d.render (wld);
 	}
 
-	@Override
+
 	public void onSurfaceChanged(GL10 gl, int width, int height) {
         g3d.setViewport (0, 0, width, height);
         Camera cam = wld.getActiveCamera ();
         cam.setPerspective (45, width/(float)height, 0.1f, 100.f);
 	}
 
-	@Override
+
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 		g3d = Graphics3D.getInstance();
 		wld    = new World ();

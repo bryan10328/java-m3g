@@ -1,0 +1,29 @@
+-------------------------------------------
+Platform specific problem
+-------------------------------------------
+   none.
+
+
+
+-------------------------------------------
+Make & Install
+-------------------------------------------
+  = libm3g.so =
+    libm3g.so is a native libary implements M3G 1.1(JSR-148).
+    This library is distributed by Desktop-M3G project (http://code.google.com/p/desktop-m3g/)
+    
+    Because Java-M3G does not include this, you need to download and compile it 
+    and copy proper files before compiling Java-M3G.
+    
+    - Go to http://code.google.com/p/desktop-m3g/) and download it.
+    - Compile them. 
+    - Copy *.hpp and libm3g.so to following directory.
+        - ${Java-M3G}/jni/src/external/include/m3g/
+        - ${Java-M3G}/jni/src/external/lib/android    (for Android)
+
+  = libjava-m3g.so =
+     - cd ${Java-M3G}/build/android/Java-M3G
+     - ndk-build
+          - will generate libjava-m3g.so
+
+
