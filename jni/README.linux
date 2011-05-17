@@ -10,11 +10,11 @@ Platform specific problem
 Make & Install
 -------------------------------------------
   = libm3g.so =
-    libm3g.so is a native libary implements M3G 1.1(JSR-148).
-    This library is distributed by Desktop-M3G project (http://code.google.com/p/desktop-m3g/)
+    libm3g.so is a native libary which implements M3G 1.1(JSR-148).
+    It is distributed by Desktop-M3G project (http://code.google.com/p/desktop-m3g/)
     
     Because Java-M3G does not include this, you need to download and compile it 
-    and copy proper files before compiling Java-M3G.
+    and copy proper files to right place before compiling Java-M3G.
     
     - Go to http://code.google.com/p/desktop-m3g/) and download it.
     - Compile them. 
