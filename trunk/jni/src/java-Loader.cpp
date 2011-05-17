@@ -29,6 +29,7 @@ JNIEXPORT jobjectArray JNICALL Java_org_karlsland_m3g_Loader_jni_1load___3BI
     objs = Loader::load (length, data, offset);
     __CATCH__;
     if (env->ExceptionOccurred ()) {
+        cout << "Java-Loader: can't load file.\n";
         return (jobjectArray)0;
     }
     releaseByteArrayPointer (env, data_array, data);
@@ -57,12 +58,12 @@ JNIEXPORT jobjectArray JNICALL Java_org_karlsland_m3g_Loader_jni_1load__Ljava_la
     cout << "Java-Loader: load2 is called.\n";
     const char* file_name = env->GetStringUTFChars (fileName, 0);
     cout << "Java-Loader: open file-name = " << file_name << "\n";
-
     vector<Object3D*> objs;
     __TRY__;
     objs = Loader::load (file_name);
     __CATCH__;
     if (env->ExceptionOccurred ()) {
+        cout << "Java-Loader: can't load file.\n";
         return (jobjectArray)0;
     }
     env->ReleaseStringUTFChars (fileName, file_name);

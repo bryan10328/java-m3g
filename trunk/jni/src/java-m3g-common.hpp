@@ -126,7 +126,7 @@ void Java_build_World               (JNIEnv* env, jobject wld_obj       , m3g::W
         catch (const m3g::IllegalArgumentException&  e) { jclass clazz = env->FindClass("java/lang/IllegalArgumentException"       ); env->ThrowNew(clazz, e.what()); } \
         catch (const m3g::IllegalStateException&     e) { jclass clazz = env->FindClass("java/lang/IllegalStateException"          ); env->ThrowNew(clazz, e.what()); } \
         catch (const m3g::IndexOutOfBoundsException& e) { jclass clazz = env->FindClass("java/lang/IndexOutOfBoundsException"      ); env->ThrowNew(clazz, e.what()); } \
-        catch (const m3g::IOException&               e) { jclass clazz = env->FindClass("java/lang/IOException"                    ); env->ThrowNew(clazz, e.what()); } \
+        catch (const m3g::IOException&               e) { jclass clazz = env->FindClass("java/io/IOException"                      ); env->ThrowNew(clazz, e.what()); } \
         catch (const m3g::NullPointerException&      e) { jclass clazz = env->FindClass("java/lang/NullPointerException"           ); env->ThrowNew(clazz, e.what()); } \
         catch (const m3g::SecurityException&         e) { jclass clazz = env->FindClass("java/lang/SecurityException"              ); env->ThrowNew(clazz, e.what()); } \
         catch (const m3g::NotImplementedException&   e) { jclass clazz = env->FindClass("org/karlsland/m3g/NotImplementedException"); env->ThrowNew(clazz, e.what()); } \
