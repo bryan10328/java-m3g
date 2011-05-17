@@ -21,7 +21,7 @@ void Java_build_objects (JNIEnv* env, const std::vector<Object3D*>& objs);
 JNIEXPORT jobjectArray JNICALL Java_org_karlsland_m3g_Loader_jni_1load___3BI
   (JNIEnv* env, jclass clazz, jbyteArray data_array, jint offset)
 {
-    cout << "Java-Loader: load1 is called.\n";
+    //cout << "Java-Loader: load1 is called.\n";
     vector<Object3D*> objs;
     int   length = getByteArrayLength  (env, data_array);
     char* data   = getByteArrayPointer (env, data_array);
@@ -29,19 +29,19 @@ JNIEXPORT jobjectArray JNICALL Java_org_karlsland_m3g_Loader_jni_1load___3BI
     objs = Loader::load (length, data, offset);
     __CATCH__;
     if (env->ExceptionOccurred ()) {
-        cout << "Java-Loader: can't load file.\n";
+        //cout << "Java-Loader: can't load file.\n";
         return (jobjectArray)0;
     }
     releaseByteArrayPointer (env, data_array, data);
 
-    cout << "Java-Loader: create " << objs.size() << " Object3D array.\n";
+    //cout << "Java-Loader: create " << objs.size() << " Object3D array.\n";
     int          size        = objs.size();
     jclass       obj3d_class = env->FindClass ("org/karlsland/m3g/Object3D");
     jobjectArray arry_obj    = env->NewObjectArray (size, obj3d_class, NULL);
     for (int i = 0; i < size; i++) {
         env->SetObjectArrayElement (arry_obj, i, (jobject)objs[i]->getExportedEntity());
     }
-    cout << "Java-Loader: created.\n";
+    //cout << "Java-Loader: created.\n";
     
     return arry_obj;
 }
@@ -55,25 +55,25 @@ JNIEXPORT jobjectArray JNICALL Java_org_karlsland_m3g_Loader_jni_1load___3BI
 JNIEXPORT jobjectArray JNICALL Java_org_karlsland_m3g_Loader_jni_1load__Ljava_lang_String_2
   (JNIEnv* env, jclass clazz, jstring fileName)
 {
-    cout << "Java-Loader: load2 is called.\n";
+    //cout << "Java-Loader: load2 is called.\n";
     const char* file_name = env->GetStringUTFChars (fileName, 0);
-    cout << "Java-Loader: open file-name = " << file_name << "\n";
+    //cout << "Java-Loader: open file-name = " << file_name << "\n";
     vector<Object3D*> objs;
     __TRY__;
     objs = Loader::load (file_name);
     __CATCH__;
     if (env->ExceptionOccurred ()) {
-        cout << "Java-Loader: can't load file.\n";
+        //cout << "Java-Loader: can't load file.\n";
         return (jobjectArray)0;
     }
     env->ReleaseStringUTFChars (fileName, file_name);
-    cout << "Java-Loader: opened\n";
+    //cout << "Java-Loader: opened\n";
 
-    cout << "Java-Loader: start of build java objects.\n";
+    //cout << "Java-Loader: start of build java objects.\n";
     Java_build_objects (env, objs);
-    cout << "Java-Loader: end of build java objects.\n";
+    //cout << "Java-Loader: end of build java objects.\n";
     
-    cout << "Java-Loader: create " << objs.size() << " Object3D array.\n";
+    //cout << "Java-Loader: create " << objs.size() << " Object3D array.\n";
     int          size        = objs.size();
     jclass       obj3d_class = env->FindClass ("org/karlsland/m3g/Object3D");
     jobjectArray arry_obj    = env->NewObjectArray (size, obj3d_class, NULL);
@@ -81,7 +81,7 @@ JNIEXPORT jobjectArray JNICALL Java_org_karlsland_m3g_Loader_jni_1load__Ljava_la
     for (int i = 0; i < size; i++) {
         env->SetObjectArrayElement (arry_obj, i, getJavaReference(env, objs[i]));
     }
-    cout << "Java-Loader: created.\n";
+    //cout << "Java-Loader: created.\n";
 
     return arry_obj;
 }

@@ -15,7 +15,7 @@ using namespace m3g;
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__III
   (JNIEnv* env, jobject thiz, jint format, jint width, jint height)
 {
-    cout << "Java-Image2D: initiazlize1 is called.\n";
+    //cout << "Java-Image2D: initiazlize1 is called.\n";
     Image2D* img = NULL;
     __TRY__;
     img = new Image2D (format, width, height);
@@ -35,7 +35,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__III
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__III_3B
   (JNIEnv* env, jobject thiz, jint format, jint width, jint height, jbyteArray pixels_array)
 {
-    cout << "Java-Image2D: initiazlize2 is called.\n";
+    //cout << "Java-Image2D: initiazlize2 is called.\n";
     char*    pixels = getByteArrayPointer (env, pixels_array);
     Image2D* img    = NULL;
     __TRY__;
@@ -57,7 +57,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__III_3B
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__III_3B_3B
   (JNIEnv* env, jobject thiz, jint format, jint width, jint height, jbyteArray pixels_array, jbyteArray palette_array)
 {
-    cout << "Java-Image2D: initiazlize3 is called.\n";
+    //cout << "Java-Image2D: initiazlize3 is called.\n";
     char*    pixels  = getByteArrayPointer (env, pixels_array);
     char*    palette = getByteArrayPointer (env, palette_array);
     Image2D* img     = NULL;
@@ -81,7 +81,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__III_3B_3B
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__ILjava_lang_Object_2
   (JNIEnv* env, jobject thiz, jint format, jobject image)
 {
-    cout << "Java-Image2D: initiazlize4 is called.\n";
+    //cout << "Java-Image2D: initiazlize4 is called.\n";
 
     // MIDPやAWTなどのImageクラス
     // 詳細不明。現在では未実装。
@@ -97,7 +97,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1initialize__ILjava_la
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1finalize
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-Image2D: finalize is called.\n";
+    //cout << "Java-Image2D: finalize is called.\n";
     Image2D* img = (Image2D*)getNativePointer (env, thiz);
     releaseJavaReference (env, img);
     addUsedObject (img);
@@ -111,7 +111,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1finalize
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Image2D_jni_1getFormat
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-Image2D: getFormat is called.\n";
+    //cout << "Java-Image2D: getFormat is called.\n";
     Image2D* img = (Image2D*)getNativePointer (env, thiz);
     int format = 0;
     __TRY__;
@@ -128,7 +128,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Image2D_jni_1getFormat
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Image2D_jni_1getHeight
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-Image2D: getHeight is called.\n";
+    //cout << "Java-Image2D: getHeight is called.\n";
     Image2D* img = (Image2D*)getNativePointer (env, thiz);
     int height = 0;
     __TRY__;
@@ -145,7 +145,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Image2D_jni_1getHeight
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Image2D_jni_1getWidth
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-Image2D: getWidth is called.\n";
+    //cout << "Java-Image2D: getWidth is called.\n";
     Image2D* img   = (Image2D*)getNativePointer (env, thiz);
     int      width = 0;
     __TRY__;
@@ -162,7 +162,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Image2D_jni_1getWidth
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Image2D_jni_1isMutable
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-Image2D: isMutable is called.\n";
+    //cout << "Java-Image2D: isMutable is called.\n";
     Image2D* img = (Image2D*)getNativePointer (env, thiz);
     bool     mut = false;
     __TRY__;
@@ -179,7 +179,7 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Image2D_jni_1isMutable
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1set
   (JNIEnv* env, jobject thiz, jint x, jint y, jint width, jint height, jbyteArray pixels_array)
 {
-    cout << "Java-Image2D: set is called.\n";
+    //cout << "Java-Image2D: set is called.\n";
     Image2D* img    = (Image2D*)getNativePointer (env, thiz);
     char*    pixels = getByteArrayPointer (env, pixels_array);
     __TRY__;
@@ -196,7 +196,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1set
 JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Image2D_jni_1print
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-Image2D: print is called.\n";
+    //cout << "Java-Image2D: print is called.\n";
     Image2D* img = (Image2D*)getNativePointer (env, thiz);
     ostringstream oss;
     __TRY__;
@@ -214,7 +214,7 @@ JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Image2D_jni_1print
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1writePng
   (JNIEnv* env, jobject thiz, jstring fileName)
 {
-    cout << "Java-Image2D: writePng is called.\n";
+    //cout << "Java-Image2D: writePng is called.\n";
     Image2D*    img  = (Image2D*)getNativePointer (env, thiz);
     const char* file_name = env->GetStringUTFChars (fileName, 0);
     img->writePNG (file_name);
@@ -225,7 +225,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Image2D_jni_1writePng
 
 void Java_new_Image2D             (JNIEnv* env, m3g::Object3D* obj)
 {
-    cout << "Java-Loader: build java Image2D.\n";
+    //cout << "Java-Loader: build java Image2D.\n";
     Image2D* img     = dynamic_cast<Image2D*>(obj);
     jobject  img_obj = allocJavaObject (env, "org/karlsland/m3g/Image2D");
     setNativePointer  (env, img_obj, img);

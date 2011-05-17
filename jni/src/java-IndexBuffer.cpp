@@ -16,7 +16,7 @@ using namespace m3g;
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1getIndexCount
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-IndexBuffer: getIndexCount is called.\n";
+    //cout << "Java-IndexBuffer: getIndexCount is called.\n";
     IndexBuffer* ibuf = (IndexBuffer*)getNativePointer (env, thiz);
     int count = 0;
     __TRY__;
@@ -33,7 +33,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1getIndexCount
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1getIndices
   (JNIEnv* env, jobject thiz, jintArray indices_array)
 {
-    cout << "Java-IndexBuffer: getIndices is called.\n";
+    //cout << "Java-IndexBuffer: getIndices is called.\n";
     IndexBuffer* ibuf    = (IndexBuffer*)getNativePointer (env, thiz);
     int*         indices = getIntArrayPointer (env, indices_array);
     __TRY__;
@@ -50,7 +50,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1getIndices
 JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_IndexBuffer_jni_1print
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-IndexBuffer: print is called.\n";
+    //cout << "Java-IndexBuffer: print is called.\n";
     IndexBuffer* ibuf = (IndexBuffer*)getNativePointer (env, thiz);
     ostringstream oss;
     __TRY__;

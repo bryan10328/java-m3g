@@ -46,8 +46,7 @@ void deleteUsedObjects ()
 
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved)
 {
-    cout << "Java-M3G: OnLoad is called.\n";
-
+    //cout << "Java-M3G: OnLoad is called.\n";
     return JNI_VERSION_1_4;
 }
 

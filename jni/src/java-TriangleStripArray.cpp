@@ -15,7 +15,7 @@ using namespace m3g;
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1initialize___3I_3I
   (JNIEnv* env, jobject thiz, jintArray indices, jintArray stripLengths)
 {
-    cout << "Java-TriangleStripArray: initilize1 is called.\n";
+    //cout << "Java-TriangleStripArray: initilize1 is called.\n";
     int* indcs         = env->GetIntArrayElements (indices, 0);
     int  length        = env->GetArrayLength (stripLengths);
     int* strip_lengths = env->GetIntArrayElements (stripLengths, 0);
@@ -40,7 +40,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1initialize
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1initialize__I_3I
   (JNIEnv* env, jobject thiz, jint firstIndex, jintArray stripLengths)
 {
-    cout << "Java-TriangleStripArray: initialize2 is called.\n";
+    //cout << "Java-TriangleStripArray: initialize2 is called.\n";
     int  len           = env->GetArrayLength (stripLengths);
     int* strip_lengths = env->GetIntArrayElements (stripLengths, 0);
     TriangleStripArray* tris = NULL;
@@ -63,7 +63,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1initialize
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1finalize
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-TriangleStripArray: finalize is called.\n";
+    //cout << "Java-TriangleStripArray: finalize is called.\n";
     TriangleStripArray* tris = (TriangleStripArray*)getNativePointer (env, thiz);
     releaseJavaReference (env, tris);
     addUsedObject (tris);
@@ -77,7 +77,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1finalize
 JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1print
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-TriangleStripArray: print is called.\n";
+    //cout << "Java-TriangleStripArray: print is called.\n";
     TriangleStripArray* tris = (TriangleStripArray*)getNativePointer (env, thiz);
     ostringstream oss;
     __TRY__;
@@ -88,7 +88,7 @@ JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1print
 
 void Java_new_TriangleStripArray  (JNIEnv* env, m3g::Object3D* obj)
 {
-    cout << "Java-Loader: build java TriangleStripArray.\n";
+    //cout << "Java-Loader: build java TriangleStripArray.\n";
     TriangleStripArray* tris     = dynamic_cast<TriangleStripArray*>(obj);
     jobject             tris_obj = allocJavaObject (env, "org/karlsland/m3g/TriangleStripArray");
     setNativePointer  (env, tris_obj, tris);
