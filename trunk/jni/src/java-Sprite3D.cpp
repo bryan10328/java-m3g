@@ -16,7 +16,7 @@ using namespace m3g;
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1initialize
   (JNIEnv* env, jobject thiz, jboolean scaled, jobject image, jobject appearance)
 {
-    cout << "Java-Sprite3D: initilize is called.\n";
+    //cout << "Java-Sprite3D: initilize is called.\n";
     Image2D*    img = (Image2D*)getNativePointer (env, image);
     Appearance* app = (Appearance*)getNativePointer (env, appearance);
     Sprite3D*   spr = NULL;
@@ -38,7 +38,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1initialize
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1finalize
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-Sprite3D: finalize is called.\n";
+    //cout << "Java-Sprite3D: finalize is called.\n";
     Sprite3D* spr = (Sprite3D*)getNativePointer (env, thiz);
     releaseJavaReference (env, spr);
     addUsedObject (spr);
@@ -52,7 +52,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1finalize
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getAppearance
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-Sprite3D: getAppearance is called.\n";
+    //cout << "Java-Sprite3D: getAppearance is called.\n";
     Sprite3D*   spr = (Sprite3D*)getNativePointer (env, thiz);
     Appearance* app = NULL;
     __TRY__;
@@ -69,7 +69,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getAppearance
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getCropHeight
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-Sprite3D: getCropHeight is called.\n";
+    //cout << "Java-Sprite3D: getCropHeight is called.\n";
     Sprite3D* spr = (Sprite3D*)getNativePointer (env, thiz);
     int height = 0;
     __TRY__;
@@ -86,7 +86,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getCropHeight
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getCropWidth
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-Sprite3D: getCropWidth is called.\n";
+    //cout << "Java-Sprite3D: getCropWidth is called.\n";
     Sprite3D* spr = (Sprite3D*)getNativePointer (env, thiz);
     int width = 0;
     __TRY__;
@@ -103,7 +103,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getCropWidth
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getCropX
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-Sprite3D: getCropX is called.\n";
+    //cout << "Java-Sprite3D: getCropX is called.\n";
     Sprite3D* spr = (Sprite3D*)getNativePointer (env, thiz);
     int x = 0;
     __TRY__;
@@ -120,7 +120,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getCropX
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getCropY
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-Sprite3D: getCropY is called.\n";
+    //cout << "Java-Sprite3D: getCropY is called.\n";
     Sprite3D* spr = (Sprite3D*)getNativePointer (env, thiz);
     int y = 0;
     __TRY__;
@@ -137,7 +137,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getCropY
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getImage
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-Sprite3D: getImage is called.\n";
+    //cout << "Java-Sprite3D: getImage is called.\n";
     Sprite3D* spr = (Sprite3D*)getNativePointer (env, thiz);
     Image2D*  img = NULL;
     __TRY__;
@@ -154,7 +154,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1getImage
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1isScaled
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-Sprite3D: isScaled is called.\n";
+    //cout << "Java-Sprite3D: isScaled is called.\n";
     Sprite3D* spr = (Sprite3D*)getNativePointer (env, thiz);
     bool scaled = false;
     __TRY__;
@@ -171,7 +171,7 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1isScaled
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1setAppearance
   (JNIEnv* env, jobject thiz, jobject appearance)
 {
-    cout << "Java-Sprite3D: setAppearance is called.\n";
+    //cout << "Java-Sprite3D: setAppearance is called.\n";
     Sprite3D*   spr = (Sprite3D*)  getNativePointer (env, thiz);
     Appearance* app = (Appearance*)getNativePointer (env, appearance);
     __TRY__;
@@ -187,7 +187,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1setAppearance
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1setCrop
   (JNIEnv* env, jobject thiz, jint cropX, jint cropY, jint width, jint height)
 {
-    cout << "Java-Sprite3D: setCrop is called.\n";
+    //cout << "Java-Sprite3D: setCrop is called.\n";
     Sprite3D* spr = (Sprite3D*)getNativePointer (env, thiz);
     __TRY__;
     spr->setCrop (cropX, cropY, width, height);
@@ -202,7 +202,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1setCrop
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1setImage
   (JNIEnv* env, jobject thiz, jobject image)
 {
-    cout << "Java-Sprite3D: setImage is called.\n";
+    //cout << "Java-Sprite3D: setImage is called.\n";
     Sprite3D* spr = (Sprite3D*)getNativePointer (env, thiz);
     Image2D*  img = (Image2D*) getNativePointer (env, image);
     __TRY__;
@@ -218,7 +218,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1setImage
 JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1print
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-Sprite3D: print is called.\n";
+    //cout << "Java-Sprite3D: print is called.\n";
     Sprite3D* spr = (Sprite3D*)getNativePointer (env, thiz);
     ostringstream oss;
    __TRY__;
@@ -230,7 +230,7 @@ JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Sprite3D_jni_1print
 
 void Java_new_Sprite3D            (JNIEnv* env, m3g::Object3D* obj)
 {
-    cout << "Java-Loader: build java Sprite3D.\n";
+    //cout << "Java-Loader: build java Sprite3D.\n";
     Sprite3D* spr     = dynamic_cast<Sprite3D*>(obj);
     jobject   spr_obj = allocJavaObject (env, "org/karlsland/m3g/Sprite3D");
     setNativePointer  (env, spr_obj, spr);

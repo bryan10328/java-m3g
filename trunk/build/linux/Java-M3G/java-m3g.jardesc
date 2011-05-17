@@ -28,8 +28,8 @@
         <javaElement handleIdentifier="=Java-M3G/src&lt;org.karlsland.m3g{Object3D.java"/>
         <javaElement handleIdentifier="=Java-M3G/src&lt;org.karlsland.m3g{Object.java"/>
         <javaElement handleIdentifier="=Java-M3G/src&lt;org.karlsland.m3g{Transform.java"/>
-        <javaElement handleIdentifier="=Java-M3G/src&lt;org.karlsland.m3g{Mesh.java"/>
         <javaElement handleIdentifier="=Java-M3G/src&lt;org.karlsland.m3g{Transformable.java"/>
+        <javaElement handleIdentifier="=Java-M3G/src&lt;org.karlsland.m3g{Mesh.java"/>
         <javaElement handleIdentifier="=Java-M3G/src&lt;org.karlsland.m3g{Texture2D.java"/>
         <javaElement handleIdentifier="=Java-M3G/src&lt;org.karlsland.m3g{Material.java"/>
         <javaElement handleIdentifier="=Java-M3G/src&lt;org.karlsland.m3g{VertexArray.java"/>
@@ -44,9 +44,7 @@
         <javaElement handleIdentifier="=Java-M3G/src&lt;org.karlsland.m3g{KeyframeSequence.java"/>
         <file path="/Java-M3G/.project"/>
         <javaElement handleIdentifier="=Java-M3G/src&lt;org.karlsland.m3g{TriangleStripArray.java"/>
-        <javaElement handleIdentifier="=Java-M3G/src&lt;org.karlsland.m3g{NotImplementedException.java"/>
         <javaElement handleIdentifier="=Java-M3G/src&lt;org.karlsland.m3g{Fog.java"/>
-        <javaElement handleIdentifier="=Java-M3G/src&lt;org.karlsland.m3g{InternalException.java"/>
         <javaElement handleIdentifier="=Java-M3G/src&lt;org.karlsland.m3g{Node.java"/>
         <javaElement handleIdentifier="=Java-M3G/src&lt;org.karlsland.m3g{CompositingMode.java"/>
     </selectedElements>

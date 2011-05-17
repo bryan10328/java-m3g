@@ -15,7 +15,7 @@ using namespace m3g;
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1initialize
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-Group: initiazlize is called.\n";
+    //cout << "Java-Group: initiazlize is called.\n";
     Group* grp = NULL;
     __TRY__;
     grp = new Group ();
@@ -35,7 +35,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1initialize
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1finalize
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-Group: finalize is called.\n";
+    //cout << "Java-Group: finalize is called.\n";
     Group* grp = (Group*)getNativePointer (env, thiz);
     releaseJavaReference (env, grp);
     addUsedObject (grp);
@@ -49,7 +49,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1finalize
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1addChild
   (JNIEnv* env, jobject thiz, jobject child)
 {
-    cout << "Java-Group: addChild is called.\n";
+    //cout << "Java-Group: addChild is called.\n";
     Group* grp  = (Group*)getNativePointer (env, thiz);
     Node*  node = (Node*)getNativePointer (env, child);
     __TRY__;
@@ -65,7 +65,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1addChild
 JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Group_jni_1getChild
   (JNIEnv* env, jobject thiz, jint index)
 {
-    cout << "Java-Group: getChild is called.\n";
+    //cout << "Java-Group: getChild is called.\n";
     Group* grp  = (Group*)getNativePointer (env, thiz);
     Node*  node = NULL;
     __TRY__;
@@ -82,7 +82,7 @@ JNIEXPORT jobject JNICALL Java_org_karlsland_m3g_Group_jni_1getChild
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Group_jni_1getChildCount
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-Group: getChildCount is called.\n";
+    //cout << "Java-Group: getChildCount is called.\n";
     Group* grp = (Group*)getNativePointer (env, thiz);
     int count = 0;
     __TRY__;
@@ -99,7 +99,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_Group_jni_1getChildCount
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Group_jni_1pick__IFFLorg_karlsland_m3g_Camera_2Lorg_karlsland_m3g_RayIntersection_2
   (JNIEnv* env, jobject thiz, jint scope, jfloat x, jfloat y, jobject camera, jobject rayIntersection)
 {
-    cout << "Java-Group: pick1 is called.\n";
+    //cout << "Java-Group: pick1 is called.\n";
     Group*           grp = (Group*)getNativePointer (env, thiz);
     Camera*          cam = (Camera*)getNativePointer (env, camera);
     RayIntersection* ri  = (RayIntersection*)getNativePointer (env, rayIntersection);
@@ -118,7 +118,7 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Group_jni_1pick__IFFLorg_karls
 JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Group_jni_1pick__IFFFFFFLorg_karlsland_m3g_RayIntersection_2
 (JNIEnv* env, jobject thiz, jint scope, jfloat ox, jfloat oy, jfloat oz, jfloat dx, jfloat dy, jfloat dz, jobject rayIntersection)
 {
-    cout << "Java-Group: pick2 is called.\n";
+    //cout << "Java-Group: pick2 is called.\n";
     Group*           grp = (Group*)getNativePointer (env, thiz);
     RayIntersection* ri  = (RayIntersection*)getNativePointer (env, rayIntersection);
     bool picked = false;
@@ -136,7 +136,7 @@ JNIEXPORT jboolean JNICALL Java_org_karlsland_m3g_Group_jni_1pick__IFFFFFFLorg_k
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1removeChild
   (JNIEnv* env, jobject thiz, jobject child)
 {
-    cout << "Java-Group: removeChild is called.\n";
+    //cout << "Java-Group: removeChild is called.\n";
     Group* grp  = (Group*)getNativePointer (env, thiz);
     Node*  node = (Node*) getNativePointer (env, child);
     __TRY__;
@@ -152,7 +152,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Group_jni_1removeChild
 JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Group_jni_1print
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-Group: print is called.\n";
+    //cout << "Java-Group: print is called.\n";
     Group* grp = (Group*)getNativePointer (env, thiz);
     ostringstream oss;
     __TRY__;
@@ -164,7 +164,7 @@ JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Group_jni_1print
 
 void Java_new_Group               (JNIEnv* env, m3g::Object3D* obj)
 {
-    cout << "Java-Loader: build java Group.\n";
+    //cout << "Java-Loader: build java Group.\n";
     Group*   grp     = dynamic_cast<Group*>(obj);
     jobject  grp_obj = allocJavaObject (env, "org/karlsland/m3g/Group");
     setNativePointer  (env, grp_obj, grp);

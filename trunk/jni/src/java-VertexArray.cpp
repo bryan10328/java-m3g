@@ -16,7 +16,7 @@ using namespace m3g;
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1initialize
   (JNIEnv* env, jobject thiz, jint numVertices, jint numComponents, jint componentSize)
 {
-    cout << "Java-VertexArray: initiazlize is called.\n";
+    //cout << "Java-VertexArray: initiazlize is called.\n";
     VertexArray* varry = NULL;
     __TRY__;
     varry = new VertexArray (numVertices, numComponents, componentSize);
@@ -36,7 +36,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1initialize
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1finalize
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-VertexArray: finalize is called.\n";
+    //cout << "Java-VertexArray: finalize is called.\n";
     VertexArray* varry = (VertexArray*)getNativePointer (env, thiz);
     releaseJavaReference (env, varry);
     addUsedObject (varry);
@@ -50,7 +50,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1finalize
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1get__II_3B
   (JNIEnv* env, jobject thiz, jint firstVertex, jint numVertices, jbyteArray values_array)
 {
-    cout << "Java-VertexArray: get is called.\n";
+    //cout << "Java-VertexArray: get is called.\n";
     VertexArray* varry  = (VertexArray*)getNativePointer (env, thiz);
     char*        values = getByteArrayPointer (env, values_array);
     __TRY__;
@@ -67,7 +67,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1get__II_3B
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1get__II_3S
   (JNIEnv* env, jobject thiz, jint firstVertex, jint numVertices, jshortArray values_array)
 {
-    cout << "Java-VertexArray: get is called.\n";
+    //cout << "Java-VertexArray: get is called.\n";
     VertexArray* varry  = (VertexArray*)getNativePointer (env, thiz);
     short*       values = getShortArrayPointer (env, values_array);
     __TRY__;
@@ -84,7 +84,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1get__II_3S
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1get__II_3F
   (JNIEnv* env, jobject thiz, jint firstVertex, jint numVertices, jfloatArray values_array)
 {
-    cout << "Java-VertexArray: get is called.\n";
+    //cout << "Java-VertexArray: get is called.\n";
     VertexArray* varry  = (VertexArray*)getNativePointer (env, thiz);
     float*       values = getFloatArrayPointer (env, values_array);
     __TRY__;
@@ -101,7 +101,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1get__II_3F
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_VertexArray_jni_1getComponentCount
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-VertexArray: getComponentCount is called.\n";
+    //cout << "Java-VertexArray: getComponentCount is called.\n";
     VertexArray* varry = (VertexArray*)getNativePointer (env, thiz);
     int count = 0;
     __TRY__;
@@ -118,7 +118,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_VertexArray_jni_1getComponentCount
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_VertexArray_jni_1getComponentType
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-VertexArray: getComponentType is called.\n";
+    //cout << "Java-VertexArray: getComponentType is called.\n";
     VertexArray* varry = (VertexArray*)getNativePointer (env, thiz);
     int type = 0;
     __TRY__;
@@ -135,7 +135,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_VertexArray_jni_1getComponentType
 JNIEXPORT jint JNICALL Java_org_karlsland_m3g_VertexArray_jni_1getVertexCount
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-VertexArray: getVertexCount is called.\n";
+    //cout << "Java-VertexArray: getVertexCount is called.\n";
     VertexArray* varry = (VertexArray*)getNativePointer (env, thiz);
     int count = 0;
     __TRY__;
@@ -152,7 +152,7 @@ JNIEXPORT jint JNICALL Java_org_karlsland_m3g_VertexArray_jni_1getVertexCount
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1set__II_3B
   (JNIEnv* env, jobject thiz, jint firstVertex, jint numVertices, jbyteArray values_array)
 {
-    cout << "Java-VertexArray: set(char) is called.\n";
+    //cout << "Java-VertexArray: set(char) is called.\n";
     VertexArray* varry  = (VertexArray*)getNativePointer (env, thiz);
     char*        values = getByteArrayPointer (env, values_array);
     __TRY__;
@@ -169,7 +169,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1set__II_3B
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1set__II_3S
   (JNIEnv* env, jobject thiz, jint firstVertex, jint numVertices, jshortArray values)
 {
-    cout << "Java-VertexArray: set(short) is called.\n";
+    //cout << "Java-VertexArray: set(short) is called.\n";
     VertexArray* varry = (VertexArray*)getNativePointer (env, thiz);
     short* v = env->GetShortArrayElements (values, 0);
     __TRY__;
@@ -186,7 +186,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1set__II_3S
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1set__II_3F
   (JNIEnv* env, jobject thiz, jint firstVertex, jint numVertices, jfloatArray values_array)
 {
-    cout << "Java-VertexArray: set(float) is called.\n";
+    //cout << "Java-VertexArray: set(float) is called.\n";
     VertexArray* varry  = (VertexArray*)getNativePointer (env, thiz);
     float*       values = getFloatArrayPointer (env, values_array);
     __TRY__;
@@ -203,7 +203,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1set__II_3F
 JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_VertexArray_jni_1print
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-VertexArray: print is called.\n";
+    //cout << "Java-VertexArray: print is called.\n";
     VertexArray* varry = (VertexArray*)getNativePointer (env, thiz);
     ostringstream oss;
     __TRY__;
@@ -221,7 +221,7 @@ JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_VertexArray_jni_1print
 JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1print_1raw_1data
   (JNIEnv* env, jobject thiz)
 {
-    cout << "Java-VertexArray: print_raw_array is called.\n";
+    //cout << "Java-VertexArray: print_raw_array is called.\n";
     VertexArray* varry = (VertexArray*)getNativePointer (env, thiz);
     __TRY__;
     varry->print_raw_data (cout) << "\n";
@@ -231,7 +231,7 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_VertexArray_jni_1print_1raw_1data
 
 void Java_new_VertexArray         (JNIEnv* env, m3g::Object3D* obj)
 {
-    cout << "Java-Loader: build java VertexArray.\n";
+    //cout << "Java-Loader: build java VertexArray.\n";
     VertexArray* varry     = dynamic_cast<VertexArray*>(obj);
     jobject      varry_obj = allocJavaObject (env, "org/karlsland/m3g/VertexArray");
     setNativePointer  (env, varry_obj, varry);

@@ -12,7 +12,7 @@ using namespace std;
 JNIEXPORT jstring JNICALL Java_org_karlsland_m3g_Log_jni_1getErrorString
   (JNIEnv* env, jclass clazz)
 {
-    cout << "Java-Log: getErrorString is called.\n";
+    //cout << "Java-Log: getErrorString is called.\n";
     return env->NewStringUTF (getErrorString());
 }
 
