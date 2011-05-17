@@ -1,0 +1,18 @@
+
+Binary package of Java-M3G.
+
+
+Java-M3G consits of 3 components.
+- libm3g.so
+- libjava-m3g.so
+- java-m3g.jar
+
+-------------
+Usage
+-------------
+
+In your eclipse project, set java-m3g.jar to external jar file.
+And copy both libjava-m3g.so and libm3g.so to ${PROJECT_ROOT}/libs/armeabi.
+ADT plugin automaticaly copy libs/armeabi/lib*.so to proper place when compiling.
+This is important!
+
