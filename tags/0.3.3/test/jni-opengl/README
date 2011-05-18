@@ -1,0 +1,9 @@
+
+
+jni-opengl is special library for UnitTests.
+Only UnitTests needs this native library.
+
+cd build/linux/Debug
+cmake -DCMAKE_BUILD_TYPE=Debug ../../..
+make
+make install
