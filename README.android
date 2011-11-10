@@ -45,6 +45,18 @@ Make & Install
            - ${Java-M3G}/bin/java-m3g.jar
        3. copy java-m3g.jar, libjava-m3g.so and libm3g.so to your project.
 
+-------------------------------------------
+Trobule shooting
+-------------------------------------------
+  = I see error! =
+    Sometimes you see the following errors when openning Java-M3G project by Eclipse.
+
+      TODO: copy error message.
+
+    I'm not sure what they are, but [project] -> [clean] -> [Clean all projects] and build all will help you very much. 
+    Or close all projects and re-open them will also help you.
+    Believe me!
+
 
 -------------------------------------------
 Test & Samples
