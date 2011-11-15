@@ -12,6 +12,12 @@ Brief description
     - OpenGL ES 1.1 or higher (for Android)
     - Desktop-M3G (libm3g.so)
 
+  = Java-M3G =
+    Java-M3G consits of 3 components.
+      - java-m3g.jar   := Java bindings for Desktop-M3G
+      - libjava-m3g.so := jni(C++) library which inteconnects Java side and C++ side.
+      - libm3g.so      := Desktop-M3G which implements M3G-1.1(JSR 184) API.
+
 
 -------------------------------------------
 Make & Install
