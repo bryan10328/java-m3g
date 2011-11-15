@@ -1,0 +1,68 @@
+-------------------------------------------
+Platform specific problem
+-------------------------------------------
+  none.
+
+
+
+-------------------------------------------
+Requirement
+-------------------------------------------
+  You need JOGL (Java bindings for OpenGL) to use OpenGL from Java.
+  There must be 2 libraries on your system.
+    - libjogl.so
+    - libgluegen-rt.so
+
+
+
+-------------------------------------------
+Make & Install
+-------------------------------------------
+
+  = libm3g.so =
+    You need Desktop-M3G (libm3g.so) before compiling Java-M3G.
+    See http://code.google.com/p/desktop-m3g/
+      1. compile libm3g.so
+           - see README of Desktop-M3G
+      2. Copy *.hpp and libm3g.so to the following directory.
+           - ${Java-M3G}/jni/src/external/include
+           - ${Java-M3G}/jni/src/external/lib/android  (for Android)
+
+  = libjava-m3g.so =
+    Compile C++ native libary first.
+    Ndk-build comes from Android-NDK.
+    See http://developer.android.com/sdk/ndk/index.html
+      1. cd ${Java-M3G}/build/android/Java-M3G
+      2. ndk-build
+           - which will generate libjava-m3g.so
+
+  = java-m3g.jar =
+    You need Eclipse for compiling java-m3g.jar.
+       1. import all projects from ${Java-M3G}/build/android
+           - which contains Java-M3G and 12 samples.
+       2. open (or double click) java-m3g.jardesc at java-M3G project
+           - which export java-m3g.jar into the following directory.
+           - ${Java-M3G}/bin/java-m3g.jar
+       3. copy java-m3g.jar, libjava-m3g.so and libm3g.so to your project.
+
+
+-------------------------------------------
+Test & Samples
+-------------------------------------------
+
+  = UnitTest =
+    You need UnitTest++ (http://unittest-cpp.sourceforge.net/).
+    1. cd test
+    2. cmake .
+    3. make 
+    4. ./a.out
+
+  = Samples =
+    You can find about 15 samples on samples directory.
+    These are good entry points for learning how to use Desktop-M3G.
+    1. cd sample/sample-xxx-yyy
+    2. cmake .
+    3. make
+    4. ./a.out
+
+
