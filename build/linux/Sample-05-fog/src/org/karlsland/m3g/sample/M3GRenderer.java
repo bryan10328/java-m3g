@@ -3,7 +3,6 @@ package org.karlsland.m3g.sample;
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
-import javax.media.opengl.GLCanvas;
 import org.karlsland.m3g.*;
 
 public class M3GRenderer implements GLEventListener {
