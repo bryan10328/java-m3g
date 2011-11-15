@@ -25,25 +25,35 @@ Make & Install
       1. compile libm3g.so
            - see README of Desktop-M3G
       2. Copy *.hpp and libm3g.so to the following directory.
-           - ${Java-M3G}/jni/src/external/include
-           - ${Java-M3G}/jni/src/external/lib/android  (for Android)
+           - ${Java-M3G}/jni/src/external/include/m3g
+           - ${Java-M3G}/jni/src/external/lib/android  (for Linux)
 
   = libjava-m3g.so =
     Compile C++ native libary first.
-    Ndk-build comes from Android-NDK.
-    See http://developer.android.com/sdk/ndk/index.html
-      1. cd ${Java-M3G}/build/android/Java-M3G
-      2. ndk-build
-           - which will generate libjava-m3g.so
+      1. cd ${Java-M3G}/jni/build/linux/Debug
+      2. cmake -DCMAKE_BUILD_TYPE=Debug ../../..
+           - will generate libjava-m3g.so
+      3. make
+      4. make install
+           - will install Java-M3G to ${Java-M3G}/bin.
 
   = java-m3g.jar =
     You need Eclipse for compiling java-m3g.jar.
-       1. import all projects from ${Java-M3G}/build/android
-           - which contains Java-M3G and 12 samples.
+       1. import all projects from ${Java-M3G}/build/linux
+           - 「import」-->「Existing Projects into Workspace」-->「Select root directory」
+           - Java-M3G, Sample-xxx-yyy, UnitTest, ...
        2. open (or double click) java-m3g.jardesc at java-M3G project
-           - which export java-m3g.jar into the following directory.
-           - ${Java-M3G}/bin/java-m3g.jar
-       3. copy java-m3g.jar, libjava-m3g.so and libm3g.so to your project.
+           - will export java-m3g.jar
+
+
+-------------------------------------------
+How to use Java-M3G
+-------------------------------------------
+    You need 3 components (java-m3g.jar, libjava-m3g.so and libm3g.so).
+    Copy these 3 components to your project.
+      - ${Java-M3G}/Java-M3G/bin/java-m3g.jar
+      - ${Java-M3G}/jni/bin/lib/linux/libjava-m3g.so
+      - ${Java-M3G}/jni/bin/lib/linux/libm3g.so
 
 
 -------------------------------------------
@@ -51,18 +61,8 @@ Test & Samples
 -------------------------------------------
 
   = UnitTest =
-    You need UnitTest++ (http://unittest-cpp.sourceforge.net/).
-    1. cd test
-    2. cmake .
-    3. make 
-    4. ./a.out
+    You can find UnitTest project on eclipse.
 
   = Samples =
-    You can find about 15 samples on samples directory.
-    These are good entry points for learning how to use Desktop-M3G.
-    1. cd sample/sample-xxx-yyy
-    2. cmake .
-    3. make
-    4. ./a.out
-
+    You can find about 15 sample projects on eclipse.
 
