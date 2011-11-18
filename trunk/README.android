@@ -5,7 +5,7 @@ Platform specific problem
 -------------------------------------------
   Desktop-M3G for Andorid doesn't support libjpeg yet.
   Please use PNG format as texture.
-  I will fix it.
+  I will fix it in the future.
  
 
 -------------------------------------------
@@ -44,6 +44,35 @@ Make & Install
            - which export java-m3g.jar into the following directory.
            - ${Java-M3G}/bin/java-m3g.jar
        3. copy java-m3g.jar, libjava-m3g.so and libm3g.so to your project.
+
+-------------------------------------------
+How to use Java-M3G
+-------------------------------------------
+    
+  = Copy Java-M3G = 
+    You need to copy 3 components (java-m3g.jar, libjava-m3g.so and libm3g.so) to your project.
+    You can find them in binary package or if you compiled it from source,
+      - ${Java-M3G}/Java-M3G/bin/java-m3g.jar
+      - ${Java-M3G}/jni/bin/lib/linux/libjava-m3g.so
+      - ${Java-M3G}/jni/bin/lib/linux/libm3g.so
+    Copy to
+      - ${YourProject}/${YourFavorite}/java-m3g.jar
+      - ${YourProject}/libs/armeabi/libjava-m3g.so
+      - ${YourProject}/libs/armeabi/libm3g.so
+    Native libary location MUST be "libs/armeabi" in Android.
+    As far as I know, you can't change this location.
+    (If you know a way, please tell me how to do it)
+
+  = Setup Java-M3G =
+    Open your project in Eclipse.
+     -  [Properties] --> [Java Build Path] --> [Libraries] --> [Add External JARs...]
+        set jar files to 
+          - ${YourProject}/${YourFavorite}/java-m3g.jar
+        and set native library location to 
+          - ${YourProject}/libs/armeabi
+        Indeed, Android SDK ignore this native library location settings and search fixed place (libs/armeabi).
+        But it is a good practice to set location explicitely.
+
 
 -------------------------------------------
 Trobule shooting
