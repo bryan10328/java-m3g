@@ -57,6 +57,7 @@ How to use Java-M3G
       - ${Java-M3G}/Java-M3G/bin/java-m3g.jar
       - ${Java-M3G}/jni/bin/lib/linux/libjava-m3g.so
       - ${Java-M3G}/jni/bin/lib/linux/libm3g.so
+    Copy to your ${YourFavorite} directory.
 
   = Setup JOGL =
     Open your project in Eclipse.
@@ -66,16 +67,16 @@ How to use Java-M3G
           - /usr/share/java/glugen-rt.jar   (on my Ubuntu 11.10)
           - /usr/lib/jni                    (on my Ubuntu 11.10)
         Don't forget to set native library location.
-        Both libjogl.so and libgugen-rt.so must be there.
+        They need native libraries (libjogl.so, libgugen-rt.so).
 
   = Setup Java-M3G =
     Open your project in Eclipse.
      -  [Properties] --> [Java Build Path] --> [Libraries] --> [Add External JARs...]
         set jar files and native library location.
-          - ${Your favorite}/java-m3g.jar
-          - ${Your favorite}/
+          - ${YourFavorite}/java-m3g.jar
+          - ${YourFavorite}/
         Don't forget to set native library location.
-        both libjava-m3g.so and libm3g.so must be there.    
+        They need native libraries (libm3g.so, libjava-m3g.so).
 
 -------------------------------------------
 Test & Samples

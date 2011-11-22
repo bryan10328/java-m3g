@@ -3,10 +3,7 @@
 -------------------------------------------
 Platform specific problem
 -------------------------------------------
-  Desktop-M3G for Andorid doesn't support libjpeg yet.
-  Please use PNG format as texture.
-  I will fix it in the future.
- 
+  none.
 
 -------------------------------------------
 Make & Install
