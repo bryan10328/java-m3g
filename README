@@ -10,6 +10,7 @@ Brief description
   = Requirement =
     - OpenGL 1.5 or higher (for Linux)
     - OpenGL ES 1.1 or higher (for Android)
+    - libz
     - Desktop-M3G (libm3g.so)
 
   = Java-M3G =
