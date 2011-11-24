@@ -22,19 +22,19 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_MorphingMesh_jni_1initialize__Lorg
     for (int i = 0; i < tars_len; i++) {
         tars[i] = (VertexBuffer*)getNativePointer (env, env->GetObjectArrayElement(targets, i));
     }
-    int           len   = env->GetArrayLength (submeshes);
-    IndexBuffer** ibufs = new IndexBuffer* [len];
-    for (int i = 0; i < len; i++) {
+    int           ibufs_len = env->GetArrayLength (submeshes);
+    IndexBuffer** ibufs     = new IndexBuffer* [ibufs_len];
+    for (int i = 0; i < ibufs_len; i++) {
         ibufs[i] = (IndexBuffer*)getNativePointer (env, env->GetObjectArrayElement(submeshes, i));
     }
-    len = env->GetArrayLength (appearances);
-    Appearance** apps = new Appearance* [len];
-    for (int i = 0; i < len; i++) {
+    int          apps_len = env->GetArrayLength (appearances);
+    Appearance** apps     = new Appearance* [apps_len];
+    for (int i = 0; i < apps_len; i++) {
         apps[i] = (Appearance*)getNativePointer (env, env->GetObjectArrayElement(appearances, i));
     }
     MorphingMesh* mesh = NULL;
     __TRY__;
-    mesh = new MorphingMesh (vbuf, tars_len, tars, len, ibufs, apps);
+    mesh = new MorphingMesh (vbuf, tars_len, tars, ibufs_len, ibufs, apps_len, apps);
     __CATCH__;
     if (env->ExceptionOccurred ()) {
         return;

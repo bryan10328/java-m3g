@@ -16,20 +16,20 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_Mesh_jni_1initialize__Lorg_karlsla
   (JNIEnv* env, jobject thiz, jobject vertices, jobjectArray submeshes, jobjectArray appearances)
 {
     //cout << "Java-Mesh: initialize1 is called.\n";
-    VertexBuffer* vbuf  = (VertexBuffer*)getNativePointer (env, vertices);
-    int           len   = env->GetArrayLength (submeshes);
-    IndexBuffer** ibufs = new IndexBuffer* [len];
-    for (int i = 0; i < len; i++) {
+    VertexBuffer* vbuf      = (VertexBuffer*)getNativePointer (env, vertices);
+    int           ibufs_len = env->GetArrayLength (submeshes);
+    IndexBuffer** ibufs     = new IndexBuffer* [ibufs_len];
+    for (int i = 0; i < ibufs_len; i++) {
         ibufs[i] = (IndexBuffer*)getNativePointer (env, env->GetObjectArrayElement(submeshes, i));
     }
-    len = env->GetArrayLength (appearances);
-    Appearance** apps = new Appearance* [len];
-    for (int i = 0; i < len; i++) {
+    int          apps_len = env->GetArrayLength (appearances);
+    Appearance** apps     = new Appearance* [apps_len];
+    for (int i = 0; i < apps_len; i++) {
         apps[i] = (Appearance*)getNativePointer (env, env->GetObjectArrayElement(appearances, i));
     }
     Mesh* mesh = NULL;
     __TRY__;
-    mesh = new Mesh (vbuf, len, ibufs, apps);
+    mesh = new Mesh (vbuf, ibufs_len, ibufs, apps_len, apps);
     __CATCH__;
     if (env->ExceptionOccurred ()) {
         return;

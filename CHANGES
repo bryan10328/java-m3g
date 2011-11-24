@@ -1,0 +1,11 @@
+
+
+
+
+2011/xx/xx
+    - remove dependecy for libpng and libjpeg.
+        - you don't need these library any more!
+
+
+2011/05/17 ver 0.3.3
+    - first release

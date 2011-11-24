@@ -33,18 +33,21 @@ Make & Install
     Compile C++ native libary first.
       1. cd ${Java-M3G}/jni/build/linux/Debug
       2. cmake -DCMAKE_BUILD_TYPE=Debug ../../..
-           - will generate libjava-m3g.so
+           - will generate Makefile
       3. make
+           - will generate libjava-m3g.so
       4. make install
            - will install Java-M3G to ${Java-M3G}/bin.
 
   = java-m3g.jar =
     You need Eclipse for compiling java-m3g.jar.
        1. import all projects from ${Java-M3G}/build/linux
-           - 「import」-->「Existing Projects into Workspace」-->「Select root directory」
-           - You can find Java-M3G, Sample-00-JOGL, Smaple-01-Simple, etc., ...
+            - 「Import」-->「General」-->「Existing Projects into Workspace」-->「Select root directory」
+          Select ${Java-M3G}/build/linux as root directory.
+          You can find Java-M3G project and other sample projects (Sample-00-JOGL, Smaple-01-Simple, etc., ...).
+          Import all of them.
        2. open (or double click) java-m3g.jardesc at java-M3G project
-           - will export java-m3g.jar
+            - will export java-m3g.jar
 
 
 -------------------------------------------
@@ -54,29 +57,31 @@ How to use Java-M3G
   = Copy Java-M3G = 
     You need to copy 3 components (java-m3g.jar, libjava-m3g.so and libm3g.so) to your project.
     You can find them here.
-      - ${Java-M3G}/Java-M3G/bin/java-m3g.jar
+      - ${Java-M3G}/build/linux/Java-M3G/bin/java-m3g.jar
       - ${Java-M3G}/jni/bin/lib/linux/libjava-m3g.so
       - ${Java-M3G}/jni/bin/lib/linux/libm3g.so
-    Copy to your ${YourFavorite} directory.
+    Copy them to your ${YourFavorite} directory.
 
   = Setup JOGL =
     Open your project in Eclipse.
      -  [Properties] --> [Java Build Path] --> [Libraries] --> [Add External JARs...]
-        set jar files and native location.
+        set jar files,
           - /usr/share/java/jogl.jar        (on my Ubuntu 11.10)
           - /usr/share/java/glugen-rt.jar   (on my Ubuntu 11.10)
+        and native library location.
           - /usr/lib/jni                    (on my Ubuntu 11.10)
         Don't forget to set native library location.
-        They need native libraries (libjogl.so, libgugen-rt.so).
+        Actually they need their proper native libraries (libjogl.so, libgugen-rt.so).
 
   = Setup Java-M3G =
     Open your project in Eclipse.
      -  [Properties] --> [Java Build Path] --> [Libraries] --> [Add External JARs...]
-        set jar files and native library location.
-          - ${YourFavorite}/java-m3g.jar
-          - ${YourFavorite}/
+        set jar files,
+          - ${YourFavorite}/java-m3g.jar    (any where you choiced)
+        and native library location.
+          - ${YourFavorite}/	            (any where you choiced)
         Don't forget to set native library location.
-        They need native libraries (libm3g.so, libjava-m3g.so).
+        Also Java-M3G need their 2 native libraries (libm3g.so, libjava-m3g.so).
 
 -------------------------------------------
 Test & Samples
@@ -84,6 +89,7 @@ Test & Samples
 
   = UnitTest =
     You can find UnitTest project on eclipse.
+    But it's broken.
 
   = Samples =
     You can find about 15 sample projects on eclipse.
