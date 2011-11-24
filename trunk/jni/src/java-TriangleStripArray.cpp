@@ -16,18 +16,19 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_TriangleStripArray_jni_1initialize
   (JNIEnv* env, jobject thiz, jintArray indices, jintArray stripLengths)
 {
     //cout << "Java-TriangleStripArray: initilize1 is called.\n";
-    int* indcs         = env->GetIntArrayElements (indices, 0);
-    int  length        = env->GetArrayLength (stripLengths);
-    int* strip_lengths = env->GetIntArrayElements (stripLengths, 0);
+    int  inds_len    = env->GetArrayLength      (indices);
+    int* inds        = env->GetIntArrayElements (indices, 0);
+    int  lengths_len = env->GetArrayLength      (stripLengths);
+    int* lengths     = env->GetIntArrayElements (stripLengths, 0);
     TriangleStripArray* tris = NULL;
     __TRY__;
-    tris = new TriangleStripArray (indcs, length, strip_lengths);
+    tris = new TriangleStripArray (inds_len, inds, lengths_len, lengths);
     __CATCH__;
     if (env->ExceptionOccurred ()) {
         return;
     }
-    env->ReleaseIntArrayElements (indices, indcs, 0);
-    env->ReleaseIntArrayElements (stripLengths, strip_lengths, 0);
+    env->ReleaseIntArrayElements (indices, inds, 0);
+    env->ReleaseIntArrayElements (stripLengths, lengths, 0);
     setNativePointer  (env, thiz, tris);
     bindJavaReference (env, thiz, tris);
 }

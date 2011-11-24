@@ -16,22 +16,22 @@ JNIEXPORT void JNICALL Java_org_karlsland_m3g_SkinnedMesh_jni_1initialize__Lorg_
   (JNIEnv* env, jobject thiz, jobject vertices, jobjectArray submeshes, jobjectArray appearances, jobject skeleton)
 {
     //cout << "Java-SkinnedMesh: initialize1 is caleld.\n";
-    VertexBuffer* vbuf     = (VertexBuffer*)getNativePointer (env, vertices);
-    Group*        skel     = (Group*)       getNativePointer (env, skeleton);
-    int           ibuf_len = env->GetArrayLength (submeshes);
-    int           app_len  = env->GetArrayLength (appearances);
-    IndexBuffer** ibufs    = new IndexBuffer* [ibuf_len];
-    Appearance**  apps     = new Appearance* [app_len];
-    for (int i = 0; i < ibuf_len; i++) {
+    VertexBuffer* vbuf      = (VertexBuffer*)getNativePointer (env, vertices);
+    int           ibufs_len = env->GetArrayLength (submeshes);
+    IndexBuffer** ibufs     = new IndexBuffer* [ibufs_len];
+    for (int i = 0; i < ibufs_len; i++) {
         ibufs[i] = (IndexBuffer*)getNativePointer (env, env->GetObjectArrayElement(submeshes, i));
     }
-    for (int i = 0; i < app_len; i++) {
+    int           apps_len = env->GetArrayLength (appearances);
+    Appearance**  apps     = new Appearance* [apps_len];
+    for (int i = 0; i < apps_len; i++) {
         apps[i] = (Appearance*)getNativePointer (env, env->GetObjectArrayElement(appearances, i));
     }
+    Group* skel = (Group*)getNativePointer (env, skeleton);
 
     SkinnedMesh* mesh = NULL;
     __TRY__;
-    mesh = new SkinnedMesh (vbuf, ibuf_len, ibufs, apps, skel);
+    mesh = new SkinnedMesh (vbuf, ibufs_len, ibufs, apps_len, apps, skel);
     __CATCH__;
     if (env->ExceptionOccurred ()) {
         return;

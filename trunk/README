@@ -4,27 +4,32 @@ Brief description
 -------------------------------------------
   
   = What is the Java-M3G? =
-    Java-M3G is a java bindings for Desktop-M3G (Which implements M3G 1.1(JSR184) API).
+    Java-M3G is a java binding for Desktop-M3G (Which implements M3G 1.1(JSR184) API).
     It is distributed under MIT license.
 
   = Requirement =
     - OpenGL 1.5 or higher (for Linux)
     - OpenGL ES 1.1 or higher (for Android)
-    - libz
-    - Desktop-M3G (libm3g.so)
+    - libz            (*1)
+    - Desktop-M3G     (*2)
+    
+    (*1) You need only libz.
+         Current version of Java-M3G(and Desktop-M3G) doesn't need libpng an libjpeg yet.
+    (*2) Desktop-M3G is another project. 
+         But binary package of Java-M3G also contains this.
+         So, you can use Java-M3G very easy and quick.
 
   = Java-M3G =
     Java-M3G consits of 3 components.
-      - java-m3g.jar   := Java bindings for Desktop-M3G
-      - libjava-m3g.so := jni(C++) library which inteconnects Java side and C++ side.
-      - libm3g.so      := Desktop-M3G which implements M3G-1.1(JSR 184) API.
-
+      - java-m3g.jar   := Java binding for Desktop-M3G
+      - libjava-m3g.so := jni(C++) library which inteconnects Java side and C++ side
+      - libm3g.so      := Desktop-M3G which implements M3G-1.1(JSR 184) API
 
 -------------------------------------------
 Make & Install
 -------------------------------------------
 
-    - see README.linux  for Linux
+    - see README.linux for Linux
     - see README.android for Android
 
 
