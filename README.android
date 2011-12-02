@@ -11,10 +11,11 @@ Make & Install
 
   = Brief description =
     Java-M3G consits of 2 components.
-      - libjava-m3g.so is a C++ library which is a simple wrapper of Desktop-M3G(libm3g.so).
-      - java-m3g.jar is a Java library which depend ons libjava-m3g.so
-    You need these 2 components and (of course) Desktop-M3G library.
-    Finally you need 3 components (java-m3g.jar, libjava-m3g.so and m3g.so).
+      - java-m3g.jar is a Java library
+      - libjava-m3g.so is a native library of java-m3g.jar
+    You need these 2 components and (of course) Desktop-M3G library(libm3g.so).
+    Finally you need 3 components (java-m3g.jar, libjava-m3g.so and libm3g.so) in your project.
+    Binary package of Java-M3G contains all of them.
 
   = libm3g.so =
     You need Desktop-M3G (libm3g.so) before compiling Java-M3G.
