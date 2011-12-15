@@ -2,7 +2,7 @@
 
 
 
-2011/xx/xx
+2011/12/16 ver 0.3.4
     - remove dependecy for libpng and libjpeg.
         - you don't need these library any more!
 

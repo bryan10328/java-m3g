@@ -8,16 +8,14 @@ Brief description
     It is distributed under MIT license.
 
   = Requirement =
-    - OpenGL 1.5 or higher (for Linux)
+    - OpenGL    1.5 or higher (for Linux)
     - OpenGL ES 1.1 or higher (for Android)
-    - libz            (*1)
-    - Desktop-M3G     (*2)
+    - libz
+    - Desktop-M3G (*1)
     
-    (*1) You need only libz.
-         Current version of Java-M3G(and Desktop-M3G) doesn't need libpng an libjpeg yet.
-    (*2) Desktop-M3G is another project. 
-         But binary package of Java-M3G also contains this.
-         So, you can use Java-M3G very easy and quick.
+    (*1) Desktop-M3G is an another my project. 
+         Binary package of Java-M3G contains this library.
+         You can use Java-M3G quick and easily.
 
   = Java-M3G =
     Java-M3G consits of 3 components.
