@@ -1,4 +1,4 @@
-
+ jn
    
 -------------------------------------------
 Platform specific problem
@@ -37,7 +37,7 @@ Make & Install
   = java-m3g.jar =
     You need Eclipse for compiling java-m3g.jar.
        1. import all projects from ${Java-M3G}/build/android
-           - which contains Java-M3G and 12 samples.
+           - which contains Java-M3G project and 12 samples.
        2. open (or double click) java-m3g.jardesc at java-M3G project
            - which export java-m3g.jar into the following directory.
            - ${Java-M3G}/bin/java-m3g.jar

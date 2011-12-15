@@ -30,6 +30,7 @@ public class M3GRenderer implements GLEventListener {
         Object3D[] objs = null;
         try {
             objs = Loader.load ("res/simple.m3g");
+            objs = Loader.load ("res/mahosyojo-with-sexy-walking.m3g");
         } catch (IOException e) {
             System.out.println ("Can't load file.");
             System.exit (0);
