@@ -1,0 +1,96 @@
+-------------------------------------------
+Platform specific problem
+-------------------------------------------
+  none.
+
+
+
+-------------------------------------------
+Requirement
+-------------------------------------------
+  You need JOGL (Java bindings for OpenGL) to use OpenGL from Java.
+　Java-M3G was tested only on JOGL 1.x, not on 2.x.
+  You need 2 JOGL components.
+    - jogl.jar       and libjogl.so
+    - gluegen-rt.jar and libgluegen-rt.so
+
+
+
+-------------------------------------------
+Make & Install
+-------------------------------------------
+
+  = libm3g.so =
+    You need Desktop-M3G (libm3g.so) before compiling Java-M3G.
+    See http://code.google.com/p/desktop-m3g/
+      1. compile libm3g.so
+           - see README of Desktop-M3G
+      2. Copy *.hpp and libm3g.so to the following directory.
+           - ${Java-M3G}/jni/src/external/include/m3g
+           - ${Java-M3G}/jni/src/external/lib/linux  (for Linux)
+
+  = libjava-m3g.so =
+    Compile C++ native libary first.
+      1. cd ${Java-M3G}/jni/build/linux/Debug
+      2. cmake -DCMAKE_BUILD_TYPE=Debug ../../..
+           - will generate Makefile
+      3. make
+           - will generate libjava-m3g.so
+      4. make install
+           - will install Java-M3G to ${Java-M3G}/bin.
+
+  = java-m3g.jar =
+    You need Eclipse for compiling java-m3g.jar.
+       1. import all projects from ${Java-M3G}/build/linux
+            - 「Import」-->「General」-->「Existing Projects into Workspace」-->「Select root directory」
+          Select ${Java-M3G}/build/linux as root directory.
+          You can find Java-M3G project and other sample projects (Sample-00-JOGL, Smaple-01-Simple, etc., ...).
+          Import all of them.
+       2. open (or double click) java-m3g.jardesc at java-M3G project
+            - will export java-m3g.jar
+
+
+-------------------------------------------
+How to use Java-M3G
+-------------------------------------------
+    
+  = Copy Java-M3G = 
+    You need to copy 3 components (java-m3g.jar, libjava-m3g.so and libm3g.so) to your project.
+    You can find them here.
+      - ${Java-M3G}/build/linux/Java-M3G/bin/java-m3g.jar
+      - ${Java-M3G}/jni/bin/lib/linux/libjava-m3g.so
+      - ${Java-M3G}/jni/bin/lib/linux/libm3g.so
+    Copy them to your ${YourFavorite} directory.
+
+  = Setup JOGL =
+    Open your project in Eclipse.
+     -  [Properties] --> [Java Build Path] --> [Libraries] --> [Add External JARs...]
+        set jar files,
+          - /usr/share/java/jogl.jar        (on my Ubuntu 11.10)
+          - /usr/share/java/glugen-rt.jar   (on my Ubuntu 11.10)
+        and native library location.
+          - /usr/lib/jni                    (on my Ubuntu 11.10)
+        Don't forget to set native library location.
+        Actually they need their proper native libraries (libjogl.so, libgugen-rt.so).
+
+  = Setup Java-M3G =
+    Open your project in Eclipse.
+     -  [Properties] --> [Java Build Path] --> [Libraries] --> [Add External JARs...]
+        set jar files,
+          - ${YourFavorite}/java-m3g.jar    (any where you choiced)
+        and native library location.
+          - ${YourFavorite}/	            (any where you choiced)
+        Don't forget to set native library location.
+        Also Java-M3G need their 2 native libraries (libm3g.so, libjava-m3g.so).
+
+-------------------------------------------
+Test & Samples
+-------------------------------------------
+
+  = UnitTest =
+    You can find UnitTest project on eclipse.
+    But it's broken.
+
+  = Samples =
+    You can find about 15 sample projects on eclipse.
+
